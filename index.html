@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cours audio de chinois</title>
+<link rel="stylesheet" href="engine/style.css?v=3">
+</head>
+<body>
+
+<!-- Écran d'accueil : menu des CHAPITRES -->
+<div class="overlay" id="chapterOverlay">
+  <div class="big-hanzi hanzi" style="font-size:52px">中文</div>
+  <h2>Cours audio de chinois mandarin</h2>
+  <p>Méthode audio dans l'esprit Pimsleur : narrateur français, phrases chinoises lues lentement, pauses pour répéter et rappels espacés. Choisis un chapitre pour commencer.</p>
+  <p class="voice-warn" id="voiceWarn">⚠️ Aucune voix chinoise détectée sur cet appareil. (Sur iPhone : Réglages → Accessibilité → Contenu énoncé → Voix → Chinois.)</p>
+  <div class="menu-list" id="chapterList"></div>
+  <div class="tip">Écouteurs conseillés · voix réglables dans 🎙 Voix · export ⏺ MP3 sur ordinateur</div>
+</div>
+
+<!-- Menu des LEÇONS du chapitre choisi -->
+<div class="overlay" id="overlay" style="display:none">
+  <div class="big-hanzi hanzi" id="lessonBigHanzi" style="font-size:52px">谈时间</div>
+  <h2 id="lessonOverlayTitle">Le temps · Cours audio de chinois</h2>
+  <p id="lessonOverlayIntro">Fais les leçons dans l'ordre : chaque leçon révise les précédentes.</p>
+  <div class="menu-list" id="menuList"></div>
+  <button class="menu-inline ghost" onclick="showChapters()">← Tous les chapitres</button>
+  <div class="tip">Écouteurs conseillés · voix réglables dans 🎙 Voix · export ⏺ MP3 sur ordinateur</div>
+</div>
+
+<header>
+  <h1><span class="hanzi">谈时间</span>Parler de l'heure</h1>
+  <span style="display:flex;gap:10px;align-items:center"><span class="lesson-tag" id="lessonTag">—</span><button class="chip" id="menuBtn" style="padding:6px 12px">☰ Menu</button></span>
+</header>
+
+<div class="progress">
+  <div class="bar"><div id="barFill"></div></div>
+  <div class="lbl"><span id="stepLbl">—</span><span id="timeLbl"></span></div>
+</div>
+
+<main class="stage">
+  <div class="ring-wrap">
+    <svg class="ring" viewBox="0 0 200 200">
+      <circle class="track" cx="100" cy="100" r="93"/>
+      <circle class="arc" id="arc" cx="100" cy="100" r="93" stroke-dasharray="584.3" stroke-dashoffset="584.3"/>
+    </svg>
+    <div class="ring-core">
+      <div class="core-icon" id="coreIcon">🎧</div>
+      <div class="phase" id="phaseLbl">Prêt</div>
+    </div>
+  </div>
+
+  <div class="caption" id="caption">
+    <div class="fr">Appuie sur lecture pour commencer.</div>
+  </div>
+</main>
+
+<div class="controls">
+  <div class="main-row">
+    <button class="skip" id="backBtn" aria-label="Reculer de 10 secondes">
+      <span class="big">−10</span>sec
+    </button>
+    <button class="play" id="playBtn" aria-label="Lecture / pause">
+      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+    </button>
+    <button class="skip" id="fwdBtn" aria-label="Avancer de 10 secondes">
+      <span class="big">+10</span>sec
+    </button>
+  </div>
+  <div class="opts">
+    <button class="chip on" id="textChip">Afficher le texte</button>
+    <button class="chip" id="slowChip">Encore + lent</button>
+    <button class="chip" id="contChip">Mode continu</button>
+    <button class="chip" id="replayChip">🔁 Réécouter</button>
+    <button class="chip" id="voiceChip">🎙 Voix</button>
+    <button class="chip" id="recChip">⏺ MP3</button>
+  </div>
+  <div class="voice-panel" id="voicePanel">
+    <label for="zhSelect">Voix chinoise</label>
+    <div class="row">
+      <select id="zhSelect"></select>
+      <button class="test" id="zhTest">Tester</button>
+    </div>
+    <label for="frSelect">Voix française (narrateur)</label>
+    <div class="row">
+      <select id="frSelect"></select>
+      <button class="test" id="frTest">Tester</button>
+    </div>
+    <div class="hint">💡 Pour une meilleure voix gratuite : sur iPhone, télécharge une voix chinoise « Premium / Améliorée » (Réglages → Accessibilité → Contenu énoncé → Voix). Sur PC/Android, ouvre ce fichier dans Microsoft Edge pour les voix neuronales « Natural ». Elles apparaîtront ensuite dans cette liste.</div>
+  </div>
+  <div class="voice-panel" id="recPanel">
+    <label>Exporter la leçon en MP3 (ordinateur)</label>
+    <div class="hint">Sur PC avec <b>Edge</b> ou Chrome : clique « Démarrer », choisis <b>Cet onglet</b> dans la fenêtre de partage et coche <b>Partager aussi l'audio de l'onglet</b>. La leçon se rejoue alors en entier en mode continu, et le MP3 est téléchargé automatiquement à la fin. Astuce : choisis d'abord une voix « Natural » dans 🎙 Voix, et ne touche à rien pendant l'enregistrement.</div>
+    <div class="row">
+      <button class="test" id="recBtn">⏺ Démarrer</button>
+      <button class="test" id="recStopBtn" style="display:none">⏹ Arrêter et sauvegarder</button>
+    </div>
+    <div class="hint" id="recHint"></div>
+  </div>
+</div>
+
+<!-- Moteur, puis chapitres (ordre important), puis démarrage -->
+<script src="engine/player.js?v=3"></script>
+<script src="chapters/01-le-temps.js?v=3"></script>
+<script>initApp();</script>
+</body>
+</html>
