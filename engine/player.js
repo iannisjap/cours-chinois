@@ -36,7 +36,7 @@ let LESSONS = [];            // leçons du chapitre courant
 const $ = id => document.getElementById(id);
 const synth = window.speechSynthesis;
 let voices = [], zhVoice=null, frVoice=null;
-let idx = 0, playing = false, showText = true, slowMode = false, continuous = false;
+let idx = 0, playing = false, showText = true, continuous = false;
 let pauseTimer = null, pauseRAF = null;
 let runToken = 0;
 let speechPaused = false;          // une phrase est suspendue via synth.pause()
@@ -93,7 +93,12 @@ function voiceScore(v){
   return s;
 }
 function pickBest(list){ return list.slice().sort((a,b)=>voiceScore(b)-voiceScore(a))[0] || null; }
-let userZhChoice = null, userFrChoice = null;
+/* mémorisation locale des préférences (voix, vitesses) */
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+let userZhChoice = store.get('zhVoice'), userFrChoice = store.get('frVoice');
 function fillSelect(sel, list, current){
   sel.innerHTML = '';
   list.forEach(v=>{
@@ -185,7 +190,7 @@ function speak(text, voice, lang, rate, token, onend){
   const u = new SpeechSynthesisUtterance(text);
   if(voice) u.voice = voice;
   u.lang = lang;
-  u.rate = rate;
+  u.rate = Math.max(0.1, Math.min(rate, 2));
   const done = ()=>{ if(playing && token===runToken) onend(); };
   u.onend = done;
   u.onerror = done;
@@ -202,7 +207,7 @@ function speakSegments(segs, i, token, onend){
     speak(txt, frVoice, 'fr-FR', frSpeedMult, token, ()=>speakSegments(segs, i+1, token, onend));
   } else {
     setPhase('speak-zh','🀄','Écoute (chinois)');
-    const r = (slowMode ? 0.45 : 0.6) * ZH_SLOW * zhSpeedMult;
+    const r = 0.6 * ZH_SLOW * zhSpeedMult;
     speak(s.hanzi, zhVoice, 'zh-CN', r, token, ()=>speakSegments(segs, i+1, token, onend));
   }
 }
@@ -254,7 +259,7 @@ function runStep(){
   } else if(s.t==='zh'){
     renderContentCaption(s);
     setPhase('speak-zh','🀄','Écoute (chinois)');
-    const r = (slowMode ? Math.min(s.rate, 0.45) : s.rate) * ZH_SLOW * zhSpeedMult;
+    const r = s.rate * ZH_SLOW * zhSpeedMult;
     speak(s.zh, zhVoice, 'zh-CN', r, token, next);
   } else if(s.t==='hold'){
     renderCaptionFor(idx, s.label);
@@ -337,9 +342,6 @@ $('textChip').addEventListener('click', e=>{
   showText=!showText; e.target.classList.toggle('on',showText);
   renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
 });
-$('slowChip').addEventListener('click', e=>{
-  slowMode=!slowMode; e.target.classList.toggle('on',slowMode);
-});
 $('contChip').addEventListener('click', e=>{
   continuous=!continuous; e.target.classList.toggle('on',continuous);
   // si on active le mode continu pendant un arrêt automatique, on repart aussitôt
@@ -350,14 +352,20 @@ $('contChip').addEventListener('click', e=>{
        0 = moitié moins vite (×0.5) · 100 = moitié plus vite (×1.5).
        S'applique à la prochaine phrase prononcée. ---- */
 let zhSpeedMult = 1, frSpeedMult = 1;
-const speedMult = v => 0.5 + v/100;
-$('zhSpeed').addEventListener('input', e=>{ zhSpeedMult = speedMult(+e.target.value); });
-$('frSpeed').addEventListener('input', e=>{ frSpeedMult = speedMult(+e.target.value); });
+const speedMult = v => Math.pow(3, (v-50)/50);   // 0→×0.33 · 50→×1 · 100→×3
+$('zhSpeed').addEventListener('input', e=>{ zhSpeedMult = speedMult(+e.target.value); store.set('zhSpeed', e.target.value); });
+$('frSpeed').addEventListener('input', e=>{ frSpeedMult = speedMult(+e.target.value); store.set('frSpeed', e.target.value); });
+/* restaurer les vitesses mémorisées */
+(function(){
+  const zs = store.get('zhSpeed'), fs = store.get('frSpeed');
+  if(zs !== null){ $('zhSpeed').value = zs; zhSpeedMult = speedMult(+zs); }
+  if(fs !== null){ $('frSpeed').value = fs; frSpeedMult = speedMult(+fs); }
+})();
 
 /* ---- panneau voix ---- */
 $('voiceChip').addEventListener('click', ()=>{ $('voicePanel').classList.toggle('open'); loadVoices(); });
-$('zhSelect').addEventListener('change', e=>{ userZhChoice=e.target.value; zhVoice=voices.find(v=>v.name===userZhChoice)||zhVoice; });
-$('frSelect').addEventListener('change', e=>{ userFrChoice=e.target.value; frVoice=voices.find(v=>v.name===userFrChoice)||frVoice; });
+$('zhSelect').addEventListener('change', e=>{ userZhChoice=e.target.value; zhVoice=voices.find(v=>v.name===userZhChoice)||zhVoice; store.set('zhVoice', userZhChoice); });
+$('frSelect').addEventListener('change', e=>{ userFrChoice=e.target.value; frVoice=voices.find(v=>v.name===userFrChoice)||frVoice; store.set('frVoice', userFrChoice); });
 $('zhTest').addEventListener('click', ()=>{
   synth.cancel();
   const u = new SpeechSynthesisUtterance('现在几点？现在十点半。');
