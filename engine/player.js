@@ -530,7 +530,9 @@ function buildChapterMenu(){
   CHAPTERS.forEach((ch, i)=>{
     const b = document.createElement('button');
     b.className = 'menu-item';
-    b.innerHTML = '<span class="mi-num">'+(i+1)+'</span>'
+    const badge = ch.badge != null ? ch.badge : (i+1);
+    const starCls = ch.star ? ' star' : '';
+    b.innerHTML = '<span class="mi-num'+starCls+'">'+badge+'</span>'
       + '<span class="mi-hz hanzi">'+ch.hanzi+'</span>'
       + '<span class="mi-tx"><b>'+ch.title+'</b><small>'+ch.desc+'</small></span>';
     b.addEventListener('click', ()=>openChapter(i));

@@ -10,8 +10,10 @@
    ============================================================ */
 registerChapter({
   id: "01-le-temps",
+  badge: "★",
+  star: true,
   hanzi: "谈时间",
-  title: "Le temps",
+  title: "Bonus · Le temps",
   desc: "Demander et donner l'heure — 7 leçons",
   intro: "Sept leçons dans l'esprit Pimsleur. Fais-les dans l'ordre : chaque leçon révise les précédentes. La leçon s'arrête quand c'est à toi de parler (désactivable avec « Mode continu »).",
   lessons: [
