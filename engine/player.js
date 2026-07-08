@@ -199,10 +199,10 @@ function speakSegments(segs, i, token, onend){
     const txt = s.text.trim();
     if(!txt){ speakSegments(segs, i+1, token, onend); return; }
     setPhase('speak-fr','🗣️','Écoute (français)');
-    speak(txt, frVoice, 'fr-FR', 1.0, token, ()=>speakSegments(segs, i+1, token, onend));
+    speak(txt, frVoice, 'fr-FR', frSpeedMult, token, ()=>speakSegments(segs, i+1, token, onend));
   } else {
     setPhase('speak-zh','🀄','Écoute (chinois)');
-    const r = (slowMode ? 0.45 : 0.6) * ZH_SLOW;
+    const r = (slowMode ? 0.45 : 0.6) * ZH_SLOW * zhSpeedMult;
     speak(s.hanzi, zhVoice, 'zh-CN', r, token, ()=>speakSegments(segs, i+1, token, onend));
   }
 }
@@ -254,7 +254,7 @@ function runStep(){
   } else if(s.t==='zh'){
     renderContentCaption(s);
     setPhase('speak-zh','🀄','Écoute (chinois)');
-    const r = (slowMode ? Math.min(s.rate, 0.45) : s.rate) * ZH_SLOW;
+    const r = (slowMode ? Math.min(s.rate, 0.45) : s.rate) * ZH_SLOW * zhSpeedMult;
     speak(s.zh, zhVoice, 'zh-CN', r, token, next);
   } else if(s.t==='hold'){
     renderCaptionFor(idx, s.label);
@@ -346,6 +346,14 @@ $('contChip').addEventListener('click', e=>{
   if(continuous && !playing && steps[idx] && steps[idx].t==='hold'){ play(); }
 });
 
+/* ---- curseurs de vitesse 🐢→🐇 (0–100, 50 = vitesse normale)
+       0 = moitié moins vite (×0.5) · 100 = moitié plus vite (×1.5).
+       S'applique à la prochaine phrase prononcée. ---- */
+let zhSpeedMult = 1, frSpeedMult = 1;
+const speedMult = v => 0.5 + v/100;
+$('zhSpeed').addEventListener('input', e=>{ zhSpeedMult = speedMult(+e.target.value); });
+$('frSpeed').addEventListener('input', e=>{ frSpeedMult = speedMult(+e.target.value); });
+
 /* ---- panneau voix ---- */
 $('voiceChip').addEventListener('click', ()=>{ $('voicePanel').classList.toggle('open'); loadVoices(); });
 $('zhSelect').addEventListener('change', e=>{ userZhChoice=e.target.value; zhVoice=voices.find(v=>v.name===userZhChoice)||zhVoice; });
@@ -353,13 +361,13 @@ $('frSelect').addEventListener('change', e=>{ userFrChoice=e.target.value; frVoi
 $('zhTest').addEventListener('click', ()=>{
   synth.cancel();
   const u = new SpeechSynthesisUtterance('现在几点？现在十点半。');
-  if(zhVoice) u.voice=zhVoice; u.lang='zh-CN'; u.rate=0.6*ZH_SLOW;
+  if(zhVoice) u.voice=zhVoice; u.lang='zh-CN'; u.rate=0.6*ZH_SLOW*zhSpeedMult;
   synth.speak(u);
 });
 $('frTest').addEventListener('click', ()=>{
   synth.cancel();
   const u = new SpeechSynthesisUtterance('Bonjour, je suis la voix du narrateur.');
-  if(frVoice) u.voice=frVoice; u.lang='fr-FR';
+  if(frVoice) u.voice=frVoice; u.lang='fr-FR'; u.rate=frSpeedMult;
   synth.speak(u);
 });
 

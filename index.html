@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cours audio de chinois</title>
-<link rel="stylesheet" href="engine/style.css?v=3">
+<link rel="stylesheet" href="engine/style.css?v=4">
 </head>
 <body>
 
@@ -76,6 +76,20 @@
     <button class="chip" id="voiceChip">🎙 Voix</button>
     <button class="chip" id="recChip">⏺ MP3</button>
   </div>
+  <div class="speed-row">
+    <div class="speed">
+      <span class="speed-lbl">中文</span>
+      <span class="speed-ico">🐢</span>
+      <input type="range" id="zhSpeed" min="0" max="100" value="50" aria-label="Vitesse du chinois">
+      <span class="speed-ico">🐇</span>
+    </div>
+    <div class="speed">
+      <span class="speed-lbl">FR</span>
+      <span class="speed-ico">🐢</span>
+      <input type="range" id="frSpeed" min="0" max="100" value="50" aria-label="Vitesse du narrateur français">
+      <span class="speed-ico">🐇</span>
+    </div>
+  </div>
   <div class="voice-panel" id="voicePanel">
     <label for="zhSelect">Voix chinoise</label>
     <div class="row">
@@ -101,8 +115,8 @@
 </div>
 
 <!-- Moteur, puis chapitres (ordre important), puis démarrage -->
-<script src="engine/player.js?v=3"></script>
-<script src="chapters/01-le-temps.js?v=3"></script>
+<script src="engine/player.js?v=4"></script>
+<script src="chapters/01-le-temps.js?v=4"></script>
 <script>initApp();</script>
 </body>
 </html>
