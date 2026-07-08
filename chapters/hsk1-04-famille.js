@@ -1,0 +1,194 @@
+/* ============================================================
+   HSK 1 · Leçon 4 — 我有两个孩子 J'ai deux enfants
+   D'après « 新HSK教程 1 », leçon 4.
+   Vocabulaire de la leçon :
+   有 · 多少 · 个 · 哥哥 · 呢 · 没有 · 家 · 几 · 口 · 爸爸 ·
+   妈妈 · 妹妹 · 和 · 儿子 · 孩子 · 女儿 · 岁 · 他 · 今年 · 多 · 大
+   Nombres : 一 二 三 四 五 六 七 八 九 十 · 两 · 二十
+   Grammaire : phrase en 有 (1) · nombres · particule 呢 (A…, B呢?) ·
+   classificateurs 个/口.
+   Structure : leçon → 3 parties (les 3 dialogues du manuel).
+   ============================================================ */
+registerChapter({
+  id: "hsk1-04",
+  badge: 4,
+  hanzi: "我有两个孩子",
+  title: "Leçon 4 · Avoir, nombres, famille",
+  desc: "3 parties · 有 · 多少个 · 家里几口人 · 岁",
+  intro: "Leçon 4 du HSK 1 : le verbe 有 « avoir », compter avec 个 et 口, parler de sa famille, et demander l'âge — 几岁 pour les enfants, 多大 pour les adultes.",
+  lessons: [
+
+  // ================= PARTIE 1 =================
+  { num:1, hanzi:"有多少个", title:"Partie 1 · Avoir, compter, 个", desc:"有 · 多少 · 个 · nombres 1-10",
+    build(){ return [
+  N("Bienvenue dans la leçon 4 du HSK 1. Aujourd'hui : le verbe « avoir », les nombres, et parler de sa famille. Révision : demandez « es-tu occupé ? »"),
+  TH(),
+  C("你忙吗？","Nǐ máng ma?","Es-tu occupé ?",0.6), HOLD(),
+
+  N("Apprenons d'abord à compter. Un se dit [[一|yī]], deux se dit [[二|èr]], trois [[三|sān]], quatre [[四|sì]], cinq [[五|wǔ]]. Écoutez et répétez chaque nombre."),
+  ...teach2("一，二，三，四，五","yī, èr, sān, sì, wǔ","un, deux, trois, quatre, cinq"),
+  N("Continuons : six se dit [[六|liù]], sept [[七|qī]], huit [[八|bā]], neuf [[九|jiǔ]], dix [[十|shí]]. Écoutez et répétez."),
+  ...teach2("六，七，八，九，十","liù, qī, bā, jiǔ, shí","six, sept, huit, neuf, dix"),
+  N("Pour les dizaines, « vingt » se dit [[二十|èrshí]] — littéralement « deux dix ». Écoutez et répétez."),
+  ...teach2("二十","èrshí","vingt"),
+  N("Rappel important, vu à la leçon 1 : pour compter des choses, « deux » ne se dit pas [[二|èr]] mais [[两|liǎng]]. Écoutez et répétez."),
+  ...teach2("两","liǎng","deux (pour compter)"),
+
+  N("Le verbe « avoir » se dit [[有|yǒu]]. Écoutez et répétez."),
+  ...teach2("有","yǒu","avoir"),
+  N("Pour compter des personnes ou des choses en général, on utilise le petit mot [[个|ge]] entre le nombre et le nom. Écoutez et répétez."),
+  ...teach2("个","ge","(classificateur général)"),
+  N("Souvenez-vous de « étudiant », [[学生|xuéshēng]]. « Deux étudiants » se dit : deux — 个 — étudiant."),
+  ...teach2("两个学生","liǎng ge xuéshēng","deux étudiants"),
+  N("Pour demander « combien », on utilise [[多少|duōshao]]. Écoutez et répétez."),
+  ...teach2("多少","duōshao","combien"),
+  N("Demandez : « Combien d'étudiants a-t-elle ? » — mot à mot « elle avoir combien 个 étudiant ? »"),
+  TH(),
+  C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.55), P(3,"…"),
+  C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.6), HOLD(),
+  N("Répondez : « Elle a vingt étudiants. »"),
+  TH(),
+  C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.6), P(2.5,"…"),
+  C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.6), HOLD(),
+
+  // Dialogue du manuel
+  N("Écoutons le dialogue. Liu Ming demande : « Yifei est-elle occupée ? »"),
+  C("一飞忙吗？","Yīfēi máng ma?","Yifei est-elle occupée ?",0.6),
+  N("Répondez : « Elle est très occupée. »"),
+  TH(),
+  C("她很忙。","Tā hěn máng.","Elle est très occupée.",0.6), P(2,"…"),
+  N("Il demande : « Combien d'étudiants a-t-elle ? » Répondez : « Elle a vingt étudiants. »"),
+  TH(),
+  C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.6), HOLD(),
+
+  // Révision
+  N("Révision. Comptez de un à cinq."),
+  TH(),
+  C("一，二，三，四，五","yī, èr, sān, sì, wǔ","un, deux, trois, quatre, cinq",0.6), P(1.5,"…"),
+  N("Dites : deux étudiants."),
+  TH(),
+  C("两个学生","liǎng ge xuéshēng","deux étudiants",0.6), P(1.5,"…"),
+  N("Fin de la partie 1. À la partie 2 : parler de sa famille."),
+    ]; } },
+
+  // ================= PARTIE 2 =================
+  { num:2, hanzi:"家有几口人", title:"Partie 2 · Combien de personnes dans ta famille ?", desc:"没有 · 家 · 几 · 口 · 呢 · 哥哥 · 妹妹 · 爸爸 · 妈妈 · 和",
+    build(){ return [
+  N("Partie 2. Révision : demandez « combien d'étudiants a-t-elle ? »"),
+  TH(),
+  C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.6), HOLD(),
+
+  N("« Ne pas avoir » se dit [[没有|méiyǒu]] — c'est la négation spéciale du verbe 有. Écoutez et répétez."),
+  ...teach2("没有","méiyǒu","ne pas avoir"),
+  N("Souvenez-vous, « grande sœur » se dit [[姐姐|jiějie]], vu à la leçon 3. « Grand frère » se dit [[哥哥|gēge]]. Écoutez et répétez."),
+  ...teach2("哥哥","gēge","grand frère"),
+  N("« J'ai deux grands frères » se dit :"),
+  ...teach2("我有两个哥哥。","Wǒ yǒu liǎng ge gēge.","J'ai deux grands frères."),
+  N("Pour demander « et toi ? » après avoir dit quelque chose, on ajoute simplement [[呢|ne]] à la fin. Écoutez et répétez."),
+  ...teach2("你呢？","Nǐ ne?","Et toi ?"),
+  N("Ainsi : « J'ai deux grands frères, et toi ? »"),
+  TH(),
+  C("我有两个哥哥，你呢？","Wǒ yǒu liǎng ge gēge, nǐ ne?","J'ai deux grands frères, et toi ?",0.55), P(3,"…"),
+  C("我有两个哥哥，你呢？","Wǒ yǒu liǎng ge gēge, nǐ ne?","J'ai deux grands frères, et toi ?",0.6), HOLD(),
+  N("Répondez : « Je n'ai pas de grand frère. »"),
+  TH(),
+  C("我没有哥哥。","Wǒ méiyǒu gēge.","Je n'ai pas de grand frère.",0.6), HOLD(),
+
+  N("« La famille », « la maison », se dit [[家|jiā]]. Écoutez et répétez."),
+  ...teach2("家","jiā","famille, maison"),
+  N("Pour les petits nombres, « combien » se dit aussi [[几|jǐ]] — vous le connaissez déjà dans [[几点|jǐ diǎn]]. Ici, pour compter les membres d'une famille, on utilise un classificateur spécial : [[口|kǒu]], comme des « bouches à nourrir ». Écoutez et répétez."),
+  ...teach2("口","kǒu","(classificateur pour la famille)"),
+  N("Demandez : « Combien de personnes dans ta famille ? » — mot à mot « ta famille avoir combien 口 personne ? »"),
+  TH(),
+  C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.55), P(3,"…"),
+  C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.6), HOLD(),
+
+  N("« Papa » se dit [[爸爸|bàba]], et « maman » se dit [[妈妈|māma]]. Écoutez et répétez."),
+  ...teach2("爸爸，妈妈","bàba, māma","papa, maman"),
+  N("« Petite sœur » se dit [[妹妹|mèimei]]. Écoutez et répétez."),
+  ...teach2("妹妹","mèimei","petite sœur"),
+  N("Et « et », pour relier des noms dans une liste, se dit [[和|hé]]. Écoutez et répétez."),
+  ...teach2("和","hé","et"),
+  N("Répondez : « Ma famille a quatre personnes : papa, maman, petite sœur et moi. »"),
+  TH(),
+  C("我家有四口人，爸爸、妈妈、妹妹和我。","Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.","Ma famille a quatre personnes : papa, maman, petite sœur et moi.",0.5), P(3,"…"),
+  C("我家有四口人，爸爸、妈妈、妹妹和我。","Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.","Ma famille a quatre personnes : papa, maman, petite sœur et moi.",0.6), HOLD(),
+
+  // Révision
+  N("Révision. Demandez : combien de personnes dans ta famille ?"),
+  TH(),
+  C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.6), P(1.5,"…"),
+  N("Dites : je n'ai pas de grand frère."),
+  TH(),
+  C("我没有哥哥。","Wǒ méiyǒu gēge.","Je n'ai pas de grand frère.",0.6), P(1.5,"…"),
+  N("Fin de la partie 2. À la partie 3 : parler de ses enfants et de leur âge."),
+    ]; } },
+
+  // ================= PARTIE 3 =================
+  { num:3, hanzi:"今年几岁", title:"Partie 3 · Les enfants et leur âge", desc:"孩子 · 儿子 · 女儿 · 岁 · 今年 · 多大",
+    build(){ return [
+  N("Partie 3. Révision : dites « ma famille a quatre personnes »."),
+  TH(),
+  C("我家有四口人。","Wǒ jiā yǒu sì kǒu rén.","Ma famille a quatre personnes.",0.6), HOLD(),
+
+  N("« Un enfant », « des enfants », se dit [[孩子|háizi]]. Écoutez et répétez."),
+  ...teach2("孩子","háizi","enfant(s)"),
+  N("« Un fils » se dit [[儿子|érzi]], et « une fille » se dit [[女儿|nǚ'ér]]. Écoutez et répétez."),
+  ...teach2("儿子，女儿","érzi, nǚ'ér","fils, fille"),
+  N("Dites : « J'ai deux enfants, un fils, une fille. »"),
+  TH(),
+  C("我有两个孩子，一个儿子，一个女儿。","Wǒ yǒu liǎng ge háizi, yí ge érzi, yí ge nǚ'ér.","J'ai deux enfants, un fils, une fille.",0.5), P(3,"…"),
+  C("我有两个孩子，一个儿子，一个女儿。","Wǒ yǒu liǎng ge háizi, yí ge érzi, yí ge nǚ'ér.","J'ai deux enfants, un fils, une fille.",0.6), HOLD(),
+
+  N("Pour parler de l'âge, « les années », « l'âge » en années se dit [[岁|suì]]. Écoutez et répétez."),
+  ...teach2("岁","suì","an(s), (âge)"),
+  N("« Il », « lui » se dit [[他|tā]] — attention, différent de [[她|tā]], « elle », vu à la leçon 3 : même son, caractère différent. Écoutez et répétez."),
+  ...teach2("他","tā","il, lui"),
+  N("Pour demander l'âge d'un enfant, on utilise [[几|jǐ]] : « quel âge a-t-il ? » — mot à mot « lui combien 岁 ? »"),
+  ...teach2("他几岁？","Tā jǐ suì?","Quel âge a-t-il ?"),
+  N("« Cette année », pour dire l'âge actuel, se dit [[今年|jīnnián]]. Répondez : « Cette année, il a cinq ans. »"),
+  TH(),
+  C("他今年五岁。","Tā jīnnián wǔ suì.","Cette année, il a cinq ans.",0.6), P(2.5,"…"),
+  C("他今年五岁。","Tā jīnnián wǔ suì.","Cette année, il a cinq ans.",0.6), HOLD(),
+
+  N("Attention : cette question avec [[几|jǐ]] sert pour un enfant. Pour l'âge d'un adulte, on demande autrement, avec [[多|duō]], « combien », et [[大|dà]], « grand » : « quel âge a-t-il ? », mot à mot « combien grand ? »"),
+  ...teach2("你女儿多大？","Nǐ nǚ'ér duō dà?","Quel âge a ta fille ?"),
+  N("Répondez : « Cette année, elle a douze ans. »"),
+  TH(),
+  C("她今年十二。","Tā jīnnián shí'èr.","Cette année, elle a douze ans.",0.6), HOLD(),
+
+  // Dialogue du manuel (résumé)
+  N("Écoutons la rencontre dans la rue. Yang Tongle demande : « C'est votre fils ? »"),
+  C("这是您儿子吗？","Zhè shì nín érzi ma?","C'est votre fils ?",0.6),
+  N("Répondez : « Oui. J'ai deux enfants, un fils, une fille. »"),
+  TH(),
+  C("是的。我有两个孩子，一个儿子，一个女儿。","Shì de. Wǒ yǒu liǎng ge háizi, yí ge érzi, yí ge nǚ'ér.","Oui. J'ai deux enfants, un fils, une fille.",0.5), P(3,"…"),
+  N("Il demande l'âge du fils. Répondez : « Cette année, il a cinq ans. »"),
+  TH(),
+  C("他今年五岁。","Tā jīnnián wǔ suì.","Cette année, il a cinq ans.",0.6), P(2,"…"),
+  N("Puis l'âge de la fille. Répondez : « Cette année, elle a douze ans. »"),
+  TH(),
+  C("她今年十二。","Tā jīnnián shí'èr.","Cette année, elle a douze ans.",0.6), HOLD(),
+
+  // Révision finale de la leçon 4
+  N("Révision finale de la leçon 4. Demandez : combien d'étudiants a-t-elle ?"),
+  TH(),
+  C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.6), P(1.5,"…"),
+  N("Demandez : combien de personnes dans ta famille ?"),
+  TH(),
+  C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.6), P(1.5,"…"),
+  N("Dites : j'ai deux enfants, un fils, une fille."),
+  TH(),
+  C("我有两个孩子，一个儿子，一个女儿。","Wǒ yǒu liǎng ge háizi, yí ge érzi, yí ge nǚ'ér.","J'ai deux enfants, un fils, une fille.",0.55), P(2,"…"),
+  N("Demandez l'âge d'un enfant : quel âge a-t-il ?"),
+  TH(),
+  C("他几岁？","Tā jǐ suì?","Quel âge a-t-il ?",0.6), P(1.5,"…"),
+  N("Demandez l'âge d'un adulte : quel âge a ta fille ?"),
+  TH(),
+  C("你女儿多大？","Nǐ nǚ'ér duō dà?","Quel âge a ta fille ?",0.6), P(1.5,"…"),
+  N("Excellent ! Vous avez terminé la leçon 4. Vous savez compter, parler de votre famille et demander l'âge. Réécoutez-la demain, puis passez à la leçon 5. 再见！"),
+  C("再见！","Zàijiàn!","Au revoir !",0.6),
+    ]; } },
+
+  ]
+});
