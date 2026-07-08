@@ -19,6 +19,10 @@ const TH = () => ({t:'hold', label:'À toi de répondre à voix haute — ▶ po
 function teach(zh, py, fr){
   return [ C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.7), HOLD() ];
 }
+/* variante « 2 fois suffit » : 1× lent + 1× normal, puis pause pour répéter */
+function teach2(zh, py, fr){
+  return [ C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.65), HOLD() ];
+}
 function drill(promptFr, zh, py, fr){
   return [ N(promptFr), TH(), C(zh,py,fr,0.65), P(2.5), C(zh,py,fr,0.65), HOLD() ];
 }
