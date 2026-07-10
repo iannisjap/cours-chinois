@@ -17,14 +17,15 @@ const HOLD = (label) => ({t:'hold', label: label||'Répète à voix haute, puis 
 const TH = () => ({t:'hold', label:'À toi de répondre à voix haute — ▶ pour entendre la réponse'});
 
 function teach(zh, py, fr){
-  return [ C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.7), HOLD() ];
+  return [ C(zh,py,fr,0.5), C(zh,py,fr,0.5), C(zh,py,fr,0.7), HOLD() ];
 }
-/* variante « 2 fois suffit » : 1× lent + 1× normal, puis pause pour répéter */
+/* variante « 2 fois suffit » : 1× lent + 1× normal, enchaînés sans pause,
+   puis HOLD pour que l'élève répète (seul moment où l'on marque un temps). */
 function teach2(zh, py, fr){
-  return [ C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.65), HOLD() ];
+  return [ C(zh,py,fr,0.5), C(zh,py,fr,0.65), HOLD() ];
 }
 function drill(promptFr, zh, py, fr){
-  return [ N(promptFr), TH(), C(zh,py,fr,0.65), P(2.5), C(zh,py,fr,0.65), HOLD() ];
+  return [ N(promptFr), TH(), C(zh,py,fr,0.65), C(zh,py,fr,0.65), HOLD() ];
 }
 
 /* ---------- registre des chapitres ---------- */
