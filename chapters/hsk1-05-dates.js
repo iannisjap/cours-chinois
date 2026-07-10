@@ -21,7 +21,15 @@ registerChapter({
   // ================= PARTIE 1 =================
   { num:1, hanzi:"今天几号", title:"Partie 1 · La date et les jours", desc:"今天 · 号 · 月 · 日 · 星期 · 休息",
     build(){ return [
-  N("Bienvenue dans la leçon 5 du HSK 1. Aujourd'hui : dire la date, et dire ce qu'on sait faire. D'abord, révision de la leçon 4 : demandez combien de personnes dans ta famille."),
+  N("Bienvenue dans la leçon 5 du HSK 1. Aujourd'hui : dire la date, et dire ce qu'on sait faire. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("今天几号？","Jīntiān jǐ hào?","Quelle est la date aujourd'hui ?",0.5),
+  P(1.5,"…"),
+  C("今天九月八号。","Jīntiān jiǔ yuè bā hào.","Aujourd'hui, c'est le 8 septembre.",0.5),
+  P(1.5,"…"),
+  C("星期几？","Xīngqī jǐ?","Quel jour de la semaine ?",0.5),
+  P(1.5,"…"),
+  C("星期日。今天我休息。","Xīngqīrì. Jīntiān wǒ xiūxi.","Dimanche. Aujourd'hui, je suis en repos.",0.5),
+  N("D'abord, révision de la leçon 4 : demandez combien de personnes dans ta famille."),
   TH(),
   C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.6), HOLD(),
 
@@ -53,13 +61,15 @@ registerChapter({
   C("星期日。今天我休息。","Xīngqīrì. Jīntiān wǒ xiūxi.","C'est dimanche. Aujourd'hui, je suis en repos.",0.55), P(3,"…"),
   C("星期日。今天我休息。","Xīngqīrì. Jīntiān wǒ xiūxi.","C'est dimanche. Aujourd'hui, je suis en repos.",0.6), HOLD(),
 
-  // Dialogue du manuel
-  N("Écoutons le dialogue. Wang Yixue demande : « Quelle est la date aujourd'hui ? »"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Wang Yixue demande : « Quelle est la date aujourd'hui ? »"),
   C("今天几号？","Jīntiān jǐ hào?","Quelle est la date aujourd'hui ?",0.6),
   N("Répondez : « Aujourd'hui, c'est le 8 septembre. »"),
   TH(),
   C("今天九月八号。","Jīntiān jiǔ yuè bā hào.","Aujourd'hui, c'est le 8 septembre.",0.6), P(2,"…"),
-  N("Elle demande : « Quel jour de la semaine ? » Répondez : « Dimanche. Aujourd'hui, je suis en repos. »"),
+  N("Elle demande :"),
+  C("星期几？","Xīngqī jǐ?","Quel jour de la semaine ?",0.6),
+  N("Répondez : « Dimanche. Aujourd'hui, je suis en repos. »"),
   TH(),
   C("星期日。今天我休息。","Xīngqīrì. Jīntiān wǒ xiūxi.","Dimanche. Aujourd'hui, je suis en repos.",0.6), HOLD(),
 
@@ -76,13 +86,21 @@ registerChapter({
   // ================= PARTIE 2 =================
   { num:2, hanzi:"会做饭", title:"Partie 2 · Savoir faire, cuisiner", desc:"会 · 做饭 · 做 · 面条儿 · 饺子 · 菜",
     build(){ return [
-  N("Partie 2. Révision : dites « aujourd'hui, je suis en repos »."),
+  N("Partie 2. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("你会做饭吗？","Nǐ huì zuò fàn ma?","Sais-tu cuisiner ?",0.5),
+  P(1.5,"…"),
+  C("我会做。","Wǒ huì zuò.","Je sais cuisiner.",0.5),
+  P(1.5,"…"),
+  C("你会做什么？","Nǐ huì zuò shénme?","Que sais-tu préparer ?",0.5),
+  P(1.5,"…"),
+  C("我会做面条儿、饺子，也会做一些菜。星期天我也做饭。","Wǒ huì zuò miàntiáor, jiǎozi, yě huì zuò yìxiē cài. Xīngqītiān wǒ yě zuò fàn.","Je sais faire des nouilles, des jiaozi, et aussi quelques plats. Le dimanche, je cuisine aussi.",0.5),
+  N("Révision : dites « aujourd'hui, je suis en repos »."),
   TH(),
   C("今天我休息。","Jīntiān wǒ xiūxi.","Aujourd'hui, je suis en repos.",0.6), HOLD(),
 
   N("Pour dire qu'on sait faire quelque chose — parce qu'on l'a appris — on utilise [[会|huì]] avant le verbe. Écoutez et répétez."),
   ...teach2("会","huì","savoir (faire)"),
-  N("« Cuisiner », « préparer un repas », se dit [[做饭|zuò fàn]] — vous connaissez déjà [[饭|fàn]], le repas. [[做|zuò]] tout seul veut dire « faire », « préparer »."),
+  N("« Cuisiner », « préparer un repas », se dit [[做饭|zuò fàn]]. [[饭|fàn]] veut dire « repas », et [[做|zuò]] tout seul veut dire « faire », « préparer »."),
   ...teach2("做饭","zuò fàn","cuisiner"),
   N("Demandez : « Sais-tu cuisiner ? »"),
   TH(),
@@ -106,6 +124,18 @@ registerChapter({
   TH(),
   C("我会做面条儿、饺子，也会做一些菜。星期天我也做饭。","Wǒ huì zuò miàntiáor, jiǎozi, yě huì zuò yìxiē cài. Xīngqītiān wǒ yě zuò fàn.","Je sais faire des nouilles, des jiaozi, et aussi quelques plats. Le dimanche, je cuisine aussi.",0.5), HOLD(),
 
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. On vous demande :"),
+  C("你会做饭吗？","Nǐ huì zuò fàn ma?","Sais-tu cuisiner ?",0.6),
+  N("Répondez : « Je sais cuisiner. »"),
+  TH(),
+  C("我会做。","Wǒ huì zuò.","Je sais cuisiner.",0.6), P(2,"…"),
+  N("On vous demande :"),
+  C("你会做什么？","Nǐ huì zuò shénme?","Que sais-tu préparer ?",0.6),
+  N("Répondez : « Je sais faire des nouilles, des jiaozi, et aussi quelques plats. Le dimanche, je cuisine aussi. »"),
+  TH(),
+  C("我会做面条儿、饺子，也会做一些菜。星期天我也做饭。","Wǒ huì zuò miàntiáor, jiǎozi, yě huì zuò yìxiē cài. Xīngqītiān wǒ yě zuò fàn.","Je sais faire des nouilles, des jiaozi, et aussi quelques plats. Le dimanche, je cuisine aussi.",0.5), HOLD(),
+
   // Révision
   N("Révision. Demandez : sais-tu cuisiner ?"),
   TH(),
@@ -119,11 +149,23 @@ registerChapter({
   // ================= PARTIE 3 =================
   { num:3, hanzi:"真好看", title:"Partie 3 · Un ordinateur neuf", desc:"下班 · 新 · 电脑 · 真 · 好看 · 喜欢 · 它",
     build(){ return [
-  N("Partie 3. Révision : dites « je sais cuisiner »."),
+  N("Partie 3. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("同乐，下班吗？","Tóngle, xiàbān ma?","Tongle, as-tu fini le travail ?",0.5),
+  P(1.5,"…"),
+  C("下班。","Xiàbān.","Fini.",0.5),
+  P(1.5,"…"),
+  C("这是你的新电脑吗？","Zhè shì nǐ de xīn diànnǎo ma?","C'est ton nouvel ordinateur ?",0.5),
+  P(1.5,"…"),
+  C("是的，是我的新电脑。","Shì de, shì wǒ de xīn diànnǎo.","Oui, c'est mon nouvel ordinateur.",0.5),
+  P(1.5,"…"),
+  C("真好看！","Zhēn hǎokàn!","Il est vraiment beau !",0.5),
+  P(1.5,"…"),
+  C("我也很喜欢它。","Wǒ yě hěn xǐhuan tā.","Je l'aime beaucoup aussi.",0.5),
+  N("Révision : dites « je sais cuisiner »."),
   TH(),
   C("我会做饭。","Wǒ huì zuò fàn.","Je sais cuisiner.",0.6), HOLD(),
 
-  N("« Finir le travail », « sortir du bureau », se dit [[下班|xiàbān]] — le contraire de [[上课|shàngkè]] que vous connaissez, mais pour le travail. Écoutez et répétez."),
+  N("« Finir le travail », « sortir du bureau », se dit [[下班|xiàbān]]. Écoutez et répétez."),
   ...teach2("下班","xiàbān","finir le travail"),
   N("Demandez à un collègue : « As-tu fini le travail ? »"),
   TH(),
@@ -145,8 +187,8 @@ registerChapter({
   N("« Aimer », « apprécier », se dit [[喜欢|xǐhuan]]. Et « il », « elle », pour un objet, se dit [[它|tā]]. Écoutez et répétez."),
   ...teach2("我也很喜欢它。","Wǒ yě hěn xǐhuan tā.","Je l'aime beaucoup aussi."),
 
-  // Dialogue du manuel
-  N("Écoutons le dialogue. Wang Yixue demande : « Tongle, as-tu fini le travail ? »"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Wang Yixue demande : « Tongle, as-tu fini le travail ? »"),
   C("同乐，下班吗？","Tóngle, xiàbān ma?","Tongle, as-tu fini le travail ?",0.6),
   N("Répondez : « Fini. »"),
   TH(),

@@ -33,6 +33,7 @@ function registerChapter(ch){ CHAPTERS.push(ch); }
 
 let steps = [];
 let cur = 0;                 // index de la leçon courante dans le chapitre
+let playerChapterIdx = -1;   // chapitre qui alimente le lecteur actif (-1 = aucun)
 let curChapter = null;       // chapitre courant
 let LESSONS = [];            // leçons du chapitre courant
 
@@ -117,8 +118,14 @@ function loadVoices(){
   voices = synth.getVoices();
   const zhList = voices.filter(v=>/^zh/i.test(v.lang));
   const frList = voices.filter(v=>/^fr/i.test(v.lang));
-  zhVoice = (userZhChoice && zhList.find(v=>v.name===userZhChoice)) || pickBest(zhList.filter(v=>/zh[-_]CN/i.test(v.lang))) || pickBest(zhList);
-  frVoice = (userFrChoice && frList.find(v=>v.name===userFrChoice)) || pickBest(frList.filter(v=>/fr[-_]FR/i.test(v.lang))) || pickBest(frList);
+  const newZh = (userZhChoice && zhList.find(v=>v.name===userZhChoice)) || pickBest(zhList.filter(v=>/zh[-_]CN/i.test(v.lang))) || pickBest(zhList);
+  const newFr = (userFrChoice && frList.find(v=>v.name===userFrChoice)) || pickBest(frList.filter(v=>/fr[-_]FR/i.test(v.lang))) || pickBest(frList);
+  // certains navigateurs redéclenchent onvoiceschanged en cours de lecture avec une
+  // liste momentanément vide (Bluetooth, verrouillage d'écran…) : ne jamais régresser
+  // vers "aucune voix" si on en avait déjà trouvé une bonne — ça évite un bascule
+  // soudain vers une voix de secours dans une autre langue.
+  if(newZh) zhVoice = newZh;
+  if(newFr) frVoice = newFr;
   if(!zhVoice && $('voiceWarn')) $('voiceWarn').style.display='block';
   if($('zhSelect')){ fillSelect($('zhSelect'), zhList, zhVoice); fillSelect($('frSelect'), frList, frVoice); }
 }
@@ -563,19 +570,28 @@ function setChapter(i){
   LESSONS = curChapter.lessons;
 }
 
-/* ---- rendu des écrans (sans toucher à l'historique navigateur) ---- */
+/* ---- rendu des écrans (sans toucher à l'historique navigateur) ----
+   Ouvrir le menu des leçons depuis une leçon en cours (☰ Menu, ou le
+   fil d'Ariane) ne doit PAS couper la lecture : c'est juste un aperçu
+   par-dessus le lecteur, qui continue de tourner en dessous. On ne
+   coupe la lecture que si on change réellement de chapitre, ou qu'on
+   revient à l'écran d'accueil des chapitres. ---- */
 function renderChapters(){
   stopEverything();
   playing = false; syncPlayBtn();
   setPhase('','🎧','Prêt');
+  playerChapterIdx = -1;   // toute reprise ultérieure repart de zéro
   $('overlay').style.display = 'none';
   $('chapterOverlay').style.display = 'flex';
 }
 function renderLessons(i){
+  const peekingSameChapter = steps.length > 0 && playerChapterIdx === i;
   setChapter(i);
-  stopEverything();
-  playing = false; syncPlayBtn();
-  setPhase('','🎧','Prêt');
+  if(!peekingSameChapter){
+    stopEverything();
+    playing = false; syncPlayBtn();
+    setPhase('','🎧','Prêt');
+  }
   $('lessonBigHanzi').textContent = curChapter.hanzi;
   $('lessonOverlayTitle').textContent = curChapter.title + ' · Cours audio de chinois';
   $('lessonOverlayIntro').textContent = curChapter.intro || '';
@@ -584,12 +600,17 @@ function renderLessons(i){
   $('overlay').style.display = 'flex';
 }
 function renderPlayer(i){
-  cur = i;
   const L = LESSONS[i];
-  stopEverything();
-  steps = L.build();
-  idx = 0; playing = false; syncPlayBtn();
-  buildTimeline(); updateProgress();
+  const resuming = steps.length > 0 && cur === i && playerChapterIdx === curChapterIdx;
+  if(!resuming){
+    cur = i;
+    playerChapterIdx = curChapterIdx;
+    stopEverything();
+    steps = L.build();
+    idx = 0; playing = false;
+    buildTimeline();
+  }
+  syncPlayBtn(); updateProgress();
   $('lessonTag').textContent = (L.num >= 7 ? 'Révision' : 'Leçon ' + L.num);
   // fil d'Ariane : « Chapitre › Leçon » — le nom du chapitre ramène à la liste des leçons
   document.querySelector('header h1').innerHTML =
@@ -605,11 +626,13 @@ function renderPlayer(i){
   $('overlay').style.display = 'none';
   $('voicePanel').classList.remove('open');
   $('recPanel').classList.remove('open');
-  // premier geste utilisateur : débloque l'audio
-  const warm = new SpeechSynthesisUtterance(' ');
-  warm.volume = 0; synth.speak(warm);
-  try{ const p = bg.play(); if(p && p.catch) p.catch(()=>{}); }catch(e){}
-  play();
+  if(!resuming){
+    // premier geste utilisateur : débloque l'audio
+    const warm = new SpeechSynthesisUtterance(' ');
+    warm.volume = 0; synth.speak(warm);
+    try{ const p = bg.play(); if(p && p.catch) p.catch(()=>{}); }catch(e){}
+    play();
+  }
 }
 
 /* ---- navigation par hash dans l'URL :

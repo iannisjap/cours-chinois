@@ -20,7 +20,11 @@ registerChapter({
   // ================= PARTIE 1 =================
   { num:1, hanzi:"中国人", title:"Partie 1 · Dire sa nationalité", desc:"人 · 中国 · 法国 · 中文 · 的",
     build(){ return [
-  N("Bienvenue dans la leçon 3 du HSK 1. Aujourd'hui : dire d'où l'on vient et poser des questions. D'abord, révision de la leçon 2 : dites « je suis étudiant »."),
+  N("Bienvenue dans la leçon 3 du HSK 1. Aujourd'hui : dire d'où l'on vient et poser des questions. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("我是中国人。","Wǒ shì Zhōngguó rén.","Je suis chinois.",0.5),
+  P(2,"…"),
+  C("我是法国人。我的中文老师也是中国人。","Wǒ shì Fǎguó rén. Wǒ de Zhōngwén lǎoshī yě shì Zhōngguó rén.","Je suis française. Mon professeur de chinois est chinois aussi.",0.5),
+  N("D'abord, révision de la leçon 2 : dites « je suis étudiant »."),
   TH(),
   C("我是学生。","Wǒ shì xuéshēng.","Je suis étudiant.",0.6), HOLD(),
 
@@ -51,8 +55,8 @@ registerChapter({
   C("我的中文老师也是中国人。","Wǒ de Zhōngwén lǎoshī yě shì Zhōngguó rén.","Mon professeur de chinois est chinois aussi.",0.55), P(3,"…"),
   C("我的中文老师也是中国人。","Wǒ de Zhōngwén lǎoshī yě shì Zhōngguó rén.","Mon professeur de chinois est chinois aussi.",0.6), HOLD(),
 
-  // Dialogue du manuel
-  N("Écoutons le dialogue. Li Wen dit : « Je suis chinois. » À vous."),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Li Wen dit : « Je suis chinois. » À vous."),
   TH(),
   C("我是中国人。","Wǒ shì Zhōngguó rén.","Je suis chinois.",0.6), P(2,"…"),
   N("Bai Jiayue répond : « Je suis française. Mon professeur de chinois est chinois aussi. »"),
@@ -72,7 +76,15 @@ registerChapter({
   // ================= PARTIE 2 =================
   { num:2, hanzi:"哪国人", title:"Partie 2 · Qui ? De quel pays ?", desc:"这 · 谁 · 哪 · 国 · 她 · 女朋友",
     build(){ return [
-  N("Partie 2. Révision : dites « je suis français »."),
+  N("Partie 2. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("这是谁？","Zhè shì shéi?","Qui est-ce ?",0.5),
+  P(1.5,"…"),
+  C("这是我女朋友。","Zhè shì wǒ nǚpéngyou.","C'est ma petite amie.",0.5),
+  P(1.5,"…"),
+  C("你女朋友是哪国人？","Nǐ nǚpéngyou shì nǎ guó rén?","Ta petite amie est de quel pays ?",0.5),
+  P(1.5,"…"),
+  C("她也是泰国人。","Tā yě shì Tàiguó rén.","Elle est thaïlandaise aussi.",0.5),
+  N("Révision : dites « je suis français »."),
   TH(),
   C("我是法国人。","Wǒ shì Fǎguó rén.","Je suis français.",0.6), HOLD(),
 
@@ -106,6 +118,18 @@ registerChapter({
   C("她也是泰国人。","Tā yě shì Tàiguó rén.","Elle est thaïlandaise aussi.",0.6), P(2.5,"…"),
   C("她也是泰国人。","Tā yě shì Tàiguó rén.","Elle est thaïlandaise aussi.",0.6), HOLD(),
 
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. On vous montre une photo et on demande :"),
+  C("这是谁？","Zhè shì shéi?","Qui est-ce ?",0.6),
+  N("Répondez : « C'est ma petite amie. »"),
+  TH(),
+  C("这是我女朋友。","Zhè shì wǒ nǚpéngyou.","C'est ma petite amie.",0.6), P(2,"…"),
+  N("On vous demande alors :"),
+  C("你女朋友是哪国人？","Nǐ nǚpéngyou shì nǎ guó rén?","Ta petite amie est de quel pays ?",0.6),
+  N("Répondez : « Elle est thaïlandaise aussi. »"),
+  TH(),
+  C("她也是泰国人。","Tā yě shì Tàiguó rén.","Elle est thaïlandaise aussi.",0.6), HOLD(),
+
   // Révision
   N("Révision. Demandez : qui est-ce ?"),
   TH(),
@@ -119,11 +143,15 @@ registerChapter({
   // ================= PARTIE 3 =================
   { num:3, hanzi:"忙吗", title:"Partie 3 · Poser une question avec 吗", desc:"吗 · 工作 · 忙 · 还 · 太 · 想 · 我们",
     build(){ return [
-  N("Partie 3. Voici le moyen le plus simple de poser une question en chinois : le petit mot [[吗|ma]] à la fin d'une phrase. La phrase reste identique, on ajoute juste [[吗|ma]]. Écoutez et répétez."),
+  N("Partie 3. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("你工作还忙吗？","Nǐ gōngzuò hái máng ma?","Es-tu encore occupé par le travail ?",0.5),
+  P(2,"…"),
+  C("对，还很忙。你也很忙吗？","Duì, hái hěn máng. Nǐ yě hěn máng ma?","Oui, encore très occupé. Et toi ?",0.5),
+  N("Voici le moyen le plus simple de poser une question en chinois : le petit mot [[吗|ma]] à la fin d'une phrase. La phrase reste identique, on ajoute juste [[吗|ma]]. Écoutez et répétez."),
   ...teach2("吗","ma","(marque une question)"),
   N("« Occupé », « avoir beaucoup à faire », se dit [[忙|máng]]. Écoutez et répétez."),
   ...teach2("忙","máng","occupé"),
-  N("« Tu es occupé » se dit « nǐ hěn máng ». Pour en faire une question, on ajoute [[吗|ma]] : « Es-tu occupé ? »"),
+  N("« Tu es occupé » se dit [[你很忙|nǐ hěn máng]]. Pour en faire une question, on ajoute [[吗|ma]] : « Es-tu occupé ? »"),
   ...teach2("你忙吗？","Nǐ máng ma?","Es-tu occupé ?"),
   N("À vous : demandez « Es-tu occupé ? »"),
   TH(),
@@ -151,8 +179,8 @@ registerChapter({
   TH(),
   C("我也想你们。","Wǒ yě xiǎng nǐmen.","Vous me manquez aussi.",0.6), HOLD(),
 
-  // Dialogue du manuel (résumé)
-  N("Écoutons l'appel vidéo entre deux sœurs. « Allô » au téléphone se dit [[喂|wèi]], et « grande sœur » se dit [[姐姐|jiějie]]. La grande sœur demande :"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. « Allô » au téléphone se dit [[喂|wèi]], et « grande sœur » se dit [[姐姐|jiějie]]. La grande sœur demande :"),
   C("你工作还忙吗？","Nǐ gōngzuò hái máng ma?","Es-tu encore occupée par le travail ?",0.6),
   N("Répondez : « Oui, encore très occupée. Et toi, es-tu occupée aussi ? »"),
   TH(),

@@ -19,7 +19,11 @@ registerChapter({
   // ================= PARTIE 1 =================
   { num:1, hanzi:"你叫什么", title:"Partie 1 · Demander et dire son nom", desc:"请问 · 叫 · 什么 · 名字 · 我",
     build(){ return [
-  N("Bienvenue dans la leçon 2 du HSK 1. Aujourd'hui : se présenter. D'abord, une révision de la leçon 1 : dites bonjour."),
+  N("Bienvenue dans la leçon 2 du HSK 1. Aujourd'hui : se présenter. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("请问，你叫什么名字？","Qǐngwèn, nǐ jiào shénme míngzi?","Excusez-moi, comment t'appelles-tu ?",0.5),
+  P(2,"…"),
+  C("我叫陈天中。","Wǒ jiào Chén Tiānzhōng.","Je m'appelle Chen Tianzhong.",0.5),
+  N("D'abord, une révision de la leçon 1 : dites bonjour."),
   TH(),
   C("你好！","Nǐ hǎo!","Bonjour !",0.6), HOLD(),
 
@@ -45,8 +49,8 @@ registerChapter({
   C("请问，你叫什么名字？","Qǐngwèn, nǐ jiào shénme míngzi?","Excusez-moi, comment t'appelles-tu ?",0.55), P(3,"…"),
   C("请问，你叫什么名字？","Qǐngwèn, nǐ jiào shénme míngzi?","Excusez-moi, comment t'appelles-tu ?",0.6), HOLD(),
 
-  // Mini-conversation
-  N("Le professeur Wang fait connaissance. Elle demande :"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Le professeur Wang fait connaissance. Elle demande :"),
   C("请问，你叫什么名字？","Qǐngwèn, nǐ jiào shénme míngzi?","Excusez-moi, comment t'appelles-tu ?",0.6),
   N("Répondez avec le nom Chen Tianzhong."),
   TH(),
@@ -65,7 +69,15 @@ registerChapter({
   // ================= PARTIE 2 =================
   { num:2, hanzi:"我是", title:"Partie 2 · Être, ne pas, s'excuser", desc:"是 · 不 · 对不起 · 没关系",
     build(){ return [
-  N("Partie 2. Révision : demandez le nom de quelqu'un, poliment."),
+  N("Partie 2. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("你好，安妮！","Nǐ hǎo, Ānnī!","Bonjour, Annie !",0.5),
+  P(1.5,"…"),
+  C("我不是安妮，我是白家月。","Wǒ bú shì Ānnī, wǒ shì Bái Jiāyuè.","Je ne suis pas Annie, je suis Bai Jiayue.",0.5),
+  P(1.5,"…"),
+  C("对不起！","Duìbuqǐ!","Pardon !",0.5),
+  P(1.5,"…"),
+  C("没关系！","Méi guānxi!","Ce n'est rien !",0.5),
+  N("Révision : demandez le nom de quelqu'un, poliment."),
   TH(),
   C("请问，你叫什么名字？","Qǐngwèn, nǐ jiào shénme míngzi?","Excusez-moi, comment t'appelles-tu ?",0.6), HOLD(),
 
@@ -91,8 +103,8 @@ registerChapter({
   N("Pour répondre « ce n'est rien », « pas de souci », on dit [[没关系|méi guānxi]]. Écoutez et répétez."),
   ...teach2("没关系","méi guānxi","ce n'est rien, pas de souci"),
 
-  // Dialogue du manuel
-  N("Chen Tianzhong se trompe de personne. Il croit parler à Annie et dit :"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Chen Tianzhong se trompe de personne. Il croit parler à Annie et dit :"),
   C("你好，安妮！","Nǐ hǎo, Ānnī!","Bonjour, Annie !",0.6),
   N("Mais c'est Bai Jiayue. Elle corrige : « Je ne suis pas Annie, je suis Bai Jiayue. »"),
   TH(),
@@ -122,7 +134,13 @@ registerChapter({
   // ================= PARTIE 3 =================
   { num:3, hanzi:"很高兴", title:"Partie 3 · Enchanté", desc:"很 · 高兴 · 认识 · 也",
     build(){ return [
-  N("Partie 3. Révision : dites « je m'appelle », avec votre nom."),
+  N("Partie 3. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("你好！我叫李文。","Nǐ hǎo! Wǒ jiào Lǐ Wén.","Bonjour ! Je m'appelle Li Wen.",0.5),
+  P(1.5,"…"),
+  C("很高兴认识你。","Hěn gāoxìng rènshi nǐ.","Très heureux de te connaître.",0.5),
+  P(1.5,"…"),
+  C("认识你我也很高兴。","Rènshi nǐ wǒ yě hěn gāoxìng.","Moi aussi, je suis content de te connaître.",0.5),
+  N("Révision : dites « je m'appelle », avec votre nom."),
   HOLD("Dis-le avec TON nom, puis ▶"),
 
   N("« Content », « heureux », se dit [[高兴|gāoxìng]]. Écoutez et répétez."),
@@ -143,8 +161,8 @@ registerChapter({
   N("« Moi aussi, je suis content de te connaître » se dit, à la manière chinoise : te connaître, moi aussi très content."),
   ...teach2("认识你我也很高兴。","Rènshi nǐ wǒ yě hěn gāoxìng.","Moi aussi, je suis content de te connaître."),
 
-  // Dialogue du manuel
-  N("Li Wen et Bai Jiayue se rencontrent. Li Wen dit : « Bonjour ! Je m'appelle Li Wen. » À vous."),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Li Wen et Bai Jiayue se rencontrent. Li Wen dit : « Bonjour ! Je m'appelle Li Wen. » À vous."),
   TH(),
   C("你好！我叫李文。","Nǐ hǎo! Wǒ jiào Lǐ Wén.","Bonjour ! Je m'appelle Li Wen.",0.6), P(2.5,"…"),
   C("你好！我叫李文。","Nǐ hǎo! Wǒ jiào Lǐ Wén.","Bonjour ! Je m'appelle Li Wen.",0.6), HOLD(),

@@ -21,7 +21,15 @@ registerChapter({
   // ================= PARTIE 1 =================
   { num:1, hanzi:"有多少个", title:"Partie 1 · Avoir, compter, 个", desc:"有 · 多少 · 个 · nombres 1-10",
     build(){ return [
-  N("Bienvenue dans la leçon 4 du HSK 1. Aujourd'hui : le verbe « avoir », les nombres, et parler de sa famille. Révision : demandez « es-tu occupé ? »"),
+  N("Bienvenue dans la leçon 4 du HSK 1. Aujourd'hui : le verbe « avoir », les nombres, et parler de sa famille. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("一飞忙吗？","Yīfēi máng ma?","Yifei est-elle occupée ?",0.5),
+  P(1.5,"…"),
+  C("她很忙。","Tā hěn máng.","Elle est très occupée.",0.5),
+  P(1.5,"…"),
+  C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.5),
+  P(1.5,"…"),
+  C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.5),
+  N("Révision : demandez « es-tu occupé ? »"),
   TH(),
   C("你忙吗？","Nǐ máng ma?","Es-tu occupé ?",0.6), HOLD(),
 
@@ -31,7 +39,7 @@ registerChapter({
   ...teach2("六，七，八，九，十","liù, qī, bā, jiǔ, shí","six, sept, huit, neuf, dix"),
   N("Pour les dizaines, « vingt » se dit [[二十|èrshí]] — littéralement « deux dix ». Écoutez et répétez."),
   ...teach2("二十","èrshí","vingt"),
-  N("Rappel important, vu à la leçon 1 : pour compter des choses, « deux » ne se dit pas [[二|èr]] mais [[两|liǎng]]. Écoutez et répétez."),
+  N("Attention, point important : pour compter des choses ou des personnes, « deux » ne se dit pas [[二|èr]] mais [[两|liǎng]]. Écoutez et répétez."),
   ...teach2("两","liǎng","deux (pour compter)"),
 
   N("Le verbe « avoir » se dit [[有|yǒu]]. Écoutez et répétez."),
@@ -51,13 +59,15 @@ registerChapter({
   C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.6), P(2.5,"…"),
   C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.6), HOLD(),
 
-  // Dialogue du manuel
-  N("Écoutons le dialogue. Liu Ming demande : « Yifei est-elle occupée ? »"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Liu Ming demande : « Yifei est-elle occupée ? »"),
   C("一飞忙吗？","Yīfēi máng ma?","Yifei est-elle occupée ?",0.6),
   N("Répondez : « Elle est très occupée. »"),
   TH(),
   C("她很忙。","Tā hěn máng.","Elle est très occupée.",0.6), P(2,"…"),
-  N("Il demande : « Combien d'étudiants a-t-elle ? » Répondez : « Elle a vingt étudiants. »"),
+  N("Il demande :"),
+  C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.6),
+  N("Répondez : « Elle a vingt étudiants. »"),
   TH(),
   C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.6), HOLD(),
 
@@ -74,7 +84,15 @@ registerChapter({
   // ================= PARTIE 2 =================
   { num:2, hanzi:"家有几口人", title:"Partie 2 · Combien de personnes dans ta famille ?", desc:"没有 · 家 · 几 · 口 · 呢 · 哥哥 · 妹妹 · 爸爸 · 妈妈 · 和",
     build(){ return [
-  N("Partie 2. Révision : demandez « combien d'étudiants a-t-elle ? »"),
+  N("Partie 2. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("我有两个哥哥，你呢？","Wǒ yǒu liǎng ge gēge, nǐ ne?","J'ai deux grands frères, et toi ?",0.5),
+  P(1.5,"…"),
+  C("我没有哥哥。","Wǒ méiyǒu gēge.","Je n'ai pas de grand frère.",0.5),
+  P(1.5,"…"),
+  C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.5),
+  P(1.5,"…"),
+  C("我家有四口人，爸爸、妈妈、妹妹和我。","Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.","Ma famille a quatre personnes : papa, maman, petite sœur et moi.",0.5),
+  N("Révision : demandez « combien d'étudiants a-t-elle ? »"),
   TH(),
   C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.6), HOLD(),
 
@@ -96,7 +114,9 @@ registerChapter({
 
   N("« La famille », « la maison », se dit [[家|jiā]]. Écoutez et répétez."),
   ...teach2("家","jiā","famille, maison"),
-  N("Pour les petits nombres, « combien » se dit aussi [[几|jǐ]] — vous le connaissez déjà dans [[几点|jǐ diǎn]]. Ici, pour compter les membres d'une famille, on utilise un classificateur spécial : [[口|kǒu]], comme des « bouches à nourrir ». Écoutez et répétez."),
+  N("Pour les petits nombres, il existe un autre mot pour « combien » : [[几|jǐ]]. Écoutez et répétez."),
+  ...teach2("几","jǐ","combien (petit nombre)"),
+  N("Pour compter les membres d'une famille, on utilise un classificateur spécial : [[口|kǒu]], comme des « bouches à nourrir ». Écoutez et répétez."),
   ...teach2("口","kǒu","(classificateur pour la famille)"),
   N("Demandez : « Combien de personnes dans ta famille ? » — mot à mot « ta famille avoir combien 口 personne ? »"),
   TH(),
@@ -114,6 +134,18 @@ registerChapter({
   C("我家有四口人，爸爸、妈妈、妹妹和我。","Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.","Ma famille a quatre personnes : papa, maman, petite sœur et moi.",0.5), P(3,"…"),
   C("我家有四口人，爸爸、妈妈、妹妹和我。","Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.","Ma famille a quatre personnes : papa, maman, petite sœur et moi.",0.6), HOLD(),
 
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Dites : « J'ai deux grands frères, et toi ? »"),
+  TH(),
+  C("我有两个哥哥，你呢？","Wǒ yǒu liǎng ge gēge, nǐ ne?","J'ai deux grands frères, et toi ?",0.6), P(2,"…"),
+  N("On vous répond :"),
+  C("我没有哥哥。","Wǒ méiyǒu gēge.","Je n'ai pas de grand frère.",0.6),
+  N("On vous demande :"),
+  C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.6),
+  N("Répondez : « Ma famille a quatre personnes : papa, maman, petite sœur et moi. »"),
+  TH(),
+  C("我家有四口人，爸爸、妈妈、妹妹和我。","Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.","Ma famille a quatre personnes : papa, maman, petite sœur et moi.",0.55), HOLD(),
+
   // Révision
   N("Révision. Demandez : combien de personnes dans ta famille ?"),
   TH(),
@@ -127,7 +159,19 @@ registerChapter({
   // ================= PARTIE 3 =================
   { num:3, hanzi:"今年几岁", title:"Partie 3 · Les enfants et leur âge", desc:"孩子 · 儿子 · 女儿 · 岁 · 今年 · 多大",
     build(){ return [
-  N("Partie 3. Révision : dites « ma famille a quatre personnes »."),
+  N("Partie 3. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("这是您儿子吗？","Zhè shì nín érzi ma?","C'est votre fils ?",0.5),
+  P(1.5,"…"),
+  C("是的。我有两个孩子，一个儿子，一个女儿。","Shì de. Wǒ yǒu liǎng ge háizi, yí ge érzi, yí ge nǚ'ér.","Oui. J'ai deux enfants, un fils, une fille.",0.5),
+  P(1.5,"…"),
+  C("您儿子几岁？","Nín érzi jǐ suì?","Quel âge a votre fils ?",0.5),
+  P(1.5,"…"),
+  C("他今年五岁。","Tā jīnnián wǔ suì.","Cette année, il a cinq ans.",0.5),
+  P(1.5,"…"),
+  C("您女儿多大？","Nín nǚ'ér duō dà?","Quel âge a votre fille ?",0.5),
+  P(1.5,"…"),
+  C("她今年十二。","Tā jīnnián shí'èr.","Cette année, elle a douze ans.",0.5),
+  N("Révision : dites « ma famille a quatre personnes »."),
   TH(),
   C("我家有四口人。","Wǒ jiā yǒu sì kǒu rén.","Ma famille a quatre personnes.",0.6), HOLD(),
 
@@ -157,16 +201,20 @@ registerChapter({
   TH(),
   C("她今年十二。","Tā jīnnián shí'èr.","Cette année, elle a douze ans.",0.6), HOLD(),
 
-  // Dialogue du manuel (résumé)
-  N("Écoutons la rencontre dans la rue. Yang Tongle demande : « C'est votre fils ? »"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Yang Tongle demande : « C'est votre fils ? »"),
   C("这是您儿子吗？","Zhè shì nín érzi ma?","C'est votre fils ?",0.6),
   N("Répondez : « Oui. J'ai deux enfants, un fils, une fille. »"),
   TH(),
   C("是的。我有两个孩子，一个儿子，一个女儿。","Shì de. Wǒ yǒu liǎng ge háizi, yí ge érzi, yí ge nǚ'ér.","Oui. J'ai deux enfants, un fils, une fille.",0.5), P(3,"…"),
-  N("Il demande l'âge du fils. Répondez : « Cette année, il a cinq ans. »"),
+  N("Il demande :"),
+  C("您儿子几岁？","Nín érzi jǐ suì?","Quel âge a votre fils ?",0.6),
+  N("Répondez : « Cette année, il a cinq ans. »"),
   TH(),
   C("他今年五岁。","Tā jīnnián wǔ suì.","Cette année, il a cinq ans.",0.6), P(2,"…"),
-  N("Puis l'âge de la fille. Répondez : « Cette année, elle a douze ans. »"),
+  N("Puis il demande :"),
+  C("您女儿多大？","Nín nǚ'ér duō dà?","Quel âge a votre fille ?",0.6),
+  N("Répondez : « Cette année, elle a douze ans. »"),
   TH(),
   C("她今年十二。","Tā jīnnián shí'èr.","Cette année, elle a douze ans.",0.6), HOLD(),
 

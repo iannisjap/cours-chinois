@@ -18,11 +18,11 @@ registerChapter({
   // ================= PARTIE 1 =================
   { num:1, hanzi:"你好", title:"Partie 1 · Saluer quelqu'un", desc:"你好 · 你 · 好 · 老师",
     build(){ return [
-  N("Bienvenue dans la leçon 1 du HSK niveau 1. Aujourd'hui, les tout premiers mots : dire bonjour, merci et au revoir. Commençons par la salutation la plus courante en chinois. Écoutez."),
+  N("Bienvenue dans la leçon 1 du HSK niveau 1. Aujourd'hui, les tout premiers mots : dire bonjour, merci et au revoir. Voici le petit dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
   C("你好！","Nǐ hǎo!","Bonjour !",0.5),
-  P(2,"…"),
-  C("你好！","Nǐ hǎo!","Bonjour !",0.5),
-  N("« Bonjour » se dit [[你好|nǐ hǎo]]. Écoutez et répétez."),
+  P(1.5,"…"),
+  C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.5),
+  N("Dans quelques minutes, vous pourrez tenir cette conversation vous-même. Apprenons les mots un par un. « Bonjour » se dit [[你好|nǐ hǎo]]. Écoutez et répétez."),
   ...teach2("你好","nǐ hǎo","bonjour"),
   N("Ce mot est fait de deux parties. [[你|nǐ]] veut dire « toi ». Répétez."),
   ...teach2("你","nǐ","toi, tu"),
@@ -35,19 +35,17 @@ registerChapter({
 
   N("Pour dire « professeur », « enseignant », on dit [[老师|lǎoshī]]. Écoutez et répétez."),
   ...teach2("老师","lǎoshī","professeur"),
-  N("Pour saluer un professeur nommé Wang, on met d'abord son nom, puis la salutation : Wáng lǎoshī, nǐ hǎo. Écoutez."),
-  ...teach2("王老师，你好！","Wáng lǎoshī, nǐ hǎo!","Bonjour, professeur Wang !"),
-  N("Remarquez l'ordre : en chinois, on nomme la personne d'abord, puis on la salue. À vous : dites « Bonjour, professeur ! »"),
+  N("En chinois, on nomme souvent la personne avant de la saluer. À vous : dites « Bonjour, professeur ! »"),
   TH(),
   C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.6), P(2.5,"…"),
   C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.6), HOLD(),
 
-  // Mini-conversation
-  N("Écoutons le dialogue de cette partie. Le professeur Wang salue l'assistante :"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Quelqu'un vous salue :"),
   C("你好！","Nǐ hǎo!","Bonjour !",0.6),
-  N("Et on lui répond en la nommant. Répondez : « Bonjour, professeur Wang ! »"),
+  N("Répondez en saluant votre professeur."),
   TH(),
-  C("王老师，你好！","Wáng lǎoshī, nǐ hǎo!","Bonjour, professeur Wang !",0.6), HOLD(),
+  C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.6), HOLD(),
 
   // Révision
   N("Petite révision. Comment dit-on « toi » ?"),
@@ -65,7 +63,13 @@ registerChapter({
   // ================= PARTIE 2 =================
   { num:2, hanzi:"您好", title:"Partie 2 · Saluer poliment et en groupe", desc:"您 · 大家 · 你们 · 学生",
     build(){ return [
-  N("Partie 2. Nous allons saluer poliment, et saluer plusieurs personnes à la fois. D'abord, une révision : dites bonjour."),
+  N("Partie 2. Nous allons saluer poliment, et saluer plusieurs personnes à la fois. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("大家好！","Dàjiā hǎo!","Bonjour tout le monde !",0.5),
+  P(1.5,"…"),
+  C("老师，您好！","Lǎoshī, nín hǎo!","Bonjour, professeur !",0.5),
+  P(1.5,"…"),
+  C("你们好！","Nǐmen hǎo!","Bonjour à vous !",0.5),
+  N("D'abord, une révision : dites bonjour."),
   TH(),
   C("你好！","Nǐ hǎo!","Bonjour !",0.6), HOLD(),
 
@@ -94,13 +98,13 @@ registerChapter({
   N("Et « les étudiants », au pluriel, avec [[们|men]] :"),
   ...teach2("学生们","xuéshēngmen","les étudiants"),
 
-  // Dialogue du manuel
-  N("Écoutons le dialogue de classe. Le professeur salue tout le monde :"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Le professeur salue tout le monde :"),
   C("大家好！","Dàjiā hǎo!","Bonjour tout le monde !",0.6),
-  N("Les étudiants répondent poliment. Dites : « Professeur, bonjour ! »"),
+  N("Répondez-lui poliment : « Professeur, bonjour ! »"),
   TH(),
   C("老师，您好！","Lǎoshī, nín hǎo!","Bonjour, professeur !",0.6), P(2,"…"),
-  N("Puis l'assistante salue les étudiants. Dites : « Bonjour à vous ! »"),
+  N("Puis saluez les étudiants à votre tour. Dites : « Bonjour à vous ! »"),
   TH(),
   C("你们好！","Nǐmen hǎo!","Bonjour à vous !",0.6), HOLD(),
 
@@ -120,7 +124,13 @@ registerChapter({
   // ================= PARTIE 3 =================
   { num:3, hanzi:"谢谢", title:"Partie 3 · Remercier et prendre congé", desc:"谢谢 · 不客气 · 同学 · 再见",
     build(){ return [
-  N("Partie 3. Nous allons apprendre à remercier et à dire au revoir. « Merci » se dit [[谢谢|xièxie]]. Écoutez et répétez."),
+  N("Partie 3. Nous allons apprendre à remercier et à dire au revoir. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("谢谢！","Xièxie!","Merci !",0.5),
+  P(1.5,"…"),
+  C("不客气！","Bú kèqi!","De rien !",0.5),
+  P(1.5,"…"),
+  C("同学们，再见！","Tóngxuémen, zàijiàn!","Au revoir, chers camarades !",0.5),
+  N("« Merci » se dit [[谢谢|xièxie]]. Écoutez et répétez."),
   ...teach2("谢谢","xièxie","merci"),
   N("Pour répondre « je vous en prie », « de rien », on dit [[不客气|bú kèqi]]. Écoutez et répétez."),
   ...teach2("不客气","bú kèqi","de rien, je vous en prie"),
@@ -143,13 +153,13 @@ registerChapter({
   C("老师，再见！","Lǎoshī, zàijiàn!","Au revoir, professeur !",0.6), P(2,"…"),
   C("老师，再见！","Lǎoshī, zàijiàn!","Au revoir, professeur !",0.6), HOLD(),
 
-  // Dialogue du manuel
-  N("Écoutons la fin du cours. Les étudiants remercient :"),
+  // Rejeu du dialogue de référence entendu au tout début
+  N("Rejouons le dialogue du début. Les étudiants remercient :"),
   C("谢谢！","Xièxie!","Merci !",0.6),
-  N("L'assistante répond. Dites : « De rien ! »"),
+  N("Répondez : « De rien ! »"),
   TH(),
   C("不客气！","Bú kèqi!","De rien !",0.6), P(2,"…"),
-  N("Le professeur salue la classe. Dites : « Au revoir, chers camarades ! »"),
+  N("Puis saluez la classe en partant. Dites : « Au revoir, chers camarades ! »"),
   TH(),
   C("同学们，再见！","Tóngxuémen, zàijiàn!","Au revoir, chers camarades !",0.6), P(2,"…"),
   C("同学们，再见！","Tóngxuémen, zàijiàn!","Au revoir, chers camarades !",0.6), HOLD(),
