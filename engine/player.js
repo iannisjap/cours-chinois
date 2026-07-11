@@ -74,18 +74,34 @@ function fmt(sec){
   sec = Math.max(0, Math.round(sec));
   return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0');
 }
-function seekToTime(target){
+function seekToIndex(i){
   if(!steps.length) return;
   stopEverything();
-  target = Math.min(Math.max(target, 0), totalDur - 0.1);
-  let i = 0;
-  while(i+1 < steps.length && cum[i+1] <= target) i++;
-  idx = i;
+  idx = Math.max(0, Math.min(i, steps.length-1));
   updateProgress();
   if(playing) runStep();
   else { renderCaptionFor(idx); setPhase('','⏸','En pause'); }
 }
-function seek(deltaSec){ seekToTime((cum[idx]||0) + deltaSec); }
+function seekToTime(target){
+  if(!steps.length) return;
+  target = Math.min(Math.max(target, 0), totalDur - 0.1);
+  let i = 0;
+  while(i+1 < steps.length && cum[i+1] <= target) i++;
+  seekToIndex(i);
+}
+function seek(deltaSec){
+  if(!steps.length) return;
+  const target = (cum[idx]||0) + deltaSec;
+  let i = 0;
+  while(i+1 < steps.length && cum[i+1] <= target) i++;
+  // les durées sont des estimations : si l'étape en cours est plus longue
+  // que le saut demandé, le calcul ne bouge pas d'étape — on avance/recule
+  // quand même d'au moins une étape pour que ±10 sec fasse toujours effet
+  // au lieu de relancer la même phrase depuis le début.
+  if(deltaSec > 0 && i <= idx) i = Math.min(idx+1, steps.length-1);
+  else if(deltaSec < 0 && i >= idx) i = Math.max(idx-1, 0);
+  seekToIndex(i);
+}
 
 /* ---------- voix : les meilleures d'abord ---------- */
 function voiceScore(v){
