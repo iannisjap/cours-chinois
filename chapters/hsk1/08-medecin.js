@@ -16,6 +16,7 @@
    Structure : leçon → 3 parties (les 3 dialogues du manuel).
    ============================================================ */
 registerChapter({
+  group: "hsk1",
   id: "hsk1-08",
   badge: 8,
   hanzi: "爸爸也在医院工作",

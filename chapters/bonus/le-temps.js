@@ -9,6 +9,7 @@
    au tableau lessons ci-dessous.
    ============================================================ */
 registerChapter({
+  group: "bonus",
   id: "01-le-temps",
   badge: "★",
   star: true,

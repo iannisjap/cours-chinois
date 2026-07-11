@@ -537,18 +537,34 @@ $('recStopBtn').addEventListener('click', ()=>{ pause(); stopRecording(); });
 /* ============================================================
    Menu des chapitres et des leçons
    ============================================================ */
+const GROUP_LABELS = { hsk1: 'HSK 1', bonus: 'Bonus' };
 function buildChapterMenu(){
   const el = $('chapterList'); el.innerHTML = '';
+  const groups = [];
   CHAPTERS.forEach((ch, i)=>{
-    const b = document.createElement('button');
-    b.className = 'menu-item';
-    const badge = ch.badge != null ? ch.badge : (i+1);
-    const starCls = ch.star ? ' star' : '';
-    b.innerHTML = '<span class="mi-num'+starCls+'">'+badge+'</span>'
-      + '<span class="mi-hz hanzi">'+ch.hanzi+'</span>'
-      + '<span class="mi-tx"><b>'+ch.title+'</b><small>'+ch.desc+'</small></span>';
-    b.addEventListener('click', ()=>openChapter(i));
-    el.appendChild(b);
+    const key = ch.group || '';
+    let g = groups.find(g=>g.key===key);
+    if(!g){ g = { key, items: [] }; groups.push(g); }
+    g.items.push({ ch, i });
+  });
+  groups.forEach(g=>{
+    if(g.key){
+      const h = document.createElement('div');
+      h.className = 'menu-section';
+      h.textContent = GROUP_LABELS[g.key] || g.key;
+      el.appendChild(h);
+    }
+    g.items.forEach(({ch, i})=>{
+      const b = document.createElement('button');
+      b.className = 'menu-item';
+      const badge = ch.badge != null ? ch.badge : (i+1);
+      const starCls = ch.star ? ' star' : '';
+      b.innerHTML = '<span class="mi-num'+starCls+'">'+badge+'</span>'
+        + '<span class="mi-hz hanzi">'+ch.hanzi+'</span>'
+        + '<span class="mi-tx"><b>'+ch.title+'</b><small>'+ch.desc+'</small></span>';
+      b.addEventListener('click', ()=>openChapter(i));
+      el.appendChild(b);
+    });
   });
 }
 function buildMenu(){
