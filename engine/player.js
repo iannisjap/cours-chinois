@@ -574,7 +574,7 @@ function buildMenu(){
   LESSONS.forEach((L, i)=>{
     const b = document.createElement('button');
     b.className = 'menu-item';
-    const isRev = L.num >= 7;
+    const isRev = !!L.star;
     b.innerHTML = '<span class="mi-num'+(isRev?' star':'')+'">'+(isRev?'★':L.num)+'</span>'
       + '<span class="mi-hz hanzi">'+L.hanzi+'</span>'
       + '<span class="mi-tx"><b>'+L.title+'</b><small>'+L.desc+'</small></span>';
@@ -650,7 +650,7 @@ function renderPlayer(i){
     buildTimeline();
   }
   syncPlayBtn(); updateProgress();
-  $('lessonTag').textContent = (L.num >= 7 ? 'Révision' : 'Leçon ' + L.num);
+  $('lessonTag').textContent = (L.star ? 'Révision' : 'Leçon ' + L.num);
   // fil d'Ariane : « Chapitre › Leçon » — le nom du chapitre ramène à la liste des leçons
   document.querySelector('header h1').innerHTML =
     '<button class="crumb" onclick="showMenu()">'+curChapter.title+'</button>'
