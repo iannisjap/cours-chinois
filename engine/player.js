@@ -537,34 +537,36 @@ $('recStopBtn').addEventListener('click', ()=>{ pause(); stopRecording(); });
 /* ============================================================
    Menu des chapitres et des leçons
    ============================================================ */
-const GROUP_LABELS = { hsk1: 'HSK 1', bonus: 'Bonus' };
-function buildChapterMenu(){
-  const el = $('chapterList'); el.innerHTML = '';
-  const groups = [];
-  CHAPTERS.forEach((ch, i)=>{
-    const key = ch.group || '';
-    let g = groups.find(g=>g.key===key);
-    if(!g){ g = { key, items: [] }; groups.push(g); }
-    g.items.push({ ch, i });
+const FOLDERS = [
+  { key: 'hsk1', hanzi: 'HSK1', title: 'HSK 1', desc: 'Les 15 leçons du manuel officiel' },
+  { key: 'bonus', hanzi: '★', title: 'Bonus', desc: 'Chapitres thématiques complémentaires' }
+];
+function buildFolderMenu(){
+  const el = $('folderList'); el.innerHTML = '';
+  FOLDERS.forEach(f=>{
+    const count = CHAPTERS.filter(ch=>ch.group===f.key).length;
+    const b = document.createElement('button');
+    b.className = 'menu-item';
+    b.innerHTML = '<span class="mi-num">'+count+'</span>'
+      + '<span class="mi-hz hanzi">'+f.hanzi+'</span>'
+      + '<span class="mi-tx"><b>'+f.title+'</b><small>'+f.desc+'</small></span>';
+    b.addEventListener('click', ()=>openFolder(f.key));
+    el.appendChild(b);
   });
-  groups.forEach(g=>{
-    if(g.key){
-      const h = document.createElement('div');
-      h.className = 'menu-section';
-      h.textContent = GROUP_LABELS[g.key] || g.key;
-      el.appendChild(h);
-    }
-    g.items.forEach(({ch, i})=>{
-      const b = document.createElement('button');
-      b.className = 'menu-item';
-      const badge = ch.badge != null ? ch.badge : (i+1);
-      const starCls = ch.star ? ' star' : '';
-      b.innerHTML = '<span class="mi-num'+starCls+'">'+badge+'</span>'
-        + '<span class="mi-hz hanzi">'+ch.hanzi+'</span>'
-        + '<span class="mi-tx"><b>'+ch.title+'</b><small>'+ch.desc+'</small></span>';
-      b.addEventListener('click', ()=>openChapter(i));
-      el.appendChild(b);
-    });
+}
+function buildChapterMenu(folderKey){
+  const el = $('chapterList'); el.innerHTML = '';
+  CHAPTERS.forEach((ch, i)=>{
+    if(ch.group !== folderKey) return;
+    const b = document.createElement('button');
+    b.className = 'menu-item';
+    const badge = ch.badge != null ? ch.badge : (i+1);
+    const starCls = ch.star ? ' star' : '';
+    b.innerHTML = '<span class="mi-num'+starCls+'">'+badge+'</span>'
+      + '<span class="mi-hz hanzi">'+ch.hanzi+'</span>'
+      + '<span class="mi-tx"><b>'+ch.title+'</b><small>'+ch.desc+'</small></span>';
+    b.addEventListener('click', ()=>openChapter(i));
+    el.appendChild(b);
   });
 }
 function buildMenu(){
@@ -593,17 +595,36 @@ function setChapter(i){
    par-dessus le lecteur, qui continue de tourner en dessous. On ne
    coupe la lecture que si on change réellement de chapitre, ou qu'on
    revient à l'écran d'accueil des chapitres. ---- */
-function renderChapters(){
+let curFolderKey = null;
+function renderFolders(){
   stopEverything();
   playing = false; syncPlayBtn();
   setPhase('','🎧','Prêt');
   playerChapterIdx = -1;   // toute reprise ultérieure repart de zéro
+  curFolderKey = null;
+  $('overlay').style.display = 'none';
+  $('chapterOverlay').style.display = 'none';
+  $('folderOverlay').style.display = 'flex';
+}
+function renderChapters(folderKey){
+  stopEverything();
+  playing = false; syncPlayBtn();
+  setPhase('','🎧','Prêt');
+  playerChapterIdx = -1;   // toute reprise ultérieure repart de zéro
+  curFolderKey = folderKey;
+  const f = FOLDERS.find(f=>f.key===folderKey);
+  $('folderBigHanzi').textContent = f ? f.hanzi : '';
+  $('folderOverlayTitle').textContent = f ? f.title : '';
+  $('folderOverlayIntro').textContent = f ? f.desc : '';
+  buildChapterMenu(folderKey);
+  $('folderOverlay').style.display = 'none';
   $('overlay').style.display = 'none';
   $('chapterOverlay').style.display = 'flex';
 }
 function renderLessons(i){
   const peekingSameChapter = steps.length > 0 && playerChapterIdx === i;
   setChapter(i);
+  curFolderKey = curChapter.group;
   if(!peekingSameChapter){
     stopEverything();
     playing = false; syncPlayBtn();
@@ -613,6 +634,7 @@ function renderLessons(i){
   $('lessonOverlayTitle').textContent = curChapter.title + ' · Cours audio de chinois';
   $('lessonOverlayIntro').textContent = curChapter.intro || '';
   buildMenu();
+  $('folderOverlay').style.display = 'none';
   $('chapterOverlay').style.display = 'none';
   $('overlay').style.display = 'flex';
 }
@@ -639,6 +661,7 @@ function renderPlayer(i){
     try{ navigator.mediaSession.metadata = new MediaMetadata({
       title:'Leçon '+L.num+' — '+L.title, artist:'Cours de chinois · '+(curChapter?curChapter.title:'')}); }catch(e){}
   }
+  $('folderOverlay').style.display = 'none';
   $('chapterOverlay').style.display = 'none';
   $('overlay').style.display = 'none';
   $('voicePanel').classList.remove('open');
@@ -653,44 +676,53 @@ function renderPlayer(i){
 }
 
 /* ---- navigation par hash dans l'URL :
-       #/              → menu des chapitres
-       #/ch/1          → leçons du chapitre 1
-       #/ch/1/lecon/2  → leçon 2 du chapitre 1
+       #/                        → menu des dossiers (HSK 1 / Bonus)
+       #/dossier/hsk1            → chapitres du dossier hsk1
+       #/dossier/hsk1/ch/1       → leçons du chapitre 1
+       #/dossier/hsk1/ch/1/lecon/2  → leçon 2 du chapitre 1
        Chaque écran change l'URL : les boutons page précédente /
        suivante du navigateur fonctionnent, et on peut recharger
        ou partager un lien direct vers une leçon. ---- */
 function route(){
-  const m = location.hash.match(/^#\/ch\/(\d+)(?:\/lecon\/(\d+))?/);
+  const m = location.hash.match(/^#\/dossier\/([^/]+)(?:\/ch\/(\d+)(?:\/lecon\/(\d+))?)?/);
   if(m){
-    const ci = parseInt(m[1],10) - 1;
-    if(ci >= 0 && ci < CHAPTERS.length){
-      if(m[2]){
-        const li = parseInt(m[2],10) - 1;
-        setChapter(ci);
-        if(li >= 0 && li < LESSONS.length){ renderPlayer(li); return; }
+    const folderKey = decodeURIComponent(m[1]);
+    if(m[2]){
+      const ci = parseInt(m[2],10) - 1;
+      if(ci >= 0 && ci < CHAPTERS.length && CHAPTERS[ci].group === folderKey){
+        if(m[3]){
+          const li = parseInt(m[3],10) - 1;
+          setChapter(ci);
+          if(li >= 0 && li < LESSONS.length){ renderPlayer(li); return; }
+        }
+        renderLessons(ci); return;
       }
-      renderLessons(ci); return;
     }
+    if(FOLDERS.some(f=>f.key===folderKey)){ renderChapters(folderKey); return; }
   }
-  renderChapters();
+  renderFolders();
 }
 function nav(hash){
   if(location.hash === hash) route();   // même hash : re-rendre quand même
   else location.hash = hash;            // sinon hashchange déclenche route()
 }
-function openChapter(i){ nav('#/ch/'+(i+1)); }
-function openLesson(i){ nav('#/ch/'+(curChapterIdx+1)+'/lecon/'+(i+1)); }
-function showMenu(){ nav('#/ch/'+(curChapterIdx+1)); }
-function showChapters(){ nav('#/'); }
+function openFolder(key){ nav('#/dossier/'+key); }
+function openChapter(i){ nav('#/dossier/'+CHAPTERS[i].group+'/ch/'+(i+1)); }
+function openLesson(i){ nav('#/dossier/'+curFolderKey+'/ch/'+(curChapterIdx+1)+'/lecon/'+(i+1)); }
+function showMenu(){ nav('#/dossier/'+curFolderKey+'/ch/'+(curChapterIdx+1)); }
+function showChapters(){ nav('#/dossier/'+curFolderKey); }
+function showFolders(){ nav('#/'); }
 window.addEventListener('hashchange', route);
 function initApp(){
-  buildChapterMenu();
+  buildFolderMenu();
   route();   // supporte le rechargement / lien direct vers une leçon
 }
+window.openFolder = openFolder;
 window.openChapter = openChapter;
 window.openLesson = openLesson;
 window.showMenu = showMenu;
 window.showChapters = showChapters;
+window.showFolders = showFolders;
 window.initApp = initApp;
 $('menuBtn').addEventListener('click', showMenu);
 

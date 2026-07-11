@@ -4,17 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cours audio de chinois</title>
-<link rel="stylesheet" href="engine/style.css?v=16">
+<link rel="stylesheet" href="engine/style.css?v=17">
 </head>
 <body>
 
-<!-- Écran d'accueil : menu des CHAPITRES -->
-<div class="overlay" id="chapterOverlay">
+<!-- Écran d'accueil : menu des DOSSIERS (HSK 1 / Bonus) -->
+<div class="overlay" id="folderOverlay">
   <div class="big-hanzi hanzi" style="font-size:52px">中文</div>
   <h2>Cours audio de chinois mandarin</h2>
-  <p>Méthode audio dans l'esprit Pimsleur : narrateur français, phrases chinoises lues lentement, pauses pour répéter et rappels espacés. Choisis un chapitre pour commencer.</p>
+  <p>Méthode audio dans l'esprit Pimsleur : narrateur français, phrases chinoises lues lentement, pauses pour répéter et rappels espacés. Choisis un dossier pour commencer.</p>
   <p class="voice-warn" id="voiceWarn">⚠️ Aucune voix chinoise détectée sur cet appareil. (Sur iPhone : Réglages → Accessibilité → Contenu énoncé → Voix → Chinois.)</p>
+  <div class="menu-list" id="folderList"></div>
+  <div class="tip">Écouteurs conseillés · voix réglables dans 🎙 Voix · export ⏺ MP3 sur ordinateur</div>
+</div>
+
+<!-- Menu des CHAPITRES du dossier choisi -->
+<div class="overlay" id="chapterOverlay" style="display:none">
+  <div class="big-hanzi hanzi" id="folderBigHanzi" style="font-size:52px">中文</div>
+  <h2 id="folderOverlayTitle">HSK 1</h2>
+  <p id="folderOverlayIntro"></p>
   <div class="menu-list" id="chapterList"></div>
+  <button class="menu-inline ghost" onclick="showFolders()">← Dossiers</button>
   <div class="tip">Écouteurs conseillés · voix réglables dans 🎙 Voix · export ⏺ MP3 sur ordinateur</div>
 </div>
 
@@ -24,7 +34,7 @@
   <h2 id="lessonOverlayTitle">Le temps · Cours audio de chinois</h2>
   <p id="lessonOverlayIntro">Fais les leçons dans l'ordre : chaque leçon révise les précédentes.</p>
   <div class="menu-list" id="menuList"></div>
-  <button class="menu-inline ghost" onclick="showChapters()">← Tous les chapitres</button>
+  <button class="menu-inline ghost" onclick="showChapters()">← Chapitres</button>
   <div class="tip">Écouteurs conseillés · voix réglables dans 🎙 Voix · export ⏺ MP3 sur ordinateur</div>
 </div>
 
@@ -114,23 +124,23 @@
 </div>
 
 <!-- Moteur, puis chapitres (ordre important), puis démarrage -->
-<script src="engine/player.js?v=16"></script>
-<script src="chapters/hsk1/01-bonjour.js?v=16"></script>
-<script src="chapters/hsk1/02-mon-nom.js?v=16"></script>
-<script src="chapters/hsk1/03-nationalites.js?v=16"></script>
-<script src="chapters/hsk1/04-famille.js?v=16"></script>
-<script src="chapters/hsk1/05-dates.js?v=16"></script>
-<script src="chapters/hsk1/06-telephone.js?v=16"></script>
-<script src="chapters/hsk1/07-heure.js?v=16"></script>
-<script src="chapters/hsk1/08-medecin.js?v=16"></script>
-<script src="chapters/hsk1/09-ecole.js?v=16"></script>
-<script src="chapters/hsk1/10-marche.js?v=16"></script>
-<script src="chapters/hsk1/11-universite.js?v=16"></script>
-<script src="chapters/hsk1/12-meteo.js?v=16"></script>
-<script src="chapters/hsk1/13-restaurant.js?v=16"></script>
-<script src="chapters/hsk1/14-voyage.js?v=16"></script>
-<script src="chapters/hsk1/15-voyage-final.js?v=16"></script>
-<script src="chapters/bonus/le-temps.js?v=16"></script>
+<script src="engine/player.js?v=17"></script>
+<script src="chapters/hsk1/01-bonjour.js?v=17"></script>
+<script src="chapters/hsk1/02-mon-nom.js?v=17"></script>
+<script src="chapters/hsk1/03-nationalites.js?v=17"></script>
+<script src="chapters/hsk1/04-famille.js?v=17"></script>
+<script src="chapters/hsk1/05-dates.js?v=17"></script>
+<script src="chapters/hsk1/06-telephone.js?v=17"></script>
+<script src="chapters/hsk1/07-heure.js?v=17"></script>
+<script src="chapters/hsk1/08-medecin.js?v=17"></script>
+<script src="chapters/hsk1/09-ecole.js?v=17"></script>
+<script src="chapters/hsk1/10-marche.js?v=17"></script>
+<script src="chapters/hsk1/11-universite.js?v=17"></script>
+<script src="chapters/hsk1/12-meteo.js?v=17"></script>
+<script src="chapters/hsk1/13-restaurant.js?v=17"></script>
+<script src="chapters/hsk1/14-voyage.js?v=17"></script>
+<script src="chapters/hsk1/15-voyage-final.js?v=17"></script>
+<script src="chapters/bonus/le-temps.js?v=17"></script>
 <script>initApp();</script>
 </body>
 </html>
