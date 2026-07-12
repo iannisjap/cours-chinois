@@ -214,23 +214,55 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 6",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Un homme donne son numéro de portable à une femme. Elle répond : moi, j'ai ton numéro de portable — quel est ton numéro de téléphone ? Un mot manque dans sa phrase, entre « moi » et « ton numéro de portable »."),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("你吃什么？","Nǐ chī shénme?","Qu'est-ce que tu manges ?",0.6),
+  N("Laquelle de ces réponses convient : A « En taxi. » ; B « Très joli ! » ; C « Des bāozi. » ?"),
   TH(),
-  N("Le mot manquant était « avoir »."),
+  N("C'est la réponse C."),
+  C("包子。","Bāozi.","Des bāozi.",0.6), HOLD(),
+
+  // Q15 — associer
+  N("Question 2. On te demande :"),
+  C("我们怎么去？","Wǒmen zěnme qù?","Comment y allons-nous ?",0.6),
+  N("Laquelle convient : A « En taxi. » ; B « Des bāozi. » ; C « D'accord, merci. » ?"),
+  TH(),
+  N("C'est la réponse A."),
+  C("坐出租车。","Zuò chūzūchē.","En taxi.",0.6), HOLD(),
+
+  // Q16 — associer
+  N("Question 3. On te dit :"),
+  C("这是老师的新电脑。","Zhè shì lǎoshī de xīn diànnǎo.","C'est le nouvel ordinateur du professeur.",0.6),
+  N("Quelle réaction convient : A « En taxi. » ; B « Il est vraiment beau ! » ; C « Des bāozi. » ?"),
+  TH(),
+  N("C'est la réponse B."),
+  C("真好看！","Zhēn hǎokàn!","Il est vraiment beau !",0.6), HOLD(),
+
+  // Q18 — texte à trou
+  N("Question 4, un mot à trouver. Un homme donne son numéro de portable. La femme répond : « Moi, je… ton numéro de portable ; et ton numéro de téléphone ? » Quel mot manque : A « avoir » ; B « du lait » ; C « prénom » ?"),
+  TH(),
+  N("C'était « avoir »."),
   C("我有你的手机号，你的电话号呢？","Wǒ yǒu nǐ de shǒujīhào, nǐ de diànhuàhào ne?","J'ai ton numéro de portable, et ton numéro de téléphone ?",0.55), HOLD(),
 
-  N("Deuxième question."),
-  C("明天星期天，我休息，想去超市买牛奶。","Míngtiān Xīngqītiān, wǒ xiūxi, xiǎng qù chāoshì mǎi niúnǎi.","Demain c'est dimanche, je suis en repos, je veux aller au supermarché acheter du lait.",0.5),
-  N("Question : qu'est-ce que cette personne veut acheter ?"),
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","Dans ma famille il y a trois personnes : papa, maman et moi.",0.55),
+  N("Question : combien de personnes dans sa famille ? A trois ; B quatre ; C six ?"),
   TH(),
-  N("Les trois choix étaient : A des légumes, B du lait, C des jiaozi."),
-  C("牛奶","niúnǎi","du lait",0.6), HOLD(),
+  C("三口人。","Sān kǒu rén.","Trois personnes.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 7."),
+  // Q20 — compréhension
+  N("Question 6, la dernière. Écoute."),
+  C("明天星期天，我休息，想去超市买牛奶。","Míngtiān Xīngqītiān, wǒ xiūxi, xiǎng qù chāoshì mǎi niúnǎi.","Demain c'est dimanche, je me repose, je veux aller au supermarché acheter du lait.",0.55),
+  N("Question : qu'est-ce que cette personne veut acheter ? A des légumes ; B du lait ; C des jiaozi ?"),
+  TH(),
+  C("牛奶。","Niúnǎi.","Du lait.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 7."),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 

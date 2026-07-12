@@ -228,25 +228,53 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 4",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","Dans ma famille il y a trois personnes : papa, maman et moi.",0.5),
-  N("Question : combien de personnes y a-t-il dans la famille de cette personne ?"),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("她是谁？","Tā shì shéi?","Qui est-elle ?",0.6),
+  N("Laquelle de ces trois réponses convient : A « Oui, c'est ça. » ; B « Il a cinq ans. » ; C « Ma copine. » ?"),
   TH(),
-  N("Les trois choix étaient : A une grande sœur, B trois personnes, C quatre personnes."),
-  C("三口人","sān kǒu rén","trois personnes",0.6), HOLD(),
+  N("C'est la réponse C."),
+  C("我女朋友。","Wǒ nǚpéngyou.","Ma copine.",0.6), HOLD(),
 
-  N("Deuxième question."),
-  C("她是法国人，我不是。","Tā shì Fǎguó rén, wǒ bú shì.","Elle est française, moi non.",0.5),
-  N("Question : quelle est la nationalité de « elle » dans cette phrase ?"),
+  // Q16 — associer
+  N("Question 2. On te demande :"),
+  C("您儿子多大？","Nín érzi duō dà?","Quel âge a votre fils ?",0.6),
+  N("Laquelle convient : A « Ma copine. » ; B « Il a cinq ans cette année. » ; C « D'accord, merci. » ?"),
   TH(),
-  N("Les trois choix étaient : A française, B chinoise, C thaïlandaise."),
-  C("法国人","Fǎguó rén","française",0.6), HOLD(),
+  N("C'est la réponse B."),
+  C("他今年五岁。","Tā jīnnián wǔ suì.","Il a cinq ans cette année.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 5."),
+  // Q17 — texte à trou
+  N("Question 3, un mot à trouver. La phrase : « Son travail est très… quelque chose. » Quel mot manque : A « penser » ; B « occupé » ; C « prénom » ?"),
+  TH(),
+  N("C'était « occupé »."),
+  C("她工作很忙。","Tā gōngzuò hěn máng.","Elle est très occupée par son travail.",0.6), HOLD(),
+
+  // Q18 — texte à trou
+  N("Question 4. Un dialogue : « Vous allez bien ? — Très bien, nous… beaucoup à toi. » Quel mot manque : A « penser à, manquer » ; B « occupé » ; C « prénom » ?"),
+  TH(),
+  N("C'était « penser à » — nous pensons beaucoup à toi."),
+  C("我们很想你。","Wǒmen hěn xiǎng nǐ.","Tu nous manques beaucoup.",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","Dans ma famille il y a trois personnes : papa, maman et moi.",0.55),
+  N("Question : combien de personnes dans sa famille ? A une grande sœur ; B trois personnes ; C quatre personnes ?"),
+  TH(),
+  C("三口人。","Sān kǒu rén.","Trois personnes.",0.6), HOLD(),
+
+  // Q20 — compréhension
+  N("Question 6, la dernière. Écoute."),
+  C("她是法国人，我不是。","Tā shì Fǎguó rén, wǒ bú shì.","Elle est française, moi non.",0.55),
+  N("Question : « elle », de quelle nationalité ? A française ; B chinoise ; C thaïlandaise ?"),
+  TH(),
+  C("法国人。","Fǎguó rén.","Française.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 5."),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 

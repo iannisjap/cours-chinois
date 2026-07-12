@@ -242,25 +242,55 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 7",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("我今天早上八点半上课，十点十分下课。","Wǒ jīntiān zǎoshang bā diǎn bàn shàngkè, shí diǎn shí fēn xiàkè.","Aujourd'hui j'ai cours à 8 h 30 du matin, je finis à 10 h 10.",0.5),
-  N("Question : à quelle heure cette personne a-t-elle cours aujourd'hui ?"),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("我们在哪儿见？","Wǒmen zài nǎr jiàn?","Où est-ce qu'on se retrouve ?",0.6),
+  N("Laquelle de ces réponses convient : A « À sept heures et demie du matin. » ; B « Désolé, j'ai cours. » ; C « Au cinéma. » ?"),
   TH(),
-  N("Les trois choix étaient : A 8 h 30, B 10 h 10, C 10 h 20."),
-  C("八点半","bā diǎn bàn","8 h 30",0.6), HOLD(),
+  N("C'est la réponse C."),
+  C("电影院。","Diànyǐngyuàn.","Au cinéma.",0.6), HOLD(),
 
-  N("Deuxième question."),
-  C("妈妈今天休息，下午想去菜店买菜。","Māma jīntiān xiūxi, xiàwǔ xiǎng qù càidiàn mǎi cài.","Maman est en repos aujourd'hui, cet après-midi elle veut aller au marché acheter des légumes.",0.5),
-  N("Question : qu'est-ce que maman veut acheter cet après-midi ?"),
+  // Q15 — associer
+  N("Question 2. On te demande :"),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.6),
+  N("Laquelle convient : A « À sept heures et demie du matin. » ; B « Au cinéma. » ; C « Désolé, j'ai cours. » ?"),
   TH(),
-  N("Les trois choix étaient : A des légumes, B des jiaozi, C du lait."),
-  C("菜","cài","des légumes",0.6), HOLD(),
+  N("C'est la réponse A."),
+  C("早上七点半。","Zǎoshang qī diǎn bàn.","Sept heures et demie du matin.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 8."),
+  // Q16 — associer
+  N("Question 3. On te propose :"),
+  C("我们下午去超市吧。","Wǒmen xiàwǔ qù chāoshì ba.","Allons au supermarché cet après-midi.",0.6),
+  N("Quelle réponse convient : A « Au cinéma. » ; B « Désolé, j'ai cours. » ; C « À sept heures et demie. » ?"),
+  TH(),
+  N("C'est la réponse B."),
+  C("对不起，我有课。","Duìbuqǐ, wǒ yǒu kè.","Désolé, j'ai cours.",0.6), HOLD(),
+
+  // Q17 — texte à trou
+  N("Question 4, un mot à trouver. La phrase : « Nous finissons les cours à midi, à 12 heures. » Quel mot manque, juste avant « 12 heures » : A « l'hôpital » ; B « midi » ; C « prénom » ?"),
+  TH(),
+  N("C'était « midi »."),
+  C("我们中午十二点下课。","Wǒmen zhōngwǔ shí'èr diǎn xiàkè.","Nous finissons les cours à midi.",0.6), HOLD(),
+
+  // Q18 — texte à trou
+  N("Question 5. Un dialogue : « Où es-tu maintenant ? — Je suis à… quelque part. » Quel mot manque : A « l'hôpital » ; B « midi » ; C « prénom » ?"),
+  TH(),
+  N("C'était « l'hôpital »."),
+  C("我在医院呢。","Wǒ zài yīyuàn ne.","Je suis à l'hôpital.",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 6, la dernière. Écoute bien."),
+  C("我今天早上八点半上课，十点十分下课。","Wǒ jīntiān zǎoshang bā diǎn bàn shàngkè, shí diǎn shí fēn xiàkè.","Aujourd'hui j'ai cours à 8 h 30 du matin, je finis à 10 h 10.",0.55),
+  N("Question : à quelle heure finit-elle les cours ? A 8 h 30 ; B 10 h 10 ; C 10 h 20 ?"),
+  TH(),
+  N("C'est B : 10 h 10."),
+  C("十点十分。","Shí diǎn shí fēn.","10 h 10.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 8."),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 

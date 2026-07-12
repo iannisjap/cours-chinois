@@ -220,25 +220,53 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 8",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("昨天爸爸在医院工作，哥哥在家里休息，没去书店。","Zuótiān bàba zài yīyuàn gōngzuò, gēge zài jiā li xiūxi, méi qù shūdiàn.","Hier papa travaillait à l'hôpital, grand frère se reposait à la maison, il n'est pas allé à la librairie.",0.5),
-  N("Question : hier, comment était le grand frère de cette personne ?"),
+  // Q15 — associer
+  N("Question 1. On te demande :"),
+  C("她是谁？","Tā shì shéi?","Qui est-elle ?",0.6),
+  N("Laquelle de ces réponses convient : A « L'hôpital. » ; B « Ma professeure. » ; C « Des jiaozi et des nouilles. » ?"),
   TH(),
-  N("Les trois choix étaient : A à la maison, B à la librairie, C au travail à l'hôpital."),
-  C("在家里","zài jiā li","à la maison",0.6), HOLD(),
+  N("C'est la réponse B."),
+  C("我老师。","Wǒ lǎoshī.","Ma professeure.",0.6), HOLD(),
 
-  N("Deuxième question."),
-  C("我喜欢吃米饭，我女朋友不喜欢。","Wǒ xǐhuan chī mǐfàn, wǒ nǚpéngyou bù xǐhuan.","J'aime manger du riz, ma copine n'aime pas.",0.5),
-  N("Question : qu'est-ce que la copine de cette personne n'aime pas manger ?"),
+  // Q16 — associer
+  N("Question 2. On te demande :"),
+  C("你爸爸在哪儿工作？","Nǐ bàba zài nǎr gōngzuò?","Où travaille ton papa ?",0.6),
+  N("Laquelle convient : A « L'hôpital. » ; B « Ma professeure. » ; C « Des jiaozi et des nouilles. » ?"),
   TH(),
-  N("Les trois choix étaient : A du riz, B des bāozi, C des nouilles."),
-  C("米饭","mǐfàn","du riz",0.6), HOLD(),
+  N("C'est la réponse A."),
+  C("医院。","Yīyuàn.","À l'hôpital.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 9."),
+  // Q17 — texte à trou
+  N("Question 3, un mot à trouver. La phrase : « Dans ma chambre, il… un petit chat. » Quel mot manque : A « pouvoir » ; B « il y a » ; C « prénom » ?"),
+  TH(),
+  N("C'était « il y a »."),
+  C("我的房间里有一只小猫。","Wǒ de fángjiān li yǒu yì zhī xiǎo māo.","Dans ma chambre il y a un petit chat.",0.6), HOLD(),
+
+  // Q18 — texte à trou
+  N("Question 4. Un dialogue : « Retrouvons-nous à la librairie cet après-midi. — D'accord, je… arriver à 7 heures. » Quel mot manque : A « pouvoir » ; B « il y a » ; C « prénom » ?"),
+  TH(),
+  N("C'était « pouvoir »."),
+  C("我七点能到。","Wǒ qī diǎn néng dào.","Je peux arriver à sept heures.",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("昨天爸爸在医院工作，哥哥在家里休息，没去书店。","Zuótiān bàba zài yīyuàn gōngzuò, gēge zài jiā li xiūxi, méi qù shūdiàn.","Hier papa travaillait à l'hôpital, grand frère se reposait à la maison, il n'est pas allé à la librairie.",0.55),
+  N("Question : où était le grand frère hier ? A à la maison ; B à la librairie ; C à l'hôpital ?"),
+  TH(),
+  C("在家里。","Zài jiā li.","À la maison.",0.6), HOLD(),
+
+  // Q20 — compréhension
+  N("Question 6, la dernière. Écoute."),
+  C("我喜欢吃米饭，我女朋友不喜欢。","Wǒ xǐhuan chī mǐfàn, wǒ nǚpéngyou bù xǐhuan.","J'aime manger du riz, ma copine n'aime pas.",0.55),
+  N("Question : qu'est-ce que sa copine n'aime pas manger ? A du riz ; B des bāozi ; C des nouilles ?"),
+  TH(),
+  C("米饭。","Mǐfàn.","Du riz.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 9."),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 
