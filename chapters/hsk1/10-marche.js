@@ -224,13 +224,13 @@ registerChapter({
   N("Et pour finir : c'est joli, et ce n'est pas cher non plus."),
   TH(),
   C("好看，也不贵。","Hǎokàn, yě bú guì.","C'est joli, et ce n'est pas cher non plus.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 10. Vous savez demander un prix, acheter au poids, et donner votre avis sur un vêtement. Réécoutez-la demain, puis passez à la leçon 11. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 10. Vous savez demander un prix, acheter au poids, et donner votre avis sur un vêtement. Réécoutez-la demain, puis passez à la leçon 11. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 10",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("我没有手机，今天想去商店买一个。","Wǒ méiyǒu shǒujī, jīntiān xiǎng qù shāngdiàn mǎi yí ge.","Je n'ai pas de portable, aujourd'hui je veux aller au magasin en acheter un.",0.5),

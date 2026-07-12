@@ -134,7 +134,7 @@ registerChapter({
   N("Demandez : tu es de quel pays ?"),
   TH(),
   C("你是哪国人？","Nǐ shì nǎ guó rén?","Tu es de quel pays ?",0.6),
-  N("Fin de la partie 2. À la partie 3 : poser des questions avec le petit mot 吗."),
+  N("Fin de la partie 2. À la partie 3 : poser des questions avec le petit mot [[吗|ma]]."),
     ]; } },
 
   // ================= PARTIE 3 =================
@@ -155,7 +155,7 @@ registerChapter({
 
   N("« Le travail » se dit [[工作|gōngzuò]]. Écoutez et répétez."),
   ...teach2("工作","gōngzuò","le travail"),
-  N("« Encore », « toujours », se dit [[还|hái]]. Demandez : « Es-tu encore occupé par le travail ? » — mot à mot « ton travail encore occupé 吗 ? »"),
+  N("« Encore », « toujours », se dit [[还|hái]]. Demandez : « Es-tu encore occupé par le travail ? » — mot à mot « ton travail encore occupé [[吗|ma]] ? »"),
   ...teach2("你工作还忙吗？","Nǐ gōngzuò hái máng ma?","Es-tu encore occupé par le travail ?"),
   N("Pour répondre « oui », « c'est exact », on dit [[对|duì]]. Écoutez et répétez."),
   ...teach2("对","duì","oui, c'est exact"),
@@ -198,13 +198,13 @@ registerChapter({
   N("Dites : tu me manques beaucoup."),
   TH(),
   C("我很想你。","Wǒ hěn xiǎng nǐ.","Tu me manques beaucoup.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 3. Vous savez parler des nationalités, poser des questions avec 吗 et utiliser 的. Réécoutez-la demain, puis passez à la leçon 4. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 3. Vous savez parler des nationalités, poser des questions avec [[吗|ma]] et utiliser [[的|de]]. Réécoutez-la demain, puis passez à la leçon 4. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel «新HSK教程1»",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel «新HSK教程1». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("我是法国人，你呢？","Wǒ shì Fǎguó rén, nǐ ne?","Je suis française, et toi ?",0.55),
@@ -215,7 +215,7 @@ N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du
 
   N("Deuxième question."),
   C("你忙吗？我很忙，你呢？","Nǐ máng ma? Wǒ hěn máng, nǐ ne?","Tu es occupé ? Moi je suis très occupé, et toi ?",0.55),
-  N("Question : que demande « 你忙吗 » ?"),
+  N("Question : que demande « [[你忙吗|nǐ máng ma]] » ?"),
   TH(),
   N("Les trois choix étaient : A si tu as faim, B si tu es occupé, C comment tu t'appelles."),
   C("忙不忙","máng bu máng","si on est occupé",0.6), HOLD(),

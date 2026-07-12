@@ -44,12 +44,12 @@ registerChapter({
   C("你们爱吃哪个菜？","Nǐmen ài chī nǎge cài?","Quel plat aimez-vous manger ?",0.6),
   C("你们爱吃哪个菜？","Nǐmen ài chī nǎge cài?","Quel plat aimez-vous manger ?",0.6), HOLD(),
 
-  N("Répondez : « J'aime celui-ci, et j'aime aussi celui-là. » Remarquez la structure « …，也… » pour relier deux idées semblables."),
+  N("Répondez : « J'aime celui-ci, et j'aime aussi celui-là. » Remarquez la structure « …，[[也|yě]]… » pour relier deux idées semblables."),
   TH(),
   C("我喜欢这个，也喜欢那个。","Wǒ xǐhuan zhège, yě xǐhuan nàge.","J'aime celui-ci, et j'aime aussi celui-là.",0.6),
   C("我喜欢这个，也喜欢那个。","Wǒ xǐhuan zhège, yě xǐhuan nàge.","J'aime celui-ci, et j'aime aussi celui-là.",0.6), HOLD(),
 
-  N("Dites : « Tous ces plats sont délicieux, et ils sont beaux aussi. » — remarquez la structure « …，还… », qui ajoute une seconde qualité."),
+  N("Dites : « Tous ces plats sont délicieux, et ils sont beaux aussi. » — remarquez la structure « …，[[还|hái]]… », qui ajoute une seconde qualité."),
   TH(),
   C("这些菜都好吃，还很好看。","Zhèxiē cài dōu hǎochī, hái hěn hǎokàn.","Tous ces plats sont délicieux, et ils sont beaux aussi.",0.6),
   C("这些菜都好吃，还很好看。","Zhèxiē cài dōu hǎochī, hái hěn hǎokàn.","Tous ces plats sont délicieux, et ils sont beaux aussi.",0.6), HOLD(),
@@ -215,13 +215,13 @@ registerChapter({
   N("Et pour finir, dites : rendez-vous à l'aéroport de Daxing !"),
   TH(),
   C("大兴机场见！","Dàxīng Jīchǎng jiàn!","Rendez-vous à l'aéroport de Daxing !",0.6),
-  N("Félicitations, magnifique travail ! Vous venez de terminer les quinze leçons du HSK niveau 1. Vous savez vous présenter, parler de votre famille, dire l'heure et les dates, faire des achats, décrire la météo, raconter vos actions passées, et organiser un voyage. Continuez à réécouter ces leçons régulièrement — c'est la répétition espacée qui ancre tout durablement. Vous avez fait un travail formidable. À bientôt, et 再见！"),
+  N("Félicitations, magnifique travail ! Vous venez de terminer les quinze leçons du HSK niveau 1. Vous savez vous présenter, parler de votre famille, dire l'heure et les dates, faire des achats, décrire la météo, raconter vos actions passées, et organiser un voyage. Continuez à réécouter ces leçons régulièrement — c'est la répétition espacée qui ancre tout durablement. Vous avez fait un travail formidable. À bientôt, et [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 15",
     build(){ return [
-N("Pour finir ce chapitre, un dernier petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir ce chapitre, un dernier petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Un mot manque dans cette phrase : « Cette année, nous voulons tous aller (   ). »"),
   TH(),

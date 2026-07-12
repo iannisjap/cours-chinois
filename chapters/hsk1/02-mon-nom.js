@@ -184,13 +184,13 @@ registerChapter({
   N("Et pour finir : très heureux de te connaître."),
   TH(),
   C("很高兴认识你。","Hěn gāoxìng rènshi nǐ.","Très heureux de te connaître.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 2. Vous savez vous présenter, dire ce que vous êtes, et faire connaissance. Réécoutez-la demain, puis passez à la leçon 3. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 2. Vous savez vous présenter, dire ce que vous êtes, et faire connaissance. Réécoutez-la demain, puis passez à la leçon 3. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel «新HSK教程1»",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel «新HSK教程1». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("我叫李文。","Wǒ jiào Lǐ Wén.","Je m'appelle Li Wen.",0.55),

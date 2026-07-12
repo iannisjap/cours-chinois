@@ -230,13 +230,13 @@ registerChapter({
   N("Et pour finir : j'ai aussi un petit chien."),
   TH(),
   C("我也有一只小狗。","Wǒ yě yǒu yì zhī xiǎo gǒu.","J'ai aussi un petit chien.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 9. Vous savez dire ce qu'il y a quelque part, compter avec des ordinaux, et parler de vos loisirs. Réécoutez-la demain, puis passez à la leçon 10. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 9. Vous savez dire ce qu'il y a quelque part, compter avec des ordinaux, et parler de vos loisirs. Réécoutez-la demain, puis passez à la leçon 10. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 9",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("我有一只小狗，很漂亮，它是我的好朋友。","Wǒ yǒu yì zhī xiǎo gǒu, hěn piàoliang, tā shì wǒ de hǎo péngyou.","J'ai un petit chien, il est très mignon, c'est mon bon ami.",0.5),

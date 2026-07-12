@@ -216,13 +216,13 @@ registerChapter({
   N("Et pour finir : mon père travaille aussi à l'hôpital."),
   TH(),
   C("我爸爸也在医院工作。","Wǒ bàba yě zài yīyuàn gōngzuò.","Mon père travaille aussi à l'hôpital.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 8. Vous savez situer les choses, donner rendez-vous, et parler de métiers. Réécoutez-la demain, puis passez à la leçon 9. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 8. Vous savez situer les choses, donner rendez-vous, et parler de métiers. Réécoutez-la demain, puis passez à la leçon 9. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 8",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("昨天爸爸在医院工作，哥哥在家里休息，没去书店。","Zuótiān bàba zài yīyuàn gōngzuò, gēge zài jiā li xiūxi, méi qù shūdiàn.","Hier papa travaillait à l'hôpital, grand frère se reposait à la maison, il n'est pas allé à la librairie.",0.5),

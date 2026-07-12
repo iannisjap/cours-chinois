@@ -210,13 +210,13 @@ registerChapter({
   N("Et pour finir : on y va en taxi."),
   TH(),
   C("坐出租车去。","Zuò chūzūchē qù.","On y va en taxi.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 6. Vous savez donner votre numéro, dire ce que vous voulez faire, et demander comment se rendre quelque part. Réécoutez-la demain, puis passez à la leçon 7. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 6. Vous savez donner votre numéro, dire ce que vous voulez faire, et demander comment se rendre quelque part. Réécoutez-la demain, puis passez à la leçon 7. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 6",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Un homme donne son numéro de portable à une femme. Elle répond : moi, j'ai ton numéro de portable — quel est ton numéro de téléphone ? Un mot manque dans sa phrase, entre « moi » et « ton numéro de portable »."),
   TH(),

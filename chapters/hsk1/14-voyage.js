@@ -29,7 +29,7 @@ registerChapter({
   // ================= PARTIE 1 =================
   { num:1, hanzi:"我看了一个电影", title:"Partie 1 · Dans le train", desc:"上(monter) · 火车 · 中午 · 开 · 有些 · 了(accompli)",
     build(){ return [
-  N("Bienvenue dans la leçon 14 du HSK 1. Aujourd'hui : dire qu'une action a eu lieu, généraliser avec 都, et parler de l'école. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  N("Bienvenue dans la leçon 14 du HSK 1. Aujourd'hui : dire qu'une action a eu lieu, généraliser avec [[都|dōu]], et parler de l'école. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
   C("你们上火车后看见王老师了吗？","Nǐmen shàng huǒchē hòu kànjiàn Wáng lǎoshī le ma?","Après être montés dans le train, avez-vous vu le professeur Wang ?",0.5),
   C("没看见。中午车开后，有些人在看书，有些人睡觉了。","Méi kànjiàn. Zhōngwǔ chē kāi hòu, yǒuxiē rén zài kàn shū, yǒuxiē rén shuìjiào le.","Non. Après le départ du train à midi, certains lisaient, d'autres se sont endormis.",0.5),
   C("你呢？","Nǐ ne?","Et toi ?",0.5),
@@ -223,13 +223,13 @@ registerChapter({
   N("Et pour finir : il est tard, allons nous coucher."),
   TH(),
   C("太晚了，睡觉吧。","Tài wǎn le, shuìjiào ba.","Il est tard, allons nous coucher.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 14. Vous savez dire qu'une action a eu lieu avec 了, généraliser avec 都, et parler de l'école. Réécoutez-la demain, puis passez à la leçon 15, la dernière ! 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 14. Vous savez dire qu'une action a eu lieu avec [[了|le]], généraliser avec [[都|dōu]], et parler de l'école. Réécoutez-la demain, puis passez à la leçon 15, la dernière ! [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 14",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("服务员，我想问一下，我们的房间号是多少？","Fúwùyuán, wǒ xiǎng wèn yíxià, wǒmen de fángjiānhào shì duōshao?","Serveur, je voudrais demander, quel est le numéro de notre chambre ?",0.5),

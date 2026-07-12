@@ -211,13 +211,13 @@ registerChapter({
   N("Et pour finir : donnez-moi un thé, s'il vous plaît."),
   TH(),
   C("请给我一杯茶吧。","Qǐng gěi wǒ yì bēi chá ba.","Donnez-moi un thé, s'il vous plaît.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 13. Vous savez demander la permission, et commander à boire et à manger. Réécoutez-la demain, puis passez à la leçon 14. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 13. Vous savez demander la permission, et commander à boire et à manger. Réécoutez-la demain, puis passez à la leçon 14. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 13",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("明天星期天，我们可以去饭店吃饺子吗？","Míngtiān Xīngqītiān, wǒmen kěyǐ qù fàndiàn chī jiǎozi ma?","Demain c'est dimanche, on peut aller au restaurant manger des jiaozi ?",0.5),

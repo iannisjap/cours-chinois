@@ -220,13 +220,13 @@ registerChapter({
   N("Et pour finir, dites : il veut jouer avec des amis."),
   TH(),
   C("他要和小朋友玩。","Tā yào hé xiǎopéngyou wán.","Il veut jouer avec des amis.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 11. Vous savez poser des questions alternatives, dire qu'une action est en cours, et exprimer une intention avec 要. Réécoutez-la demain, puis passez à la leçon 12. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 11. Vous savez poser des questions alternatives, dire qu'une action est en cours, et exprimer une intention avec [[要|yào]]. Réécoutez-la demain, puis passez à la leçon 12. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 11",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("我姐姐今年20岁，正在读大学呢，她学医。","Wǒ jiějie jīnnián èrshí suì, zhèngzài dú dàxué ne, tā xué yī.","Ma grande sœur a 20 ans cette année, elle est en train de faire des études à l'université, elle étudie la médecine.",0.5),

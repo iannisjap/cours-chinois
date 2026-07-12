@@ -37,7 +37,7 @@ registerChapter({
   ...teach2("九月","jiǔ yuè","septembre"),
   N("Pour le jour du mois à l'oral, on utilise [[号|hào]] après le nombre. « Le 8 », comme date, se dit :"),
   ...teach2("八号","bā hào","le 8 (du mois)"),
-  N("En chinois, l'ordre est important : d'abord l'année, puis le mois, puis le jour. « Aujourd'hui, le 8 septembre » se dit donc : aujourd'hui — neuf mois — huit 号."),
+  N("En chinois, l'ordre est important : d'abord l'année, puis le mois, puis le jour. « Aujourd'hui, le 8 septembre » se dit donc : aujourd'hui — neuf mois — huit [[号|hào]]."),
   ...teach2("今天九月八号。","Jīntiān jiǔ yuè bā hào.","Aujourd'hui, c'est le 8 septembre."),
   N("Remarquez : il n'y a pas de verbe « être » dans cette phrase ! En chinois, pour les dates, on peut dire directement « aujourd'hui neuf mois huit » sans [[是|shì]]. Pour demander la date, on utilise [[几|jǐ]] avec [[号|hào]] : « Aujourd'hui, quelle date ? »"),
   TH(),
@@ -208,13 +208,13 @@ registerChapter({
   N("Et pour finir : je l'aime beaucoup."),
   TH(),
   C("我很喜欢它。","Wǒ hěn xǐhuan tā.","Je l'aime beaucoup.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 5. Vous savez dire la date, le jour de la semaine, et parler de ce que vous savez faire. Réécoutez-la demain, puis passez à la leçon 6. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 5. Vous savez dire la date, le jour de la semaine, et parler de ce que vous savez faire. Réécoutez-la demain, puis passez à la leçon 6. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 5",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("我非常喜欢我的中文名字。","Wǒ fēicháng xǐhuan wǒ de Zhōngwén míngzi.","J'aime beaucoup mon prénom chinois.",0.5),

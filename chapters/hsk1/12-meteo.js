@@ -98,7 +98,7 @@ registerChapter({
   C("昨天下雪了。","Zuótiān xià xuě le.","Il a neigé hier.",0.6),
   C("昨天下雪了。","Zuótiān xià xuě le.","Il a neigé hier.",0.6), HOLD(),
 
-  N("Pour une exclamation forte, on encadre l'adjectif avec [[太|tài]]…[[了|le]] : «太冷了 » veut dire « il faisait vraiment trop froid ». Écoutez et répétez."),
+  N("Pour une exclamation forte, on encadre l'adjectif avec [[太|tài]]…[[了|le]] : «[[太冷了|tài lěng le]] » veut dire « il faisait vraiment trop froid ». Écoutez et répétez."),
   ...teach2("太冷了","tài lěng le","il fait vraiment trop froid"),
   N("Répondez : « Oui, il faisait vraiment trop froid. »"),
   TH(),
@@ -209,13 +209,13 @@ registerChapter({
   N("Et pour finir : buvez de l'eau chaude."),
   TH(),
   C("喝热水。","Hē rè shuǐ.","Buvez de l'eau chaude.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 12. Vous savez parler de la météo et décrire un état de santé avec 了 et 太……了. Réécoutez-la demain, puis passez à la leçon 13. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 12. Vous savez parler de la météo et décrire un état de santé avec [[了|le]] et [[太|tài]]……[[了|le]]. Réécoutez-la demain, puis passez à la leçon 13. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 12",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("昨天的天气很好，我和朋友外边玩了。","Zuótiān de tiānqì hěn hǎo, wǒ hé péngyou wàibian wán le.","Hier le temps était très beau, mon ami et moi avons joué dehors.",0.5),

@@ -69,7 +69,7 @@ registerChapter({
   ...teach2("见","jiàn","se voir, se retrouver"),
   N("Pour proposer, suggérer gentiment, on ajoute [[吧|ba]] à la fin de la phrase. Écoutez et répétez."),
   ...teach2("吧","ba","(suggestion)"),
-  N("Répondez : « D'accord, retrouvons-nous à 14 h. » — littéralement « après-midi deux heures se voir 吧 »."),
+  N("Répondez : « D'accord, retrouvons-nous à 14 h. » — littéralement « après-midi deux heures se voir [[吧|ba]] »."),
   TH(),
   C("好的，我们下午两点见吧。","Hǎo de, wǒmen xiàwǔ liǎng diǎn jiàn ba.","D'accord, retrouvons-nous à 14 h.",0.55),
   C("好的，我们下午两点见吧。","Hǎo de, wǒmen xiàwǔ liǎng diǎn jiàn ba.","D'accord, retrouvons-nous à 14 h.",0.6), HOLD(),
@@ -238,13 +238,13 @@ registerChapter({
   N("Et pour finir : je finis le travail à 18 h 30 ce soir."),
   TH(),
   C("我晚上六点半下班。","Wǒ wǎnshang liù diǎn bàn xiàbān.","Je finis le travail à 18 h 30 ce soir.",0.6),
-  N("Excellent ! Vous avez terminé la leçon 7. Vous savez dire l'heure, organiser un rendez-vous, et parler au téléphone. Réécoutez-la demain, puis passez à la leçon 8. 再见！"),
+  N("Excellent ! Vous avez terminé la leçon 7. Vous savez dire l'heure, organiser un rendez-vous, et parler au téléphone. Réécoutez-la demain, puis passez à la leçon 8. [[再见|zàijiàn]]！"),
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 7",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
 
   N("Première question. Écoutez bien."),
   C("我今天早上八点半上课，十点十分下课。","Wǒ jīntiān zǎoshang bā diǎn bàn shàngkè, shí diǎn shí fēn xiàkè.","Aujourd'hui j'ai cours à 8 h 30 du matin, je finis à 10 h 10.",0.5),
