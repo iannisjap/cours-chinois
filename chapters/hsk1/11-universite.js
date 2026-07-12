@@ -224,5 +224,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 11",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("我姐姐今年20岁，正在读大学呢，她学医。","Wǒ jiějie jīnnián èrshí suì, zhèngzài dú dàxué ne, tā xué yī.","Ma grande sœur a 20 ans cette année, elle est en train de faire des études à l'université, elle étudie la médecine.",0.5),
+  N("Question : que fait la grande sœur de cette personne en ce moment ?"),
+  TH(),
+  N("Les trois choix étaient : A professeure, B médecin, C étudiante à l'université."),
+  C("大学生","dàxuéshēng","étudiante à l'université",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("我明天有事，要去学校找老师，不知道老师在不在。","Wǒ míngtiān yǒu shì, yào qù xuéxiào zhǎo lǎoshī, bù zhīdào lǎoshī zài bu zài.","Demain j'ai quelque chose à faire, je dois aller à l'école voir le professeur, je ne sais pas s'il sera là.",0.5),
+  N("Question : qui cette personne va-t-elle voir demain à l'école ?"),
+  TH(),
+  N("Les trois choix étaient : A un ami, B un élève, C le professeur."),
+  C("老师","lǎoshī","le professeur",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 12."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

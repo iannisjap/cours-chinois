@@ -215,5 +215,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 13",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("明天星期天，我们可以去饭店吃饺子吗？","Míngtiān Xīngqītiān, wǒmen kěyǐ qù fàndiàn chī jiǎozi ma?","Demain c'est dimanche, on peut aller au restaurant manger des jiaozi ?",0.5),
+  N("Question : quel jour de la semaine est-on demain, d'après cette phrase ?"),
+  TH(),
+  N("Les trois choix étaient : A vendredi, B samedi, C dimanche."),
+  C("星期日","Xīngqīrì","dimanche",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("爸爸今天在家里工作，我们不要去他的房间。","Bàba jīntiān zài jiā li gōngzuò, wǒmen bú yào qù tā de fángjiān.","Papa travaille à la maison aujourd'hui, il ne faut pas aller dans sa chambre.",0.5),
+  N("Question : que fait papa aujourd'hui ?"),
+  TH(),
+  N("Les trois choix étaient : A il travaille à la maison, B il a fait la cuisine, C il ne peut pas aller au bureau."),
+  C("在家里工作","zài jiā li gōngzuò","il travaille à la maison",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 14."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

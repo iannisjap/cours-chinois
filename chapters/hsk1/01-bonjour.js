@@ -183,5 +183,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel «新HSK教程1»",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel «新HSK教程1» sur lequel cette méthode est basée. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.55),
+  N("Question : à qui s'adresse cette phrase ?"),
+  TH(),
+  N("Les trois choix étaient : A un camarade de classe, B le professeur, C la maman."),
+  C("老师","lǎoshī","le professeur",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("谢谢！不客气。","Xièxie! Bú kèqi.","Merci ! De rien.",0.55),
+  N("Question : que répond-on quand quelqu'un dit « merci » ?"),
+  TH(),
+  N("Les trois choix étaient : A au revoir, B de rien, C bonjour."),
+  C("不客气","bú kèqi","de rien",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 2."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

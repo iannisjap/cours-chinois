@@ -228,5 +228,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 4",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","Dans ma famille il y a trois personnes : papa, maman et moi.",0.5),
+  N("Question : combien de personnes y a-t-il dans la famille de cette personne ?"),
+  TH(),
+  N("Les trois choix étaient : A une grande sœur, B trois personnes, C quatre personnes."),
+  C("三口人","sān kǒu rén","trois personnes",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("她是法国人，我不是。","Tā shì Fǎguó rén, wǒ bú shì.","Elle est française, moi non.",0.5),
+  N("Question : quelle est la nationalité de « elle » dans cette phrase ?"),
+  TH(),
+  N("Les trois choix étaient : A française, B chinoise, C thaïlandaise."),
+  C("法国人","Fǎguó rén","française",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 5."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

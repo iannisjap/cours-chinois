@@ -220,5 +220,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 8",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("昨天爸爸在医院工作，哥哥在家里休息，没去书店。","Zuótiān bàba zài yīyuàn gōngzuò, gēge zài jiā li xiūxi, méi qù shūdiàn.","Hier papa travaillait à l'hôpital, grand frère se reposait à la maison, il n'est pas allé à la librairie.",0.5),
+  N("Question : hier, comment était le grand frère de cette personne ?"),
+  TH(),
+  N("Les trois choix étaient : A à la maison, B à la librairie, C au travail à l'hôpital."),
+  C("在家里","zài jiā li","à la maison",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("我喜欢吃米饭，我女朋友不喜欢。","Wǒ xǐhuan chī mǐfàn, wǒ nǚpéngyou bù xǐhuan.","J'aime manger du riz, ma copine n'aime pas.",0.5),
+  N("Question : qu'est-ce que la copine de cette personne n'aime pas manger ?"),
+  TH(),
+  N("Les trois choix étaient : A du riz, B des bāozi, C des nouilles."),
+  C("米饭","mǐfàn","du riz",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 9."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

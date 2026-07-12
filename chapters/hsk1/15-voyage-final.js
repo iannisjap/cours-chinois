@@ -219,5 +219,25 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 15",
+    build(){ return [
+N("Pour finir ce chapitre, un dernier petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Un mot manque dans cette phrase : « Cette année, nous voulons tous aller (   ). »"),
+  TH(),
+  N("Les trois choix étaient : A la télévision, B Pékin, C le prénom. Le bon choix était Pékin."),
+  C("今年我们都想去北京。","Jīnnián wǒmen dōu xiǎng qù Běijīng.","Cette année, nous voulons tous aller à Pékin.",0.55), HOLD(),
+
+  N("Deuxième question. Écoutez bien."),
+  C("明天星期天，儿子想去看一个电影。","Míngtiān Xīngqītiān, érzi xiǎng qù kàn yí ge diànyǐng.","Demain c'est dimanche, le fils veut aller voir un film.",0.5),
+  N("Question : que veut faire le fils demain ?"),
+  TH(),
+  N("Les trois choix étaient : A acheter un ordinateur, B passer un appel, C voir un film."),
+  C("看电影","kàn diànyǐng","voir un film",0.6), HOLD(),
+
+  N("Bravo, dernier exercice terminé ! Vous avez fini tout le HSK niveau 1, avec en plus un aperçu du style d'examen officiel. Félicitations !"),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

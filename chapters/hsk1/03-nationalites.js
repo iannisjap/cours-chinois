@@ -202,5 +202,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel «新HSK教程1»",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel «新HSK教程1». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("我是法国人，你呢？","Wǒ shì Fǎguó rén, nǐ ne?","Je suis française, et toi ?",0.55),
+  N("Question : de quelle nationalité est la personne qui parle ?"),
+  TH(),
+  N("Les trois choix étaient : A chinoise, B française, C thaïlandaise."),
+  C("法国人","Fǎguó rén","française",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("你忙吗？我很忙，你呢？","Nǐ máng ma? Wǒ hěn máng, nǐ ne?","Tu es occupé ? Moi je suis très occupé, et toi ?",0.55),
+  N("Question : que demande « 你忙吗 » ?"),
+  TH(),
+  N("Les trois choix étaient : A si tu as faim, B si tu es occupé, C comment tu t'appelles."),
+  C("忙不忙","máng bu máng","si on est occupé",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 4."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

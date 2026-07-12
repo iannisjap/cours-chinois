@@ -227,5 +227,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 14",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("服务员，我想问一下，我们的房间号是多少？","Fúwùyuán, wǒ xiǎng wèn yíxià, wǒmen de fángjiānhào shì duōshao?","Serveur, je voudrais demander, quel est le numéro de notre chambre ?",0.5),
+  N("Question : que veut savoir cette personne ?"),
+  TH(),
+  N("Les trois choix étaient : A l'heure, B un numéro de téléphone, C le numéro de la chambre."),
+  C("房间号","fángjiānhào","le numéro de la chambre",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("儿子和女儿都上小学了，他们会写很多字了。","Érzi hé nǚ'ér dōu shàng xiǎoxué le, tāmen huì xiě hěn duō zì le.","Le fils et la fille vont maintenant à l'école primaire, ils savent écrire beaucoup de caractères.",0.5),
+  N("Question : que sont les deux enfants de cette personne, maintenant ?"),
+  TH(),
+  N("Les trois choix étaient : A des écoliers, B des collégiens, C des étudiants d'université."),
+  C("小学生","xiǎoxuéshēng","des écoliers",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 15, la dernière !"),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

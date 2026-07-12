@@ -214,5 +214,25 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 6",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Un homme donne son numéro de portable à une femme. Elle répond : moi, j'ai ton numéro de portable — quel est ton numéro de téléphone ? Un mot manque dans sa phrase, entre « moi » et « ton numéro de portable »."),
+  TH(),
+  N("Le mot manquant était « avoir »."),
+  C("我有你的手机号，你的电话号呢？","Wǒ yǒu nǐ de shǒujīhào, nǐ de diànhuàhào ne?","J'ai ton numéro de portable, et ton numéro de téléphone ?",0.55), HOLD(),
+
+  N("Deuxième question."),
+  C("明天星期天，我休息，想去超市买牛奶。","Míngtiān Xīngqītiān, wǒ xiūxi, xiǎng qù chāoshì mǎi niúnǎi.","Demain c'est dimanche, je suis en repos, je veux aller au supermarché acheter du lait.",0.5),
+  N("Question : qu'est-ce que cette personne veut acheter ?"),
+  TH(),
+  N("Les trois choix étaient : A des légumes, B du lait, C des jiaozi."),
+  C("牛奶","niúnǎi","du lait",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 7."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

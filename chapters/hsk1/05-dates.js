@@ -212,5 +212,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 5",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("我非常喜欢我的中文名字。","Wǒ fēicháng xǐhuan wǒ de Zhōngwén míngzi.","J'aime beaucoup mon prénom chinois.",0.5),
+  N("Question : qu'est-ce que cette personne aime beaucoup ?"),
+  TH(),
+  N("Les trois choix étaient : A un nouvel ordinateur, B la cuisine chinoise, C son prénom chinois."),
+  C("中文名字","Zhōngwén míngzi","le prénom chinois",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("今天8号，你几号休息？","Jīntiān bā hào, nǐ jǐ hào xiūxi?","Aujourd'hui c'est le 8, toi tu es en repos quel jour ?",0.5),
+  N("Question : que veut savoir la personne qui parle ?"),
+  TH(),
+  N("Les trois choix étaient : A la date d'aujourd'hui, B quel jour tu es en repos, C quel jour tu travailles."),
+  C("哪天休息","nǎ tiān xiūxi","quel jour on est en repos",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 6."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

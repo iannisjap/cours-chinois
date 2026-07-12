@@ -242,5 +242,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 7",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("我今天早上八点半上课，十点十分下课。","Wǒ jīntiān zǎoshang bā diǎn bàn shàngkè, shí diǎn shí fēn xiàkè.","Aujourd'hui j'ai cours à 8 h 30 du matin, je finis à 10 h 10.",0.5),
+  N("Question : à quelle heure cette personne a-t-elle cours aujourd'hui ?"),
+  TH(),
+  N("Les trois choix étaient : A 8 h 30, B 10 h 10, C 10 h 20."),
+  C("八点半","bā diǎn bàn","8 h 30",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("妈妈今天休息，下午想去菜店买菜。","Māma jīntiān xiūxi, xiàwǔ xiǎng qù càidiàn mǎi cài.","Maman est en repos aujourd'hui, cet après-midi elle veut aller au marché acheter des légumes.",0.5),
+  N("Question : qu'est-ce que maman veut acheter cet après-midi ?"),
+  TH(),
+  N("Les trois choix étaient : A des légumes, B des jiaozi, C du lait."),
+  C("菜","cài","des légumes",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 8."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

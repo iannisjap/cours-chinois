@@ -234,5 +234,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 9",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("我有一只小狗，很漂亮，它是我的好朋友。","Wǒ yǒu yì zhī xiǎo gǒu, hěn piàoliang, tā shì wǒ de hǎo péngyou.","J'ai un petit chien, il est très mignon, c'est mon bon ami.",0.5),
+  N("Question : combien de petits chiens cette personne a-t-elle ?"),
+  TH(),
+  N("Les trois choix étaient : A un, B quatre, C onze."),
+  C("一只","yì zhī","un (chien)",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("星期天中午妈妈在做饭，我和妹妹在房间里玩。","Xīngqītiān zhōngwǔ māma zài zuò fàn, wǒ hé mèimei zài fángjiān li wán.","Dimanche midi, maman fait la cuisine, ma petite sœur et moi jouons dans la chambre.",0.5),
+  N("Question : où sont cette personne et sa petite sœur ?"),
+  TH(),
+  N("Les trois choix étaient : A dehors, B dans la chambre, C au supermarché."),
+  C("房间里","fángjiān li","dans la chambre",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 10."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

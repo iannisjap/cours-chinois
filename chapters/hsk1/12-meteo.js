@@ -213,5 +213,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 12",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("昨天的天气很好，我和朋友外边玩了。","Zuótiān de tiānqì hěn hǎo, wǒ hé péngyou wàibian wán le.","Hier le temps était très beau, mon ami et moi avons joué dehors.",0.5),
+  N("Question : d'après cette personne, comment était le temps hier ?"),
+  TH(),
+  N("Les trois choix étaient : A il faisait beau, B la pluie n'était pas forte, C il faisait un peu froid."),
+  C("天气好","tiānqì hǎo","il faisait beau",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("老张去看病，医生说他要吃三天药。","Lǎo Zhāng qù kànbìng, yīshēng shuō tā yào chī sān tiān yào.","Lao Zhang est allé voir un médecin, le médecin a dit qu'il devait prendre des médicaments pendant trois jours.",0.5),
+  N("Question : que dit le médecin à Lao Zhang de faire ?"),
+  TH(),
+  N("Les trois choix étaient : A prendre des médicaments, B faire plus de sport, C boire plus d'eau."),
+  C("要吃药","yào chī yào","il doit prendre des médicaments",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 13."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

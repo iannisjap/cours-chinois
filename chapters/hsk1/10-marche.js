@@ -228,5 +228,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 10",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel «新HSK教程1 学练手册». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("我没有手机，今天想去商店买一个。","Wǒ méiyǒu shǒujī, jīntiān xiǎng qù shāngdiàn mǎi yí ge.","Je n'ai pas de portable, aujourd'hui je veux aller au magasin en acheter un.",0.5),
+  N("Question : qu'est-ce que cette personne veut acheter ?"),
+  TH(),
+  N("Les trois choix étaient : A une tasse, B un portable, C des fruits."),
+  C("手机","shǒujī","un portable",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("这件衣服很好看，你也能穿，买一件吧。","Zhè jiàn yīfu hěn hǎokàn, nǐ yě néng chuān, mǎi yí jiàn ba.","Ce vêtement est très joli, tu peux aussi le porter, achètes-en un.",0.5),
+  N("Question : comment est ce vêtement, d'après la phrase ?"),
+  TH(),
+  N("Les trois choix étaient : A joli, B pas cher, C très cher."),
+  C("好看","hǎokàn","joli",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 11."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });

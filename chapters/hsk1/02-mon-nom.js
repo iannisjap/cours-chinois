@@ -188,5 +188,27 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel «新HSK教程1»",
+    build(){ return [
+N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel «新HSK教程1». Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+
+  N("Première question. Écoutez bien."),
+  C("我叫李文。","Wǒ jiào Lǐ Wén.","Je m'appelle Li Wen.",0.55),
+  N("Question : comment s'appelle la personne qui parle ?"),
+  TH(),
+  N("Les trois choix étaient : A Wang Fang, B Li Wen, C professeur Wang."),
+  C("李文","Lǐ Wén","Li Wen",0.6), HOLD(),
+
+  N("Deuxième question."),
+  C("你叫什么名字？我叫李文。","Nǐ jiào shénme míngzi? Wǒ jiào Lǐ Wén.","Comment tu t'appelles ? Je m'appelle Li Wen.",0.55),
+  N("Question : que veut savoir la première personne ?"),
+  TH(),
+  N("Les trois choix étaient : A ton nom, B ton âge, C ton pays."),
+  C("名字","míngzi","le nom",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passez maintenant à la leçon 3."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+
   ]
 });
