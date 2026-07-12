@@ -215,25 +215,55 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 13",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("明天星期天，我们可以去饭店吃饺子吗？","Míngtiān Xīngqītiān, wǒmen kěyǐ qù fàndiàn chī jiǎozi ma?","Demain c'est dimanche, on peut aller au restaurant manger des jiaozi ?",0.5),
-  N("Question : quel jour de la semaine est-on demain, d'après cette phrase ?"),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("那里卖不卖手机？","Nàli mài bu mài shǒujī?","Est-ce qu'on vend des téléphones là-bas ?",0.6),
+  N("Laquelle de ces réponses convient : A « De rien. » ; B « Un pain. » ; C « Je ne sais pas. » ?"),
   TH(),
-  N("Les trois choix étaient : A vendredi, B samedi, C dimanche."),
-  C("星期日","Xīngqīrì","dimanche",0.6), HOLD(),
+  N("C'est la réponse C."),
+  C("不知道。","Bù zhīdào.","Je ne sais pas.",0.6), HOLD(),
 
-  N("Deuxième question."),
-  C("爸爸今天在家里工作，我们不要去他的房间。","Bàba jīntiān zài jiā li gōngzuò, wǒmen bú yào qù tā de fángjiān.","Papa travaille à la maison aujourd'hui, il ne faut pas aller dans sa chambre.",0.5),
-  N("Question : que fait papa aujourd'hui ?"),
+  // Q15 — associer
+  N("Question 2. On te dit :"),
+  C("我会写了，谢谢老师。","Wǒ huì xiě le, xièxie lǎoshī.","Je sais écrire maintenant, merci professeur.",0.6),
+  N("Quelle réponse convient : A « De rien. » ; B « Un pain. » ; C « Je ne sais pas. » ?"),
   TH(),
-  N("Les trois choix étaient : A il travaille à la maison, B il a fait la cuisine, C il ne peut pas aller au bureau."),
-  C("在家里工作","zài jiā li gōngzuò","il travaille à la maison",0.6), HOLD(),
+  N("C'est la réponse A."),
+  C("不客气。","Bú kèqi.","De rien.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 14."),
+  // Q16 — associer
+  N("Question 3. On te demande :"),
+  C("你要什么？","Nǐ yào shénme?","Que désires-tu ?",0.6),
+  N("Laquelle convient : A « De rien. » ; B « Un pain. » ; C « Je ne sais pas. » ?"),
+  TH(),
+  N("C'est la réponse B."),
+  C("一个面包。","Yí ge miànbāo.","Un pain.",0.6), HOLD(),
+
+  // Q17 — texte à trou
+  N("Question 4, un mot à trouver. La phrase : « Regarde un… , qu'est-ce que tu veux ? » Quel mot manque, juste après « regarde » : A « donner » ; B « un peu, un instant » ; C « prénom » ?"),
+  TH(),
+  N("C'était « un instant » — « jette un coup d'œil »."),
+  C("你看一下，你要什么？","Nǐ kàn yíxià, nǐ yào shénme?","Jette un coup d'œil, qu'est-ce que tu veux ?",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("明天星期天，我们可以去饭店吃饺子吗？","Míngtiān Xīngqītiān, wǒmen kěyǐ qù fàndiàn chī jiǎozi ma?","Demain c'est dimanche, on peut aller au restaurant manger des jiaozi ?",0.55),
+  N("Question : quel jour est-on demain ? A vendredi ; B samedi ; C dimanche ?"),
+  TH(),
+  C("星期日。","Xīngqīrì.","Dimanche.",0.6), HOLD(),
+
+  // Q20 — compréhension
+  N("Question 6, la dernière. Écoute."),
+  C("爸爸今天在家里工作，我们不要去他的房间。","Bàba jīntiān zài jiā li gōngzuò, wǒmen bú yào qù tā de fángjiān.","Papa travaille à la maison aujourd'hui, il ne faut pas aller dans sa chambre.",0.55),
+  N("Question : que fait papa aujourd'hui ? A il travaille à la maison ; B il a fait des nouilles ; C il ne peut pas aller au bureau ?"),
+  TH(),
+  C("在家里工作。","Zài jiā li gōngzuò.","Il travaille à la maison.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 14."),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 

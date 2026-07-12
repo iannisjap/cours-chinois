@@ -224,25 +224,55 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 11",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("我姐姐今年20岁，正在读大学呢，她学医。","Wǒ jiějie jīnnián èrshí suì, zhèngzài dú dàxué ne, tā xué yī.","Ma grande sœur a 20 ans cette année, elle est en train de faire des études à l'université, elle étudie la médecine.",0.5),
-  N("Question : que fait la grande sœur de cette personne en ce moment ?"),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("你开车去吗？","Nǐ kāichē qù ma?","Tu y vas en voiture ?",0.6),
+  N("Laquelle de ces réponses convient : A « Non, je prends un taxi. » ; B « Très occupé. » ; C « Non, je suis en train de conduire. » ?"),
   TH(),
-  N("Les trois choix étaient : A professeure, B médecin, C étudiante à l'université."),
-  C("大学生","dàxuéshēng","étudiante à l'université",0.6), HOLD(),
+  N("C'est la réponse A."),
+  C("不，我坐出租车。","Bù, wǒ zuò chūzūchē.","Non, je prends un taxi.",0.6), HOLD(),
 
-  N("Deuxième question."),
-  C("我明天有事，要去学校找老师，不知道老师在不在。","Wǒ míngtiān yǒu shì, yào qù xuéxiào zhǎo lǎoshī, bù zhīdào lǎoshī zài bu zài.","Demain j'ai quelque chose à faire, je dois aller à l'école voir le professeur, je ne sais pas s'il sera là.",0.5),
-  N("Question : qui cette personne va-t-elle voir demain à l'école ?"),
+  // Q15 — associer
+  N("Question 2. On te demande :"),
+  C("你们学习忙不忙？","Nǐmen xuéxí máng bu máng?","Vos études sont chargées ?",0.6),
+  N("Laquelle convient : A « Non, je prends un taxi. » ; B « Très occupé. » ; C « D'accord, merci. » ?"),
   TH(),
-  N("Les trois choix étaient : A un ami, B un élève, C le professeur."),
-  C("老师","lǎoshī","le professeur",0.6), HOLD(),
+  N("C'est la réponse B."),
+  C("非常忙。","Fēicháng máng.","Très occupé.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 12."),
+  // Q16 — associer
+  N("Question 3. On te demande :"),
+  C("你在吃午饭吗？","Nǐ zài chī wǔfàn ma?","Tu es en train de déjeuner ?",0.6),
+  N("Laquelle convient : A « Non, je prends un taxi. » ; B « Très occupé. » ; C « Non, je suis en train de conduire. » ?"),
+  TH(),
+  N("C'est la réponse C."),
+  C("没有，我在开车呢。","Méiyǒu, wǒ zài kāichē ne.","Non, je suis en train de conduire.",0.6), HOLD(),
+
+  // Q17 — texte à trou
+  N("Question 4, un mot à trouver. La phrase : « Le petit frère n'est pas levé, il est encore en train de… quelque chose. » Quel mot manque : A « chercher » ; B « dormir » ; C « prénom » ?"),
+  TH(),
+  N("C'était « dormir »."),
+  C("弟弟没起床，还在睡觉呢。","Dìdi méi qǐchuáng, hái zài shuìjiào ne.","Le petit frère n'est pas levé, il dort encore.",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("我姐姐今年二十岁，正在读大学呢，她学医。","Wǒ jiějie jīnnián èrshí suì, zhèngzài dú dàxué ne, tā xué yī.","Ma grande sœur a vingt ans cette année, elle est à l'université, elle étudie la médecine.",0.55),
+  N("Question : qu'est-ce que sa grande sœur ? A professeure ; B médecin ; C étudiante à l'université ?"),
+  TH(),
+  C("大学生。","Dàxuéshēng.","Étudiante à l'université.",0.6), HOLD(),
+
+  // Q20 — compréhension
+  N("Question 6, la dernière. Écoute."),
+  C("我明天有事，要去学校找老师，不知道老师在不在。","Wǒ míngtiān yǒu shì, yào qù xuéxiào zhǎo lǎoshī, bù zhīdào lǎoshī zài bu zài.","Demain j'ai quelque chose à faire, je dois aller à l'école chercher le professeur, je ne sais pas s'il sera là.",0.55),
+  N("Question : qui va-t-elle voir demain à l'école ? A un ami ; B un élève ; C le professeur ?"),
+  TH(),
+  C("老师。","Lǎoshī.","Le professeur.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 12."),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 

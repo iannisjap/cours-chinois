@@ -227,25 +227,53 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 14",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("服务员，我想问一下，我们的房间号是多少？","Fúwùyuán, wǒ xiǎng wèn yíxià, wǒmen de fángjiānhào shì duōshao?","Serveur, je voudrais demander, quel est le numéro de notre chambre ?",0.5),
-  N("Question : que veut savoir cette personne ?"),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("谁去学校了？","Shéi qù xuéxiào le?","Qui est allé à l'école ?",0.6),
+  N("Laquelle de ces réponses convient : A « Oui, j'ai fait une sieste. » ; B « Nous y sommes tous allés. » ; C « Écrire, lire, manger. » ?"),
   TH(),
-  N("Les trois choix étaient : A l'heure, B un numéro de téléphone, C le numéro de la chambre."),
-  C("房间号","fángjiānhào","le numéro de la chambre",0.6), HOLD(),
+  N("C'est la réponse B."),
+  C("我们都去了。","Wǒmen dōu qù le.","Nous y sommes tous allés.",0.6), HOLD(),
 
-  N("Deuxième question."),
-  C("儿子和女儿都上小学了，他们会写很多字了。","Érzi hé nǚ'ér dōu shàng xiǎoxué le, tāmen huì xiě hěn duō zì le.","Le fils et la fille vont maintenant à l'école primaire, ils savent écrire beaucoup de caractères.",0.5),
-  N("Question : que sont les deux enfants de cette personne, maintenant ?"),
+  // Q16 — associer
+  N("Question 2. On te demande :"),
+  C("你今天上午都忙了些什么？","Nǐ jīntiān shàngwǔ dōu mángle xiē shénme?","Tu étais occupé à quoi ce matin ?",0.6),
+  N("Laquelle convient : A « Oui, j'ai fait une sieste. » ; B « Nous y sommes tous allés. » ; C « À écrire, lire et manger. » ?"),
   TH(),
-  N("Les trois choix étaient : A des écoliers, B des collégiens, C des étudiants d'université."),
-  C("小学生","xiǎoxuéshēng","des écoliers",0.6), HOLD(),
+  N("C'est la réponse C."),
+  C("写字、看书、吃饭。","Xiě zì, kàn shū, chī fàn.","À écrire, lire et manger.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 15, la dernière !"),
+  // Q17 — texte à trou
+  N("Question 3, un mot à trouver. La phrase : « J'ai bu une tasse de… quoi ? » Quel mot manque : A « tous » ; B « thé » ; C « prénom » ?"),
+  TH(),
+  N("C'était « thé »."),
+  C("我喝了一杯茶。","Wǒ hēle yì bēi chá.","J'ai bu une tasse de thé.",0.6), HOLD(),
+
+  // Q18 — texte à trou
+  N("Question 4. Un dialogue : « Le cours commence, ne parlez plus s'il vous plaît. — D'accord, professeur, nous… on ne parle plus. » Quel mot manque : A « tous » ; B « thé » ; C « prénom » ?"),
+  TH(),
+  N("C'était « tous »."),
+  C("我们都不说话了。","Wǒmen dōu bù shuōhuà le.","Nous arrêtons tous de parler.",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("服务员，我想问一下，我们的房间号是多少？","Fúwùyuán, wǒ xiǎng wèn yíxià, wǒmen de fángjiānhào shì duōshao?","Serveur, je voudrais demander : quel est le numéro de notre chambre ?",0.55),
+  N("Question : que veut savoir cette personne ? A l'heure ; B un numéro de téléphone ; C le numéro de la chambre ?"),
+  TH(),
+  C("房间号。","Fángjiānhào.","Le numéro de la chambre.",0.6), HOLD(),
+
+  // Q20 — compréhension
+  N("Question 6, la dernière. Écoute."),
+  C("儿子和女儿都上小学了，他们会写很多字了。","Érzi hé nǚ'ér dōu shàng xiǎoxué le, tāmen huì xiě hěn duō zì le.","Le fils et la fille vont maintenant à l'école primaire, ils savent écrire beaucoup de caractères.",0.55),
+  N("Question : que sont les deux enfants maintenant ? A des écoliers ; B des collégiens ; C des étudiants ?"),
+  TH(),
+  C("小学生。","Xiǎoxuéshēng.","Des écoliers.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 15, la dernière !"),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 

@@ -219,23 +219,55 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 15",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir ce chapitre, un dernier petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir ce chapitre, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Un mot manque dans cette phrase : « Cette année, nous voulons tous aller (   ). »"),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("你会写几个汉字？","Nǐ huì xiě jǐ ge Hànzì?","Combien de caractères sais-tu écrire ?",0.6),
+  N("Laquelle de ces réponses convient : A « Ma fille. » ; B « Dix. » ; C « Des pommes. » ?"),
   TH(),
-  N("Les trois choix étaient : A la télévision, B Pékin, C le prénom. Le bon choix était Pékin."),
-  C("今年我们都想去北京。","Jīnnián wǒmen dōu xiǎng qù Běijīng.","Cette année, nous voulons tous aller à Pékin.",0.55), HOLD(),
+  N("C'est la réponse B."),
+  C("十个。","Shí ge.","Dix.",0.6), HOLD(),
 
-  N("Deuxième question. Écoutez bien."),
-  C("明天星期天，儿子想去看一个电影。","Míngtiān Xīngqītiān, érzi xiǎng qù kàn yí ge diànyǐng.","Demain c'est dimanche, le fils veut aller voir un film.",0.5),
-  N("Question : que veut faire le fils demain ?"),
+  // Q15 — associer
+  N("Question 2. On te demande :"),
+  C("谁上中学了？","Shéi shàng zhōngxué le?","Qui est entré au collège ?",0.6),
+  N("Laquelle convient : A « Ma fille. » ; B « Dix. » ; C « Des pommes. » ?"),
   TH(),
-  N("Les trois choix étaient : A acheter un ordinateur, B passer un appel, C voir un film."),
-  C("看电影","kàn diànyǐng","voir un film",0.6), HOLD(),
+  N("C'est la réponse A."),
+  C("我女儿。","Wǒ nǚ'ér.","Ma fille.",0.6), HOLD(),
 
-  N("Bravo, dernier exercice terminé ! Vous avez fini tout le HSK niveau 1, avec en plus un aperçu du style d'examen officiel. Félicitations !"),
+  // Q16 — associer
+  N("Question 3. On te demande :"),
+  C("你爱吃什么？","Nǐ ài chī shénme?","Qu'est-ce que tu adores manger ?",0.6),
+  N("Laquelle convient : A « Ma fille. » ; B « Dix. » ; C « Des pommes. » ?"),
+  TH(),
+  N("C'est la réponse C."),
+  C("苹果。","Píngguǒ.","Des pommes.",0.6), HOLD(),
+
+  // Q17 — texte à trou
+  N("Question 4, un mot à trouver. La phrase : « Cette année, nous voulons tous aller à… quelque part. » Quel mot manque : A « la télévision » ; B « Pékin » ; C « prénom » ?"),
+  TH(),
+  N("C'était « Pékin »."),
+  C("今年我们都想去北京。","Jīnnián wǒmen dōu xiǎng qù Běijīng.","Cette année, nous voulons tous aller à Pékin.",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("明天星期天，儿子想去看一个电影。","Míngtiān Xīngqītiān, érzi xiǎng qù kàn yí ge diànyǐng.","Demain c'est dimanche, le fils veut aller voir un film.",0.55),
+  N("Question : que veut faire le fils demain ? A acheter un ordinateur ; B passer un appel ; C voir un film ?"),
+  TH(),
+  C("看电影。","Kàn diànyǐng.","Voir un film.",0.6), HOLD(),
+
+  // Q20 — compréhension
+  N("Question 6, la toute dernière. Écoute."),
+  C("下小雨了，小狗非常高兴，它喜欢小雨。","Xià xiǎoyǔ le, xiǎo gǒu fēicháng gāoxìng, tā xǐhuan xiǎoyǔ.","Il pleut un peu, le petit chien est très content, il aime la pluie fine.",0.55),
+  N("Question : qu'est-ce que le petit chien aime ? A la pluie fine ; B la grosse pluie ; C la neige légère ?"),
+  TH(),
+  C("下小雨。","Xià xiǎoyǔ.","La pluie fine.",0.6), HOLD(),
+
+  N("Bravo, dernier exercice terminé ! Tu as fini tout le HSK niveau 1, avec en plus un vrai aperçu du style d'examen officiel. Félicitations !"),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 

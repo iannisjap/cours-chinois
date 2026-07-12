@@ -213,25 +213,55 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 12",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("昨天的天气很好，我和朋友外边玩了。","Zuótiān de tiānqì hěn hǎo, wǒ hé péngyou wàibian wán le.","Hier le temps était très beau, mon ami et moi avons joué dehors.",0.5),
-  N("Question : d'après cette personne, comment était le temps hier ?"),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("你怎么了？","Nǐ zěnme le?","Qu'est-ce qui ne va pas ?",0.6),
+  N("Laquelle de ces réponses convient : A « De l'eau chaude. » ; B « Je suis malade. » ; C « Oui, c'est ça. » ?"),
   TH(),
-  N("Les trois choix étaient : A il faisait beau, B la pluie n'était pas forte, C il faisait un peu froid."),
-  C("天气好","tiānqì hǎo","il faisait beau",0.6), HOLD(),
+  N("C'est la réponse B."),
+  C("我病了。","Wǒ bìng le.","Je suis malade.",0.6), HOLD(),
 
-  N("Deuxième question."),
-  C("老张去看病，医生说他要吃三天药。","Lǎo Zhāng qù kànbìng, yīshēng shuō tā yào chī sān tiān yào.","Lao Zhang est allé voir un médecin, le médecin a dit qu'il devait prendre des médicaments pendant trois jours.",0.5),
-  N("Question : que dit le médecin à Lao Zhang de faire ?"),
+  // Q15 — associer
+  N("Question 2. On te demande :"),
+  C("你想喝点儿什么？","Nǐ xiǎng hē diǎnr shénme?","Que veux-tu boire ?",0.6),
+  N("Laquelle convient : A « De l'eau chaude. » ; B « Je suis malade. » ; C « Oui, c'est ça. » ?"),
   TH(),
-  N("Les trois choix étaient : A prendre des médicaments, B faire plus de sport, C boire plus d'eau."),
-  C("要吃药","yào chī yào","il doit prendre des médicaments",0.6), HOLD(),
+  N("C'est la réponse A."),
+  C("热水。","Rè shuǐ.","De l'eau chaude.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 13."),
+  // Q16 — associer
+  N("Question 3. On te demande :"),
+  C("你开车了？","Nǐ kāichē le?","Tu as conduit ?",0.6),
+  N("Laquelle convient : A « De l'eau chaude. » ; B « Je suis malade. » ; C « Oui. » ?"),
+  TH(),
+  N("C'est la réponse C."),
+  C("对。","Duì.","Oui.",0.6), HOLD(),
+
+  // Q17 — texte à trou
+  N("Question 4, un mot à trouver. La phrase : « Il est… quelque chose, il n'est pas venu travailler. » Quel mot manque : A « avoir froid » ; B « tomber malade » ; C « prénom » ?"),
+  TH(),
+  N("C'était « tomber malade »."),
+  C("他生病了，没来上班。","Tā shēngbìng le, méi lái shàngbān.","Il est tombé malade, il n'est pas venu travailler.",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("昨天的天气很好，我和朋友们去外边玩了。","Zuótiān de tiānqì hěn hǎo, wǒ hé péngyoumen qù wàibian wán le.","Hier il faisait très beau, mes amis et moi sommes allés jouer dehors.",0.55),
+  N("Question : d'après elle, comment était hier ? A il faisait beau ; B la pluie n'était pas forte ; C il faisait un peu froid ?"),
+  TH(),
+  C("天气好。","Tiānqì hǎo.","Il faisait beau.",0.6), HOLD(),
+
+  // Q20 — compréhension
+  N("Question 6, la dernière. Écoute."),
+  C("老张去看病，医生说他要吃三天药。","Lǎo Zhāng qù kànbìng, yīshēng shuō tā yào chī sān tiān yào.","Lao Zhang est allé voir un médecin, qui a dit qu'il devait prendre des médicaments pendant trois jours.",0.55),
+  N("Question : que dit le médecin ? A prendre des médicaments ; B dormir davantage ; C boire plus d'eau ?"),
+  TH(),
+  C("要吃药。","Yào chī yào.","Prendre des médicaments.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 13."),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 

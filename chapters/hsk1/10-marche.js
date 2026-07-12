@@ -228,25 +228,55 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"D'après 新HSK教程1 学练手册 · Leçon 10",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension tiré du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("我没有手机，今天想去商店买一个。","Wǒ méiyǒu shǒujī, jīntiān xiǎng qù shāngdiàn mǎi yí ge.","Je n'ai pas de portable, aujourd'hui je veux aller au magasin en acheter un.",0.5),
-  N("Question : qu'est-ce que cette personne veut acheter ?"),
+  // Q14 — associer
+  N("Question 1. On te demande :"),
+  C("女孩子的衣服在哪儿？","Nǚ háizi de yīfu zài nǎr?","Où sont les vêtements de fille ?",0.6),
+  N("Laquelle de ces réponses convient : A « Dix yuans. » ; B « Désolé, il n'y en a pas. » ; C « Là-bas. » ?"),
   TH(),
-  N("Les trois choix étaient : A une tasse, B un portable, C des fruits."),
-  C("手机","shǒujī","un portable",0.6), HOLD(),
+  N("C'est la réponse C."),
+  C("在那边。","Zài nàbian.","Là-bas.",0.6), HOLD(),
 
-  N("Deuxième question."),
-  C("这件衣服很好看，你也能穿，买一件吧。","Zhè jiàn yīfu hěn hǎokàn, nǐ yě néng chuān, mǎi yí jiàn ba.","Ce vêtement est très joli, tu peux aussi le porter, achètes-en un.",0.5),
-  N("Question : comment est ce vêtement, d'après la phrase ?"),
+  // Q15 — associer
+  N("Question 2. On te demande :"),
+  C("杯子多少钱一个？","Bēizi duōshao qián yí ge?","Combien coûte une tasse ?",0.6),
+  N("Laquelle convient : A « Dix yuans. » ; B « Là-bas. » ; C « Désolé, il n'y en a pas. » ?"),
   TH(),
-  N("Les trois choix étaient : A joli, B pas cher, C très cher."),
-  C("好看","hǎokàn","joli",0.6), HOLD(),
+  N("C'est la réponse A."),
+  C("十块钱。","Shí kuài qián.","Dix yuans.",0.6), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 11."),
+  // Q16 — associer
+  N("Question 3. On te demande :"),
+  C("请问，这儿有牛奶吗？","Qǐngwèn, zhèr yǒu niúnǎi ma?","Excusez-moi, y a-t-il du lait ici ?",0.6),
+  N("Laquelle convient : A « Dix yuans. » ; B « Désolé, il n'y en a pas. » ; C « Là-bas. » ?"),
+  TH(),
+  N("C'est la réponse B."),
+  C("对不起，没有。","Duìbuqǐ, méiyǒu.","Désolé, il n'y en a pas.",0.6), HOLD(),
+
+  // Q17 — texte à trou
+  N("Question 4, un mot à trouver. La phrase : « Ces pommes, deux… le demi-kilo, c'est très bon marché. » Quel mot manque, l'unité d'argent : A « porter (un vêtement) » ; B « yuan (unité) » ; C « prénom » ?"),
+  TH(),
+  N("C'était « yuan »."),
+  C("那些苹果两块钱一斤。","Nàxiē píngguǒ liǎng kuài qián yì jīn.","Ces pommes, c'est deux yuans le demi-kilo.",0.6), HOLD(),
+
+  // Q19 — compréhension
+  N("Question 5. Écoute bien."),
+  C("我没有手机，今天想去商店买一个。","Wǒ méiyǒu shǒujī, jīntiān xiǎng qù shāngdiàn mǎi yí ge.","Je n'ai pas de portable, aujourd'hui je veux aller au magasin en acheter un.",0.55),
+  N("Question : qu'est-ce que cette personne veut acheter ? A une tasse ; B un portable ; C des fruits ?"),
+  TH(),
+  C("手机。","Shǒujī.","Un portable.",0.6), HOLD(),
+
+  // Q20 — compréhension
+  N("Question 6, la dernière. Écoute."),
+  C("这件衣服很好看，你也能穿，买一件吧。","Zhè jiàn yīfu hěn hǎokàn, nǐ yě néng chuān, mǎi yí jiàn ba.","Ce vêtement est très joli, tu peux le porter toi aussi, achètes-en un.",0.55),
+  N("Question : comment est ce vêtement ? A joli ; B bon marché ; C très cher ?"),
+  TH(),
+  C("好看。","Hǎokàn.","Joli.",0.6), HOLD(),
+
+  N("Bravo, exercice terminé ! Passe maintenant à la leçon 11."),
   C("再见！","Zàijiàn!","Au revoir !",0.65),
     ]; } },
 
