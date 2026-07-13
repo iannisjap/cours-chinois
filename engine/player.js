@@ -113,6 +113,10 @@ function voiceScore(v){
   if(/premium|enhanced|améliorée/.test(n)) s += 80;
   if(!v.localService) s += 20;
   if(/google/.test(n)) s += 10;
+  // Voix Edge (Natural) préférées : Xiaoxiao pour le chinois, Ariane pour
+  // le français — les mettre en tête parmi les nombreuses voix « Natural ».
+  if(/xiaoxiao/.test(n)) s += 30;
+  if(/ariane/.test(n)) s += 30;
   return s;
 }
 function pickBest(list){ return list.slice().sort((a,b)=>voiceScore(b)-voiceScore(a))[0] || null; }
