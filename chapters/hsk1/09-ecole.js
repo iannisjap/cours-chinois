@@ -234,57 +234,54 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
+N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
-  // Q14 — associer
-  N("Question 1. On te demande :"),
-  C("桌子上有什么？","Zhuōzi shang yǒu shénme?","Qu'est-ce qu'il y a sur la table ?",0.6),
-  N("Laquelle de ces réponses convient : A « À la maison. » ; B « Ma copine. » ; C « Un petit chat. » ?"),
+  // Question 1
+  C("桌子上有什么？","Zhuōzi shang yǒu shénme?","",0.6),
+  C("一、在家里。","Yī. Zài jiā li.","",0.6),
+  C("二、我女朋友。","Èr. Wǒ nǚpéngyou.","",0.6),
+  C("三、一只小猫。","Sān. Yì zhī xiǎo māo.","",0.6),
   TH(),
-  N("C'est la réponse C."),
-  C("一只小猫。","Yì zhī xiǎo māo.","Un petit chat.",0.6), HOLD(),
+  C("一只小猫。","Yì zhī xiǎo māo.","",0.65), HOLD(),
 
-  // Q15 — associer
-  N("Question 2. On te demande :"),
-  C("你今天下午在哪儿？","Nǐ jīntiān xiàwǔ zài nǎr?","Où es-tu cet après-midi ?",0.6),
-  N("Laquelle convient : A « À la maison. » ; B « Un petit chat. » ; C « Ma copine. » ?"),
+  // Question 2
+  C("你今天下午在哪儿？","Nǐ jīntiān xiàwǔ zài nǎr?","",0.6),
+  C("一、在家里。","Yī. Zài jiā li.","",0.6),
+  C("二、一只小猫。","Èr. Yì zhī xiǎo māo.","",0.6),
+  C("三、我女朋友。","Sān. Wǒ nǚpéngyou.","",0.6),
   TH(),
-  N("C'est la réponse A."),
-  C("在家里。","Zài jiā li.","À la maison.",0.6), HOLD(),
+  C("在家里。","Zài jiā li.","",0.65), HOLD(),
 
-  // Q16 — associer
-  N("Question 3. On te demande :"),
-  C("你和谁在超市呢？","Nǐ hé shéi zài chāoshì ne?","Avec qui es-tu au supermarché ?",0.6),
-  N("Laquelle convient : A « À la maison. » ; B « Ma copine. » ; C « Un petit chat. » ?"),
+  // Question 3
+  C("你和谁在超市呢？","Nǐ hé shéi zài chāoshì ne?","",0.6),
+  C("一、在家里。","Yī. Zài jiā li.","",0.6),
+  C("二、我女朋友。","Èr. Wǒ nǚpéngyou.","",0.6),
+  C("三、一只小猫。","Sān. Yì zhī xiǎo māo.","",0.6),
   TH(),
-  N("C'est la réponse B."),
-  C("我女朋友。","Wǒ nǚpéngyou.","Ma copine.",0.6), HOLD(),
+  C("我女朋友。","Wǒ nǚpéngyou.","",0.65), HOLD(),
 
-  // Q17 — texte à trou
-  N("Question 4, un mot à trouver. La phrase : « Le matin je suis à l'école pour… quelque chose, l'après-midi on va au cinéma. » Quel mot manque : A « deux heures » ; B « avoir cours » ; C « prénom » ?"),
+  // Question 4
+  C("我有一只小狗，很漂亮，它是我的好朋友。","Wǒ yǒu yì zhī xiǎo gǒu, hěn piàoliang, tā shì wǒ de hǎo péngyou.","",0.55),
+  C("说话人有几只小狗？","Shuōhuàrén yǒu jǐ zhī xiǎo gǒu?","",0.6),
+  C("一、一只。","Yī. Yì zhī.","",0.6),
+  C("二、四只。","Èr. Sì zhī.","",0.6),
+  C("三、十一只。","Sān. Shíyī zhī.","",0.6),
   TH(),
-  N("C'était « avoir cours »."),
-  C("我上午在学校上课。","Wǒ shàngwǔ zài xuéxiào shàngkè.","Le matin, j'ai cours à l'école.",0.6), HOLD(),
+  C("一只。","Yì zhī.","",0.65), HOLD(),
 
-  // Q19 — compréhension
-  N("Question 5. Écoute bien."),
-  C("我有一只小狗，很漂亮，它是我的好朋友。","Wǒ yǒu yì zhī xiǎo gǒu, hěn piàoliang, tā shì wǒ de hǎo péngyou.","J'ai un petit chien, il est très mignon, c'est mon bon ami.",0.55),
-  N("Question : combien de petits chiens a cette personne ? A un ; B quatre ; C onze ?"),
+  // Question 5
+  C("星期天中午妈妈在做饭，我和妹妹在房间里玩。","Xīngqītiān zhōngwǔ māma zài zuò fàn, wǒ hé mèimei zài fángjiān li wán.","",0.55),
+  C("说话人和妹妹在哪儿？","Shuōhuàrén hé mèimei zài nǎr?","",0.6),
+  C("一、外边。","Yī. Wàibian.","",0.6),
+  C("二、房间里。","Èr. Fángjiān li.","",0.6),
+  C("三、超市里。","Sān. Chāoshì li.","",0.6),
   TH(),
-  C("一只。","Yì zhī.","Un.",0.6), HOLD(),
+  C("房间里。","Fángjiān li.","",0.65), HOLD(),
 
-  // Q20 — compréhension
-  N("Question 6, la dernière. Écoute."),
-  C("星期天中午妈妈在做饭，我和妹妹在房间里玩。","Xīngqītiān zhōngwǔ māma zài zuò fàn, wǒ hé mèimei zài fángjiān li wán.","Dimanche midi, maman fait la cuisine, ma petite sœur et moi jouons dans la chambre.",0.55),
-  N("Question : où sont-ils, elle et sa petite sœur ? A dehors ; B dans la chambre ; C au supermarché ?"),
-  TH(),
-  C("房间里。","Fángjiān li.","Dans la chambre.",0.6), HOLD(),
-
-  N("Bravo, exercice terminé ! Passe maintenant à la leçon 10."),
-  C("再见！","Zàijiàn!","Au revoir !",0.65),
+N("Bravo, exercice terminé ! Passe à la leçon 10."),
+  C("再见！","Zàijiàn!","",0.65),
     ]; } },
-
   ]
 });

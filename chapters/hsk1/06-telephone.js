@@ -214,57 +214,54 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
+N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
-  // Q14 — associer
-  N("Question 1. On te demande :"),
-  C("你吃什么？","Nǐ chī shénme?","Qu'est-ce que tu manges ?",0.6),
-  N("Laquelle de ces réponses convient : A « En taxi. » ; B « Très joli ! » ; C « Des bāozi. » ?"),
+  // Question 1
+  C("你吃什么？","Nǐ chī shénme?","",0.6),
+  C("一、坐出租车。","Yī. Zuò chūzūchē.","",0.6),
+  C("二、真好看！","Èr. Zhēn hǎokàn!","",0.6),
+  C("三、包子。","Sān. Bāozi.","",0.6),
   TH(),
-  N("C'est la réponse C."),
-  C("包子。","Bāozi.","Des bāozi.",0.6), HOLD(),
+  C("包子。","Bāozi.","",0.65), HOLD(),
 
-  // Q15 — associer
-  N("Question 2. On te demande :"),
-  C("我们怎么去？","Wǒmen zěnme qù?","Comment y allons-nous ?",0.6),
-  N("Laquelle convient : A « En taxi. » ; B « Des bāozi. » ; C « D'accord, merci. » ?"),
+  // Question 2
+  C("我们怎么去？","Wǒmen zěnme qù?","",0.6),
+  C("一、坐出租车。","Yī. Zuò chūzūchē.","",0.6),
+  C("二、包子。","Èr. Bāozi.","",0.6),
+  C("三、好的，谢谢！","Sān. Hǎo de, xièxie!","",0.6),
   TH(),
-  N("C'est la réponse A."),
-  C("坐出租车。","Zuò chūzūchē.","En taxi.",0.6), HOLD(),
+  C("坐出租车。","Zuò chūzūchē.","",0.65), HOLD(),
 
-  // Q16 — associer
-  N("Question 3. On te dit :"),
-  C("这是老师的新电脑。","Zhè shì lǎoshī de xīn diànnǎo.","C'est le nouvel ordinateur du professeur.",0.6),
-  N("Quelle réaction convient : A « En taxi. » ; B « Il est vraiment beau ! » ; C « Des bāozi. » ?"),
+  // Question 3
+  C("这是老师的新电脑。","Zhè shì lǎoshī de xīn diànnǎo.","",0.6),
+  C("一、坐出租车。","Yī. Zuò chūzūchē.","",0.6),
+  C("二、真好看！","Èr. Zhēn hǎokàn!","",0.6),
+  C("三、包子。","Sān. Bāozi.","",0.6),
   TH(),
-  N("C'est la réponse B."),
-  C("真好看！","Zhēn hǎokàn!","Il est vraiment beau !",0.6), HOLD(),
+  C("真好看！","Zhēn hǎokàn!","",0.65), HOLD(),
 
-  // Q18 — texte à trou
-  N("Question 4, un mot à trouver. Un homme donne son numéro de portable. La femme répond : « Moi, je… ton numéro de portable ; et ton numéro de téléphone ? » Quel mot manque : A « avoir » ; B « du lait » ; C « prénom » ?"),
+  // Question 4
+  C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","",0.55),
+  C("家里有几口人？","Jiā li yǒu jǐ kǒu rén?","",0.6),
+  C("一、三口人。","Yī. Sān kǒu rén.","",0.6),
+  C("二、四口人。","Èr. Sì kǒu rén.","",0.6),
+  C("三、六口人。","Sān. Liù kǒu rén.","",0.6),
   TH(),
-  N("C'était « avoir »."),
-  C("我有你的手机号，你的电话号呢？","Wǒ yǒu nǐ de shǒujīhào, nǐ de diànhuàhào ne?","J'ai ton numéro de portable, et ton numéro de téléphone ?",0.55), HOLD(),
+  C("三口人。","Sān kǒu rén.","",0.65), HOLD(),
 
-  // Q19 — compréhension
-  N("Question 5. Écoute bien."),
-  C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","Dans ma famille il y a trois personnes : papa, maman et moi.",0.55),
-  N("Question : combien de personnes dans sa famille ? A trois ; B quatre ; C six ?"),
+  // Question 5
+  C("明天星期天，我休息，想去超市买牛奶。","Míngtiān Xīngqītiān, wǒ xiūxi, xiǎng qù chāoshì mǎi niúnǎi.","",0.55),
+  C("说话人想买什么？","Shuōhuàrén xiǎng mǎi shénme?","",0.6),
+  C("一、菜。","Yī. Cài.","",0.6),
+  C("二、牛奶。","Èr. Niúnǎi.","",0.6),
+  C("三、饺子。","Sān. Jiǎozi.","",0.6),
   TH(),
-  C("三口人。","Sān kǒu rén.","Trois personnes.",0.6), HOLD(),
+  C("牛奶。","Niúnǎi.","",0.65), HOLD(),
 
-  // Q20 — compréhension
-  N("Question 6, la dernière. Écoute."),
-  C("明天星期天，我休息，想去超市买牛奶。","Míngtiān Xīngqītiān, wǒ xiūxi, xiǎng qù chāoshì mǎi niúnǎi.","Demain c'est dimanche, je me repose, je veux aller au supermarché acheter du lait.",0.55),
-  N("Question : qu'est-ce que cette personne veut acheter ? A des légumes ; B du lait ; C des jiaozi ?"),
-  TH(),
-  C("牛奶。","Niúnǎi.","Du lait.",0.6), HOLD(),
-
-  N("Bravo, exercice terminé ! Passe maintenant à la leçon 7."),
-  C("再见！","Zàijiàn!","Au revoir !",0.65),
+N("Bravo, exercice terminé ! Passe à la leçon 7."),
+  C("再见！","Zàijiàn!","",0.65),
     ]; } },
-
   ]
 });

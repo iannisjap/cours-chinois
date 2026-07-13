@@ -188,27 +188,36 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel HSK 1. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("我叫李文。","Wǒ jiào Lǐ Wén.","Je m'appelle Li Wen.",0.55),
-  N("Question : comment s'appelle la personne qui parle ?"),
+  // Question 1
+  C("你叫什么名字？","Nǐ jiào shénme míngzi?","",0.6),
+  C("一、我叫李文。","Yī. Wǒ jiào Lǐ Wén.","",0.6),
+  C("二、我是中国人。","Èr. Wǒ shì Zhōngguó rén.","",0.6),
+  C("三、谢谢。","Sān. Xièxie.","",0.6),
   TH(),
-  N("Les trois choix étaient : A Wang Fang, B Li Wen, C professeur Wang."),
-  C("李文","Lǐ Wén","Li Wen",0.6), HOLD(),
+  C("我叫李文。","Wǒ jiào Lǐ Wén.","",0.65), HOLD(),
 
-  N("Deuxième question."),
-  C("你叫什么名字？我叫李文。","Nǐ jiào shénme míngzi? Wǒ jiào Lǐ Wén.","Comment tu t'appelles ? Je m'appelle Li Wen.",0.55),
-  N("Question : que veut savoir la première personne ?"),
+  // Question 2
+  C("认识你很高兴。","Rènshi nǐ hěn gāoxìng.","",0.6),
+  C("一、认识你我也很高兴。","Yī. Rènshi nǐ wǒ yě hěn gāoxìng.","",0.6),
+  C("二、对不起。","Èr. Duìbuqǐ.","",0.6),
+  C("三、再见。","Sān. Zàijiàn.","",0.6),
   TH(),
-  N("Les trois choix étaient : A ton nom, B ton âge, C ton pays."),
-  C("名字","míngzi","le nom",0.6), HOLD(),
+  C("认识你我也很高兴。","Rènshi nǐ wǒ yě hěn gāoxìng.","",0.65), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 3."),
-  C("再见！","Zàijiàn!","Au revoir !",0.65),
+  // Question 3
+  C("对不起。","Duìbuqǐ.","",0.6),
+  C("一、没关系。","Yī. Méi guānxi.","",0.6),
+  C("二、谢谢。","Èr. Xièxie.","",0.6),
+  C("三、你好。","Sān. Nǐ hǎo.","",0.6),
+  TH(),
+  C("没关系。","Méi guānxi.","",0.65), HOLD(),
+
+N("Bravo, exercice terminé ! Passe à la leçon 3."),
+  C("再见！","Zàijiàn!","",0.65),
     ]; } },
-
   ]
 });

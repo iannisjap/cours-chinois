@@ -227,55 +227,54 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
+N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
-  // Q14 — associer
-  N("Question 1. On te demande :"),
-  C("谁去学校了？","Shéi qù xuéxiào le?","Qui est allé à l'école ?",0.6),
-  N("Laquelle de ces réponses convient : A « Oui, j'ai fait une sieste. » ; B « Nous y sommes tous allés. » ; C « Écrire, lire, manger. » ?"),
+  // Question 1
+  C("谁去学校了？","Shéi qù xuéxiào le?","",0.6),
+  C("一、是的，我睡了一觉。","Yī. Shì de, wǒ shuìle yí jiào.","",0.6),
+  C("二、我们都去了。","Èr. Wǒmen dōu qù le.","",0.6),
+  C("三、写字、看书、吃饭。","Sān. Xiě zì, kàn shū, chī fàn.","",0.6),
   TH(),
-  N("C'est la réponse B."),
-  C("我们都去了。","Wǒmen dōu qù le.","Nous y sommes tous allés.",0.6), HOLD(),
+  C("我们都去了。","Wǒmen dōu qù le.","",0.65), HOLD(),
 
-  // Q16 — associer
-  N("Question 2. On te demande :"),
-  C("你今天上午都忙了些什么？","Nǐ jīntiān shàngwǔ dōu mángle xiē shénme?","Tu étais occupé à quoi ce matin ?",0.6),
-  N("Laquelle convient : A « Oui, j'ai fait une sieste. » ; B « Nous y sommes tous allés. » ; C « À écrire, lire et manger. » ?"),
+  // Question 2
+  C("你下午没去医院吗？","Nǐ xiàwǔ méi qù yīyuàn ma?","",0.6),
+  C("一、是的，我睡了一觉。","Yī. Shì de, wǒ shuìle yí jiào.","",0.6),
+  C("二、我们都去了。","Èr. Wǒmen dōu qù le.","",0.6),
+  C("三、写字、看书、吃饭。","Sān. Xiě zì, kàn shū, chī fàn.","",0.6),
   TH(),
-  N("C'est la réponse C."),
-  C("写字、看书、吃饭。","Xiě zì, kàn shū, chī fàn.","À écrire, lire et manger.",0.6), HOLD(),
+  C("是的，我睡了一觉。","Shì de, wǒ shuìle yí jiào.","",0.65), HOLD(),
 
-  // Q17 — texte à trou
-  N("Question 3, un mot à trouver. La phrase : « J'ai bu une tasse de… quoi ? » Quel mot manque : A « tous » ; B « thé » ; C « prénom » ?"),
+  // Question 3
+  C("你今天上午都忙了些什么？","Nǐ jīntiān shàngwǔ dōu mángle xiē shénme?","",0.6),
+  C("一、是的，我睡了一觉。","Yī. Shì de, wǒ shuìle yí jiào.","",0.6),
+  C("二、我们都去了。","Èr. Wǒmen dōu qù le.","",0.6),
+  C("三、写字、看书、吃饭。","Sān. Xiě zì, kàn shū, chī fàn.","",0.6),
   TH(),
-  N("C'était « thé »."),
-  C("我喝了一杯茶。","Wǒ hēle yì bēi chá.","J'ai bu une tasse de thé.",0.6), HOLD(),
+  C("写字、看书、吃饭。","Xiě zì, kàn shū, chī fàn.","",0.65), HOLD(),
 
-  // Q18 — texte à trou
-  N("Question 4. Un dialogue : « Le cours commence, ne parlez plus s'il vous plaît. — D'accord, professeur, nous… on ne parle plus. » Quel mot manque : A « tous » ; B « thé » ; C « prénom » ?"),
+  // Question 4
+  C("服务员，我想问一下，我们的房间号是多少？","Fúwùyuán, wǒ xiǎng wèn yíxià, wǒmen de fángjiānhào shì duōshao?","",0.55),
+  C("说话人想知道什么？","Shuōhuàrén xiǎng zhīdào shénme?","",0.6),
+  C("一、时间。","Yī. Shíjiān.","",0.6),
+  C("二、电话号。","Èr. Diànhuàhào.","",0.6),
+  C("三、房间号。","Sān. Fángjiānhào.","",0.6),
   TH(),
-  N("C'était « tous »."),
-  C("我们都不说话了。","Wǒmen dōu bù shuōhuà le.","Nous arrêtons tous de parler.",0.6), HOLD(),
+  C("房间号。","Fángjiānhào.","",0.65), HOLD(),
 
-  // Q19 — compréhension
-  N("Question 5. Écoute bien."),
-  C("服务员，我想问一下，我们的房间号是多少？","Fúwùyuán, wǒ xiǎng wèn yíxià, wǒmen de fángjiānhào shì duōshao?","Serveur, je voudrais demander : quel est le numéro de notre chambre ?",0.55),
-  N("Question : que veut savoir cette personne ? A l'heure ; B un numéro de téléphone ; C le numéro de la chambre ?"),
+  // Question 5
+  C("儿子和女儿都上小学了，他们会写很多字了。","Érzi hé nǚ'ér dōu shàng xiǎoxué le, tāmen huì xiě hěn duō zì le.","",0.55),
+  C("两个孩子是什么？","Liǎng ge háizi shì shénme?","",0.6),
+  C("一、小学生。","Yī. Xiǎoxuéshēng.","",0.6),
+  C("二、中学生。","Èr. Zhōngxuéshēng.","",0.6),
+  C("三、大学生。","Sān. Dàxuéshēng.","",0.6),
   TH(),
-  C("房间号。","Fángjiānhào.","Le numéro de la chambre.",0.6), HOLD(),
+  C("小学生。","Xiǎoxuéshēng.","",0.65), HOLD(),
 
-  // Q20 — compréhension
-  N("Question 6, la dernière. Écoute."),
-  C("儿子和女儿都上小学了，他们会写很多字了。","Érzi hé nǚ'ér dōu shàng xiǎoxué le, tāmen huì xiě hěn duō zì le.","Le fils et la fille vont maintenant à l'école primaire, ils savent écrire beaucoup de caractères.",0.55),
-  N("Question : que sont les deux enfants maintenant ? A des écoliers ; B des collégiens ; C des étudiants ?"),
-  TH(),
-  C("小学生。","Xiǎoxuéshēng.","Des écoliers.",0.6), HOLD(),
-
-  N("Bravo, exercice terminé ! Passe maintenant à la leçon 15, la dernière !"),
-  C("再见！","Zàijiàn!","Au revoir !",0.65),
+N("Bravo, exercice terminé ! Passe à la leçon 15."),
+  C("再见！","Zàijiàn!","",0.65),
     ]; } },
-
   ]
 });

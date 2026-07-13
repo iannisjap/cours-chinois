@@ -212,56 +212,54 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
+N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
-  // Q15 — associer
-  N("Question 1. On te demande :"),
-  C("你会做饭吗？","Nǐ huì zuò fàn ma?","Sais-tu cuisiner ?",0.6),
-  N("Laquelle de ces réponses convient : A « D'accord, merci. » ; B « Je ne sais pas (faire). » ; C « Des nouilles. » ?"),
+  // Question 1
+  C("你去超市买什么？","Nǐ qù chāoshì mǎi shénme?","",0.6),
+  C("一、我不会。","Yī. Wǒ bú huì.","",0.6),
+  C("二、面条儿。","Èr. Miàntiáor.","",0.6),
+  C("三、五月六号。","Sān. Wǔ yuè liù hào.","",0.6),
   TH(),
-  N("C'est la réponse B."),
-  C("我不会。","Wǒ bú huì.","Je ne sais pas.",0.6), HOLD(),
+  C("面条儿。","Miàntiáor.","",0.65), HOLD(),
 
-  // Q16 — associer
-  N("Question 2. On te demande :"),
-  C("今天几号？","Jīntiān jǐ hào?","Quelle est la date aujourd'hui ?",0.6),
-  N("Laquelle convient : A « Des nouilles. » ; B « Je ne sais pas. » ; C « Le 6 mai. » ?"),
+  // Question 2
+  C("你会做饭吗？","Nǐ huì zuò fàn ma?","",0.6),
+  C("一、我不会。","Yī. Wǒ bú huì.","",0.6),
+  C("二、面条儿。","Èr. Miàntiáor.","",0.6),
+  C("三、好的，谢谢！","Sān. Hǎo de, xièxie!","",0.6),
   TH(),
-  N("C'est la réponse C."),
-  C("五月六号。","Wǔ yuè liù hào.","Le 6 mai.",0.6), HOLD(),
+  C("我不会。","Wǒ bú huì.","",0.65), HOLD(),
 
-  // Q17 — texte à trou
-  N("Question 3, un mot à trouver. La phrase : « Aujourd'hui, on est le… quoi ? » Quel mot manque : A « combien, quel » ; B « joli » ; C « prénom » ?"),
+  // Question 3
+  C("今天几号？","Jīntiān jǐ hào?","",0.6),
+  C("一、面条儿。","Yī. Miàntiáor.","",0.6),
+  C("二、我不会。","Èr. Wǒ bú huì.","",0.6),
+  C("三、五月六号。","Sān. Wǔ yuè liù hào.","",0.6),
   TH(),
-  N("C'était « combien, quel » — on demande la date."),
-  C("今天几号？","Jīntiān jǐ hào?","On est le combien aujourd'hui ?",0.6), HOLD(),
+  C("五月六号。","Wǔ yuè liù hào.","",0.65), HOLD(),
 
-  // Q18 — texte à trou
-  N("Question 4. Un dialogue : « Ton nouvel ordinateur est vraiment… quelque chose ! — Merci, je l'aime beaucoup aussi. » Quel mot manque : A « combien » ; B « joli, beau » ; C « prénom » ?"),
+  // Question 4
+  C("我非常喜欢我的中文名字。","Wǒ fēicháng xǐhuan wǒ de Zhōngwén míngzi.","",0.55),
+  C("说话人喜欢什么？","Shuōhuàrén xǐhuan shénme?","",0.6),
+  C("一、新电脑。","Yī. Xīn diànnǎo.","",0.6),
+  C("二、中国菜。","Èr. Zhōngguó cài.","",0.6),
+  C("三、中文名字。","Sān. Zhōngwén míngzi.","",0.6),
   TH(),
-  N("C'était « joli »."),
-  C("你的新电脑真好看！","Nǐ de xīn diànnǎo zhēn hǎokàn!","Ton nouvel ordinateur est vraiment beau !",0.6), HOLD(),
+  C("中文名字。","Zhōngwén míngzi.","",0.65), HOLD(),
 
-  // Q19 — compréhension
-  N("Question 5. Écoute bien."),
-  C("我非常喜欢我的中文名字。","Wǒ fēicháng xǐhuan wǒ de Zhōngwén míngzi.","J'aime beaucoup mon prénom chinois.",0.55),
-  N("Question : qu'est-ce que cette personne aime beaucoup ? A un nouvel ordinateur ; B la cuisine chinoise ; C son prénom chinois ?"),
+  // Question 5
+  C("今天八号，你几号休息？","Jīntiān bā hào, nǐ jǐ hào xiūxi?","",0.55),
+  C("说话人想知道什么？","Shuōhuàrén xiǎng zhīdào shénme?","",0.6),
+  C("一、今天几号。","Yī. Jīntiān jǐ hào.","",0.6),
+  C("二、哪天休息。","Èr. Nǎ tiān xiūxi.","",0.6),
+  C("三、星期几上班。","Sān. Xīngqī jǐ shàngbān.","",0.6),
   TH(),
-  C("中文名字。","Zhōngwén míngzi.","Son prénom chinois.",0.6), HOLD(),
+  C("哪天休息。","Nǎ tiān xiūxi.","",0.65), HOLD(),
 
-  // Q20 — compréhension
-  N("Question 6, la dernière. Écoute."),
-  C("今天八号，你几号休息？","Jīntiān bā hào, nǐ jǐ hào xiūxi?","Aujourd'hui c'est le 8, et toi, tu es en repos quel jour ?",0.55),
-  N("Question : que veut savoir la personne ? A la date d'aujourd'hui ; B quel jour tu es en repos ; C quel jour tu travailles ?"),
-  TH(),
-  N("C'est B : quel jour tu es en repos."),
-  C("哪天休息。","Nǎ tiān xiūxi.","Quel jour on est en repos.",0.6), HOLD(),
-
-  N("Bravo, exercice terminé ! Passe maintenant à la leçon 6."),
-  C("再见！","Zàijiàn!","Au revoir !",0.65),
+N("Bravo, exercice terminé ! Passe à la leçon 6."),
+  C("再见！","Zàijiàn!","",0.65),
     ]; } },
-
   ]
 });

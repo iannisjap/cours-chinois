@@ -183,27 +183,36 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Dans l'esprit du manuel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, un petit exercice de compréhension dans l'esprit du manuel officiel HSK 1 sur lequel cette méthode est basée. Écoutez chaque phrase, réfléchissez à la question posée, puis répondez à voix haute avant la correction."),
+N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
-  N("Première question. Écoutez bien."),
-  C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.55),
-  N("Question : à qui s'adresse cette phrase ?"),
+  // Question 1
+  C("老师，你好！","Lǎoshī, nǐ hǎo!","",0.6),
+  C("一、你好！","Yī. Nǐ hǎo!","",0.6),
+  C("二、谢谢！","Èr. Xièxie!","",0.6),
+  C("三、再见！","Sān. Zàijiàn!","",0.6),
   TH(),
-  N("Les trois choix étaient : A un camarade de classe, B le professeur, C la maman."),
-  C("老师","lǎoshī","le professeur",0.6), HOLD(),
+  C("你好！","Nǐ hǎo!","",0.65), HOLD(),
 
-  N("Deuxième question."),
-  C("谢谢！不客气。","Xièxie! Bú kèqi.","Merci ! De rien.",0.55),
-  N("Question : que répond-on quand quelqu'un dit « merci » ?"),
+  // Question 2
+  C("谢谢！","Xièxie!","",0.6),
+  C("一、不客气。","Yī. Bú kèqi.","",0.6),
+  C("二、你好。","Èr. Nǐ hǎo.","",0.6),
+  C("三、再见。","Sān. Zàijiàn.","",0.6),
   TH(),
-  N("Les trois choix étaient : A au revoir, B de rien, C bonjour."),
-  C("不客气","bú kèqi","de rien",0.6), HOLD(),
+  C("不客气。","Bú kèqi.","",0.65), HOLD(),
 
-  N("Bravo, exercice terminé ! Passez maintenant à la leçon 2."),
-  C("再见！","Zàijiàn!","Au revoir !",0.65),
+  // Question 3
+  C("同学们，再见！","Tóngxuémen, zàijiàn!","",0.6),
+  C("一、你好！","Yī. Nǐ hǎo!","",0.6),
+  C("二、谢谢！","Èr. Xièxie!","",0.6),
+  C("三、再见！","Sān. Zàijiàn!","",0.6),
+  TH(),
+  C("再见！","Zàijiàn!","",0.65), HOLD(),
+
+N("Bravo, exercice terminé ! Passe à la leçon 2."),
+  C("再见！","Zàijiàn!","",0.65),
     ]; } },
-
   ]
 });

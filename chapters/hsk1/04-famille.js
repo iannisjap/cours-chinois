@@ -228,55 +228,54 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"6 questions · section lecture du cahier officiel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Pour finir cette leçon, six questions tirées de la section lecture du cahier d'exercices officiel HSK 1. Écoute chaque phrase, réfléchis, puis réponds à voix haute avant la correction."),
+N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
-  // Q14 — associer
-  N("Question 1. On te demande :"),
-  C("她是谁？","Tā shì shéi?","Qui est-elle ?",0.6),
-  N("Laquelle de ces trois réponses convient : A « Oui, c'est ça. » ; B « Il a cinq ans. » ; C « Ma copine. » ?"),
+  // Question 1
+  C("她是谁？","Tā shì shéi?","",0.6),
+  C("一、是的。","Yī. Shì de.","",0.6),
+  C("二、他今年五岁。","Èr. Tā jīnnián wǔ suì.","",0.6),
+  C("三、我女朋友。","Sān. Wǒ nǚpéngyou.","",0.6),
   TH(),
-  N("C'est la réponse C."),
-  C("我女朋友。","Wǒ nǚpéngyou.","Ma copine.",0.6), HOLD(),
+  C("我女朋友。","Wǒ nǚpéngyou.","",0.65), HOLD(),
 
-  // Q16 — associer
-  N("Question 2. On te demande :"),
-  C("您儿子多大？","Nín érzi duō dà?","Quel âge a votre fils ?",0.6),
-  N("Laquelle convient : A « Ma copine. » ; B « Il a cinq ans cette année. » ; C « D'accord, merci. » ?"),
+  // Question 2
+  C("你是法国人吗？","Nǐ shì Fǎguó rén ma?","",0.6),
+  C("一、是的。","Yī. Shì de.","",0.6),
+  C("二、我女朋友。","Èr. Wǒ nǚpéngyou.","",0.6),
+  C("三、他今年五岁。","Sān. Tā jīnnián wǔ suì.","",0.6),
   TH(),
-  N("C'est la réponse B."),
-  C("他今年五岁。","Tā jīnnián wǔ suì.","Il a cinq ans cette année.",0.6), HOLD(),
+  C("是的。","Shì de.","",0.65), HOLD(),
 
-  // Q17 — texte à trou
-  N("Question 3, un mot à trouver. La phrase : « Son travail est très… quelque chose. » Quel mot manque : A « penser » ; B « occupé » ; C « prénom » ?"),
+  // Question 3
+  C("您儿子多大？","Nín érzi duō dà?","",0.6),
+  C("一、我女朋友。","Yī. Wǒ nǚpéngyou.","",0.6),
+  C("二、他今年五岁。","Èr. Tā jīnnián wǔ suì.","",0.6),
+  C("三、是的。","Sān. Shì de.","",0.6),
   TH(),
-  N("C'était « occupé »."),
-  C("她工作很忙。","Tā gōngzuò hěn máng.","Elle est très occupée par son travail.",0.6), HOLD(),
+  C("他今年五岁。","Tā jīnnián wǔ suì.","",0.65), HOLD(),
 
-  // Q18 — texte à trou
-  N("Question 4. Un dialogue : « Vous allez bien ? — Très bien, nous… beaucoup à toi. » Quel mot manque : A « penser à, manquer » ; B « occupé » ; C « prénom » ?"),
+  // Question 4
+  C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","",0.55),
+  C("说话人家里有几口人？","Shuōhuàrén jiā li yǒu jǐ kǒu rén?","",0.6),
+  C("一、姐姐。","Yī. Jiějie.","",0.6),
+  C("二、三口人。","Èr. Sān kǒu rén.","",0.6),
+  C("三、四口人。","Sān. Sì kǒu rén.","",0.6),
   TH(),
-  N("C'était « penser à » — nous pensons beaucoup à toi."),
-  C("我们很想你。","Wǒmen hěn xiǎng nǐ.","Tu nous manques beaucoup.",0.6), HOLD(),
+  C("三口人。","Sān kǒu rén.","",0.65), HOLD(),
 
-  // Q19 — compréhension
-  N("Question 5. Écoute bien."),
-  C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","Dans ma famille il y a trois personnes : papa, maman et moi.",0.55),
-  N("Question : combien de personnes dans sa famille ? A une grande sœur ; B trois personnes ; C quatre personnes ?"),
+  // Question 5
+  C("她是法国人，我不是。","Tā shì Fǎguó rén, wǒ bú shì.","",0.55),
+  C("她是哪国人？","Tā shì nǎ guó rén?","",0.6),
+  C("一、法国人。","Yī. Fǎguó rén.","",0.6),
+  C("二、中国人。","Èr. Zhōngguó rén.","",0.6),
+  C("三、泰国人。","Sān. Tàiguó rén.","",0.6),
   TH(),
-  C("三口人。","Sān kǒu rén.","Trois personnes.",0.6), HOLD(),
+  C("法国人。","Fǎguó rén.","",0.65), HOLD(),
 
-  // Q20 — compréhension
-  N("Question 6, la dernière. Écoute."),
-  C("她是法国人，我不是。","Tā shì Fǎguó rén, wǒ bú shì.","Elle est française, moi non.",0.55),
-  N("Question : « elle », de quelle nationalité ? A française ; B chinoise ; C thaïlandaise ?"),
-  TH(),
-  C("法国人。","Fǎguó rén.","Française.",0.6), HOLD(),
-
-  N("Bravo, exercice terminé ! Passe maintenant à la leçon 5."),
-  C("再见！","Zàijiàn!","Au revoir !",0.65),
+N("Bravo, exercice terminé ! Passe à la leçon 5."),
+  C("再见！","Zàijiàn!","",0.65),
     ]; } },
-
   ]
 });
