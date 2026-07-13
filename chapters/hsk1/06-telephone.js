@@ -216,28 +216,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("你吃什么？","Nǐ chī shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、坐出租车。","Yī. Zuò chūzūchē.","",0.6),
+  P(4,"…"),
   C("二、真好看！","Èr. Zhēn hǎokàn!","",0.6),
+  P(4,"…"),
   C("三、包子。","Sān. Bāozi.","",0.6),
   TH(),
   C("包子。","Bāozi.","",0.65), HOLD(),
 
   // Question 2
   C("我们怎么去？","Wǒmen zěnme qù?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、坐出租车。","Yī. Zuò chūzūchē.","",0.6),
+  P(4,"…"),
   C("二、包子。","Èr. Bāozi.","",0.6),
+  P(4,"…"),
   C("三、好的，谢谢！","Sān. Hǎo de, xièxie!","",0.6),
   TH(),
   C("坐出租车。","Zuò chūzūchē.","",0.65), HOLD(),
 
   // Question 3
   C("这是老师的新电脑。","Zhè shì lǎoshī de xīn diànnǎo.","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、坐出租车。","Yī. Zuò chūzūchē.","",0.6),
+  P(4,"…"),
   C("二、真好看！","Èr. Zhēn hǎokàn!","",0.6),
+  P(4,"…"),
   C("三、包子。","Sān. Bāozi.","",0.6),
   TH(),
   C("真好看！","Zhēn hǎokàn!","",0.65), HOLD(),
@@ -245,8 +254,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","",0.55),
   C("家里有几口人？","Jiā li yǒu jǐ kǒu rén?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、三口人。","Yī. Sān kǒu rén.","",0.6),
+  P(4,"…"),
   C("二、四口人。","Èr. Sì kǒu rén.","",0.6),
+  P(4,"…"),
   C("三、六口人。","Sān. Liù kǒu rén.","",0.6),
   TH(),
   C("三口人。","Sān kǒu rén.","",0.65), HOLD(),
@@ -254,8 +266,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("明天星期天，我休息，想去超市买牛奶。","Míngtiān Xīngqītiān, wǒ xiūxi, xiǎng qù chāoshì mǎi niúnǎi.","",0.55),
   C("说话人想买什么？","Shuōhuàrén xiǎng mǎi shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、菜。","Yī. Cài.","",0.6),
+  P(4,"…"),
   C("二、牛奶。","Èr. Niúnǎi.","",0.6),
+  P(4,"…"),
   C("三、饺子。","Sān. Jiǎozi.","",0.6),
   TH(),
   C("牛奶。","Niúnǎi.","",0.65), HOLD(),

@@ -204,28 +204,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("这是谁？","Zhè shì shéi?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、这是我姐姐。","Yī. Zhè shì wǒ jiějie.","",0.6),
+  P(4,"…"),
   C("二、我很忙。","Èr. Wǒ hěn máng.","",0.6),
+  P(4,"…"),
   C("三、谢谢。","Sān. Xièxie.","",0.6),
   TH(),
   C("这是我姐姐。","Zhè shì wǒ jiějie.","",0.65), HOLD(),
 
   // Question 2
   C("你是哪国人？","Nǐ shì nǎ guó rén?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、我是法国人。","Yī. Wǒ shì Fǎguó rén.","",0.6),
+  P(4,"…"),
   C("二、我是学生。","Èr. Wǒ shì xuéshēng.","",0.6),
+  P(4,"…"),
   C("三、再见。","Sān. Zàijiàn.","",0.6),
   TH(),
   C("我是法国人。","Wǒ shì Fǎguó rén.","",0.65), HOLD(),
 
   // Question 3
   C("你忙吗？","Nǐ máng ma?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、我很忙。","Yī. Wǒ hěn máng.","",0.6),
+  P(4,"…"),
   C("二、我想去。","Èr. Wǒ xiǎng qù.","",0.6),
+  P(4,"…"),
   C("三、不客气。","Sān. Bú kèqi.","",0.6),
   TH(),
   C("我很忙。","Wǒ hěn máng.","",0.65), HOLD(),

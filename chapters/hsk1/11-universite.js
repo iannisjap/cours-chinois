@@ -226,28 +226,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("你开车去吗？","Nǐ kāichē qù ma?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、不，我坐出租车。","Yī. Bù, wǒ zuò chūzūchē.","",0.6),
+  P(4,"…"),
   C("二、非常忙。","Èr. Fēicháng máng.","",0.6),
+  P(4,"…"),
   C("三、没有，我在开车呢。","Sān. Méiyǒu, wǒ zài kāichē ne.","",0.6),
   TH(),
   C("不，我坐出租车。","Bù, wǒ zuò chūzūchē.","",0.65), HOLD(),
 
   // Question 2
   C("你们学习忙不忙？","Nǐmen xuéxí máng bu máng?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、不，我坐出租车。","Yī. Bù, wǒ zuò chūzūchē.","",0.6),
+  P(4,"…"),
   C("二、非常忙。","Èr. Fēicháng máng.","",0.6),
+  P(4,"…"),
   C("三、好的，谢谢！","Sān. Hǎo de, xièxie!","",0.6),
   TH(),
   C("非常忙。","Fēicháng máng.","",0.65), HOLD(),
 
   // Question 3
   C("你在吃午饭吗？","Nǐ zài chī wǔfàn ma?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、不，我坐出租车。","Yī. Bù, wǒ zuò chūzūchē.","",0.6),
+  P(4,"…"),
   C("二、非常忙。","Èr. Fēicháng máng.","",0.6),
+  P(4,"…"),
   C("三、没有，我在开车呢。","Sān. Méiyǒu, wǒ zài kāichē ne.","",0.6),
   TH(),
   C("没有，我在开车呢。","Méiyǒu, wǒ zài kāichē ne.","",0.65), HOLD(),
@@ -255,8 +264,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("我姐姐今年二十岁，正在读大学呢，她学医。","Wǒ jiějie jīnnián èrshí suì, zhèngzài dú dàxué ne, tā xué yī.","",0.55),
   C("说话人的姐姐是什么？","Shuōhuàrén de jiějie shì shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、老师。","Yī. Lǎoshī.","",0.6),
+  P(4,"…"),
   C("二、医生。","Èr. Yīshēng.","",0.6),
+  P(4,"…"),
   C("三、大学生。","Sān. Dàxuéshēng.","",0.6),
   TH(),
   C("大学生。","Dàxuéshēng.","",0.65), HOLD(),
@@ -264,8 +276,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("我明天有事，要去学校找老师，不知道老师在不在。","Wǒ míngtiān yǒu shì, yào qù xuéxiào zhǎo lǎoshī, bù zhīdào lǎoshī zài bu zài.","",0.55),
   C("说话人明天要去学校见谁？","Shuōhuàrén míngtiān yào qù xuéxiào jiàn shéi?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、朋友。","Yī. Péngyou.","",0.6),
+  P(4,"…"),
   C("二、学生。","Èr. Xuéshēng.","",0.6),
+  P(4,"…"),
   C("三、老师。","Sān. Lǎoshī.","",0.6),
   TH(),
   C("老师。","Lǎoshī.","",0.65), HOLD(),

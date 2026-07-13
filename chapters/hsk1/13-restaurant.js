@@ -217,28 +217,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("那里卖不卖手机？","Nàli mài bu mài shǒujī?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、不客气。","Yī. Bú kèqi.","",0.6),
+  P(4,"…"),
   C("二、一个面包。","Èr. Yí ge miànbāo.","",0.6),
+  P(4,"…"),
   C("三、不知道。","Sān. Bù zhīdào.","",0.6),
   TH(),
   C("不知道。","Bù zhīdào.","",0.65), HOLD(),
 
   // Question 2
   C("我会写了，谢谢老师。","Wǒ huì xiě le, xièxie lǎoshī.","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、不客气。","Yī. Bú kèqi.","",0.6),
+  P(4,"…"),
   C("二、一个面包。","Èr. Yí ge miànbāo.","",0.6),
+  P(4,"…"),
   C("三、不知道。","Sān. Bù zhīdào.","",0.6),
   TH(),
   C("不客气。","Bú kèqi.","",0.65), HOLD(),
 
   // Question 3
   C("你要什么？","Nǐ yào shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、不客气。","Yī. Bú kèqi.","",0.6),
+  P(4,"…"),
   C("二、一个面包。","Èr. Yí ge miànbāo.","",0.6),
+  P(4,"…"),
   C("三、不知道。","Sān. Bù zhīdào.","",0.6),
   TH(),
   C("一个面包。","Yí ge miànbāo.","",0.65), HOLD(),
@@ -246,8 +255,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("明天星期天，我们可以去饭店吃饺子吗？","Míngtiān Xīngqītiān, wǒmen kěyǐ qù fàndiàn chī jiǎozi ma?","",0.55),
   C("明天是星期几？","Míngtiān shì xīngqī jǐ?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、星期五。","Yī. Xīngqīwǔ.","",0.6),
+  P(4,"…"),
   C("二、星期六。","Èr. Xīngqīliù.","",0.6),
+  P(4,"…"),
   C("三、星期日。","Sān. Xīngqīrì.","",0.6),
   TH(),
   C("星期日。","Xīngqīrì.","",0.65), HOLD(),
@@ -255,8 +267,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("爸爸今天在家里工作，我们不要去他的房间。","Bàba jīntiān zài jiā li gōngzuò, wǒmen bú yào qù tā de fángjiān.","",0.55),
   C("爸爸今天做什么？","Bàba jīntiān zuò shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、在家里工作。","Yī. Zài jiā li gōngzuò.","",0.6),
+  P(4,"…"),
   C("二、做了面条儿。","Èr. Zuòle miàntiáor.","",0.6),
+  P(4,"…"),
   C("三、不能去公司。","Sān. Bù néng qù gōngsī.","",0.6),
   TH(),
   C("在家里工作。","Zài jiā li gōngzuò.","",0.65), HOLD(),

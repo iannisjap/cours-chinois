@@ -214,28 +214,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("你去超市买什么？","Nǐ qù chāoshì mǎi shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、我不会。","Yī. Wǒ bú huì.","",0.6),
+  P(4,"…"),
   C("二、面条儿。","Èr. Miàntiáor.","",0.6),
+  P(4,"…"),
   C("三、五月六号。","Sān. Wǔ yuè liù hào.","",0.6),
   TH(),
   C("面条儿。","Miàntiáor.","",0.65), HOLD(),
 
   // Question 2
   C("你会做饭吗？","Nǐ huì zuò fàn ma?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、我不会。","Yī. Wǒ bú huì.","",0.6),
+  P(4,"…"),
   C("二、面条儿。","Èr. Miàntiáor.","",0.6),
+  P(4,"…"),
   C("三、好的，谢谢！","Sān. Hǎo de, xièxie!","",0.6),
   TH(),
   C("我不会。","Wǒ bú huì.","",0.65), HOLD(),
 
   // Question 3
   C("今天几号？","Jīntiān jǐ hào?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、面条儿。","Yī. Miàntiáor.","",0.6),
+  P(4,"…"),
   C("二、我不会。","Èr. Wǒ bú huì.","",0.6),
+  P(4,"…"),
   C("三、五月六号。","Sān. Wǔ yuè liù hào.","",0.6),
   TH(),
   C("五月六号。","Wǔ yuè liù hào.","",0.65), HOLD(),
@@ -243,8 +252,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("我非常喜欢我的中文名字。","Wǒ fēicháng xǐhuan wǒ de Zhōngwén míngzi.","",0.55),
   C("说话人喜欢什么？","Shuōhuàrén xǐhuan shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、新电脑。","Yī. Xīn diànnǎo.","",0.6),
+  P(4,"…"),
   C("二、中国菜。","Èr. Zhōngguó cài.","",0.6),
+  P(4,"…"),
   C("三、中文名字。","Sān. Zhōngwén míngzi.","",0.6),
   TH(),
   C("中文名字。","Zhōngwén míngzi.","",0.65), HOLD(),
@@ -252,8 +264,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("今天八号，你几号休息？","Jīntiān bā hào, nǐ jǐ hào xiūxi?","",0.55),
   C("说话人想知道什么？","Shuōhuàrén xiǎng zhīdào shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、今天几号。","Yī. Jīntiān jǐ hào.","",0.6),
+  P(4,"…"),
   C("二、哪天休息。","Èr. Nǎ tiān xiūxi.","",0.6),
+  P(4,"…"),
   C("三、星期几上班。","Sān. Xīngqī jǐ shàngbān.","",0.6),
   TH(),
   C("哪天休息。","Nǎ tiān xiūxi.","",0.65), HOLD(),

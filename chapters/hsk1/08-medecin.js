@@ -222,28 +222,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("桌子上有什么？","Zhuōzi shang yǒu shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、医院。","Yī. Yīyuàn.","",0.6),
+  P(4,"…"),
   C("二、我老师。","Èr. Wǒ lǎoshī.","",0.6),
+  P(4,"…"),
   C("三、饺子和面条儿。","Sān. Jiǎozi hé miàntiáor.","",0.6),
   TH(),
   C("饺子和面条儿。","Jiǎozi hé miàntiáor.","",0.65), HOLD(),
 
   // Question 2
   C("她是谁？","Tā shì shéi?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、医院。","Yī. Yīyuàn.","",0.6),
+  P(4,"…"),
   C("二、我老师。","Èr. Wǒ lǎoshī.","",0.6),
+  P(4,"…"),
   C("三、饺子和面条儿。","Sān. Jiǎozi hé miàntiáor.","",0.6),
   TH(),
   C("我老师。","Wǒ lǎoshī.","",0.65), HOLD(),
 
   // Question 3
   C("你爸爸在哪儿工作？","Nǐ bàba zài nǎr gōngzuò?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、医院。","Yī. Yīyuàn.","",0.6),
+  P(4,"…"),
   C("二、我老师。","Èr. Wǒ lǎoshī.","",0.6),
+  P(4,"…"),
   C("三、饺子和面条儿。","Sān. Jiǎozi hé miàntiáor.","",0.6),
   TH(),
   C("医院。","Yīyuàn.","",0.65), HOLD(),
@@ -251,8 +260,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("昨天爸爸在医院工作，哥哥在家里休息，没去书店。","Zuótiān bàba zài yīyuàn gōngzuò, gēge zài jiā li xiūxi, méi qù shūdiàn.","",0.55),
   C("哥哥昨天在哪儿？","Gēge zuótiān zài nǎr?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、在家里。","Yī. Zài jiā li.","",0.6),
+  P(4,"…"),
   C("二、在书店。","Èr. Zài shūdiàn.","",0.6),
+  P(4,"…"),
   C("三、在医院工作。","Sān. Zài yīyuàn gōngzuò.","",0.6),
   TH(),
   C("在家里。","Zài jiā li.","",0.65), HOLD(),
@@ -260,8 +272,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("我喜欢吃米饭，我女朋友不喜欢。","Wǒ xǐhuan chī mǐfàn, wǒ nǚpéngyou bù xǐhuan.","",0.55),
   C("女朋友不喜欢吃什么？","Nǚpéngyou bù xǐhuan chī shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、米饭。","Yī. Mǐfàn.","",0.6),
+  P(4,"…"),
   C("二、包子。","Èr. Bāozi.","",0.6),
+  P(4,"…"),
   C("三、面条儿。","Sān. Miàntiáor.","",0.6),
   TH(),
   C("米饭。","Mǐfàn.","",0.65), HOLD(),

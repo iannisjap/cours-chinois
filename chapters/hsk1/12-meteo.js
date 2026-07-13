@@ -215,28 +215,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("你怎么了？","Nǐ zěnme le?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、热水。","Yī. Rè shuǐ.","",0.6),
+  P(4,"…"),
   C("二、我病了。","Èr. Wǒ bìng le.","",0.6),
+  P(4,"…"),
   C("三、对。","Sān. Duì.","",0.6),
   TH(),
   C("我病了。","Wǒ bìng le.","",0.65), HOLD(),
 
   // Question 2
   C("你想喝点儿什么？","Nǐ xiǎng hē diǎnr shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、热水。","Yī. Rè shuǐ.","",0.6),
+  P(4,"…"),
   C("二、我病了。","Èr. Wǒ bìng le.","",0.6),
+  P(4,"…"),
   C("三、对。","Sān. Duì.","",0.6),
   TH(),
   C("热水。","Rè shuǐ.","",0.65), HOLD(),
 
   // Question 3
   C("你开车了？","Nǐ kāichē le?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、热水。","Yī. Rè shuǐ.","",0.6),
+  P(4,"…"),
   C("二、我病了。","Èr. Wǒ bìng le.","",0.6),
+  P(4,"…"),
   C("三、对。","Sān. Duì.","",0.6),
   TH(),
   C("对。","Duì.","",0.65), HOLD(),
@@ -244,8 +253,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("昨天的天气很好，我和朋友们去外边玩了。","Zuótiān de tiānqì hěn hǎo, wǒ hé péngyoumen qù wàibian wán le.","",0.55),
   C("说话人觉得昨天怎么样？","Shuōhuàrén juéde zuótiān zěnmeyàng?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、天气好。","Yī. Tiānqì hǎo.","",0.6),
+  P(4,"…"),
   C("二、雨不大。","Èr. Yǔ bú dà.","",0.6),
+  P(4,"…"),
   C("三、有点儿冷。","Sān. Yǒudiǎnr lěng.","",0.6),
   TH(),
   C("天气好。","Tiānqì hǎo.","",0.65), HOLD(),
@@ -253,8 +265,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("老张去看病，医生说他要吃三天药。","Lǎo Zhāng qù kànbìng, yīshēng shuō tā yào chī sān tiān yào.","",0.55),
   C("医生说老张要做什么？","Yīshēng shuō Lǎo Zhāng yào zuò shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、要吃药。","Yī. Yào chī yào.","",0.6),
+  P(4,"…"),
   C("二、要多睡觉。","Èr. Yào duō shuìjiào.","",0.6),
+  P(4,"…"),
   C("三、要多喝水。","Sān. Yào duō hē shuǐ.","",0.6),
   TH(),
   C("要吃药。","Yào chī yào.","",0.65), HOLD(),

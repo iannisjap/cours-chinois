@@ -185,28 +185,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("老师，你好！","Lǎoshī, nǐ hǎo!","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、你好！","Yī. Nǐ hǎo!","",0.6),
+  P(4,"…"),
   C("二、谢谢！","Èr. Xièxie!","",0.6),
+  P(4,"…"),
   C("三、再见！","Sān. Zàijiàn!","",0.6),
   TH(),
   C("你好！","Nǐ hǎo!","",0.65), HOLD(),
 
   // Question 2
   C("谢谢！","Xièxie!","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、不客气。","Yī. Bú kèqi.","",0.6),
+  P(4,"…"),
   C("二、你好。","Èr. Nǐ hǎo.","",0.6),
+  P(4,"…"),
   C("三、再见。","Sān. Zàijiàn.","",0.6),
   TH(),
   C("不客气。","Bú kèqi.","",0.65), HOLD(),
 
   // Question 3
   C("同学们，再见！","Tóngxuémen, zàijiàn!","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、你好！","Yī. Nǐ hǎo!","",0.6),
+  P(4,"…"),
   C("二、谢谢！","Èr. Xièxie!","",0.6),
+  P(4,"…"),
   C("三、再见！","Sān. Zàijiàn!","",0.6),
   TH(),
   C("再见！","Zàijiàn!","",0.65), HOLD(),

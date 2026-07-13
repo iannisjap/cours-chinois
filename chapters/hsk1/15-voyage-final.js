@@ -221,28 +221,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("你会写几个汉字？","Nǐ huì xiě jǐ ge Hànzì?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、我女儿。","Yī. Wǒ nǚ'ér.","",0.6),
+  P(4,"…"),
   C("二、十个。","Èr. Shí ge.","",0.6),
+  P(4,"…"),
   C("三、苹果。","Sān. Píngguǒ.","",0.6),
   TH(),
   C("十个。","Shí ge.","",0.65), HOLD(),
 
   // Question 2
   C("谁上中学了？","Shéi shàng zhōngxué le?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、我女儿。","Yī. Wǒ nǚ'ér.","",0.6),
+  P(4,"…"),
   C("二、十个。","Èr. Shí ge.","",0.6),
+  P(4,"…"),
   C("三、苹果。","Sān. Píngguǒ.","",0.6),
   TH(),
   C("我女儿。","Wǒ nǚ'ér.","",0.65), HOLD(),
 
   // Question 3
   C("你爱吃什么？","Nǐ ài chī shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、我女儿。","Yī. Wǒ nǚ'ér.","",0.6),
+  P(4,"…"),
   C("二、十个。","Èr. Shí ge.","",0.6),
+  P(4,"…"),
   C("三、苹果。","Sān. Píngguǒ.","",0.6),
   TH(),
   C("苹果。","Píngguǒ.","",0.65), HOLD(),
@@ -250,8 +259,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("明天星期天，儿子想去看一个电影。","Míngtiān Xīngqītiān, érzi xiǎng qù kàn yí ge diànyǐng.","",0.55),
   C("儿子明天想做什么？","Érzi míngtiān xiǎng zuò shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、买电脑。","Yī. Mǎi diànnǎo.","",0.6),
+  P(4,"…"),
   C("二、打电话。","Èr. Dǎ diànhuà.","",0.6),
+  P(4,"…"),
   C("三、看电影。","Sān. Kàn diànyǐng.","",0.6),
   TH(),
   C("看电影。","Kàn diànyǐng.","",0.65), HOLD(),
@@ -259,8 +271,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("下小雨了，小狗非常高兴，它喜欢小雨。","Xià xiǎoyǔ le, xiǎo gǒu fēicháng gāoxìng, tā xǐhuan xiǎoyǔ.","",0.55),
   C("小狗喜欢什么？","Xiǎo gǒu xǐhuan shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、下小雨。","Yī. Xià xiǎoyǔ.","",0.6),
+  P(4,"…"),
   C("二、下大雨。","Èr. Xià dàyǔ.","",0.6),
+  P(4,"…"),
   C("三、下小雪。","Sān. Xià xiǎoxuě.","",0.6),
   TH(),
   C("下小雨。","Xià xiǎoyǔ.","",0.65), HOLD(),

@@ -230,28 +230,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("她是谁？","Tā shì shéi?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、是的。","Yī. Shì de.","",0.6),
+  P(4,"…"),
   C("二、他今年五岁。","Èr. Tā jīnnián wǔ suì.","",0.6),
+  P(4,"…"),
   C("三、我女朋友。","Sān. Wǒ nǚpéngyou.","",0.6),
   TH(),
   C("我女朋友。","Wǒ nǚpéngyou.","",0.65), HOLD(),
 
   // Question 2
   C("你是法国人吗？","Nǐ shì Fǎguó rén ma?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、是的。","Yī. Shì de.","",0.6),
+  P(4,"…"),
   C("二、我女朋友。","Èr. Wǒ nǚpéngyou.","",0.6),
+  P(4,"…"),
   C("三、他今年五岁。","Sān. Tā jīnnián wǔ suì.","",0.6),
   TH(),
   C("是的。","Shì de.","",0.65), HOLD(),
 
   // Question 3
   C("您儿子多大？","Nín érzi duō dà?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、我女朋友。","Yī. Wǒ nǚpéngyou.","",0.6),
+  P(4,"…"),
   C("二、他今年五岁。","Èr. Tā jīnnián wǔ suì.","",0.6),
+  P(4,"…"),
   C("三、是的。","Sān. Shì de.","",0.6),
   TH(),
   C("他今年五岁。","Tā jīnnián wǔ suì.","",0.65), HOLD(),
@@ -259,8 +268,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("我家有三口人，爸爸、妈妈和我。","Wǒ jiā yǒu sān kǒu rén, bàba, māma hé wǒ.","",0.55),
   C("说话人家里有几口人？","Shuōhuàrén jiā li yǒu jǐ kǒu rén?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、姐姐。","Yī. Jiějie.","",0.6),
+  P(4,"…"),
   C("二、三口人。","Èr. Sān kǒu rén.","",0.6),
+  P(4,"…"),
   C("三、四口人。","Sān. Sì kǒu rén.","",0.6),
   TH(),
   C("三口人。","Sān kǒu rén.","",0.65), HOLD(),
@@ -268,8 +280,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("她是法国人，我不是。","Tā shì Fǎguó rén, wǒ bú shì.","",0.55),
   C("她是哪国人？","Tā shì nǎ guó rén?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、法国人。","Yī. Fǎguó rén.","",0.6),
+  P(4,"…"),
   C("二、中国人。","Èr. Zhōngguó rén.","",0.6),
+  P(4,"…"),
   C("三、泰国人。","Sān. Tàiguó rén.","",0.6),
   TH(),
   C("法国人。","Fǎguó rén.","",0.65), HOLD(),

@@ -229,28 +229,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("谁去学校了？","Shéi qù xuéxiào le?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、是的，我睡了一觉。","Yī. Shì de, wǒ shuìle yí jiào.","",0.6),
+  P(4,"…"),
   C("二、我们都去了。","Èr. Wǒmen dōu qù le.","",0.6),
+  P(4,"…"),
   C("三、写字、看书、吃饭。","Sān. Xiě zì, kàn shū, chī fàn.","",0.6),
   TH(),
   C("我们都去了。","Wǒmen dōu qù le.","",0.65), HOLD(),
 
   // Question 2
   C("你下午没去医院吗？","Nǐ xiàwǔ méi qù yīyuàn ma?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、是的，我睡了一觉。","Yī. Shì de, wǒ shuìle yí jiào.","",0.6),
+  P(4,"…"),
   C("二、我们都去了。","Èr. Wǒmen dōu qù le.","",0.6),
+  P(4,"…"),
   C("三、写字、看书、吃饭。","Sān. Xiě zì, kàn shū, chī fàn.","",0.6),
   TH(),
   C("是的，我睡了一觉。","Shì de, wǒ shuìle yí jiào.","",0.65), HOLD(),
 
   // Question 3
   C("你今天上午都忙了些什么？","Nǐ jīntiān shàngwǔ dōu mángle xiē shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、是的，我睡了一觉。","Yī. Shì de, wǒ shuìle yí jiào.","",0.6),
+  P(4,"…"),
   C("二、我们都去了。","Èr. Wǒmen dōu qù le.","",0.6),
+  P(4,"…"),
   C("三、写字、看书、吃饭。","Sān. Xiě zì, kàn shū, chī fàn.","",0.6),
   TH(),
   C("写字、看书、吃饭。","Xiě zì, kàn shū, chī fàn.","",0.65), HOLD(),
@@ -258,8 +267,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("服务员，我想问一下，我们的房间号是多少？","Fúwùyuán, wǒ xiǎng wèn yíxià, wǒmen de fángjiānhào shì duōshao?","",0.55),
   C("说话人想知道什么？","Shuōhuàrén xiǎng zhīdào shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、时间。","Yī. Shíjiān.","",0.6),
+  P(4,"…"),
   C("二、电话号。","Èr. Diànhuàhào.","",0.6),
+  P(4,"…"),
   C("三、房间号。","Sān. Fángjiānhào.","",0.6),
   TH(),
   C("房间号。","Fángjiānhào.","",0.65), HOLD(),
@@ -267,8 +279,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("儿子和女儿都上小学了，他们会写很多字了。","Érzi hé nǚ'ér dōu shàng xiǎoxué le, tāmen huì xiě hěn duō zì le.","",0.55),
   C("两个孩子是什么？","Liǎng ge háizi shì shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、小学生。","Yī. Xiǎoxuéshēng.","",0.6),
+  P(4,"…"),
   C("二、中学生。","Èr. Zhōngxuéshēng.","",0.6),
+  P(4,"…"),
   C("三、大学生。","Sān. Dàxuéshēng.","",0.6),
   TH(),
   C("小学生。","Xiǎoxuéshēng.","",0.65), HOLD(),

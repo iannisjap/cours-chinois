@@ -13,7 +13,7 @@ const ZH_SLOW = 0.75;   // ralentissement global du chinois (multiplié aux vite
 const N = (text) => ({t:'fr', text});
 const C = (zh, py, fr, rate) => ({t:'zh', zh, py, fr, rate});
 const P = (sec, label) => ({t:'pause', sec, label: label||'…'});
-const HOLD = (label) => ({t:'hold', label: label||'Répète à voix haute, puis ▶'});
+const HOLD = (label, sec) => ({t:'hold', label: label||'Répète à voix haute, puis ▶', sec: sec||5});
 const TH = () => ({t:'hold', label:'À toi de répondre à voix haute — ▶ pour entendre la réponse'});
 
 function teach(zh, py, fr){
@@ -42,7 +42,7 @@ let LESSONS = [];            // leçons du chapitre courant
 const $ = id => document.getElementById(id);
 const synth = window.speechSynthesis;
 let voices = [], zhVoice=null, frVoice=null;
-let idx = 0, playing = false, showText = true, continuous = false;
+let idx = 0, playing = false, showText = true, continuous = false, autoChain = false;
 let pauseTimer = null, pauseRAF = null;
 let runToken = 0;
 let speechPaused = false;          // une phrase est suspendue via synth.pause()
@@ -272,11 +272,27 @@ function runStep(){
     playing=false; syncPlayBtn();
     setPhase('','🎉','Leçon terminée'); setArc(1);
     const hasNext = cur + 1 < LESSONS.length;
+    if(recState.active){ setTimeout(stopRecording, 1500); }
+    if(autoChain){
+      const nxt = nextLessonRef();
+      if(nxt){
+        const chainToken = ++runToken;
+        $('caption').innerHTML = '<div class="fr">🎉 Bravo ! Enchaînement automatique vers la leçon suivante…</div>';
+        setTimeout(()=>{
+          if(!autoChain || chainToken!==runToken) return; // désactivé ou navigation manuelle entre-temps
+          nav('#/dossier/'+CHAPTERS[nxt.chapterIdx].group+'/ch/'+(nxt.chapterIdx+1)+'/lecon/'+(nxt.lessonIdx+1));
+        }, 2500);
+        return;
+      }
+      $('caption').innerHTML =
+        '<div class="fr">🎉🎉 Bravo, tu as terminé tout l\'enchaînement !</div>' +
+        '<button class="menu-inline ghost" onclick="showMenu()">☰ Retour au menu</button>';
+      return;
+    }
     $('caption').innerHTML =
       '<div class="fr">🎉 Bravo, leçon terminée ! Refais-la demain — la répétition espacée fait tout.</div>' +
       (hasNext ? '<button class="menu-inline" onclick="openLesson('+(cur+1)+')">▶ Leçon suivante : '+LESSONS[cur+1].title+'</button>' : '') +
       '<button class="menu-inline ghost" onclick="showMenu()">☰ Retour au menu</button>';
-    if(recState.active){ setTimeout(stopRecording, 1500); }
     return;
   }
   const s = steps[idx];
@@ -292,10 +308,11 @@ function runStep(){
   } else if(s.t==='hold'){
     renderCaptionFor(idx, s.label);
     if(continuous){
-      // MODE CONTINU : pause chronométrée de 5 s au lieu d'un arrêt
+      // MODE CONTINU : pause chronométrée (5 s par défaut, personnalisable) au lieu d'un arrêt
+      const sec = s.sec || 5;
       setPhase('pause-p','⏳','À toi…');
-      pauseTotal = 5;
-      startTimedPause(5, 5, token);
+      pauseTotal = sec;
+      startTimedPause(sec, sec, token);
     } else {
       // PAUSE AUTOMATIQUE : le texte précédent reste affiché
       playing = false; syncPlayBtn();
@@ -374,6 +391,9 @@ $('contChip').addEventListener('click', e=>{
   continuous=!continuous; e.target.classList.toggle('on',continuous);
   // si on active le mode continu pendant un arrêt automatique, on repart aussitôt
   if(continuous && !playing && steps[idx] && steps[idx].t==='hold'){ play(); }
+});
+$('chainChip').addEventListener('click', e=>{
+  autoChain=!autoChain; e.target.classList.toggle('on',autoChain);
 });
 
 /* ---- curseurs de vitesse 🐢→🐇 (0–100, 50 = vitesse normale)
@@ -725,6 +745,19 @@ function nav(hash){
 function openFolder(key){ nav('#/dossier/'+key); }
 function openChapter(i){ nav('#/dossier/'+CHAPTERS[i].group+'/ch/'+(i+1)); }
 function openLesson(i){ nav('#/dossier/'+curFolderKey+'/ch/'+(curChapterIdx+1)+'/lecon/'+(i+1)); }
+/* ---- enchaînement automatique : leçon suivante, ou premier chapitre
+       suivant du même dossier (HSK1/Bonus) une fois le chapitre fini ---- */
+function nextLessonRef(){
+  if(cur + 1 < LESSONS.length) return { chapterIdx: curChapterIdx, lessonIdx: cur + 1 };
+  const group = curChapter.group;
+  const sameGroup = [];
+  CHAPTERS.forEach((c, i)=>{ if(c.group === group) sameGroup.push(i); });
+  const pos = sameGroup.indexOf(curChapterIdx);
+  if(pos >= 0 && pos + 1 < sameGroup.length){
+    return { chapterIdx: sameGroup[pos + 1], lessonIdx: 0 };
+  }
+  return null;
+}
 function showMenu(){ nav('#/dossier/'+curFolderKey+'/ch/'+(curChapterIdx+1)); }
 function showChapters(){ nav('#/dossier/'+curFolderKey); }
 function showFolders(){ nav('#/'); }

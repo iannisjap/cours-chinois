@@ -230,28 +230,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("女孩子的衣服在哪儿？","Nǚ háizi de yīfu zài nǎr?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、十块钱。","Yī. Shí kuài qián.","",0.6),
+  P(4,"…"),
   C("二、对不起，没有。","Èr. Duìbuqǐ, méiyǒu.","",0.6),
+  P(4,"…"),
   C("三、在那边。","Sān. Zài nàbian.","",0.6),
   TH(),
   C("在那边。","Zài nàbian.","",0.65), HOLD(),
 
   // Question 2
   C("杯子多少钱一个？","Bēizi duōshao qián yí ge?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、十块钱。","Yī. Shí kuài qián.","",0.6),
+  P(4,"…"),
   C("二、在那边。","Èr. Zài nàbian.","",0.6),
+  P(4,"…"),
   C("三、对不起，没有。","Sān. Duìbuqǐ, méiyǒu.","",0.6),
   TH(),
   C("十块钱。","Shí kuài qián.","",0.65), HOLD(),
 
   // Question 3
   C("请问，这儿有牛奶吗？","Qǐngwèn, zhèr yǒu niúnǎi ma?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、十块钱。","Yī. Shí kuài qián.","",0.6),
+  P(4,"…"),
   C("二、对不起，没有。","Èr. Duìbuqǐ, méiyǒu.","",0.6),
+  P(4,"…"),
   C("三、在那边。","Sān. Zài nàbian.","",0.6),
   TH(),
   C("对不起，没有。","Duìbuqǐ, méiyǒu.","",0.65), HOLD(),
@@ -259,8 +268,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("我没有手机，今天想去商店买一个。","Wǒ méiyǒu shǒujī, jīntiān xiǎng qù shāngdiàn mǎi yí ge.","",0.55),
   C("说话人想买什么？","Shuōhuàrén xiǎng mǎi shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、杯子。","Yī. Bēizi.","",0.6),
+  P(4,"…"),
   C("二、手机。","Èr. Shǒujī.","",0.6),
+  P(4,"…"),
   C("三、水果。","Sān. Shuǐguǒ.","",0.6),
   TH(),
   C("手机。","Shǒujī.","",0.65), HOLD(),
@@ -268,8 +280,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("这件衣服很好看，你也能穿，买一件吧。","Zhè jiàn yīfu hěn hǎokàn, nǐ yě néng chuān, mǎi yí jiàn ba.","",0.55),
   C("那件衣服怎么样？","Nà jiàn yīfu zěnmeyàng?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、好看。","Yī. Hǎokàn.","",0.6),
+  P(4,"…"),
   C("二、便宜。","Èr. Piányi.","",0.6),
+  P(4,"…"),
   C("三、很贵。","Sān. Hěn guì.","",0.6),
   TH(),
   C("好看。","Hǎokàn.","",0.65), HOLD(),

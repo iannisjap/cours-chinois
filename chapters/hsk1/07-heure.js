@@ -244,28 +244,37 @@ registerChapter({
 
   { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
     build(){ return [
-N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
   // Question 1
   C("我们在哪儿见？","Wǒmen zài nǎr jiàn?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、早上七点半。","Yī. Zǎoshang qī diǎn bàn.","",0.6),
+  P(4,"…"),
   C("二、对不起，我有课。","Èr. Duìbuqǐ, wǒ yǒu kè.","",0.6),
+  P(4,"…"),
   C("三、电影院。","Sān. Diànyǐngyuàn.","",0.6),
   TH(),
   C("电影院。","Diànyǐngyuàn.","",0.65), HOLD(),
 
   // Question 2
   C("现在几点？","Xiànzài jǐ diǎn?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、早上七点半。","Yī. Zǎoshang qī diǎn bàn.","",0.6),
+  P(4,"…"),
   C("二、电影院。","Èr. Diànyǐngyuàn.","",0.6),
+  P(4,"…"),
   C("三、对不起，我有课。","Sān. Duìbuqǐ, wǒ yǒu kè.","",0.6),
   TH(),
   C("早上七点半。","Zǎoshang qī diǎn bàn.","",0.65), HOLD(),
 
   // Question 3
   C("我们下午去超市吧。","Wǒmen xiàwǔ qù chāoshì ba.","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、电影院。","Yī. Diànyǐngyuàn.","",0.6),
+  P(4,"…"),
   C("二、对不起，我有课。","Èr. Duìbuqǐ, wǒ yǒu kè.","",0.6),
+  P(4,"…"),
   C("三、早上七点半。","Sān. Zǎoshang qī diǎn bàn.","",0.6),
   TH(),
   C("对不起，我有课。","Duìbuqǐ, wǒ yǒu kè.","",0.65), HOLD(),
@@ -273,8 +282,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 4
   C("我今天早上八点半上课，十点十分下课。","Wǒ jīntiān zǎoshang bā diǎn bàn shàngkè, shí diǎn shí fēn xiàkè.","",0.55),
   C("今天几点下课？","Jīntiān jǐ diǎn xiàkè?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、八点半。","Yī. Bā diǎn bàn.","",0.6),
+  P(4,"…"),
   C("二、十点十分。","Èr. Shí diǎn shí fēn.","",0.6),
+  P(4,"…"),
   C("三、十点二十。","Sān. Shí diǎn èrshí.","",0.6),
   TH(),
   C("十点十分。","Shí diǎn shí fēn.","",0.65), HOLD(),
@@ -282,8 +294,11 @@ N("Exercice, tout en chinois. Écoute la question, puis les trois réponses. Cho
   // Question 5
   C("妈妈今天休息，下午想去菜店买些菜。","Māma jīntiān xiūxi, xiàwǔ xiǎng qù càidiàn mǎi xiē cài.","",0.55),
   C("妈妈想买什么？","Māma xiǎng mǎi shénme?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
   C("一、菜。","Yī. Cài.","",0.6),
+  P(4,"…"),
   C("二、饺子。","Èr. Jiǎozi.","",0.6),
+  P(4,"…"),
   C("三、牛奶。","Sān. Niúnǎi.","",0.6),
   TH(),
   C("菜。","Cài.","",0.65), HOLD(),
