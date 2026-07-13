@@ -43,6 +43,7 @@ const $ = id => document.getElementById(id);
 const synth = window.speechSynthesis;
 let voices = [], zhVoice=null, frVoice=null;
 let idx = 0, playing = false, showText = true, continuous = false, autoChain = false;
+let showPinyin = true, showFr = true;   // pinyin / traduction FR sous les phrases chinoises
 let pauseTimer = null, pauseRAF = null;
 let runToken = 0;
 let speechPaused = false;          // une phrase est suspendue via synth.pause()
@@ -182,7 +183,9 @@ function renderContentCaption(step, yourTurnLabel){
   if(!step) return;
   if(step.t==='zh'){
     if(showText){
-      c.innerHTML = `<div class="zh hanzi">${step.zh}</div><div class="py">${step.py}</div>` + (step.fr?`<div class="fr">${step.fr}</div>`:'');
+      c.innerHTML = `<div class="zh hanzi">${step.zh}</div>`
+        + (showPinyin && step.py ? `<div class="py">${step.py}</div>` : '')
+        + (showFr && step.fr ? `<div class="fr">${step.fr}</div>` : '');
     } else {
       c.innerHTML = `<div class="hidden-note">Texte masqué — mode 100 % audio</div>`;
     }
@@ -383,10 +386,27 @@ $('replayChip').addEventListener('click', ()=>{
   while(j>=0 && steps[j].t!=='zh') j--;
   if(j>=0){ idx=j; if(!playing){playing=true;syncPlayBtn();} runStep(); }
 });
+function reRenderCaption(){
+  renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+}
 $('textChip').addEventListener('click', e=>{
   showText=!showText; e.target.classList.toggle('on',showText);
-  renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+  reRenderCaption();
 });
+$('pyChip').addEventListener('click', e=>{
+  showPinyin=!showPinyin; e.target.classList.toggle('on',showPinyin);
+  store.set('showPinyin', showPinyin?'1':'0'); reRenderCaption();
+});
+$('frTradChip').addEventListener('click', e=>{
+  showFr=!showFr; e.target.classList.toggle('on',showFr);
+  store.set('showFr', showFr?'1':'0'); reRenderCaption();
+});
+/* restaurer les préférences d'affichage pinyin / traduction */
+(function(){
+  const sp = store.get('showPinyin'), sf = store.get('showFr');
+  if(sp==='0'){ showPinyin=false; $('pyChip').classList.remove('on'); }
+  if(sf==='0'){ showFr=false; $('frTradChip').classList.remove('on'); }
+})();
 $('contChip').addEventListener('click', e=>{
   continuous=!continuous; e.target.classList.toggle('on',continuous);
   // si on active le mode continu pendant un arrêt automatique, on repart aussitôt
