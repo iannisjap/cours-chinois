@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cours audio de chinois</title>
-<link rel="stylesheet" href="engine/style.css?v=35">
+<link rel="stylesheet" href="engine/style.css?v=36">
 </head>
 <body>
 
-<!-- Écran d'accueil : menu des DOSSIERS (HSK 1 / Bonus) -->
-<div class="overlay" id="folderOverlay">
+<!-- Menu des DOSSIERS (HSK 1 / HSK 2 / Bonus) — masqué par défaut : l'accueil, c'est le lecteur ci-dessous, sans leçon chargée -->
+<div class="overlay" id="folderOverlay" style="display:none">
   <button class="overlay-close" id="folderCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
   <div class="big-hanzi hanzi" style="font-size:52px">中文</div>
   <h2>Cours audio de chinois mandarin</h2>
@@ -42,7 +42,7 @@
 </div>
 
 <header>
-  <h1><span class="hanzi">谈时间</span>Parler de l'heure</h1>
+  <h1><span class="hanzi">中文</span>Cours audio de chinois</h1>
   <span style="display:flex;gap:10px;align-items:center"><span class="lesson-tag" id="lessonTag">—</span><button class="chip" id="menuBtn" style="padding:6px 12px">☰ Menu</button></span>
 </header>
 
@@ -64,7 +64,7 @@
   </div>
 
   <div class="caption" id="caption">
-    <div class="fr">Appuie sur lecture pour commencer.</div>
+    <div class="fr">Sélectionne une leçon dans le menu ☰ pour commencer.</div>
   </div>
 </main>
 
@@ -130,39 +130,39 @@
 </div>
 
 <!-- Moteur, puis chapitres (ordre important), puis démarrage -->
-<script src="engine/player.js?v=35"></script>
-<script src="chapters/hsk1/01-bonjour.js?v=35"></script>
-<script src="chapters/hsk1/02-mon-nom.js?v=35"></script>
-<script src="chapters/hsk1/03-nationalites.js?v=35"></script>
-<script src="chapters/hsk1/04-famille.js?v=35"></script>
-<script src="chapters/hsk1/05-dates.js?v=35"></script>
-<script src="chapters/hsk1/06-telephone.js?v=35"></script>
-<script src="chapters/hsk1/07-heure.js?v=35"></script>
-<script src="chapters/hsk1/08-medecin.js?v=35"></script>
-<script src="chapters/hsk1/09-ecole.js?v=35"></script>
-<script src="chapters/hsk1/10-marche.js?v=35"></script>
-<script src="chapters/hsk1/11-universite.js?v=35"></script>
-<script src="chapters/hsk1/12-meteo.js?v=35"></script>
-<script src="chapters/hsk1/13-restaurant.js?v=35"></script>
-<script src="chapters/hsk1/14-voyage.js?v=35"></script>
-<script src="chapters/hsk1/15-voyage-final.js?v=35"></script>
-<script src="chapters/hsk2/01-arrivee-pekin.js?v=35"></script>
-<script src="chapters/hsk2/02-taxi-beida.js?v=35"></script>
-<script src="chapters/hsk2/03-xian.js?v=35"></script>
-<script src="chapters/hsk2/04-couleur-vetements.js?v=35"></script>
-<script src="chapters/hsk2/05-visite-famille.js?v=35"></script>
-<script src="chapters/hsk2/06-anniversaire.js?v=35"></script>
-<script src="chapters/hsk2/07-sport.js?v=35"></script>
-<script src="chapters/hsk2/08-anniversaire-mari.js?v=35"></script>
-<script src="chapters/hsk2/09-cafe-ou-the.js?v=35"></script>
-<script src="chapters/hsk2/10-examen.js?v=35"></script>
-<script src="chapters/hsk2/11-mal-de-tete.js?v=35"></script>
-<script src="chapters/hsk2/12-il-neige.js?v=35"></script>
-<script src="chapters/hsk2/13-cours-de-chinois.js?v=35"></script>
-<script src="chapters/hsk2/14-nouvel-an-seul.js?v=35"></script>
-<script src="chapters/hsk2/15-retour-en-chine.js?v=35"></script>
-<script src="chapters/bonus/le-temps.js?v=35"></script>
-<script src="chapters/bonus/planning.js?v=35"></script>
+<script src="engine/player.js?v=36"></script>
+<script src="chapters/hsk1/01-bonjour.js?v=36"></script>
+<script src="chapters/hsk1/02-mon-nom.js?v=36"></script>
+<script src="chapters/hsk1/03-nationalites.js?v=36"></script>
+<script src="chapters/hsk1/04-famille.js?v=36"></script>
+<script src="chapters/hsk1/05-dates.js?v=36"></script>
+<script src="chapters/hsk1/06-telephone.js?v=36"></script>
+<script src="chapters/hsk1/07-heure.js?v=36"></script>
+<script src="chapters/hsk1/08-medecin.js?v=36"></script>
+<script src="chapters/hsk1/09-ecole.js?v=36"></script>
+<script src="chapters/hsk1/10-marche.js?v=36"></script>
+<script src="chapters/hsk1/11-universite.js?v=36"></script>
+<script src="chapters/hsk1/12-meteo.js?v=36"></script>
+<script src="chapters/hsk1/13-restaurant.js?v=36"></script>
+<script src="chapters/hsk1/14-voyage.js?v=36"></script>
+<script src="chapters/hsk1/15-voyage-final.js?v=36"></script>
+<script src="chapters/hsk2/01-arrivee-pekin.js?v=36"></script>
+<script src="chapters/hsk2/02-taxi-beida.js?v=36"></script>
+<script src="chapters/hsk2/03-xian.js?v=36"></script>
+<script src="chapters/hsk2/04-couleur-vetements.js?v=36"></script>
+<script src="chapters/hsk2/05-visite-famille.js?v=36"></script>
+<script src="chapters/hsk2/06-anniversaire.js?v=36"></script>
+<script src="chapters/hsk2/07-sport.js?v=36"></script>
+<script src="chapters/hsk2/08-anniversaire-mari.js?v=36"></script>
+<script src="chapters/hsk2/09-cafe-ou-the.js?v=36"></script>
+<script src="chapters/hsk2/10-examen.js?v=36"></script>
+<script src="chapters/hsk2/11-mal-de-tete.js?v=36"></script>
+<script src="chapters/hsk2/12-il-neige.js?v=36"></script>
+<script src="chapters/hsk2/13-cours-de-chinois.js?v=36"></script>
+<script src="chapters/hsk2/14-nouvel-an-seul.js?v=36"></script>
+<script src="chapters/hsk2/15-retour-en-chine.js?v=36"></script>
+<script src="chapters/bonus/le-temps.js?v=36"></script>
+<script src="chapters/bonus/planning.js?v=36"></script>
 <script>initApp();</script>
 </body>
 </html>

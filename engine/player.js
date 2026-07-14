@@ -349,6 +349,8 @@ function syncPlayBtn(){
 
 function play(){
   if(playing) return;
+  // Accueil, aucune leçon chargée : rien à jouer, on ouvre le menu.
+  if(playerChapterIdx < 0){ showFolders(); return; }
   playing = true; syncPlayBtn();
   // 1) une phrase était suspendue en plein milieu → on la reprend là où elle s'était arrêtée
   if(speechPaused){
@@ -668,6 +670,22 @@ function setChapter(i){
    sur les trois écrans du menu, referme l'aperçu et révèle le lecteur
    tel qu'il est actuellement (cf. closeMenu()). ---- */
 let curFolderKey = null;
+/* Accueil : le lecteur lui-même, sans leçon chargée, avec un message
+   invitant à ouvrir le menu. C'est l'écran affiché au tout premier
+   chargement (et tant qu'aucune leçon n'a jamais été choisie) —
+   plus question d'imposer le menu des dossiers par-dessus. */
+function renderHome(){
+  curFolderKey = null;
+  $('folderOverlay').style.display = 'none';
+  $('chapterOverlay').style.display = 'none';
+  $('overlay').style.display = 'none';
+  document.querySelector('header h1').innerHTML = '<span class="hanzi">中文</span>Cours audio de chinois';
+  document.title = 'Cours audio de chinois';
+  $('lessonTag').textContent = '—';
+  $('stepLbl').textContent = '—';
+  $('timeLbl').textContent = '';
+  $('caption').innerHTML = '<div class="fr">Sélectionne une leçon dans le menu ☰ pour commencer.</div>';
+}
 function renderFolders(){
   curFolderKey = null;
   $('overlay').style.display = 'none';
@@ -743,6 +761,7 @@ function renderPlayer(i){
        suivante du navigateur fonctionnent, et on peut recharger
        ou partager un lien direct vers une leçon. ---- */
 function route(){
+  if(location.hash === '#/menu'){ renderFolders(); return; }
   const m = location.hash.match(/^#\/dossier\/([^/]+)(?:\/ch\/(\d+)(?:\/lecon\/(\d+))?)?/);
   if(m){
     const folderKey = decodeURIComponent(m[1]);
@@ -764,7 +783,7 @@ function route(){
     }
     if(FOLDERS.some(f=>f.key===folderKey)){ renderChapters(folderKey); return; }
   }
-  renderFolders();
+  renderHome();
 }
 function nav(hash){
   if(location.hash === hash) route();   // même hash : re-rendre quand même
@@ -788,9 +807,14 @@ function nextLessonRef(){
   }
   return null;
 }
-function showMenu(){ nav('#/dossier/'+curFolderKey+'/ch/'+(curChapterIdx+1)); }
+function showMenu(){
+  // Rien n'a encore été chargé (accueil) : « ☰ Menu » ouvre directement
+  // le choix d'un dossier, il n'y a pas encore de chapitre à afficher.
+  if(playerChapterIdx < 0){ showFolders(); return; }
+  nav('#/dossier/'+curFolderKey+'/ch/'+(curChapterIdx+1));
+}
 function showChapters(){ nav('#/dossier/'+curFolderKey); }
-function showFolders(){ nav('#/'); }
+function showFolders(){ nav('#/menu'); }
 /* Fermer le menu (croix, présente sur les 3 écrans dossiers/chapitres/
    leçons) et révéler le lecteur tel qu'il est actuellement — peu importe
    à quel niveau du menu on se trouve, et peu importe le chemin parcouru
@@ -800,7 +824,7 @@ function closeMenu(){
   if(playerChapterIdx >= 0 && playerChapterIdx < CHAPTERS.length){
     nav('#/dossier/'+CHAPTERS[playerChapterIdx].group+'/ch/'+(playerChapterIdx+1)+'/lecon/'+(cur+1));
   } else {
-    showFolders();
+    nav('#/');
   }
 }
 window.addEventListener('hashchange', route);
