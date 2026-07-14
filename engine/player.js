@@ -49,7 +49,7 @@ let idx = 0, playing = false, showText = true, continuous = false, autoChain = f
 let showPinyin = true, showFr = true;   // pinyin / traduction FR sous les phrases chinoises
 let pauseTimer = null, pauseRAF = null;
 let runToken = 0;
-let speechPaused = false;          // une phrase est suspendue via synth.pause()
+let speechPaused = false;          // une phrase a été coupée par pause() (à redire à la reprise)
 let pauseRemaining = 0;            // secondes restantes d'une pause chronométrée suspendue
 let pauseTotal = 0;
 const ARC_LEN = 584.3;
@@ -242,6 +242,10 @@ function speak(text, voice, lang, rate, token, onend){
   const done = ()=>{ if(playing && token===runToken) onend(); };
   u.onend = done;
   u.onerror = done;
+  // Bug connu d'Edge/Chrome : si la synthèse est restée coincée en état
+  // « paused » (typiquement après un ancien pause() sur une voix online),
+  // tout speak() suivant est ignoré en silence. On la débloque d'abord.
+  if(synth.paused) synth.resume();
   synth.speak(u);
 }
 function speakSegments(segs, i, token, onend){
@@ -362,15 +366,13 @@ function play(){
   // Accueil, aucune leçon chargée : rien à jouer, on ouvre le menu.
   if(playerChapterIdx < 0){ showFolders(); return; }
   playing = true; syncPlayBtn();
-  // 1) une phrase était suspendue en plein milieu → on la reprend là où elle s'était arrêtée
+  // 1) une phrase était coupée en cours → on la redit depuis le début.
+  //    On NE fait PAS synth.resume() : sur les voix Microsoft « online »
+  //    d'Edge, pause()/resume() laisse souvent la synthèse bloquée et la
+  //    leçon ne défile plus. Redire l'étape courante est fiable partout.
   if(speechPaused){
     speechPaused = false;
-    const cur = steps[idx];
-    if(cur){
-      if(cur.t==='zh'){ renderContentCaption(cur); setPhase('speak-zh','🀄','Écoute (chinois)'); }
-      else if(cur.t==='fr'){ renderContentCaption(cur); }
-    }
-    synth.resume();
+    runStep();
     return;
   }
   // 2) une pause chronométrée était suspendue → on reprend le compte à rebours restant
@@ -389,10 +391,13 @@ function play(){
 function pause(){
   if(!playing) return;
   playing = false; syncPlayBtn();
-  if(synth.speaking && !synth.paused){
-    // suspendre la phrase EN COURS sans la perdre
-    synth.pause();
+  if(synth.speaking || synth.pending){
+    // On COUPE la phrase en cours (synth.cancel) au lieu de synth.pause() :
+    // pause()/resume() casse les voix Microsoft online. À la reprise, play()
+    // redira l'étape courante depuis le début (voir la branche speechPaused).
+    // playing est déjà à false, donc le onend de la phrase coupée n'avance pas.
     speechPaused = true;
+    synth.cancel();
   } else {
     // suspendre une pause chronométrée (pauseRemaining déjà tenu à jour)
     clearTimers();
@@ -459,12 +464,14 @@ $('zhSelect').addEventListener('change', e=>{ userZhChoice=e.target.value; zhVoi
 $('frSelect').addEventListener('change', e=>{ userFrChoice=e.target.value; frVoice=voices.find(v=>v.name===userFrChoice)||frVoice; store.set('frVoice', userFrChoice); });
 $('zhTest').addEventListener('click', ()=>{
   synth.cancel();
+  if(synth.paused) synth.resume();
   const u = new SpeechSynthesisUtterance('现在几点？现在十点半。');
   if(zhVoice) u.voice=zhVoice; u.lang='zh-CN'; u.rate=0.6*ZH_SLOW*zhSpeedMult;
   synth.speak(u);
 });
 $('frTest').addEventListener('click', ()=>{
   synth.cancel();
+  if(synth.paused) synth.resume();
   const u = new SpeechSynthesisUtterance('Bonjour, je suis la voix du narrateur.');
   if(frVoice) u.voice=frVoice; u.lang='fr-FR'; u.rate=frSpeedMult;
   synth.speak(u);
