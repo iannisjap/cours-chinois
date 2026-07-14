@@ -158,16 +158,35 @@ loadVoices();
 if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
 
 /* ---------- narration mixte fr/zh ---------- */
+/* Un fragment de texte français peut contenir du chinois « brut »,
+   glissé sans balisage [[...]] (ex. « avec 吧 », « la structure 是……的 »).
+   On repère ces suites de sinogrammes pour les faire parler par la
+   voix chinoise : sans ça, la voix française les saute purement et
+   simplement (elle ne sait pas les prononcer). Pas de pinyin affiché
+   pour ces segments-là — seule la balise [[...]] en fournit un. */
+const CJK_RE = /[一-鿿]+/g;
+function splitBareHanzi(text){
+  const out = [];
+  let last = 0, m;
+  CJK_RE.lastIndex = 0;
+  while((m = CJK_RE.exec(text)) !== null){
+    if(m.index > last) out.push({lang:'fr', text:text.slice(last, m.index)});
+    out.push({lang:'zh', hanzi:m[0], pinyin:''});
+    last = CJK_RE.lastIndex;
+  }
+  if(last < text.length) out.push({lang:'fr', text:text.slice(last)});
+  return out;
+}
 function parseNarration(text){
   const segs = [];
   const re = /\[\[([^\|\]]+)\|([^\]]+)\]\]/g;
   let last = 0, m;
   while((m = re.exec(text)) !== null){
-    if(m.index > last) segs.push({lang:'fr', text:text.slice(last, m.index)});
+    if(m.index > last) segs.push(...splitBareHanzi(text.slice(last, m.index)));
     segs.push({lang:'zh', hanzi:m[1], pinyin:m[2]});
     last = re.lastIndex;
   }
-  if(last < text.length) segs.push({lang:'fr', text:text.slice(last)});
+  if(last < text.length) segs.push(...splitBareHanzi(text.slice(last)));
   return segs;
 }
 function narrationHTML(text){
