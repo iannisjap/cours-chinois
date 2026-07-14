@@ -1,0 +1,301 @@
+/* ============================================================
+   HSK 2 · Leçon 5 — 第一次去中国朋友家 Première visite chez des amis chinois
+   D'après « 新HSK教程 2 », leçon 5.
+   Vocabulaire de la leçon :
+   快 · 下来 · 上来 · 上去 · 下面 · 面 · 等 · 一会儿 · 下去 ·
+   进来 · 爷爷 · 奶奶 · 礼物 · 准备 · 奶茶 · 跟
+   Grammaire : complément directionnel simple (1) V+来/去 ·
+   complément directionnel simple (2) place de l'objet ·
+   tournure fixe 都……了.
+   Structure : leçon → 3 parties (les 3 dialogues du manuel) +
+   texte 4 (message) intégré en révision de la partie 3.
+   Nouveaux personnages : Liu Yeye et Liu Nainai, les grands-parents.
+   ============================================================ */
+registerChapter({
+  group: "hsk2",
+  id: "hsk2-05",
+  badge: 5,
+  hanzi: "第一次去中国朋友家",
+  title: "Leçon 5 · Première visite chez des amis chinois",
+  desc: "3 parties · compléments directionnels · 都……了",
+  intro: "Bai Jiayue et Annie vont pour la première fois chez Wang Yixue, où elles rencontrent Liu Ming, leur fille Liu Xiaoxue, et les grands-parents Liu Yeye et Liu Nainai. Au programme : les compléments directionnels simples avec 来/去 (monter, descendre, entrer…), et la tournure 都……了 pour insister sur l'heure ou la quantité.",
+  lessons: [
+
+  // ================= PARTIE 1 =================
+  { num:1, hanzi:"快下来吧", title:"Partie 1 · En bas de l'immeuble", desc:"快 · 下来 · 上来 · 上去 · 下面 · 等 · 一会儿 · 下去",
+    build(){ return [
+  N("Partie 1. Annie appelle Bai Jiayue, qui est encore en haut, pendant qu'elle attend en bas de l'immeuble de Wang Yixue. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("家月，快下来吧，第一次去中国朋友家，别晚了。","Jiāyuè, kuài xiàlái ba, dì-yī cì qù Zhōngguó péngyou jiā, bié wǎn le.","Jiayue, dépêche-toi de descendre, c'est la première fois qu'on va chez des amis chinois, ne soyons pas en retard.",0.45),
+  C("还有时间，你上来吧。","Hái yǒu shíjiān, nǐ shànglái ba.","On a encore le temps, monte donc.",0.5),
+  C("我不上去了，就在下面等你。","Wǒ bú shàngqù le, jiù zài xiàmiàn děng nǐ.","Je ne monte pas, je t'attends juste en bas.",0.5),
+  C("那我一会儿就下去。","Nà wǒ yíhuìr jiù xiàqù.","Alors je descends dans un instant.",0.55),
+  C("你快点儿吧。","Nǐ kuài diǎnr ba.","Dépêche-toi un peu.",0.6),
+  C("没事，一雪姐说11点前到就可以。","Méishì, Yīxuě jiě shuō shíyī diǎn qián dào jiù kěyǐ.","Pas de souci, Yixue a dit qu'il suffisait d'arriver avant 11 heures.",0.45),
+
+  N("« Vite, se dépêcher » se dit [[快|kuài]]. Écoutez et répétez."),
+  ...teach2("快","kuài","vite, se dépêcher"),
+  N("« Descendre » se dit [[下来|xiàlái]] — littéralement « descendre + vers moi ». Dites : « Jiayue, dépêche-toi de descendre, c'est la première fois qu'on va chez des amis chinois, ne soyons pas en retard. »"),
+  ...teach2("下来","xiàlái","descendre (vers le locuteur)"),
+  TH(),
+  C("家月，快下来吧，第一次去中国朋友家，别晚了。","Jiāyuè, kuài xiàlái ba, dì-yī cì qù Zhōngguó péngyou jiā, bié wǎn le.","Jiayue, dépêche-toi de descendre, c'est la première fois qu'on va chez des amis chinois, ne soyons pas en retard.",0.45), HOLD(),
+
+  N("Grammaire : le complément directionnel simple. Un verbe suivi de 来 ou 去 indique la direction du mouvement par rapport au locuteur : 来 signifie que l'action se dirige vers celui qui parle, 去 qu'elle s'en éloigne. On l'utilise avec 上 (monter), 下 (descendre), 进 (entrer), 出 (sortir), 回 (revenir), 过 (passer). Écoutez ces exemples."),
+  C("我不上去了，就在下面等你。","Wǒ bú shàngqù le, jiù zài xiàmiàn děng nǐ.","Je ne monte pas, je t'attends juste en bas.",0.45),
+  N("Ici, celui qui parle est en bas et celui à qui il parle est en haut : 上去 s'éloigne du locuteur, vers le haut."),
+  C("家月到下边了，你下去接她吧。","Jiāyuè dào xiàbian le, nǐ xiàqù jiē tā ba.","Jiayue est arrivée en bas, va donc descendre la chercher.",0.45),
+  N("Ici, le locuteur est en haut et l'auditeur aussi : 下去 s'éloigne des deux, vers le bas."),
+  C("我在外边呢，你出来吧。","Wǒ zài wàibian ne, nǐ chūlái ba.","Je suis dehors, viens donc me rejoindre.",0.5),
+  N("Ici, le locuteur est dehors et l'auditeur dedans : 出来 se rapproche du locuteur."),
+  N("« Monter » se dit [[上来|shànglái]] quand on se rapproche du locuteur, et [[上去|shàngqù]] quand on s'en éloigne. On vous répond : « on a encore le temps, monte donc. »"),
+  ...teach2("上来","shànglái","monter (vers le locuteur)"),
+  C("还有时间，你上来吧。","Hái yǒu shíjiān, nǐ shànglái ba.","On a encore le temps, monte donc.",0.5),
+  N("Répondez : « je ne monte pas, je t'attends juste en bas. »"),
+  ...teach2("上去","shàngqù","monter (loin du locuteur)"),
+  TH(),
+  C("我不上去了，就在下面等你。","Wǒ bú shàngqù le, jiù zài xiàmiàn děng nǐ.","Je ne monte pas, je t'attends juste en bas.",0.5), HOLD(),
+
+  N("« En bas, en dessous » se dit [[下面|xiàmiàn]] — le suffixe [[面|miàn]] s'ajoute pour former les mots de position, comme 上面 (en haut) ou 里面 (à l'intérieur). « Attendre » se dit [[等|děng]]. Écoutez et répétez."),
+  ...teach2("下面","xiàmiàn","en bas, en dessous"),
+  ...teach2("等","děng","attendre"),
+  N("Révisez la phrase complète : « je ne monte pas, je t'attends juste en bas. »"),
+  TH(),
+  C("我不上去了，就在下面等你。","Wǒ bú shàngqù le, jiù zài xiàmiàn děng nǐ.","Je ne monte pas, je t'attends juste en bas.",0.5),
+
+  N("« Dans un instant, tout à l'heure » se dit [[一会儿|yíhuìr]]. « Descendre en s'éloignant du locuteur » se dit [[下去|xiàqù]]. Écoutez et répétez."),
+  ...teach2("一会儿","yíhuìr","dans un instant, tout à l'heure"),
+  ...teach2("下去","xiàqù","descendre (loin du locuteur)"),
+  N("Répondez : « alors je descends dans un instant. »"),
+  TH(),
+  C("那我一会儿就下去。","Nà wǒ yíhuìr jiù xiàqù.","Alors je descends dans un instant.",0.55), HOLD(),
+  N("On vous presse : « dépêche-toi un peu. »"),
+  C("你快点儿吧。","Nǐ kuài diǎnr ba.","Dépêche-toi un peu.",0.6),
+  N("Répondez : « pas de souci, Yixue a dit qu'il suffisait d'arriver avant 11 heures. »"),
+  TH(),
+  C("没事，一雪姐说11点前到就可以。","Méishì, Yīxuě jiě shuō shíyī diǎn qián dào jiù kěyǐ.","Pas de souci, Yixue a dit qu'il suffisait d'arriver avant 11 heures.",0.45), HOLD(),
+
+  N("Révision. Dites : je suis dehors, viens donc me rejoindre."),
+  TH(),
+  C("我在外边呢，你出来吧。","Wǒ zài wàibian ne, nǐ chūlái ba.","Je suis dehors, viens donc me rejoindre.",0.55),
+  N("Dites : Jiayue est arrivée en bas, va donc descendre la chercher."),
+  TH(),
+  C("家月到下边了，你下去接她吧。","Jiāyuè dào xiàbian le, nǐ xiàqù jiē tā ba.","Jiayue est arrivée en bas, va donc descendre la chercher.",0.5),
+  N("Fin de la partie 1. À la partie 2 : l'arrivée chez Wang Yixue, et la rencontre avec les grands-parents."),
+    ]; } },
+
+  // ================= PARTIE 2 =================
+  { num:2, hanzi:"这是爷爷奶奶", title:"Partie 2 · Les grands-parents", desc:"进来 · 爷爷 · 奶奶 · 礼物 · 准备",
+    build(){ return [
+  N("Partie 2. Chez Wang Yixue. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("家月、安妮，快进来！我给你们介绍一下，这是孩子们的爷爷、奶奶。","Jiāyuè, Ānnī, kuài jìnlái! Wǒ gěi nǐmen jièshào yíxià, zhè shì háizimen de yéye, nǎinai.","Jiayue, Annie, entrez vite ! Je vous présente : voici le grand-père et la grand-mère des enfants.",0.4),
+  C("你们好！","Nǐmen hǎo!","Bonjour !",0.6),
+  C("爸，妈，这是白家月，这是安妮。她们都是一飞的学生。","Bà, mā, zhè shì Bái Jiāyuè, zhè shì Ānnī. Tāmen dōu shì Yīfēi de xuéshēng.","Papa, maman, voici Bai Jiayue, voici Annie. Elles sont toutes les deux les élèves de Yifei.",0.45),
+  C("家月、安妮，你们好！","Jiāyuè, Ānnī, nǐmen hǎo!","Jiayue, Annie, bonjour !",0.55),
+  C("这是送你们的礼物。","Zhè shì sòng nǐmen de lǐwù.","Voici un cadeau pour vous.",0.55),
+  C("你们太客气了，还拿这么多礼物来！","Nǐmen tài kèqi le, hái ná zhème duō lǐwù lái!","Vous êtes trop gentils, apporter autant de cadeaux !",0.45),
+  C("一雪姐，这是给孩子们准备的礼物。","Yīxuě jiě, zhè shì gěi háizimen zhǔnbèi de lǐwù.","Yixue, voici des cadeaux préparés pour les enfants.",0.45),
+  C("谢谢！你们别客气，快坐吧！","Xièxie! Nǐmen bié kèqi, kuài zuò ba!","Merci ! Ne faites pas de manières, asseyez-vous vite !",0.5),
+  N("Révision : dites « alors je descends dans un instant. »"),
+  TH(),
+  C("那我一会儿就下去。","Nà wǒ yíhuìr jiù xiàqù.","Alors je descends dans un instant.",0.55), HOLD(),
+
+  N("« Entrer, en se rapprochant du locuteur » se dit [[进来|jìnlái]]. Écoutez et répétez."),
+  ...teach2("进来","jìnlái","entrer (vers le locuteur)"),
+  N("Dites : « Jiayue, Annie, entrez vite ! Je vous présente : voici le grand-père et la grand-mère des enfants. »"),
+  TH(),
+  C("家月、安妮，快进来！我给你们介绍一下，这是孩子们的爷爷、奶奶。","Jiāyuè, Ānnī, kuài jìnlái! Wǒ gěi nǐmen jièshào yíxià, zhè shì háizimen de yéye, nǎinai.","Jiayue, Annie, entrez vite ! Je vous présente : voici le grand-père et la grand-mère des enfants.",0.4), HOLD(),
+
+  N("« Grand-père » se dit [[爷爷|yéye]], « grand-mère » se dit [[奶奶|nǎinai]] — ce sont les parents du côté du père. Écoutez et répétez."),
+  ...teach2("爷爷，奶奶","yéye, nǎinai","grand-père, grand-mère"),
+  N("On vous salue : « bonjour ! » Répondez de même."),
+  TH(),
+  C("你们好！","Nǐmen hǎo!","Bonjour !",0.6), HOLD(),
+  N("Wang Yixue fait les présentations : « papa, maman, voici Bai Jiayue, voici Annie. Elles sont toutes les deux les élèves de Yifei. »"),
+  C("爸，妈，这是白家月，这是安妮。她们都是一飞的学生。","Bà, mā, zhè shì Bái Jiāyuè, zhè shì Ānnī. Tāmen dōu shì Yīfēi de xuéshēng.","Papa, maman, voici Bai Jiayue, voici Annie. Elles sont toutes les deux les élèves de Yifei.",0.45),
+  N("On vous répond : « Jiayue, Annie, bonjour ! »"),
+  C("家月、安妮，你们好！","Jiāyuè, Ānnī, nǐmen hǎo!","Jiayue, Annie, bonjour !",0.55),
+
+  N("« Le cadeau » se dit [[礼物|lǐwù]]. Grammaire : quand le verbe a un complément directionnel ET un objet, si l'objet désigne un lieu, il se place entre le verbe et 来/去 ; s'il désigne une chose, il peut se placer avant OU après 来/去. Écoutez ces exemples."),
+  ...teach2("礼物","lǐwù","le cadeau"),
+  C("你们太客气了，还拿这么多礼物来！","Nǐmen tài kèqi le, hái ná zhème duō lǐwù lái!","Vous êtes trop gentils, apporter autant de cadeaux !",0.4),
+  C("家月给我送来了一本书。","Jiāyuè gěi wǒ sònglái le yì běn shū.","Jiayue m'a apporté un livre.",0.5),
+  N("Ici l'objet « un livre » se place après 来. On peut aussi dire 送一本书来, avant 来."),
+  C("上课了，你们快进教室来吧。","Shàngkè le, nǐmen kuài jìn jiàoshì lái ba.","Le cours commence, entrez vite dans la salle de classe.",0.45),
+  N("Ici « la salle de classe » est un lieu : il se place obligatoirement avant 来, entre le verbe et 来."),
+  N("Dites : « vous êtes trop gentils, apporter autant de cadeaux ! »"),
+  TH(),
+  C("你们太客气了，还拿这么多礼物来！","Nǐmen tài kèqi le, hái ná zhème duō lǐwù lái!","Vous êtes trop gentils, apporter autant de cadeaux !",0.45), HOLD(),
+
+  N("« Préparer » se dit [[准备|zhǔnbèi]]. Wang Yixue précise : « Yixue, voici des cadeaux préparés pour les enfants. » — remarquez, c'est elle-même qui parle d'elle à la troisième personne par son prénom, une habitude fréquente en chinois familier."),
+  ...teach2("准备","zhǔnbèi","préparer"),
+  TH(),
+  C("一雪姐，这是给孩子们准备的礼物。","Yīxuě jiě, zhè shì gěi háizimen zhǔnbèi de lǐwù.","Yixue, voici des cadeaux préparés pour les enfants.",0.45), HOLD(),
+  N("Répondez : « merci ! Ne faites pas de manières, asseyez-vous vite ! »"),
+  TH(),
+  C("谢谢！你们别客气，快坐吧！","Xièxie! Nǐmen bié kèqi, kuài zuò ba!","Merci ! Ne faites pas de manières, asseyez-vous vite !",0.5), HOLD(),
+
+  N("Révision. Dites : le cours commence, entrez vite dans la salle de classe."),
+  TH(),
+  C("上课了，你们快进教室来吧。","Shàngkè le, nǐmen kuài jìn jiàoshì lái ba.","Le cours commence, entrez vite dans la salle de classe.",0.5),
+  N("Dites : Jiayue m'a apporté un livre."),
+  TH(),
+  C("家月给我送来了一本书。","Jiāyuè gěi wǒ sònglái le yì běn shū.","Jiayue m'a apporté un livre.",0.5),
+  N("Fin de la partie 2. À la partie 3 : le repas chez Wang Yixue."),
+    ]; } },
+
+  // ================= PARTIE 3 =================
+  { num:3, hanzi:"都12点了", title:"Partie 3 · Le repas", desc:"奶茶 · 跟 · 都……了",
+    build(){ return [
+  N("Partie 3. À table. Voici le dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
+  C("都12点了，我们吃饭吧。","Dōu shí'èr diǎn le, wǒmen chī fàn ba.","Il est déjà midi, mangeons.",0.55),
+  C("这么多好吃的，您太客气了！","Zhème duō hǎochī de, nín tài kèqi le!","Autant de bonnes choses, vous êtes trop gentille !",0.5),
+  C("都是我自己做的，你们多吃点儿。","Dōu shì wǒ zìjǐ zuò de, nǐmen duō chī diǎnr.","J'ai tout préparé moi-même, mangez-en bien.",0.5),
+  C("奶茶也很好喝，是您自己做的吗？","Nǎichá yě hěn hǎohē, shì nín zìjǐ zuò de ma?","Le thé au lait est délicieux aussi, c'est vous qui l'avez fait ?",0.45),
+  C("不是，奶茶是爷爷买的。","Bú shì, nǎichá shì yéye mǎi de.","Non, le thé au lait, c'est grand-père qui l'a acheté.",0.5),
+  C("在哪儿买的？我还没喝过这么好喝的奶茶。","Zài nǎr mǎi de? Wǒ hái méi hēguo zhème hǎohē de nǎichá.","Où l'a-t-il acheté ? Je n'ai jamais bu un thé au lait aussi bon.",0.45),
+  C("就在前边的商场，吃完饭你们可以跟我去看看。","Jiù zài qiánbian de shāngchǎng, chīwán fàn nǐmen kěyǐ gēn wǒ qù kànkan.","Juste dans le centre commercial devant, après manger vous pourrez venir avec moi jeter un œil.",0.4),
+  N("Révision : dites « où l'a-t-il acheté ? »"),
+  TH(),
+  C("在哪儿买的？","Zài nǎr mǎi de?","Où l'a-t-il acheté ?",0.6), HOLD(),
+
+  N("Grammaire : la tournure fixe 都……了 insiste sur le fait qu'on est déjà arrivé à un moment ou une quantité, souvent avec une nuance d'insistance ou de reproche léger. Écoutez ces exemples."),
+  C("都12点了，我们吃饭吧。","Dōu shí'èr diǎn le, wǒmen chī fàn ba.","Il est déjà midi, mangeons.",0.5),
+  C("都8点半了，你还不起床吗？","Dōu bā diǎn bàn le, nǐ hái bù qǐchuáng ma?","Il est déjà 8h30, tu ne te lèves toujours pas ?",0.5),
+  C("我都去过北京了，不想再去了。","Wǒ dōu qùguo Běijīng le, bù xiǎng zài qù le.","Je suis déjà allé à Pékin, je ne veux pas y retourner.",0.5),
+  N("Dites, avec 都……了 : « il est déjà midi, mangeons. »"),
+  TH(),
+  C("都12点了，我们吃饭吧。","Dōu shí'èr diǎn le, wǒmen chī fàn ba.","Il est déjà midi, mangeons.",0.55), HOLD(),
+  N("On vous répond : « autant de bonnes choses, vous êtes trop gentille ! »"),
+  C("这么多好吃的，您太客气了！","Zhème duō hǎochī de, nín tài kèqi le!","Autant de bonnes choses, vous êtes trop gentille !",0.5),
+  N("Wang Yixue insiste : « j'ai tout préparé moi-même, mangez-en bien. »"),
+  TH(),
+  C("都是我自己做的，你们多吃点儿。","Dōu shì wǒ zìjǐ zuò de, nǐmen duō chī diǎnr.","J'ai tout préparé moi-même, mangez-en bien.",0.5), HOLD(),
+
+  N("« Le thé au lait » se dit [[奶茶|nǎichá]]. Demandez : « le thé au lait est délicieux aussi, c'est vous qui l'avez fait ? »"),
+  ...teach2("奶茶","nǎichá","le thé au lait"),
+  TH(),
+  C("奶茶也很好喝，是您自己做的吗？","Nǎichá yě hěn hǎohē, shì nín zìjǐ zuò de ma?","Le thé au lait est délicieux aussi, c'est vous qui l'avez fait ?",0.45), HOLD(),
+  N("On vous répond : « non, le thé au lait, c'est grand-père qui l'a acheté. »"),
+  C("不是，奶茶是爷爷买的。","Bú shì, nǎichá shì yéye mǎi de.","Non, le thé au lait, c'est grand-père qui l'a acheté.",0.5),
+  N("Demandez : « où l'a-t-il acheté ? Je n'ai jamais bu un thé au lait aussi bon. »"),
+  TH(),
+  C("在哪儿买的？我还没喝过这么好喝的奶茶。","Zài nǎr mǎi de? Wǒ hái méi hēguo zhème hǎohē de nǎichá.","Où l'a-t-il acheté ? Je n'ai jamais bu un thé au lait aussi bon.",0.45), HOLD(),
+
+  N("« Avec, accompagner » se dit [[跟|gēn]] — vous le connaissez déjà comme dans 跟他说. On vous répond : « juste dans le centre commercial devant, après manger vous pourrez venir avec moi jeter un œil. »"),
+  ...teach2("跟","gēn","avec, accompagner"),
+  TH(),
+  C("就在前边的商场，吃完饭你们可以跟我去看看。","Jiù zài qiánbian de shāngchǎng, chīwán fàn nǐmen kěyǐ gēn wǒ qù kànkan.","Juste dans le centre commercial devant, après manger vous pourrez venir avec moi jeter un œil.",0.4), HOLD(),
+
+  N("Le soir, de retour à l'hôtel, Bai Jiayue écrit un message à Li Wen pour raconter sa journée. Écoutez."),
+  C("回国前一天，我们去一雪姐家了。","Huí guó qián yì tiān, wǒmen qù Yīxuě jiě jiā le.","La veille de rentrer, nous sommes allées chez Yixue.",0.5),
+  C("到她家的时候，饭菜都做好了。刘爷爷还准备了奶茶。","Dào tā jiā de shíhou, fàncài dōu zuòhǎo le. Liú yéye hái zhǔnbèile nǎichá.","Quand nous sommes arrivées chez elle, le repas était déjà prêt. Grand-père Liu avait même préparé du thé au lait.",0.45),
+  C("因为吃了太多东西，我们吃完饭是走回酒店的。","Yīnwèi chīle tài duō dōngxi, wǒmen chīwán fàn shì zǒuhuí jiǔdiàn de.","Comme nous avions trop mangé, après le repas nous sommes rentrées à pied à l'hôtel.",0.45),
+  N("Deux mots nouveaux : [[走|zǒu]] veut dire « marcher, partir », et [[酒店|jiǔdiàn]] veut dire « l'hôtel »."),
+  ...teach2("走","zǒu","marcher, partir"),
+  ...teach2("酒店","jiǔdiàn","l'hôtel"),
+  N("Dites : comme nous avions trop mangé, après le repas nous sommes rentrées à pied à l'hôtel."),
+  TH(),
+  C("因为吃了太多东西，我们吃完饭是走回酒店的。","Yīnwèi chīle tài duō dōngxi, wǒmen chīwán fàn shì zǒuhuí jiǔdiàn de.","Comme nous avions trop mangé, après le repas nous sommes rentrées à pied à l'hôtel.",0.45), HOLD(),
+
+  // Révision finale de la leçon 5
+  N("Révision finale de la leçon 5. Dites, avec un complément directionnel : je suis dehors, viens donc me rejoindre."),
+  TH(),
+  C("我在外边呢，你出来吧。","Wǒ zài wàibian ne, nǐ chūlái ba.","Je suis dehors, viens donc me rejoindre.",0.5),
+  N("Dites : Jiayue m'a apporté un livre."),
+  TH(),
+  C("家月给我送来了一本书。","Jiāyuè gěi wǒ sònglái le yì běn shū.","Jiayue m'a apporté un livre.",0.5),
+  N("Dites, avec 都……了 : il est déjà midi, mangeons."),
+  TH(),
+  C("都12点了，我们吃饭吧。","Dōu shí'èr diǎn le, wǒmen chī fàn ba.","Il est déjà midi, mangeons.",0.55),
+  N("Excellent ! Vous avez terminé la leçon 5 du HSK 2. Réécoutez-la demain, puis passez à la leçon 6. [[再见|zàijiàn]]！"),
+  C("再见！","Zàijiàn!","Au revoir !",0.6),
+    ]; } },
+
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 2",
+    build(){ return [
+N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
+
+  // Question 1
+  C("你怎么买这么多水果？","Nǐ zěnme mǎi zhème duō shuǐguǒ?","",0.55),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
+  C("一、不是我买的，是小王送来的。","Yī. Bú shì wǒ mǎi de, shì Xiǎo Wáng sònglái de.","",0.45),
+  P(4,"…"),
+  C("二、他打电话了，说还在公司。","Èr. Tā dǎ diànhuà le, shuō hái zài gōngsī.","",0.5),
+  P(4,"…"),
+  C("三、今天星期天，你能不能别叫我起床？","Sān. Jīntiān xīngqītiān, nǐ néng bu néng bié jiào wǒ qǐchuáng?","",0.45),
+  TH(),
+  C("不是我买的，是小王送来的。","Bú shì wǒ mǎi de, shì Xiǎo Wáng sònglái de.","",0.5), HOLD(),
+
+  // Question 2
+  C("都十点了，快起来吧！","Dōu shí diǎn le, kuài qǐlái ba!","",0.55),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
+  C("一、我跟他说过，他不来。","Yī. Wǒ gēn tā shuōguo, tā bù lái.","",0.5),
+  P(4,"…"),
+  C("二、今天星期天，你能不能别叫我起床？","Èr. Jīntiān xīngqītiān, nǐ néng bu néng bié jiào wǒ qǐchuáng?","",0.45),
+  P(4,"…"),
+  C("三、不是我买的，是小王送来的。","Sān. Bú shì wǒ mǎi de, shì Xiǎo Wáng sònglái de.","",0.45),
+  TH(),
+  C("今天星期天，你能不能别叫我起床？","Jīntiān xīngqītiān, nǐ néng bu néng bié jiào wǒ qǐchuáng?","",0.5), HOLD(),
+
+  // Question 3
+  C("让爷爷过来跟我们一起住吧。","Ràng yéye guòlái gēn wǒmen yìqǐ zhù ba.","",0.5),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
+  C("一、他打电话了，说还在公司。","Yī. Tā dǎ diànhuà le, shuō hái zài gōngsī.","",0.5),
+  P(4,"…"),
+  C("二、我跟他说过，他不来。","Èr. Wǒ gēn tā shuōguo, tā bù lái.","",0.5),
+  P(4,"…"),
+  C("三、今天星期天，你能不能别叫我起床？","Sān. Jīntiān xīngqītiān, nǐ néng bu néng bié jiào wǒ qǐchuáng?","",0.45),
+  TH(),
+  C("我跟他说过，他不来。","Wǒ gēn tā shuōguo, tā bù lái.","",0.55), HOLD(),
+
+  // Question 4
+  C("都八点了，爸爸还没回家。","Dōu bā diǎn le, bàba hái méi huí jiā.","",0.55),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
+  C("一、他打电话了，说还在公司。","Yī. Tā dǎ diànhuà le, shuō hái zài gōngsī.","",0.5),
+  P(4,"…"),
+  C("二、不是我买的，是小王送来的。","Èr. Bú shì wǒ mǎi de, shì Xiǎo Wáng sònglái de.","",0.45),
+  P(4,"…"),
+  C("三、我跟他说过，他不来。","Sān. Wǒ gēn tā shuōguo, tā bù lái.","",0.5),
+  TH(),
+  C("他打电话了，说还在公司。","Tā dǎ diànhuà le, shuō hái zài gōngsī.","",0.55), HOLD(),
+
+  // Question 5
+  C("我的小猫生病了，但我要去上班。爷爷跟我说，小猫可以送他那儿去，下班后，我再接小猫回来。","Wǒ de xiǎomāo shēngbìng le, dàn wǒ yào qù shàngbān. Yéye gēn wǒ shuō, xiǎomāo kěyǐ sòng tā nàr qù, xiàbān hòu, wǒ zài jiē xiǎomāo huílái.","",0.4),
+  C("他为什么送小猫去爷爷那儿？","Tā wèi shénme sòng xiǎomāo qù yéye nàr?","",0.55),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
+  C("一、有好吃的。","Yī. Yǒu hǎochī de.","",0.6),
+  P(4,"…"),
+  C("二、小猫生病了。","Èr. Xiǎomāo shēngbìng le.","",0.6),
+  P(4,"…"),
+  C("三、爷爷想小猫了。","Sān. Yéye xiǎng xiǎomāo le.","",0.6),
+  TH(),
+  C("小猫生病了。","Xiǎomāo shēngbìng le.","",0.6), HOLD(),
+
+  // Question 6
+  C("今天中午李文打来电话，让我晚上去他家吃饭。晚上，天中也过来了。李文做菜，我洗水果，天中出去买奶茶。","Jīntiān zhōngwǔ Lǐ Wén dǎlái diànhuà, ràng wǒ wǎnshang qù tā jiā chī fàn. Wǎnshang, Tiānzhōng yě guòlái le. Lǐ Wén zuò cài, wǒ xǐ shuǐguǒ, Tiānzhōng chūqù mǎi nǎichá.","",0.4),
+  C("李文做什么了？","Lǐ Wén zuò shénme le?","",0.6),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
+  C("一、做菜。","Yī. Zuò cài.","",0.6),
+  P(4,"…"),
+  C("二、买奶茶。","Èr. Mǎi nǎichá.","",0.6),
+  P(4,"…"),
+  C("三、洗水果。","Sān. Xǐ shuǐguǒ.","",0.6),
+  TH(),
+  C("做菜。","Zuò cài.","",0.65), HOLD(),
+
+  // Question 7
+  C("我第一次去男朋友家，他们一家人都下来接我，让我觉得很不好意思。他的家人都很好，还送了我礼物。","Wǒ dì-yī cì qù nánpéngyou jiā, tāmen yì jiā rén dōu xiàlái jiē wǒ, ràng wǒ juéde hěn bù hǎoyìsi. Tā de jiārén dōu hěn hǎo, hái sòngle wǒ lǐwù.","",0.4),
+  C("她为什么觉得不好意思？","Tā wèi shénme juéde bù hǎoyìsi?","",0.55),
+  HOLD("Réfléchis… puis ▶ pour entendre les choix.", 4),
+  C("一、来晚了。","Yī. Láiwǎn le.","",0.6),
+  P(4,"…"),
+  C("二、没准备礼物。","Èr. Méi zhǔnbèi lǐwù.","",0.6),
+  P(4,"…"),
+  C("三、很多人来接她。","Sān. Hěn duō rén lái jiē tā.","",0.55),
+  TH(),
+  C("很多人来接她。","Hěn duō rén lái jiē tā.","",0.6), HOLD(),
+
+N("Bravo, exercice terminé ! Passe à la leçon 6."),
+  C("再见！","Zàijiàn!","",0.65),
+    ]; } },
+  ]
+});

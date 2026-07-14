@@ -606,6 +606,7 @@ $('recStopBtn').addEventListener('click', ()=>{ pause(); stopRecording(); });
    ============================================================ */
 const FOLDERS = [
   { key: 'hsk1', hanzi: 'HSK1', title: 'HSK 1', desc: 'Les 15 leçons du manuel officiel' },
+  { key: 'hsk2', hanzi: 'HSK2', title: 'HSK 2', desc: 'Les 15 leçons du manuel officiel' },
   { key: 'bonus', hanzi: '★', title: 'Bonus', desc: 'Chapitres thématiques complémentaires' }
 ];
 function buildFolderMenu(){
