@@ -107,22 +107,7 @@ function seek(deltaSec){
   seekToIndex(i);
 }
 
-/* ---------- voix : les meilleures d'abord ---------- */
-function voiceScore(v){
-  const n = (v.name||'').toLowerCase();
-  let s = 0;
-  if(/natural|neural/.test(n)) s += 100;
-  if(/siri/.test(n)) s += 90;
-  if(/premium|enhanced|améliorée/.test(n)) s += 80;
-  if(!v.localService) s += 20;
-  if(/google/.test(n)) s += 10;
-  // Voix Edge (Natural) préférées : Xiaoxiao pour le chinois, Ariane pour
-  // le français — les mettre en tête parmi les nombreuses voix « Natural ».
-  if(/xiaoxiao/.test(n)) s += 30;
-  if(/ariane/.test(n)) s += 30;
-  return s;
-}
-function pickBest(list){ return list.slice().sort((a,b)=>voiceScore(b)-voiceScore(a))[0] || null; }
+/* ---------- voix : c'est toi qui choisis ---------- */
 /* mémorisation locale des préférences (voix, vitesses) */
 const store = {
   get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
@@ -134,23 +119,29 @@ function fillSelect(sel, list, current){
   list.forEach(v=>{
     const o = document.createElement('option');
     o.value = v.name;
-    o.textContent = v.name + (voiceScore(v) >= 80 ? ' ★' : '');
+    o.textContent = v.name;
     if(current && v.name === current.name) o.selected = true;
     sel.appendChild(o);
   });
 }
+/* On ne (ré)assigne une voix que dans deux cas : ton choix manuel (menu
+   déroulant 🎙 Voix) vient d'apparaître dans la liste, ou aucune voix
+   n'est encore active pour cette langue (tout premier chargement — il
+   faut bien un son par défaut avant que tu n'aies choisi). Une fois une
+   voix établie, on ne la remplace plus jamais automatiquement : certains
+   navigateurs redéclenchent onvoiceschanged en cours de lecture avec une
+   liste momentanément incomplète (mise en pause, Bluetooth, verrouillage
+   d'écran…), et une ancienne version rebasculait alors toute seule vers
+   une autre voix, coupant la lecture en cours. Seul le menu 🎙 Voix
+   change la voix active. */
 function loadVoices(){
   voices = synth.getVoices();
   const zhList = voices.filter(v=>/^zh/i.test(v.lang));
   const frList = voices.filter(v=>/^fr/i.test(v.lang));
-  const newZh = (userZhChoice && zhList.find(v=>v.name===userZhChoice)) || pickBest(zhList.filter(v=>/zh[-_]CN/i.test(v.lang))) || pickBest(zhList);
-  const newFr = (userFrChoice && frList.find(v=>v.name===userFrChoice)) || pickBest(frList.filter(v=>/fr[-_]FR/i.test(v.lang))) || pickBest(frList);
-  // certains navigateurs redéclenchent onvoiceschanged en cours de lecture avec une
-  // liste momentanément vide (Bluetooth, verrouillage d'écran…) : ne jamais régresser
-  // vers "aucune voix" si on en avait déjà trouvé une bonne — ça évite un bascule
-  // soudain vers une voix de secours dans une autre langue.
-  if(newZh) zhVoice = newZh;
-  if(newFr) frVoice = newFr;
+  if(userZhChoice){ const f = zhList.find(v=>v.name===userZhChoice); if(f) zhVoice = f; }
+  else if(!zhVoice && zhList.length) zhVoice = zhList.find(v=>/zh[-_]CN/i.test(v.lang)) || zhList[0];
+  if(userFrChoice){ const f = frList.find(v=>v.name===userFrChoice); if(f) frVoice = f; }
+  else if(!frVoice && frList.length) frVoice = frList.find(v=>/fr[-_]FR/i.test(v.lang)) || frList[0];
   if(!zhVoice && $('voiceWarn')) $('voiceWarn').style.display='block';
   if($('zhSelect')){ fillSelect($('zhSelect'), zhList, zhVoice); fillSelect($('frSelect'), frList, frVoice); }
 }
