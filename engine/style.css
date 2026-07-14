@@ -94,6 +94,10 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-rad
 .voice-panel .hint{font-size:11.5px;color:var(--muted);line-height:1.5}
 
 .overlay{position:fixed;inset:0;background:var(--ink);z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:38px 22px calc(30px + env(safe-area-inset-bottom));text-align:center;gap:14px;overflow-y:auto}
+.overlay-close{position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;z-index:2;
+  width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);color:var(--paper);font-size:19px;line-height:1;cursor:pointer}
+.overlay-close:active{background:rgba(255,255,255,.16)}
 .menu-list{width:100%;max-width:440px;display:flex;flex-direction:column;gap:10px;margin-top:6px}
 .menu-item{
   display:flex;align-items:center;gap:14px;text-align:left;

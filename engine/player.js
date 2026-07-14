@@ -35,6 +35,9 @@ function registerChapter(ch){ CHAPTERS.push(ch); }
 let steps = [];
 let cur = 0;                 // index de la leçon courante dans le chapitre
 let playerChapterIdx = -1;   // chapitre qui alimente le lecteur actif (-1 = aucun)
+let playerLessons = [];      // tableau des leçons du chapitre actif (indépendant
+                              // du chapitre que l'on est peut-être en train de
+                              // parcourir dans le menu, pendant que ça joue)
 let curChapter = null;       // chapitre courant
 let LESSONS = [];            // leçons du chapitre courant
 
@@ -278,7 +281,11 @@ function runStep(){
   if(idx >= steps.length){
     playing=false; syncPlayBtn();
     setPhase('','🎉','Leçon terminée'); setArc(1);
-    const hasNext = cur + 1 < LESSONS.length;
+    // Toujours se baser sur playerChapterIdx / playerLessons (le chapitre qui
+    // JOUE), jamais sur curChapterIdx / LESSONS (le chapitre éventuellement
+    // parcouru dans le menu en arrière-plan pendant que ça joue).
+    const hasNext = cur + 1 < playerLessons.length;
+    const backToMenuHash = '#/dossier/'+CHAPTERS[playerChapterIdx].group+'/ch/'+(playerChapterIdx+1);
     if(recState.active){ setTimeout(stopRecording, 1500); }
     if(autoChain){
       const nxt = nextLessonRef();
@@ -293,13 +300,13 @@ function runStep(){
       }
       $('caption').innerHTML =
         '<div class="fr">🎉🎉 Bravo, tu as terminé tout l\'enchaînement !</div>' +
-        '<button class="menu-inline ghost" onclick="showMenu()">☰ Retour au menu</button>';
+        '<button class="menu-inline ghost" onclick="nav(\''+backToMenuHash+'\')">☰ Retour au menu</button>';
       return;
     }
     $('caption').innerHTML =
       '<div class="fr">🎉 Bravo, leçon terminée ! Refais-la demain — la répétition espacée fait tout.</div>' +
-      (hasNext ? '<button class="menu-inline" onclick="openLesson('+(cur+1)+')">▶ Leçon suivante : '+LESSONS[cur+1].title+'</button>' : '') +
-      '<button class="menu-inline ghost" onclick="showMenu()">☰ Retour au menu</button>';
+      (hasNext ? '<button class="menu-inline" onclick="nav(\''+backToMenuHash+'/lecon/'+(cur+2)+'\')">▶ Leçon suivante : '+playerLessons[cur+1].title+'</button>' : '') +
+      '<button class="menu-inline ghost" onclick="nav(\''+backToMenuHash+'\')">☰ Retour au menu</button>';
     return;
   }
   const s = steps[idx];
@@ -650,27 +657,23 @@ function setChapter(i){
 }
 
 /* ---- rendu des écrans (sans toucher à l'historique navigateur) ----
-   Ouvrir le menu des leçons depuis une leçon en cours (☰ Menu, ou le
-   fil d'Ariane) ne doit PAS couper la lecture : c'est juste un aperçu
-   par-dessus le lecteur, qui continue de tourner en dessous. On ne
-   coupe la lecture que si on change réellement de chapitre, ou qu'on
-   revient à l'écran d'accueil des chapitres. ---- */
+   Le menu (dossiers / chapitres / leçons) n'est qu'un aperçu affiché
+   PAR-DESSUS le lecteur : ce n'est pas une vraie page distincte, c'est
+   le lecteur qui est « chez lui ». Naviguer dans le menu — même en
+   changeant de dossier ou de chapitre affiché — ne coupe donc JAMAIS
+   la lecture en cours : elle continue en arrière-plan. Seul le fait de
+   choisir explicitement une AUTRE leçon (clic sur une leçon) déclenche
+   un vrai changement, géré dans renderPlayer(). La croix ✕, présente
+   sur les trois écrans du menu, referme l'aperçu et révèle le lecteur
+   tel qu'il est actuellement (cf. closeMenu()). ---- */
 let curFolderKey = null;
 function renderFolders(){
-  stopEverything();
-  playing = false; syncPlayBtn();
-  setPhase('','🎧','Prêt');
-  playerChapterIdx = -1;   // toute reprise ultérieure repart de zéro
   curFolderKey = null;
   $('overlay').style.display = 'none';
   $('chapterOverlay').style.display = 'none';
   $('folderOverlay').style.display = 'flex';
 }
 function renderChapters(folderKey){
-  stopEverything();
-  playing = false; syncPlayBtn();
-  setPhase('','🎧','Prêt');
-  playerChapterIdx = -1;   // toute reprise ultérieure repart de zéro
   curFolderKey = folderKey;
   const f = FOLDERS.find(f=>f.key===folderKey);
   $('folderBigHanzi').textContent = f ? f.hanzi : '';
@@ -682,14 +685,8 @@ function renderChapters(folderKey){
   $('chapterOverlay').style.display = 'flex';
 }
 function renderLessons(i){
-  const peekingSameChapter = steps.length > 0 && playerChapterIdx === i;
   setChapter(i);
   curFolderKey = curChapter.group;
-  if(!peekingSameChapter){
-    stopEverything();
-    playing = false; syncPlayBtn();
-    setPhase('','🎧','Prêt');
-  }
   $('lessonBigHanzi').textContent = curChapter.hanzi;
   $('lessonOverlayTitle').textContent = curChapter.title + ' · Cours audio de chinois';
   $('lessonOverlayIntro').textContent = curChapter.intro || '';
@@ -704,6 +701,7 @@ function renderPlayer(i){
   if(!resuming){
     cur = i;
     playerChapterIdx = curChapterIdx;
+    playerLessons = LESSONS;
     stopEverything();
     steps = L.build();
     idx = 0; playing = false;
@@ -750,6 +748,11 @@ function route(){
     if(m[2]){
       const ci = parseInt(m[2],10) - 1;
       if(ci >= 0 && ci < CHAPTERS.length && CHAPTERS[ci].group === folderKey){
+        // Toujours resynchroniser curFolderKey ici, y compris pour un lien
+        // direct vers une leçon (rechargement, favori) qui ne passe jamais
+        // par renderLessons/renderChapters : sinon « ☰ Menu » et la croix
+        // calculeraient un hash invalide (dossier "null").
+        curFolderKey = folderKey;
         if(m[3]){
           const li = parseInt(m[3],10) - 1;
           setChapter(ci);
@@ -772,11 +775,13 @@ function openLesson(i){ nav('#/dossier/'+curFolderKey+'/ch/'+(curChapterIdx+1)+'
 /* ---- enchaînement automatique : leçon suivante, ou premier chapitre
        suivant du même dossier (HSK1/Bonus) une fois le chapitre fini ---- */
 function nextLessonRef(){
-  if(cur + 1 < LESSONS.length) return { chapterIdx: curChapterIdx, lessonIdx: cur + 1 };
-  const group = curChapter.group;
+  // Basé sur le chapitre qui JOUE (playerChapterIdx/playerLessons), jamais
+  // sur celui éventuellement parcouru dans le menu en arrière-plan.
+  if(cur + 1 < playerLessons.length) return { chapterIdx: playerChapterIdx, lessonIdx: cur + 1 };
+  const group = CHAPTERS[playerChapterIdx].group;
   const sameGroup = [];
   CHAPTERS.forEach((c, i)=>{ if(c.group === group) sameGroup.push(i); });
-  const pos = sameGroup.indexOf(curChapterIdx);
+  const pos = sameGroup.indexOf(playerChapterIdx);
   if(pos >= 0 && pos + 1 < sameGroup.length){
     return { chapterIdx: sameGroup[pos + 1], lessonIdx: 0 };
   }
@@ -785,6 +790,18 @@ function nextLessonRef(){
 function showMenu(){ nav('#/dossier/'+curFolderKey+'/ch/'+(curChapterIdx+1)); }
 function showChapters(){ nav('#/dossier/'+curFolderKey); }
 function showFolders(){ nav('#/'); }
+/* Fermer le menu (croix, présente sur les 3 écrans dossiers/chapitres/
+   leçons) et révéler le lecteur tel qu'il est actuellement — peu importe
+   à quel niveau du menu on se trouve, et peu importe le chemin parcouru
+   pour y arriver. S'il n'y a jamais eu de leçon chargée (tout premier
+   lancement), il n'y a rien à révéler : on reste sur l'accueil. */
+function closeMenu(){
+  if(playerChapterIdx >= 0 && playerChapterIdx < CHAPTERS.length){
+    nav('#/dossier/'+CHAPTERS[playerChapterIdx].group+'/ch/'+(playerChapterIdx+1)+'/lecon/'+(cur+1));
+  } else {
+    showFolders();
+  }
+}
 window.addEventListener('hashchange', route);
 function initApp(){
   buildFolderMenu();
@@ -796,6 +813,7 @@ window.openLesson = openLesson;
 window.showMenu = showMenu;
 window.showChapters = showChapters;
 window.showFolders = showFolders;
+window.closeMenu = closeMenu;
 window.initApp = initApp;
 $('menuBtn').addEventListener('click', showMenu);
 

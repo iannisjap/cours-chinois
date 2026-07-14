@@ -77,7 +77,7 @@ registerChapter({
   C("明天你去哪儿？","Míngtiān nǐ qù nǎr?","Où vas-tu demain ?",0.5),
   C("我想去超市买东西。","Wǒ xiǎng qù chāoshì mǎi dōngxi.","Je veux aller au supermarché acheter des choses.",0.5),
   C("你去超市买什么？","Nǐ qù chāoshì mǎi shénme?","Qu'est-ce que tu vas acheter au supermarché ?",0.5),
-  C("我想买些牛奶。","Wǒ xiǎng mǎi xiē niúnǎi.","Je veux acheter du lait.",0.5),
+  C("我想买些牛奶。","Wǒ xiǎng mǎi xiē niúnǎi.","Je veux acheter un peu de lait.",0.5),
   N("Révision : comment dit-on « numéro de portable » ?"),
   TH(),
   C("手机号","shǒujīhào","numéro de portable",0.6), HOLD(),
@@ -110,9 +110,9 @@ registerChapter({
 
   N("« Quelques », « un peu de », se dit [[些|xiē]] — après un verbe comme acheter, il précède le nom. « Le lait » se dit [[牛奶|niúnǎi]]. Écoutez et répétez."),
   ...teach2("牛奶","niúnǎi","le lait"),
-  N("Répondez : « Je veux acheter du lait. »"),
+  N("Répondez : « Je veux acheter un peu de lait. »"),
   TH(),
-  C("我想买些牛奶。","Wǒ xiǎng mǎi xiē niúnǎi.","Je veux acheter du lait.",0.6), HOLD(),
+  C("我想买些牛奶。","Wǒ xiǎng mǎi xiē niúnǎi.","Je veux acheter un peu de lait.",0.6), HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. On vous demande : « Où vas-tu demain ? »"),
@@ -122,9 +122,9 @@ registerChapter({
   C("我想去超市买东西。","Wǒ xiǎng qù chāoshì mǎi dōngxi.","Je veux aller au supermarché acheter des choses.",0.6),
   N("On vous demande :"),
   C("你去超市买什么？","Nǐ qù chāoshì mǎi shénme?","Qu'est-ce que tu vas acheter au supermarché ?",0.6),
-  N("Répondez : « Je veux acheter du lait. »"),
+  N("Répondez : « Je veux acheter un peu de lait. »"),
   TH(),
-  C("我想买些牛奶。","Wǒ xiǎng mǎi xiē niúnǎi.","Je veux acheter du lait.",0.6), HOLD(),
+  C("我想买些牛奶。","Wǒ xiǎng mǎi xiē niúnǎi.","Je veux acheter un peu de lait.",0.6), HOLD(),
 
   // Révision
   N("Révision. Dites : demain."),
@@ -144,9 +144,9 @@ registerChapter({
   C("我想去西安饭店，那边的包子非常好吃。","Wǒ xiǎng qù Xī'ān Fàndiàn, nàbian de bāozi fēicháng hǎochī.","Je veux aller au restaurant Xi'an, leurs bāozi sont délicieux là-bas.",0.5),
   C("好的。我们怎么去？","Hǎo de. Wǒmen zěnme qù?","D'accord. Comment y allons-nous ?",0.5),
   C("坐出租车去。","Zuò chūzūchē qù.","On y va en taxi.",0.5),
-  N("Révision : dites « je veux acheter du lait »."),
+  N("Révision : dites « je veux acheter un peu de lait »."),
   TH(),
-  C("我想买些牛奶。","Wǒ xiǎng mǎi xiē niúnǎi.","Je veux acheter du lait.",0.6), HOLD(),
+  C("我想买些牛奶。","Wǒ xiǎng mǎi xiē niúnǎi.","Je veux acheter un peu de lait.",0.6), HOLD(),
 
   N("Vous connaissez déjà [[饭|fàn]], le repas, depuis la leçon 5. « Manger » se dit [[吃|chī]]. Écoutez et répétez."),
   ...teach2("吃","chī","manger"),

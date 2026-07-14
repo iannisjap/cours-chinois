@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cours audio de chinois</title>
-<link rel="stylesheet" href="engine/style.css?v=30">
+<link rel="stylesheet" href="engine/style.css?v=34">
 </head>
 <body>
 
 <!-- Écran d'accueil : menu des DOSSIERS (HSK 1 / Bonus) -->
 <div class="overlay" id="folderOverlay">
+  <button class="overlay-close" id="folderCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
   <div class="big-hanzi hanzi" style="font-size:52px">中文</div>
   <h2>Cours audio de chinois mandarin</h2>
   <p>Méthode audio dans l'esprit Pimsleur : narrateur français, phrases chinoises lues lentement, pauses pour répéter et rappels espacés. Choisis un dossier pour commencer.</p>
@@ -20,6 +21,7 @@
 
 <!-- Menu des CHAPITRES du dossier choisi -->
 <div class="overlay" id="chapterOverlay" style="display:none">
+  <button class="overlay-close" id="chapterCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
   <div class="big-hanzi hanzi" id="folderBigHanzi" style="font-size:52px">中文</div>
   <h2 id="folderOverlayTitle">HSK 1</h2>
   <p id="folderOverlayIntro"></p>
@@ -30,6 +32,7 @@
 
 <!-- Menu des LEÇONS du chapitre choisi -->
 <div class="overlay" id="overlay" style="display:none">
+  <button class="overlay-close" id="menuCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
   <div class="big-hanzi hanzi" id="lessonBigHanzi" style="font-size:52px">谈时间</div>
   <h2 id="lessonOverlayTitle">Le temps · Cours audio de chinois</h2>
   <p id="lessonOverlayIntro">Fais les leçons dans l'ordre : chaque leçon révise les précédentes.</p>
@@ -127,24 +130,24 @@
 </div>
 
 <!-- Moteur, puis chapitres (ordre important), puis démarrage -->
-<script src="engine/player.js?v=30"></script>
-<script src="chapters/hsk1/01-bonjour.js?v=30"></script>
-<script src="chapters/hsk1/02-mon-nom.js?v=30"></script>
-<script src="chapters/hsk1/03-nationalites.js?v=30"></script>
-<script src="chapters/hsk1/04-famille.js?v=30"></script>
-<script src="chapters/hsk1/05-dates.js?v=30"></script>
-<script src="chapters/hsk1/06-telephone.js?v=30"></script>
-<script src="chapters/hsk1/07-heure.js?v=30"></script>
-<script src="chapters/hsk1/08-medecin.js?v=30"></script>
-<script src="chapters/hsk1/09-ecole.js?v=30"></script>
-<script src="chapters/hsk1/10-marche.js?v=30"></script>
-<script src="chapters/hsk1/11-universite.js?v=30"></script>
-<script src="chapters/hsk1/12-meteo.js?v=30"></script>
-<script src="chapters/hsk1/13-restaurant.js?v=30"></script>
-<script src="chapters/hsk1/14-voyage.js?v=30"></script>
-<script src="chapters/hsk1/15-voyage-final.js?v=30"></script>
-<script src="chapters/bonus/le-temps.js?v=30"></script>
-<script src="chapters/bonus/planning.js?v=30"></script>
+<script src="engine/player.js?v=34"></script>
+<script src="chapters/hsk1/01-bonjour.js?v=34"></script>
+<script src="chapters/hsk1/02-mon-nom.js?v=34"></script>
+<script src="chapters/hsk1/03-nationalites.js?v=34"></script>
+<script src="chapters/hsk1/04-famille.js?v=34"></script>
+<script src="chapters/hsk1/05-dates.js?v=34"></script>
+<script src="chapters/hsk1/06-telephone.js?v=34"></script>
+<script src="chapters/hsk1/07-heure.js?v=34"></script>
+<script src="chapters/hsk1/08-medecin.js?v=34"></script>
+<script src="chapters/hsk1/09-ecole.js?v=34"></script>
+<script src="chapters/hsk1/10-marche.js?v=34"></script>
+<script src="chapters/hsk1/11-universite.js?v=34"></script>
+<script src="chapters/hsk1/12-meteo.js?v=34"></script>
+<script src="chapters/hsk1/13-restaurant.js?v=34"></script>
+<script src="chapters/hsk1/14-voyage.js?v=34"></script>
+<script src="chapters/hsk1/15-voyage-final.js?v=34"></script>
+<script src="chapters/bonus/le-temps.js?v=34"></script>
+<script src="chapters/bonus/planning.js?v=34"></script>
 <script>initApp();</script>
 </body>
 </html>
