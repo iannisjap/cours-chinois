@@ -112,6 +112,21 @@ function moveSequence(direction){
   if(target >= steps.length) target = steps.length - 1;
   seekToIndex(target);
 }
+function seekTimeline(ratio){
+  if(!totalDur || !steps.length) return;
+  const targetTime = Math.max(0, Math.min(1, ratio)) * totalDur;
+  let target = steps.length - 1;
+  for(let i=0; i<steps.length; i++){
+    if(targetTime < cum[i] + stepDurations[i] || i === steps.length - 1){
+      target = i;
+      break;
+    }
+  }
+  // Une barre de progression mène toujours à du contenu audible, jamais à
+  // une pause vide entre deux phrases.
+  while(target < steps.length - 1 && steps[target].t !== 'fr' && steps[target].t !== 'zh') target++;
+  seekToIndex(target);
+}
 
 /* ---------- préférences d'affichage ---------- */
 const store = {
@@ -238,6 +253,8 @@ sfx.hidden = true;
 sfx.setAttribute('playsinline', '');
 document.body.appendChild(sfx);
 sfx.preload = 'auto';
+sfx.addEventListener('timeupdate', updateProgress);
+sfx.addEventListener('loadedmetadata', updateProgress);
 async function loadAudioManifest(chapterId, lessonNum){
   AUDIO = null;
   const chapter = CHAPTERS.find(ch => ch.id === chapterId);
@@ -561,6 +578,64 @@ function pause(){
 $('playBtn').addEventListener('click', ()=> playing?pause():play());
 $('fwdBtn').addEventListener('click', ()=> moveSequence(+1));
 $('backBtn').addEventListener('click', ()=> moveSequence(-1));
+let previousTrackTimer = null;
+function restartCurrentLesson(){
+  if(playerChapterIdx < 0 || !steps.length) return;
+  const wasPlaying = playing;
+  stopEverything();
+  idx = 0;
+  playing = false;
+  updateProgress();
+  if(wasPlaying){
+    playing = true;
+    syncPlayBtn();
+    runStep();
+  } else {
+    renderCaptionFor(idx);
+    setPhase('','⏸','Début de la leçon');
+  }
+}
+function openTrack(ref){
+  if(!ref) return;
+  nav('#/dossier/'+CHAPTERS[ref.chapterIdx].group+'/ch/'+(ref.chapterIdx+1)+'/lecon/'+(ref.lessonIdx+1));
+}
+function previousLessonRef(){
+  if(cur > 0) return { chapterIdx: playerChapterIdx, lessonIdx: cur - 1 };
+  const group = CHAPTERS[playerChapterIdx].group;
+  const sameGroup = [];
+  CHAPTERS.forEach((chapter, chapterIdx)=>{ if(chapter.group === group) sameGroup.push(chapterIdx); });
+  const pos = sameGroup.indexOf(playerChapterIdx);
+  if(pos > 0){
+    const chapterIdx = sameGroup[pos - 1];
+    return { chapterIdx, lessonIdx: CHAPTERS[chapterIdx].lessons.length - 1 };
+  }
+  return null;
+}
+function previousTrack(){
+  if(playerChapterIdx < 0) return;
+  if(previousTrackTimer){
+    clearTimeout(previousTrackTimer);
+    previousTrackTimer = null;
+    const previous = previousLessonRef();
+    if(previous) openTrack(previous);
+    else restartCurrentLesson();
+    return;
+  }
+  previousTrackTimer = setTimeout(()=>{
+    previousTrackTimer = null;
+    restartCurrentLesson();
+  }, 280);
+}
+function nextTrack(){
+  if(playerChapterIdx < 0) return;
+  openTrack(nextLessonRef());
+}
+$('prevTrackBtn').addEventListener('click', previousTrack);
+$('nextTrackBtn').addEventListener('click', nextTrack);
+$('timelineBar').addEventListener('click', event=>{
+  const rect = event.currentTarget.getBoundingClientRect();
+  seekTimeline((event.clientX - rect.left) / rect.width);
+});
 $('replayChip').addEventListener('click', ()=>{
   stopEverything();
   let j = Math.min(idx, steps.length-1);
@@ -622,8 +697,8 @@ if('mediaSession' in navigator){
   const H = (name, fn)=>{ try{ navigator.mediaSession.setActionHandler(name, fn); }catch(e){} };
   H('play',  ()=>{ if(!playing) play(); });
   H('pause', ()=>{ if(playing) pause(); });
-  H('nexttrack',     ()=> moveSequence(+1));
-  H('previoustrack', ()=> moveSequence(-1));
+  H('nexttrack',     ()=> nextTrack());
+  H('previoustrack', ()=> previousTrack());
   H('seekforward',   ()=> moveSequence(+1));
   H('seekbackward',  ()=> moveSequence(-1));
 }
