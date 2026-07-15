@@ -155,52 +155,6 @@ const store = {
 let practiceRecorder = null, practiceStream = null, practiceChunks = [];
 let practiceUrl = null, practiceStep = -1, practiceGeneration = 0;
 let practiceStarting = false;
-let practiceMetrics = null, referenceMetrics = null, comparisonMessage = '';
-let practiceAudioContext = null, practiceAnalyser = null, practiceMeterFrame = null;
-
-/* Comparaison locale, sans envoyer l'enregistrement : on mesure la durée et
-   le contour de hauteur (utile pour les tons). Ce n'est pas une transcription
-   automatique : le résultat est donc un repère d'entraînement, pas un verdict. */
-function estimatePitch(samples, sampleRate){
-  let energy = 0;
-  for(let i=0; i<samples.length; i++) energy += samples[i] * samples[i];
-  if(Math.sqrt(energy / samples.length) < .012) return 0;
-  const minLag = Math.floor(sampleRate / 380), maxLag = Math.min(Math.floor(sampleRate / 75), samples.length - 1);
-  let bestLag = 0, best = 0;
-  for(let lag=minLag; lag<=maxLag; lag++){
-    let sum = 0;
-    for(let i=0; i<samples.length-lag; i++) sum += samples[i] * samples[i+lag];
-    if(sum > best){ best = sum; bestLag = lag; }
-  }
-  return bestLag ? sampleRate / bestLag : 0;
-}
-function createMetrics(){ return {started:performance.now(), pitches:[], frames:0}; }
-function finishMetrics(metrics){
-  if(!metrics) return null;
-  const duration = (performance.now() - metrics.started) / 1000;
-  return {duration, pitches:metrics.pitches, voiced:metrics.frames ? metrics.pitches.length / metrics.frames : 0};
-}
-function samplePitch(analyser, metrics){
-  const data = new Float32Array(analyser.fftSize);
-  analyser.getFloatTimeDomainData(data);
-  metrics.frames++;
-  const pitch = estimatePitch(data, practiceAudioContext.sampleRate);
-  if(pitch >= 75 && pitch <= 380) metrics.pitches.push(pitch);
-}
-function startPracticeMeter(){
-  const metrics = createMetrics();
-  const tick = ()=>{
-    if(!practiceAnalyser || !practiceRecorder || practiceRecorder.state !== 'recording') return;
-    samplePitch(practiceAnalyser, metrics);
-    practiceMeterFrame = requestAnimationFrame(tick);
-  };
-  practiceMeterFrame = requestAnimationFrame(tick);
-  return metrics;
-}
-function stopPracticeMeter(){
-  if(practiceMeterFrame) cancelAnimationFrame(practiceMeterFrame);
-  practiceMeterFrame = null;
-}
 function comparisonTargetFor(stepIndex){
   // Après une phrase enseignée, on répète cette phrase. Après une question
   // française (TH), la prochaine phrase chinoise est au contraire la réponse
@@ -212,68 +166,19 @@ function comparisonTargetFor(stepIndex){
   for(let i=previous; i>=0; i--) if(steps[i].t === 'zh') return steps[i];
   return null;
 }
-function contourSimilarity(a, b){
-  if(a.length < 3 || b.length < 3) return null;
-  const points = 12;
-  const normalized = source=>{
-    const values = Array.from({length:points}, (_, i)=>source[Math.round(i*(source.length-1)/(points-1))]);
-    const mean = values.reduce((sum, value)=>sum+value, 0) / values.length;
-    return values.map(value=>(value-mean)/mean);
-  };
-  const x = normalized(a), y = normalized(b);
-  let xy=0, xx=0, yy=0;
-  for(let i=0; i<points; i++){ xy+=x[i]*y[i]; xx+=x[i]*x[i]; yy+=y[i]*y[i]; }
-  return Math.max(0, Math.min(1, (xy / Math.sqrt(xx*yy || 1) + 1) / 2));
-}
-function comparePractice(){
-  if(!practiceMetrics){ comparisonMessage = 'Enregistre d’abord ton essai.'; renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null); return; }
-  if(!referenceMetrics){ comparisonMessage = 'Écoute d’abord la référence : elle sera mesurée automatiquement.'; renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null); return; }
-  const duration = Math.min(practiceMetrics.duration, referenceMetrics.duration) / Math.max(practiceMetrics.duration, referenceMetrics.duration);
-  const contour = contourSimilarity(practiceMetrics.pitches, referenceMetrics.pitches);
-  const score = contour === null ? Math.round(duration*100) : Math.round((duration*.35 + contour*.65)*100);
-  const tone = contour === null ? 'Le rythme est mesuré, mais il y a trop peu de voix nette pour comparer les tons.'
-    : contour >= .72 ? 'Le rythme et le contour des tons sont proches.'
-    : contour >= .5 ? 'Bonne base : réécoute surtout la montée et la descente des tons.'
-    : 'Le rythme ou les tons sont encore éloignés : répète lentement avec la référence.';
-  comparisonMessage = `Repère indicatif : ${score}/100 — ${tone}`;
-  renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
-}
-async function listenToReference(){
+function listenToReference(){
   const target = comparisonTargetFor(idx), url = target && audioFileFor('zh', target.zh);
-  if(!target || !url){ comparisonMessage = 'Référence chinoise introuvable pour cette séquence.'; renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null); return; }
-  if(!window.AudioContext && !window.webkitAudioContext){ new Audio(url).play(); return; }
-  try{
-    practiceAudioContext = practiceAudioContext || new (window.AudioContext || window.webkitAudioContext)();
-    await practiceAudioContext.resume();
-    const reference = new Audio(url), analyser = practiceAudioContext.createAnalyser();
-    analyser.fftSize = 2048;
-    const source = practiceAudioContext.createMediaElementSource(reference);
-    source.connect(analyser); analyser.connect(practiceAudioContext.destination);
-    const metrics = createMetrics();
-    const timer = setInterval(()=>samplePitch(analyser, metrics), 75);
-    reference.onended = ()=>{
-      clearInterval(timer); referenceMetrics = finishMetrics(metrics);
-      comparisonMessage = 'Référence écoutée. Tu peux maintenant comparer ton essai.';
-      renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
-    };
-    comparisonMessage = `Référence : ${target.zh}`;
-    renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
-    await reference.play();
-  }catch(error){
-    comparisonMessage = 'Impossible d’analyser la référence dans ce navigateur.';
-    renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
-  }
+  if(!target || !url){ alert('Référence chinoise introuvable pour cette séquence.'); return; }
+  new Audio(url).play().catch(()=>alert('Impossible de lire la référence.'));
 }
 function clearPracticeRecording(){
   practiceGeneration++;
   practiceStarting = false;
-  stopPracticeMeter();
   if(practiceRecorder && practiceRecorder.state === 'recording') practiceRecorder.stop();
   if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
   practiceRecorder = null; practiceStream = null; practiceChunks = [];
   if(practiceUrl){ URL.revokeObjectURL(practiceUrl); practiceUrl = null; }
   practiceStep = -1;
-  practiceMetrics = null; referenceMetrics = null; comparisonMessage = '';
 }
 async function startPracticeRecording(){
   if(practiceStarting) return;
@@ -285,10 +190,6 @@ async function startPracticeRecording(){
     if(!navigator.mediaDevices || !window.MediaRecorder) throw new Error('Enregistrement micro non pris en charge par ce navigateur.');
     practiceStream = await navigator.mediaDevices.getUserMedia({audio:true});
     if(generation !== practiceGeneration){ practiceStream.getTracks().forEach(track=>track.stop()); return; }
-    practiceAudioContext = practiceAudioContext || new (window.AudioContext || window.webkitAudioContext)();
-    await practiceAudioContext.resume();
-    practiceAnalyser = practiceAudioContext.createAnalyser(); practiceAnalyser.fftSize = 2048;
-    practiceAudioContext.createMediaStreamSource(practiceStream).connect(practiceAnalyser);
     const chunks = practiceChunks = []; practiceStep = idx;
     const recorder = practiceRecorder = new MediaRecorder(practiceStream);
     let recordingConfirmed = false;
@@ -296,7 +197,6 @@ async function startPracticeRecording(){
       if(recordingConfirmed || generation !== practiceGeneration) return;
       recordingConfirmed = true;
       practiceStarting = false;
-      practiceMetrics = startPracticeMeter();
       renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
     };
     recorder.ondataavailable = event=>{
@@ -314,9 +214,6 @@ async function startPracticeRecording(){
       }
       if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
       practiceStream = null;
-      practiceMetrics = finishMetrics(practiceMetrics);
-      practiceAnalyser = null;
-      stopPracticeMeter();
       renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
     };
     // Un court timeslice permet d'attendre une vraie donnée du micro plutôt
@@ -426,17 +323,8 @@ function renderContentCaption(step, yourTurnLabel){
       reference.className = 'record-compare'; reference.textContent = '🎧 Écouter la référence';
       reference.addEventListener('click', listenToReference);
       controls.appendChild(reference);
-      const compare = document.createElement('button');
-      compare.className = 'record-compare'; compare.textContent = '≈ Comparer';
-      compare.addEventListener('click', comparePractice);
-      controls.appendChild(compare);
     }
     c.appendChild(controls);
-    if(comparisonMessage){
-      const feedback = document.createElement('div');
-      feedback.className = 'practice-feedback'; feedback.textContent = comparisonMessage;
-      c.appendChild(feedback);
-    }
   }
 }
 /* le contenu affiché pendant une pause/hold = le dernier vrai contenu */
