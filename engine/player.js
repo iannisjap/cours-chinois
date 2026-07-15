@@ -374,6 +374,9 @@ function renderContentCaption(step, yourTurnLabel){
     d.className = 'your-turn';
     d.textContent = yourTurnLabel;
     c.appendChild(d);
+    // Une pause de question attend une réponse personnelle : elle n'a pas de
+    // modèle à imiter. L'enregistreur est réservé aux phrases à répéter.
+    if(yourTurnLabel.startsWith('À toi de répondre')) return;
     const controls = document.createElement('div');
     controls.className = 'record-controls';
     const recording = practiceRecorder && practiceRecorder.state === 'recording';
