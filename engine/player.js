@@ -291,7 +291,22 @@ async function startPracticeRecording(){
     practiceAudioContext.createMediaStreamSource(practiceStream).connect(practiceAnalyser);
     const chunks = practiceChunks = []; practiceStep = idx;
     const recorder = practiceRecorder = new MediaRecorder(practiceStream);
-    recorder.ondataavailable = event=>{ if(event.data.size) chunks.push(event.data); };
+    let recordingConfirmed = false;
+    const confirmRecording = ()=>{
+      if(recordingConfirmed || generation !== practiceGeneration) return;
+      recordingConfirmed = true;
+      practiceStarting = false;
+      practiceMetrics = startPracticeMeter();
+      renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+    };
+    recorder.ondataavailable = event=>{
+      if(event.data.size){
+        chunks.push(event.data);
+        // Le premier fragment non vide est la preuve que le micro fournit
+        // vraiment des données ; seulement là le bouton devient « Stop ».
+        confirmRecording();
+      }
+    };
     recorder.onstop = ()=>{
       if(generation !== practiceGeneration) return;
       if(chunks.length){
@@ -304,10 +319,9 @@ async function startPracticeRecording(){
       stopPracticeMeter();
       renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
     };
-    recorder.start();
-    practiceMetrics = startPracticeMeter();
-    practiceStarting = false;
-    renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+    // Un court timeslice permet d'attendre une vraie donnée du micro plutôt
+    // que de présenter « Stop » dès l'appel asynchrone à MediaRecorder.start.
+    recorder.start(250);
   }catch(error){
     practiceStarting = false;
     renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
