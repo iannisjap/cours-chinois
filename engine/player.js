@@ -154,6 +154,7 @@ const store = {
 
 let practiceRecorder = null, practiceStream = null, practiceChunks = [];
 let practiceUrl = null, practiceStep = -1, practiceGeneration = 0;
+let practiceStarting = false;
 let practiceMetrics = null, referenceMetrics = null, comparisonMessage = '';
 let practiceAudioContext = null, practiceAnalyser = null, practiceMeterFrame = null;
 
@@ -265,6 +266,7 @@ async function listenToReference(){
 }
 function clearPracticeRecording(){
   practiceGeneration++;
+  practiceStarting = false;
   stopPracticeMeter();
   if(practiceRecorder && practiceRecorder.state === 'recording') practiceRecorder.stop();
   if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
@@ -274,32 +276,43 @@ function clearPracticeRecording(){
   practiceMetrics = null; referenceMetrics = null; comparisonMessage = '';
 }
 async function startPracticeRecording(){
+  if(practiceStarting) return;
   clearPracticeRecording();
-  if(!navigator.mediaDevices || !window.MediaRecorder) throw new Error('Enregistrement micro non pris en charge par ce navigateur.');
-  practiceStream = await navigator.mediaDevices.getUserMedia({audio:true});
-  practiceAudioContext = practiceAudioContext || new (window.AudioContext || window.webkitAudioContext)();
-  await practiceAudioContext.resume();
-  practiceAnalyser = practiceAudioContext.createAnalyser(); practiceAnalyser.fftSize = 2048;
-  practiceAudioContext.createMediaStreamSource(practiceStream).connect(practiceAnalyser);
-  const chunks = practiceChunks = []; practiceStep = idx;
   const generation = ++practiceGeneration;
-  const recorder = practiceRecorder = new MediaRecorder(practiceStream);
-  recorder.ondataavailable = event=>{ if(event.data.size) chunks.push(event.data); };
-  recorder.onstop = ()=>{
-    if(generation !== practiceGeneration) return;
-    if(chunks.length){
-      practiceUrl = URL.createObjectURL(new Blob(chunks, {type:recorder.mimeType||'audio/webm'}));
-    }
-    if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
-    practiceStream = null;
-    practiceMetrics = finishMetrics(practiceMetrics);
-    practiceAnalyser = null;
-    stopPracticeMeter();
-    renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
-  };
-  practiceRecorder.start();
-  practiceMetrics = startPracticeMeter();
+  practiceStarting = true;
   renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+  try{
+    if(!navigator.mediaDevices || !window.MediaRecorder) throw new Error('Enregistrement micro non pris en charge par ce navigateur.');
+    practiceStream = await navigator.mediaDevices.getUserMedia({audio:true});
+    if(generation !== practiceGeneration){ practiceStream.getTracks().forEach(track=>track.stop()); return; }
+    practiceAudioContext = practiceAudioContext || new (window.AudioContext || window.webkitAudioContext)();
+    await practiceAudioContext.resume();
+    practiceAnalyser = practiceAudioContext.createAnalyser(); practiceAnalyser.fftSize = 2048;
+    practiceAudioContext.createMediaStreamSource(practiceStream).connect(practiceAnalyser);
+    const chunks = practiceChunks = []; practiceStep = idx;
+    const recorder = practiceRecorder = new MediaRecorder(practiceStream);
+    recorder.ondataavailable = event=>{ if(event.data.size) chunks.push(event.data); };
+    recorder.onstop = ()=>{
+      if(generation !== practiceGeneration) return;
+      if(chunks.length){
+        practiceUrl = URL.createObjectURL(new Blob(chunks, {type:recorder.mimeType||'audio/webm'}));
+      }
+      if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
+      practiceStream = null;
+      practiceMetrics = finishMetrics(practiceMetrics);
+      practiceAnalyser = null;
+      stopPracticeMeter();
+      renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+    };
+    recorder.start();
+    practiceMetrics = startPracticeMeter();
+    practiceStarting = false;
+    renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+  }catch(error){
+    practiceStarting = false;
+    renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+    throw error;
+  }
 }
 function stopPracticeRecording(){ if(practiceRecorder && practiceRecorder.state === 'recording') practiceRecorder.stop(); }
 
@@ -380,9 +393,11 @@ function renderContentCaption(step, yourTurnLabel){
     const controls = document.createElement('div');
     controls.className = 'record-controls';
     const recording = practiceRecorder && practiceRecorder.state === 'recording';
+    const starting = practiceStarting;
     const record = document.createElement('button');
-    record.className = 'record-btn' + (recording ? ' recording' : '');
-    record.textContent = recording ? '■ Stop' : '● Enregistrer';
+    record.className = 'record-btn' + (recording ? ' recording' : '') + (starting ? ' starting' : '');
+    record.textContent = recording ? '■ Stop' : (starting ? 'Connexion au micro…' : '● Enregistrer');
+    record.disabled = starting;
     record.addEventListener('click', async ()=>{
       try{ recording ? stopPracticeRecording() : await startPracticeRecording(); }
       catch(error){ alert(error.message || 'Micro indisponible.'); }

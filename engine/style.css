@@ -61,6 +61,7 @@ svg.ring{width:170px;height:170px;transform:rotate(-90deg)}
 .record-controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:9px}
 .record-btn,.record-play,.record-compare{font-size:12px;padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.08)}
 .record-btn{color:#ffb1aa;border-color:rgba(255,141,130,.6)}
+.record-btn.starting{color:var(--muted);border-color:rgba(255,255,255,.16);cursor:wait}
 .record-btn.recording{background:var(--cinnabar);color:var(--paper);animation:record-pulse 1s ease-in-out infinite}
 .record-play{color:var(--gold)}
 .record-compare{color:#b9d9ff;border-color:rgba(145,194,255,.45)}
