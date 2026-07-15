@@ -65,7 +65,7 @@ def collect_segments(source: str, part: int):
         section = source[start:end]
     items = []
     # Les chaînes de ce projet n'utilisent pas de guillemet double non échappé.
-    pattern = re.compile(r'\b(N|C|teach2|teach)\("((?:[^"\\]|\\.)*)"(?:,"((?:[^"\\]|\\.)*)")?(?:,"((?:[^"\\]|\\.)*)")?(?:,[^)]*)?\)')
+    pattern = re.compile(r'\b(N|C|teach2|teach|drill)\("((?:[^"\\]|\\.)*)"(?:,"((?:[^"\\]|\\.)*)")?(?:,"((?:[^"\\]|\\.)*)")?(?:,[^)]*)?\)')
     for kind, one, two, three in pattern.findall(section):
         if kind == "N":
             for lang, text in narration_segments(js_string(one)):
@@ -76,7 +76,14 @@ def collect_segments(source: str, part: int):
                     items.append((lang, text.strip()))
         elif kind == "C":
             items.append(("zh", js_string(one)))
-        else:  # teach2 : deux lectures de la même phrase, un seul MP3 suffit.
+        elif kind == "drill":
+            # drill(promptFr, chinois, pinyin, traduction) produit lui aussi
+            # une consigne française et deux étapes chinoises dans le lecteur.
+            for lang, text in narration_segments(js_string(one)):
+                if text.strip() and any(char.isalnum() for char in text):
+                    items.append((lang, text.strip()))
+            items.append(("zh", js_string(two)))
+        else:  # teach / teach2 : plusieurs lectures, un seul MP3 suffit.
             items.append(("zh", js_string(one)))
     # Le moteur recherche par texte : les doublons doivent partager le même MP3.
     return list(dict.fromkeys(items))
