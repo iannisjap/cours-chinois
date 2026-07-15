@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+"""Génère les MP3 Edge TTS et le manifeste d'une partie de cours.
+
+Usage :
+  .venv-tts/bin/python tools/generate_edge_audio.py chapters/hsk1/01-bonjour.js 1 audio/hsk1-01-1
+"""
+
+import asyncio
+import hashlib
+import json
+import re
+import sys
+from pathlib import Path
+
+import edge_tts
+
+FR_VOICE = "fr-CH-ArianeNeural"
+ZH_VOICE = "zh-CN-XiaoxiaoNeural"
+MAX_ATTEMPTS = 6
+
+
+def js_string(value: str) -> str:
+    return json.loads('"' + value + '"')
+
+
+def narration_segments(text: str):
+    tagged = re.compile(r"\[\[([^|\]]+)\|[^\]]+\]\]")
+    cjk = re.compile(r"[\u4e00-\u9fff]+")
+
+    def bare(part: str):
+        last = 0
+        for match in cjk.finditer(part):
+            if match.start() > last:
+                yield "fr", part[last:match.start()]
+            yield "zh", match.group(0)
+            last = match.end()
+        if last < len(part):
+            yield "fr", part[last:]
+
+    last = 0
+    for match in tagged.finditer(text):
+        if match.start() > last:
+            yield from bare(text[last:match.start()])
+        yield "zh", match.group(1)
+        last = match.end()
+    if last < len(text):
+        yield from bare(text[last:])
+
+
+def collect_segments(source: str, part: int):
+    marker = f"// ================= PARTIE {part} ================="
+    start = source.find(marker)
+    if start != -1:
+        next_marker = source.find(f"// ================= PARTIE {part + 1} =================", start + 1)
+        section = source[start: next_marker if next_marker != -1 else len(source)]
+    else:
+        # Les anciens bonus regroupent leurs leçons dans un tableau d'objets
+        # { num: 1, ..., build(){ return [...] } } sans marqueur PARTIE.
+        lesson = re.search(rf"\{{\s*num\s*:\s*{part}\s*,", source)
+        if not lesson:
+            raise ValueError(f"Leçon {part} introuvable dans le fichier")
+        start = lesson.start()
+        following = re.search(rf"\{{\s*num\s*:\s*{part + 1}\s*,", source[lesson.end():])
+        end = lesson.end() + following.start() if following else len(source)
+        section = source[start:end]
+    items = []
+    # Les chaînes de ce projet n'utilisent pas de guillemet double non échappé.
+    pattern = re.compile(r'\b(N|C|teach2|teach)\("((?:[^"\\]|\\.)*)"(?:,"((?:[^"\\]|\\.)*)")?(?:,"((?:[^"\\]|\\.)*)")?(?:,[^)]*)?\)')
+    for kind, one, two, three in pattern.findall(section):
+        if kind == "N":
+            for lang, text in narration_segments(js_string(one)):
+                # Les fragments situés entre deux balises chinoises peuvent ne
+                # contenir qu'un signe de ponctuation. Edge TTS ne renvoie pas
+                # d'audio pour « . » ou « : » seuls : on les ignore.
+                if text.strip() and any(char.isalnum() for char in text):
+                    items.append((lang, text.strip()))
+        elif kind == "C":
+            items.append(("zh", js_string(one)))
+        else:  # teach2 : deux lectures de la même phrase, un seul MP3 suffit.
+            items.append(("zh", js_string(one)))
+    # Le moteur recherche par texte : les doublons doivent partager le même MP3.
+    return list(dict.fromkeys(items))
+
+
+async def main(source_file: Path, part: int, output: Path):
+    output.mkdir(parents=True, exist_ok=True)
+    items = collect_segments(source_file.read_text(encoding="utf-8"), part)
+    lookup = {}
+    for index, (lang, text) in enumerate(items, 1):
+        voice = FR_VOICE if lang == "fr" else ZH_VOICE
+        # La voix fait partie du nom : un changement de voix ne peut pas
+        # réutiliser un MP3 déjà mis en cache par le navigateur.
+        digest = hashlib.sha256(f"{voice}|{lang}|{text}".encode()).hexdigest()[:12]
+        stem = f"{lang}-{digest}"
+        target = output / f"{stem}.mp3"
+        # -25 % pour le chinois : il correspond à la référence du lecteur.
+        rate = "+0%" if lang == "fr" else "-25%"
+        print(f"[{index}/{len(items)}] {lang}: {text[:72]}")
+        if not target.exists() or target.stat().st_size < 1000:
+            for attempt in range(1, MAX_ATTEMPTS + 1):
+                try:
+                    target.unlink(missing_ok=True)
+                    await edge_tts.Communicate(text, voice=voice, rate=rate).save(str(target))
+                    if target.stat().st_size < 1000:
+                        raise RuntimeError("fichier audio vide ou incomplet")
+                    break
+                except Exception as exc:
+                    target.unlink(missing_ok=True)
+                    if attempt == MAX_ATTEMPTS:
+                        raise
+                    delay = min(2 ** (attempt - 1), 12)
+                    print(f"  tentative {attempt}/{MAX_ATTEMPTS} échouée ({exc}); reprise dans {delay} s")
+                    await asyncio.sleep(delay)
+        lookup[f"{lang}|{text}"] = stem
+    (output / "manifest.json").write_text(
+        json.dumps({"lookup": lookup}, ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8",
+    )
+    print(f"Terminé : {len(items)} segments dans {output}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        raise SystemExit("Usage: generate_edge_audio.py SOURCE PARTIE DOSSIER_SORTIE")
+    asyncio.run(main(Path(sys.argv[1]), int(sys.argv[2]), Path(sys.argv[3])))

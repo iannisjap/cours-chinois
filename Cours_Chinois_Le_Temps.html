@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>谈时间 · Le temps — Cours audio de chinois</title>
+<style>
+  :root{
+    --ink:#14213d; --ink-2:#1e3358; --cinnabar:#c73e2e;
+    --gold:#e8b84b; --paper:#f7f3ea; --muted:#8a94a8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    background:var(--ink); color:var(--paper);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    display:flex;flex-direction:column;align-items:center;
+    min-height:100dvh;overflow-x:hidden;
+  }
+  .hanzi{font-family:"Noto Serif SC","Songti SC","STSong",serif}
+
+  header{width:100%;max-width:520px;padding:18px 20px 6px;display:flex;justify-content:space-between;align-items:baseline}
+  header h1{font-size:15px;font-weight:600;letter-spacing:.04em}
+  header h1 .hanzi{color:var(--gold);font-size:17px;margin-right:6px}
+  header .lesson-tag{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+
+  .progress{width:100%;max-width:520px;padding:0 20px;margin-top:6px}
+  .bar{height:3px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+  .bar>div{height:100%;width:0%;background:var(--gold);transition:width .4s ease}
+  .progress .lbl{font-size:11px;color:var(--muted);margin-top:5px;display:flex;justify-content:space-between}
+
+  .stage{flex:1;width:100%;max-width:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 24px;gap:16px;text-align:center}
+
+  .ring-wrap{position:relative;width:170px;height:170px;flex:0 0 auto}
+  svg.ring{width:170px;height:170px;transform:rotate(-90deg)}
+  .ring circle{fill:none;stroke-width:5}
+  .ring .track{stroke:rgba(255,255,255,.10)}
+  .ring .arc{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+  .ring-core{
+    position:absolute;inset:14px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--ink-2), var(--ink) 70%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    border:1px solid rgba(232,184,75,.25);padding:8px;
+  }
+  .phase{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1.4}
+  .phase.speak-zh{color:var(--cinnabar);font-weight:700}
+  .phase.speak-fr{color:var(--paper)}
+  .phase.pause-p{color:var(--gold);font-weight:700}
+  .core-icon{font-size:30px;line-height:1}
+  .pulse{animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(1.12);opacity:1}}
+  @media (prefers-reduced-motion: reduce){.pulse{animation:none}}
+
+  .caption{min-height:130px;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:flex-start;width:100%}
+  .caption .zh{font-size:32px;color:var(--paper);line-height:1.25}
+  .caption .py{font-size:16px;color:var(--gold)}
+  .caption .fr{font-size:14.5px;color:var(--muted);max-width:36ch;line-height:1.5}
+  .caption .fr .py-inline{color:var(--gold);font-weight:600;font-style:normal}
+  .caption .hidden-note{font-size:12px;color:var(--muted);font-style:italic}
+  .caption .your-turn{
+    margin-top:6px;font-size:12.5px;color:var(--gold);font-weight:600;
+    border:1px dashed rgba(232,184,75,.5);border-radius:999px;padding:6px 14px;
+  }
+
+  .controls{width:100%;max-width:520px;padding:8px 24px calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px}
+  .main-row{display:flex;align-items:center;justify-content:center;gap:22px}
+  button{border:none;background:none;color:var(--paper);cursor:pointer;font-family:inherit}
+  button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+  .skip{font-size:12px;color:var(--muted);padding:10px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:56px}
+  .skip .big{font-size:17px;font-weight:700;color:var(--paper)}
+  .play{
+    width:78px;height:78px;border-radius:50%;background:var(--cinnabar);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 22px rgba(199,62,46,.45);transition:transform .12s ease;
+  }
+  .play:active{transform:scale(.94)}
+  .play svg{width:32px;height:32px;fill:var(--paper)}
+
+  .opts{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+  .chip{font-size:12px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.22);color:var(--paper);background:rgba(255,255,255,.05)}
+  .chip.on{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600}
+
+  .voice-panel{display:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:14px;gap:10px;flex-direction:column;font-size:13px}
+  .voice-panel.open{display:flex}
+  .voice-panel label{color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .voice-panel select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:var(--ink-2);color:var(--paper);font-size:13px}
+  .voice-panel .row{display:flex;gap:8px;align-items:center}
+  .voice-panel .test{flex:0 0 auto;font-size:12px;padding:9px 14px;border-radius:10px;background:var(--gold);color:var(--ink);font-weight:600}
+  .voice-panel .hint{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+  .overlay{position:fixed;inset:0;background:var(--ink);z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:38px 22px calc(30px + env(safe-area-inset-bottom));text-align:center;gap:14px;overflow-y:auto}
+  .menu-list{width:100%;max-width:440px;display:flex;flex-direction:column;gap:10px;margin-top:6px}
+  .menu-item{
+    display:flex;align-items:center;gap:14px;text-align:left;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    border-radius:14px;padding:13px 15px;color:var(--paper);width:100%;
+  }
+  .menu-item:active{background:rgba(255,255,255,.12)}
+  .mi-num{
+    flex:0 0 34px;height:34px;border-radius:50%;background:var(--cinnabar);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;
+  }
+  .mi-num.star{background:var(--gold);color:var(--ink)}
+  .mi-hz{flex:0 0 auto;font-size:20px;color:var(--gold)}
+  .mi-tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .mi-tx b{font-size:14px}
+  .mi-tx small{font-size:11.5px;color:var(--muted)}
+  .menu-inline{
+    display:block;margin:10px auto 0;background:var(--cinnabar);color:var(--paper);
+    font-size:14px;font-weight:600;padding:12px 22px;border-radius:999px;
+    box-shadow:0 4px 16px rgba(199,62,46,.4);
+  }
+  .menu-inline.ghost{background:transparent;border:1px solid rgba(255,255,255,.3);box-shadow:none;color:var(--muted)}
+  .overlay .big-hanzi{font-size:64px;color:var(--gold)}
+  .overlay h2{font-size:20px;font-weight:600}
+  .overlay p{font-size:14px;color:var(--muted);max-width:36ch;line-height:1.55}
+  .overlay .start{margin-top:10px;background:var(--cinnabar);color:var(--paper);font-size:16px;font-weight:600;padding:15px 42px;border-radius:999px;box-shadow:0 6px 22px rgba(199,62,46,.45)}
+  .overlay .tip{font-size:12px;color:var(--muted)}
+  .voice-warn{font-size:12px;color:var(--gold);max-width:38ch;line-height:1.5;display:none}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay">
+  <div class="big-hanzi hanzi" style="font-size:52px">谈时间</div>
+  <h2>Le temps · Cours audio de chinois</h2>
+  <p>Sept leçons dans l'esprit Pimsleur. Fais-les dans l'ordre : chaque leçon révise les précédentes. La leçon s'arrête quand c'est à toi de parler (désactivable avec « Mode continu »).</p>
+  <p class="voice-warn" id="voiceWarn">⚠️ Aucune voix chinoise détectée sur cet appareil. (Sur iPhone : Réglages → Accessibilité → Contenu énoncé → Voix → Chinois.)</p>
+  <div class="menu-list" id="menuList"></div>
+  <div class="tip">Écouteurs conseillés · voix réglables dans 🎙 Voix · export ⏺ MP3 sur ordinateur</div>
+</div>
+
+<header>
+  <h1><span class="hanzi">谈时间</span>Parler de l'heure</h1>
+  <span style="display:flex;gap:10px;align-items:center"><span class="lesson-tag" id="lessonTag">—</span><button class="chip" id="menuBtn" style="padding:6px 12px">☰ Menu</button></span>
+</header>
+
+<div class="progress">
+  <div class="bar"><div id="barFill"></div></div>
+  <div class="lbl"><span id="stepLbl">—</span><span id="timeLbl"></span></div>
+</div>
+
+<main class="stage">
+  <div class="ring-wrap">
+    <svg class="ring" viewBox="0 0 200 200">
+      <circle class="track" cx="100" cy="100" r="93"/>
+      <circle class="arc" id="arc" cx="100" cy="100" r="93" stroke-dasharray="584.3" stroke-dashoffset="584.3"/>
+    </svg>
+    <div class="ring-core">
+      <div class="core-icon" id="coreIcon">🎧</div>
+      <div class="phase" id="phaseLbl">Prêt</div>
+    </div>
+  </div>
+
+  <div class="caption" id="caption">
+    <div class="fr">Appuie sur lecture pour commencer.</div>
+  </div>
+</main>
+
+<div class="controls">
+  <div class="main-row">
+    <button class="skip" id="backBtn" aria-label="Reculer de 10 secondes">
+      <span class="big">−10</span>sec
+    </button>
+    <button class="play" id="playBtn" aria-label="Lecture / pause">
+      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+    </button>
+    <button class="skip" id="fwdBtn" aria-label="Avancer de 10 secondes">
+      <span class="big">+10</span>sec
+    </button>
+  </div>
+  <div class="opts">
+    <button class="chip on" id="textChip">Afficher le texte</button>
+    <button class="chip" id="slowChip">Encore + lent</button>
+    <button class="chip" id="contChip">Mode continu</button>
+    <button class="chip" id="replayChip">🔁 Réécouter</button>
+    <button class="chip" id="voiceChip">🎙 Voix</button>
+    <button class="chip" id="recChip">⏺ MP3</button>
+  </div>
+  <div class="voice-panel" id="voicePanel">
+    <label for="zhSelect">Voix chinoise</label>
+    <div class="row">
+      <select id="zhSelect"></select>
+      <button class="test" id="zhTest">Tester</button>
+    </div>
+    <label for="frSelect">Voix française (narrateur)</label>
+    <div class="row">
+      <select id="frSelect"></select>
+      <button class="test" id="frTest">Tester</button>
+    </div>
+    <div class="hint">💡 Pour une meilleure voix gratuite : sur iPhone, télécharge une voix chinoise « Premium / Améliorée » (Réglages → Accessibilité → Contenu énoncé → Voix). Sur PC/Android, ouvre ce fichier dans Microsoft Edge pour les voix neuronales « Natural ». Elles apparaîtront ensuite dans cette liste.</div>
+  </div>
+  <div class="voice-panel" id="recPanel">
+    <label>Exporter la leçon en MP3 (ordinateur)</label>
+    <div class="hint">Sur PC avec <b>Edge</b> ou Chrome : clique « Démarrer », choisis <b>Cet onglet</b> dans la fenêtre de partage et coche <b>Partager aussi l'audio de l'onglet</b>. La leçon se rejoue alors en entier en mode continu, et le MP3 est téléchargé automatiquement à la fin. Astuce : choisis d'abord une voix « Natural » dans 🎙 Voix, et ne touche à rien pendant l'enregistrement.</div>
+    <div class="row">
+      <button class="test" id="recBtn">⏺ Démarrer</button>
+      <button class="test" id="recStopBtn" style="display:none">⏹ Arrêter et sauvegarder</button>
+    </div>
+    <div class="hint" id="recHint"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Moteur v3
+   - N  : narrateur français ([[汉字|pinyin]] = voix chinoise)
+   - C  : phrase chinoise {zh, py, fr, rate}
+   - P  : petite pause chronométrée (le texte reste affiché)
+   - HOLD : PAUSE AUTOMATIQUE — la leçon attend que tu appuies ▶
+   ============================================================ */
+const ZH_SLOW = 0.75;   // ralentissement global du chinois (multiplié aux vitesses)
+
+const N = (text) => ({t:'fr', text});
+const C = (zh, py, fr, rate) => ({t:'zh', zh, py, fr, rate});
+const P = (sec, label) => ({t:'pause', sec, label: label||'…'});
+const HOLD = (label) => ({t:'hold', label: label||'Répète à voix haute, puis ▶'});
+const TH = () => ({t:'hold', label:'À toi de répondre à voix haute — ▶ pour entendre la réponse'});
+
+function teach(zh, py, fr){
+  return [ C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.7), HOLD() ];
+}
+function drill(promptFr, zh, py, fr){
+  return [ N(promptFr), TH(), C(zh,py,fr,0.65), P(2.5), C(zh,py,fr,0.65), HOLD() ];
+}
+
+let steps = [];
+let cur = 0;
+
+/* ============================================================
+   DONNÉES DU COURS — pour ajouter une leçon : ajouter un objet
+   { num, hanzi, title, desc, build(){ return [ ...étapes... ]; } }
+   (les étapes utilisent N, C, P, HOLD, TH, teach, drill ci-dessus)
+   ============================================================ */
+const LESSONS = [
+  { num:1, hanzi:"谈时间", title:"Parler de l'heure", desc:"几点 · 点 · 半 · 一刻 · 差",
+    build(){ return [
+// ---------- Introduction ----------
+  N("Bienvenue dans cette leçon de chinois mandarin. Aujourd'hui : demander et donner l'heure. Écoutez d'abord cette courte conversation entre deux collègues à Pékin."),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.4),
+  P(2,"…"),
+  C("现在十点。","Xiànzài shí diǎn.","Il est dix heures.",0.4),
+  N("Dans les prochaines minutes, vous apprendrez à avoir cette conversation vous-même. Écoutez encore une fois."),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.4),
+  P(2,"…"),
+  C("现在十点。","Xiànzài shí diǎn.","Il est dix heures.",0.4),
+
+  // ---------- 点 ----------
+  N("Le mot pour « heure », au sens de l'heure sur l'horloge, est [[点|diǎn]]. Écoutez et répétez."),
+  ...teach("点","diǎn","heure (sur l'horloge)"),
+  N("« Quelle heure », littéralement « combien d'heures », se dit [[几点|jǐ diǎn]]. D'abord la fin : [[点|diǎn]]."),
+  C("点","diǎn","",0.5), P(2,"…"),
+  N("Maintenant, le mot entier : [[几点|jǐ diǎn]]."),
+  ...teach("几点","jǐ diǎn","quelle heure"),
+  N("« Maintenant » se dit [[现在|xiànzài]]. Répétez."),
+  ...teach("现在","xiànzài","maintenant"),
+  N("À vous : dites « Quelle heure est-il ? » — littéralement « maintenant, quelle heure ? »"),
+  TH(),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), P(2.5,"…"),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), HOLD(),
+
+  // ---------- Répondre ----------
+  N("Pour répondre, on dit le nombre, puis [[点|diǎn]]. « Dix » se dit [[十|shí]]. Écoutez : il est dix heures."),
+  ...teach("现在十点。","Xiànzài shí diǎn.","Il est dix heures."),
+  N("« Neuf » se dit [[九|jiǔ]]. Dites : il est neuf heures."),
+  TH(),
+  C("现在九点。","Xiànzài jiǔ diǎn.","Il est neuf heures.",0.65), HOLD(),
+  N("Attention : pour « deux heures », on n'utilise pas [[二|èr]] mais [[两|liǎng]]. Écoutez : [[两点|liǎng diǎn]]."),
+  ...teach("两点","liǎng diǎn","deux heures"),
+  N("Dites : il est deux heures."),
+  TH(),
+  C("现在两点。","Xiànzài liǎng diǎn.","Il est deux heures.",0.65), HOLD(),
+
+  // ---------- Rappel espacé n°1 ----------
+  N("Comment demandez-vous « Quelle heure est-il ? »"),
+  TH(),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), HOLD(),
+
+  // ---------- 半 ----------
+  N("« Et demie » se dit [[半|bàn]]. Écoutez et répétez."),
+  ...teach("半","bàn","et demie"),
+  N("Il est neuf heures et demie :"),
+  ...teach("九点半","jiǔ diǎn bàn","neuf heures et demie"),
+  ...drill("Dites : il est dix heures et demie.","现在十点半。","Xiànzài shí diǎn bàn.","Il est dix heures et demie."),
+
+  // ---------- 一刻 ----------
+  N("« Un quart d'heure » se dit [[一刻|yí kè]]. Écoutez et répétez."),
+  ...teach("一刻","yí kè","un quart (d'heure)"),
+  N("Il est une heure et quart. « Une heure » se dit [[一点|yī diǎn]] :"),
+  ...teach("一点一刻","yī diǎn yí kè","une heure et quart"),
+  ...drill("Dites : il est neuf heures et quart.","现在九点一刻。","Xiànzài jiǔ diǎn yí kè.","Il est neuf heures et quart."),
+
+  // ---------- Rappel espacé n°2 ----------
+  N("Vous souvenez-vous ? Dites : il est deux heures."),
+  TH(),
+  C("现在两点。","Xiànzài liǎng diǎn.","Il est deux heures.",0.65), P(2,"…"),
+  N("Et maintenant : il est deux heures et demie."),
+  TH(),
+  C("现在两点半。","Xiànzài liǎng diǎn bàn.","Il est deux heures et demie.",0.65), HOLD(),
+
+  // ---------- 差 ----------
+  N("Pour dire « moins le quart », le chinois dit « il manque un quart ». « Il manque » se dit [[差|chà]]. Écoutez et répétez."),
+  ...teach("差","chà","il manque (« moins »)"),
+  N("Onze heures moins le quart — littéralement « manque un quart, onze heures » :"),
+  ...teach("差一刻十一点","chà yí kè shíyī diǎn","onze heures moins le quart"),
+  ...drill("Dites : il est quatre heures moins le quart.","现在差一刻四点。","Xiànzài chà yí kè sì diǎn.","Il est quatre heures moins le quart."),
+  N("« Cinq minutes » se dit [[五分|wǔ fēn]]. Midi moins cinq — « manque cinq minutes, douze heures » :"),
+  ...teach("差五分十二点","chà wǔ fēn shí'èr diǎn","midi moins cinq"),
+
+  // ---------- Mini-conversation ----------
+  N("Quelqu'un vous aborde dans la rue à Pékin et vous demande :"),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65),
+  N("Il est neuf heures et demie. Répondez-lui."),
+  TH(),
+  C("现在九点半。","Xiànzài jiǔ diǎn bàn.","Il est neuf heures et demie.",0.65), HOLD(),
+  N("Maintenant c'est vous qui ne connaissez pas l'heure. Demandez-la."),
+  TH(),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), P(2,"…"),
+  C("差一刻十一点。","Chà yí kè shíyī diǎn.","Onze heures moins le quart.",0.65),
+  N("Qu'a-t-il répondu ? … Il est onze heures moins le quart."),
+
+  // ---------- 起床 ----------
+  N("Un dernier mot pour aujourd'hui. « Se lever », le matin, se dit [[起床|qǐchuáng]]. Écoutez et répétez."),
+  ...teach("起床","qǐchuáng","se lever"),
+  N("« Chaque jour » se dit [[每天|měitiān]]. « À quelle heure te lèves-tu chaque jour ? » Écoutez :"),
+  ...teach("你每天几点起床？","Nǐ měitiān jǐ diǎn qǐchuáng?","À quelle heure te lèves-tu chaque jour ?"),
+  N("Répondez : « je me lève à sept heures ». « Je » se dit [[我|wǒ]], et « sept » se dit [[七|qī]]."),
+  TH(),
+  C("我七点起床。","Wǒ qī diǎn qǐchuáng.","Je me lève à sept heures.",0.6), P(2.5,"…"),
+  C("我七点起床。","Wǒ qī diǎn qǐchuáng.","Je me lève à sept heures.",0.65), HOLD(),
+
+  // ---------- Révision finale ----------
+  N("Révision finale. Demandez : quelle heure est-il ?"),
+  TH(),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), P(1.5,"…"),
+  N("Dites : il est une heure et quart."),
+  TH(),
+  C("现在一点一刻。","Xiànzài yī diǎn yí kè.","Il est une heure et quart.",0.65), P(1.5,"…"),
+  N("Il est dix heures et demie."),
+  TH(),
+  C("现在十点半。","Xiànzài shí diǎn bàn.","Il est dix heures et demie.",0.65), P(1.5,"…"),
+  N("Il est quatre heures moins le quart."),
+  TH(),
+  C("现在差一刻四点。","Xiànzài chà yí kè sì diǎn.","Il est quatre heures moins le quart.",0.65), P(1.5,"…"),
+  N("Demandez-moi à quelle heure je me lève."),
+  TH(),
+  C("你每天几点起床？","Nǐ měitiān jǐ diǎn qǐchuáng?","À quelle heure te lèves-tu chaque jour ?",0.65), P(2,"…"),
+  C("我七点起床。","Wǒ qī diǎn qǐchuáng.","Je me lève à sept heures.",0.65),
+  N("Excellent travail. C'est la fin de la leçon 1. Réécoutez-la demain avant de passer à la suite — c'est la répétition espacée qui fait tout. Au revoir se dit [[再见|zàijiàn]] !"),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+  { num:2, hanzi:"谈作息", title:"Ma journée et les durées", desc:"上课 · 吃饭 · 睡觉 · 小时/分钟 · 大概",
+    build(){ return [
+// ---------- Révision de la leçon 1 ----------
+  N("Bienvenue dans la leçon 2. Aujourd'hui : parler de sa journée et exprimer une durée. Mais d'abord, une petite révision. Demandez : quelle heure est-il ?"),
+  TH(),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), P(2,"…"),
+  N("Dites : il est neuf heures et demie."),
+  TH(),
+  C("现在九点半。","Xiànzài jiǔ diǎn bàn.","Il est neuf heures et demie.",0.65), P(2,"…"),
+  N("Et : je me lève à sept heures."),
+  TH(),
+  C("我七点起床。","Wǒ qī diǎn qǐchuáng.","Je me lève à sept heures.",0.65), HOLD(),
+
+  // ---------- Dialogue cible ----------
+  N("Très bien. Écoutez maintenant la conversation d'aujourd'hui, entre deux étudiants."),
+  C("你每天几点上课？","Nǐ měitiān jǐ diǎn shàngkè?","À quelle heure as-tu cours chaque jour ?",0.4),
+  P(2,"…"),
+  C("我八点上课。","Wǒ bā diǎn shàngkè.","J'ai cours à huit heures.",0.4),
+  P(2,"…"),
+  C("你每天学习多长时间？","Nǐ měitiān xuéxí duō cháng shíjiān?","Combien de temps étudies-tu chaque jour ?",0.4),
+  P(2,"…"),
+  C("大概四个小时。","Dàgài sì ge xiǎoshí.","Environ quatre heures.",0.4),
+  N("À la fin de cette leçon, cette conversation sera à vous."),
+
+  // ---------- 上课 / 下课 ----------
+  N("« Le cours », « la classe », se dit [[课|kè]]. Écoutez et répétez."),
+  ...teach("课","kè","le cours"),
+  N("« Aller en cours », « commencer les cours », se dit [[上课|shàngkè]] — littéralement « monter en cours »."),
+  ...teach("上课","shàngkè","aller en cours"),
+  N("Et « finir les cours » se dit [[下课|xiàkè]] — « descendre du cours »."),
+  ...teach("下课","xiàkè","finir les cours"),
+  N("Demandez : à quelle heure as-tu cours chaque jour ? Souvenez-vous : « chaque jour » se dit [[每天|měitiān]]."),
+  TH(),
+  C("你每天几点上课？","Nǐ měitiān jǐ diǎn shàngkè?","À quelle heure as-tu cours chaque jour ?",0.6), HOLD(),
+  N("Répondez : j'ai cours à huit heures. « Huit » se dit [[八|bā]]."),
+  TH(),
+  C("我八点上课。","Wǒ bā diǎn shàngkè.","J'ai cours à huit heures.",0.65), HOLD(),
+
+  // ---------- 吃午饭 ----------
+  N("« Manger » se dit [[吃|chī]]. Écoutez et répétez."),
+  ...teach("吃","chī","manger"),
+  N("« Le déjeuner », le repas de midi, se dit [[午饭|wǔfàn]]."),
+  ...teach("午饭","wǔfàn","le déjeuner"),
+  N("Manger le déjeuner : [[吃午饭|chī wǔfàn]]."),
+  ...teach("吃午饭","chī wǔfàn","déjeuner"),
+  ...drill("Demandez : à quelle heure déjeunes-tu chaque jour ?","你每天几点吃午饭？","Nǐ měitiān jǐ diǎn chī wǔfàn?","À quelle heure déjeunes-tu chaque jour ?"),
+  N("Répondez : je déjeune à midi et demi — douze heures et demie."),
+  TH(),
+  C("我十二点半吃午饭。","Wǒ shí'èr diǎn bàn chī wǔfàn.","Je déjeune à midi et demi.",0.6), P(2.5,"…"),
+  C("我十二点半吃午饭。","Wǒ shí'èr diǎn bàn chī wǔfàn.","Je déjeune à midi et demi.",0.65), HOLD(),
+  N("Remarquez l'ordre des mots : l'heure se place AVANT le verbe. Je — à midi et demi — déjeune."),
+
+  // ---------- 睡觉 ----------
+  N("« Dormir », « se coucher », se dit [[睡觉|shuìjiào]]. Écoutez et répétez."),
+  ...teach("睡觉","shuìjiào","dormir / se coucher"),
+  ...drill("Demandez : à quelle heure te couches-tu chaque jour ?","你每天几点睡觉？","Nǐ měitiān jǐ diǎn shuìjiào?","À quelle heure te couches-tu ?"),
+  N("Répondez : je me couche à onze heures. « Onze » se dit [[十一|shíyī]]."),
+  TH(),
+  C("我十一点睡觉。","Wǒ shíyī diǎn shuìjiào.","Je me couche à onze heures.",0.65), HOLD(),
+
+  // ---------- Rappel espacé ----------
+  N("Vous souvenez-vous ? Dites : j'ai cours à huit heures."),
+  TH(),
+  C("我八点上课。","Wǒ bā diǎn shàngkè.","J'ai cours à huit heures.",0.65), HOLD(),
+
+  // ---------- 从……到…… ----------
+  N("Passons à la durée. « De… à… » se dit [[从|cóng]]… [[到|dào]]… Écoutez : de huit heures à midi."),
+  ...teach("从八点到十二点","cóng bā diǎn dào shí'èr diǎn","de 8 h à 12 h"),
+  ...drill("Dites : de neuf heures à cinq heures.","从九点到五点","cóng jiǔ diǎn dào wǔ diǎn","de 9 h à 17 h"),
+
+  // ---------- 小时 ----------
+  N("Attention, point important. [[点|diǎn]], c'est l'heure sur l'horloge. Mais une DURÉE en heures se dit [[小时|xiǎoshí]]."),
+  ...teach("小时","xiǎoshí","heure (durée)"),
+  N("« Quatre heures », au sens de quatre heures de temps : [[四个小时|sì ge xiǎoshí]]. Le petit mot [[个|ge]] est obligatoire."),
+  ...teach("四个小时","sì ge xiǎoshí","quatre heures (durée)"),
+  N("« En tout » se dit [[一共|yígòng]]. Écoutez la phrase complète : nous avons cours de huit heures à midi, en tout quatre heures."),
+  C("我们从八点到十二点上课，一共四个小时。","Wǒmen cóng bā diǎn dào shí'èr diǎn shàngkè, yígòng sì ge xiǎoshí.","Nous avons cours de 8 h à 12 h, soit 4 heures en tout.",0.5), P(2.5,"…"),
+  C("我们从八点到十二点上课，一共四个小时。","Wǒmen cóng bā diǎn dào shí'èr diǎn shàngkè, yígòng sì ge xiǎoshí.","Nous avons cours de 8 h à 12 h, soit 4 heures en tout.",0.6), HOLD(),
+
+  // ---------- 分钟 ----------
+  N("De même pour les minutes : [[分|fēn]] sur l'horloge, mais une durée en minutes se dit [[分钟|fēnzhōng]]."),
+  ...teach("分钟","fēnzhōng","minute (durée)"),
+  ...drill("Dites : dix minutes.","十分钟","shí fēnzhōng","dix minutes (durée)"),
+
+  // ---------- 多长时间 ----------
+  N("Pour demander « combien de temps », on dit [[多长时间|duō cháng shíjiān]] — littéralement « quelle longueur de temps »."),
+  ...teach("多长时间","duō cháng shíjiān","combien de temps"),
+  N("« Étudier » se dit [[学习|xuéxí]]. Demandez : combien de temps étudies-tu chaque jour ?"),
+  TH(),
+  C("你每天学习多长时间？","Nǐ měitiān xuéxí duō cháng shíjiān?","Combien de temps étudies-tu chaque jour ?",0.55), P(2.5,"…"),
+  C("你每天学习多长时间？","Nǐ měitiān xuéxí duō cháng shíjiān?","Combien de temps étudies-tu chaque jour ?",0.65), HOLD(),
+  N("Répondez : trois heures. « Trois » se dit [[三|sān]]. N'oubliez pas [[个|ge]]."),
+  TH(),
+  C("三个小时。","Sān ge xiǎoshí.","Trois heures (de temps).",0.65), HOLD(),
+
+  // ---------- 大概 / 左右 ----------
+  N("Pour dire « environ », deux options. Avant le nombre : [[大概|dàgài]]. Écoutez : environ une heure."),
+  ...teach("大概一个小时","dàgài yí ge xiǎoshí","environ une heure"),
+  N("Ou après le nombre : [[左右|zuǒyòu]]. Une heure environ :"),
+  ...teach("一个小时左右","yí ge xiǎoshí zuǒyòu","une heure environ"),
+  ...drill("Dites : environ quatre heures, avec dàgài.","大概四个小时","dàgài sì ge xiǎoshí","environ quatre heures"),
+  ...drill("Maintenant avec zuǒyòu : quatre heures environ.","四个小时左右","sì ge xiǎoshí zuǒyòu","quatre heures environ"),
+
+  // ---------- Mini-conversation ----------
+  N("Mettons tout ensemble. Un ami chinois vous demande :"),
+  C("你每天几点上课？","Nǐ měitiān jǐ diǎn shàngkè?","À quelle heure as-tu cours ?",0.65),
+  N("Répondez : j'ai cours à huit heures."),
+  TH(),
+  C("我八点上课。","Wǒ bā diǎn shàngkè.","J'ai cours à huit heures.",0.65), P(2,"…"),
+  C("你每天学习多长时间？","Nǐ měitiān xuéxí duō cháng shíjiān?","Combien de temps étudies-tu chaque jour ?",0.65),
+  N("Répondez : environ quatre heures."),
+  TH(),
+  C("大概四个小时。","Dàgài sì ge xiǎoshí.","Environ quatre heures.",0.65), P(2,"…"),
+  N("Maintenant, posez-lui la question : à quelle heure te couches-tu chaque jour ?"),
+  TH(),
+  C("你每天几点睡觉？","Nǐ měitiān jǐ diǎn shuìjiào?","À quelle heure te couches-tu chaque jour ?",0.65), P(2,"…"),
+  C("我十一点半左右睡觉。","Wǒ shíyī diǎn bàn zuǒyòu shuìjiào.","Je me couche vers onze heures et demie.",0.6),
+  N("Qu'a-t-il répondu ? … Il se couche vers onze heures et demie. Vous avez entendu [[左右|zuǒyòu]] : « environ »."),
+
+  // ---------- Révision finale ----------
+  N("Révision finale. Demandez : à quelle heure déjeunes-tu chaque jour ?"),
+  TH(),
+  C("你每天几点吃午饭？","Nǐ měitiān jǐ diǎn chī wǔfàn?","À quelle heure déjeunes-tu chaque jour ?",0.65), P(1.5,"…"),
+  N("Dites : je déjeune à midi et demi."),
+  TH(),
+  C("我十二点半吃午饭。","Wǒ shí'èr diǎn bàn chī wǔfàn.","Je déjeune à midi et demi.",0.65), P(1.5,"…"),
+  N("Dites : de neuf heures à cinq heures."),
+  TH(),
+  C("从九点到五点","cóng jiǔ diǎn dào wǔ diǎn","de 9 h à 17 h",0.65), P(1.5,"…"),
+  N("Combien de temps étudies-tu chaque jour ?"),
+  TH(),
+  C("你每天学习多长时间？","Nǐ měitiān xuéxí duō cháng shíjiān?","Combien de temps étudies-tu chaque jour ?",0.65), P(1.5,"…"),
+  N("Environ trois heures."),
+  TH(),
+  C("大概三个小时。","Dàgài sān ge xiǎoshí.","Environ trois heures.",0.65), P(1.5,"…"),
+  N("Et pour finir : je me couche à onze heures."),
+  TH(),
+  C("我十一点睡觉。","Wǒ shíyī diǎn shuìjiào.","Je me couche à onze heures.",0.65), P(1.5,"…"),
+  N("Excellent. C'est la fin de la leçon 2. Vous savez maintenant décrire votre journée et parler de durées. Réécoutez cette leçon demain, puis refaites la leçon 1 dans quelques jours. Au revoir !"),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+  { num:3, hanzi:"谈时段", title:"Les moments de la journée", desc:"早上 · 下午 · 晚上 · 时差",
+    build(){ return [
+N("Bienvenue dans la leçon 3. Aujourd'hui : les moments de la journée, et le décalage horaire. Révision rapide. Demandez : quelle heure est-il ?"),
+  TH(),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), P(2,"…"),
+  N("Dites : il est deux heures et demie."),
+  TH(),
+  C("现在两点半。","Xiànzài liǎng diǎn bàn.","Il est deux heures et demie.",0.65), HOLD(),
+
+  N("En chinois, on précise souvent le moment de la journée AVANT l'heure. Commençons. « Le matin », tôt le matin, se dit [[早上|zǎoshang]]. Écoutez et répétez."),
+  ...teach("早上","zǎoshang","le matin (tôt)"),
+  N("« La matinée » se dit [[上午|shàngwǔ]]."),
+  ...teach("上午","shàngwǔ","la matinée"),
+  N("« Midi » se dit [[中午|zhōngwǔ]]."),
+  ...teach("中午","zhōngwǔ","midi"),
+  N("« L'après-midi » se dit [[下午|xiàwǔ]]."),
+  ...teach("下午","xiàwǔ","l'après-midi"),
+  N("« Le soir » se dit [[晚上|wǎnshang]]."),
+  ...teach("晚上","wǎnshang","le soir"),
+  N("Et « la nuit » se dit [[夜里|yèli]]."),
+  ...teach("夜里","yèli","la nuit"),
+
+  N("Maintenant la règle : le moment se place AVANT l'heure. « Deux heures et demie de l'après-midi », c'est-à-dire quatorze heures trente, se dit :"),
+  ...teach("下午两点半","xiàwǔ liǎng diǎn bàn","14 h 30"),
+  ...drill("Dites : sept heures du matin.","早上七点","zǎoshang qī diǎn","7 h du matin"),
+  ...drill("Dites : huit heures du soir — donc vingt heures.","晚上八点","wǎnshang bā diǎn","20 h"),
+  N("Dites : il est quatre heures et quart de l'après-midi."),
+  TH(),
+  C("现在下午四点一刻。","Xiànzài xiàwǔ sì diǎn yí kè.","Il est 16 h 15.",0.6), HOLD(),
+
+  N("Vous souvenez-vous ? « Je me couche à onze heures. » Ajoutez maintenant « le soir » : je me couche le soir à onze heures."),
+  TH(),
+  C("我晚上十一点睡觉。","Wǒ wǎnshang shíyī diǎn shuìjiào.","Je me couche à 23 h.",0.6), P(2.5,"…"),
+  C("我晚上十一点睡觉。","Wǒ wǎnshang shíyī diǎn shuìjiào.","Je me couche à 23 h.",0.65), HOLD(),
+  ...drill("Dites : je me lève le matin à sept heures.","我早上七点起床。","Wǒ zǎoshang qī diǎn qǐchuáng.","Je me lève à 7 h du matin."),
+
+  N("Passons au décalage horaire. « Pékin » se dit [[北京|Běijīng]]. Demandez : quelle heure est-il à Pékin ? Le lieu se place au début."),
+  TH(),
+  C("北京现在几点？","Běijīng xiànzài jǐ diǎn?","Quelle heure est-il à Pékin ?",0.6), P(2.5,"…"),
+  C("北京现在几点？","Běijīng xiànzài jǐ diǎn?","Quelle heure est-il à Pékin ?",0.65), HOLD(),
+  N("« Paris » se dit [[巴黎|Bālí]]. Demandez : quelle heure est-il à Paris ?"),
+  TH(),
+  C("巴黎现在几点？","Bālí xiànzài jǐ diǎn?","Quelle heure est-il à Paris ?",0.65), HOLD(),
+  N("Répondez : à Paris il est neuf heures du matin."),
+  TH(),
+  C("巴黎现在是早上九点。","Bālí xiànzài shì zǎoshang jiǔ diǎn.","À Paris il est 9 h du matin.",0.6), HOLD(),
+  N("« Le décalage horaire » se dit [[时差|shíchā]]. Écoutez la question : quel est le décalage horaire entre Pékin et Paris ?"),
+  C("北京和巴黎的时差是多少？","Běijīng hé Bālí de shíchā shì duōshao?","Quel est le décalage entre Pékin et Paris ?",0.55), P(2.5,"…"),
+  C("北京和巴黎的时差是多少？","Běijīng hé Bālí de shíchā shì duōshao?","Quel est le décalage entre Pékin et Paris ?",0.65), HOLD(),
+
+  N("Mini-conversation. Un ami à Pékin vous appelle et demande :"),
+  C("巴黎现在几点？","Bālí xiànzài jǐ diǎn?","Quelle heure est-il à Paris ?",0.65),
+  N("Il est deux heures et demie de l'après-midi à Paris. Répondez."),
+  TH(),
+  C("巴黎现在是下午两点半。","Bālí xiànzài shì xiàwǔ liǎng diǎn bàn.","À Paris il est 14 h 30.",0.6), HOLD(),
+
+  N("Révision finale. Dites : sept heures du matin."),
+  TH(),
+  C("早上七点","zǎoshang qī diǎn","7 h du matin",0.65), P(1.5,"…"),
+  N("Vingt heures — huit heures du soir."),
+  TH(),
+  C("晚上八点","wǎnshang bā diǎn","20 h",0.65), P(1.5,"…"),
+  N("Il est seize heures quinze."),
+  TH(),
+  C("现在下午四点一刻。","Xiànzài xiàwǔ sì diǎn yí kè.","Il est 16 h 15.",0.65), P(1.5,"…"),
+  N("Quelle heure est-il à Pékin ?"),
+  TH(),
+  C("北京现在几点？","Běijīng xiànzài jǐ diǎn?","Quelle heure est-il à Pékin ?",0.65), P(1.5,"…"),
+  N("Je me couche le soir à onze heures."),
+  TH(),
+  C("我晚上十一点睡觉。","Wǒ wǎnshang shíyī diǎn shuìjiào.","Je me couche à 23 h.",0.65), P(1.5,"…"),
+  N("Excellent. Fin de la leçon 3. À demain pour la leçon 4 !"),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+  { num:4, hanzi:"谈大概", title:"Environ, plus de, moins de", desc:"多 · 不到 · 以前/以后 · 岁",
+    build(){ return [
+N("Bienvenue dans la leçon 4. Aujourd'hui : dire « un peu plus de », « moins de », et parler de l'âge. Révision. Dites : environ quatre heures — avec dàgài."),
+  TH(),
+  C("大概四个小时","dàgài sì ge xiǎoshí","environ quatre heures",0.65), P(2,"…"),
+  N("La même chose avec zuǒyòu."),
+  TH(),
+  C("四个小时左右","sì ge xiǎoshí zuǒyòu","quatre heures environ",0.65), HOLD(),
+
+  N("Nouveau mot. Placé APRÈS un nombre, [[多|duō]] signifie « et quelques », « un peu plus de ». Écoutez : midi passé — un peu plus de douze heures."),
+  ...teach("十二点多","shí'èr diǎn duō","midi passé"),
+  N("Un peu plus d'une heure de temps :"),
+  ...teach("一个多小时","yí ge duō xiǎoshí","un peu plus d'une heure"),
+  ...drill("Dites : il est neuf heures passées.","现在九点多。","Xiànzài jiǔ diǎn duō.","Il est 9 h passées."),
+
+  N("Le contraire, « moins de », « pas encore », se dit [[不到|bú dào]] — placé AVANT le nombre. Écoutez : pas encore midi."),
+  ...teach("不到十二点","bú dào shí'èr diǎn","pas encore midi"),
+  N("Moins d'une heure de temps :"),
+  ...teach("不到一个小时","bú dào yí ge xiǎoshí","moins d'une heure"),
+  ...drill("Dites : moins de dix minutes.","不到十分钟","bú dào shí fēnzhōng","moins de dix minutes"),
+
+  N("Parlons de l'âge. « An », au sens de l'âge, se dit [[岁|suì]]. Écoutez : trente ans."),
+  ...teach("三十岁","sānshí suì","trente ans"),
+  N("Pour demander l'âge d'un adulte : « il a quel âge ? » se dit [[他多大|tā duō dà]] — littéralement « lui, combien grand ? »"),
+  ...teach("他多大？","Tā duō dà?","Quel âge a-t-il ?"),
+  N("Répondez avec ce que vous savez : il a environ trente ans — trente ans, zuǒyòu."),
+  TH(),
+  C("他三十岁左右。","Tā sānshí suì zuǒyòu.","Il a environ 30 ans.",0.65), HOLD(),
+  ...drill("Dites : il a moins de trente ans.","他不到三十岁。","Tā bú dào sānshí suì.","Il a moins de 30 ans."),
+  ...drill("Dites : il a trente ans et quelques.","他三十多岁。","Tā sānshí duō suì.","Il a la trentaine passée."),
+
+  N("Encore deux mots très utiles. « Avant » se dit [[以前|yǐqián]] — placé APRÈS l'heure. Avant une heure :"),
+  ...teach("一点以前","yì diǎn yǐqián","avant 13 h"),
+  N("Et « après » se dit [[以后|yǐhòu]]. Après une heure :"),
+  ...teach("一点以后","yì diǎn yǐhòu","après 13 h"),
+  ...drill("Dites : avant huit heures du matin.","早上八点以前","zǎoshang bā diǎn yǐqián","avant 8 h du matin"),
+  ...drill("Dites : après le déjeuner — après midi et demi.","十二点半以后","shí'èr diǎn bàn yǐhòu","après 12 h 30"),
+
+  N("Mini-conversation. On vous demande :"),
+  C("他多大？","Tā duō dà?","Quel âge a-t-il ?",0.65),
+  N("Vous ne savez pas exactement. Répondez : environ trente ans, moins de trente-cinq ans."),
+  TH(),
+  C("他三十岁左右，不到三十五岁。","Tā sānshí suì zuǒyòu, bú dào sānshíwǔ suì.","Environ 30 ans, moins de 35.",0.55), P(2.5,"…"),
+  C("他三十岁左右，不到三十五岁。","Tā sānshí suì zuǒyòu, bú dào sānshíwǔ suì.","Environ 30 ans, moins de 35.",0.65), HOLD(),
+  N("On vous demande maintenant :"),
+  C("他每天几点到教室？","Tā měitiān jǐ diǎn dào jiàoshì?","À quelle heure arrive-t-il en classe ?",0.6),
+  N("[[教室|jiàoshì]] veut dire « la salle de classe », et vous connaissez [[到|dào]] : arriver. Répondez : vers huit heures dix, avant huit heures et demie."),
+  TH(),
+  C("大概八点十分左右，八点半以前。","Dàgài bā diǎn shí fēn zuǒyòu, bā diǎn bàn yǐqián.","Vers 8 h 10, avant 8 h 30.",0.55), P(2.5,"…"),
+  C("大概八点十分左右，八点半以前。","Dàgài bā diǎn shí fēn zuǒyòu, bā diǎn bàn yǐqián.","Vers 8 h 10, avant 8 h 30.",0.65), HOLD(),
+
+  N("Révision finale. Dites : il est neuf heures passées."),
+  TH(),
+  C("现在九点多。","Xiànzài jiǔ diǎn duō.","Il est 9 h passées.",0.65), P(1.5,"…"),
+  N("Moins d'une heure."),
+  TH(),
+  C("不到一个小时","bú dào yí ge xiǎoshí","moins d'une heure",0.65), P(1.5,"…"),
+  N("Il a environ trente ans."),
+  TH(),
+  C("他三十岁左右。","Tā sānshí suì zuǒyòu.","Il a environ 30 ans.",0.65), P(1.5,"…"),
+  N("Avant une heure."),
+  TH(),
+  C("一点以前","yì diǎn yǐqián","avant 13 h",0.65), P(1.5,"…"),
+  N("Après midi et demi."),
+  TH(),
+  C("十二点半以后","shí'èr diǎn bàn yǐhòu","après 12 h 30",0.65), P(1.5,"…"),
+  N("Parfait. Fin de la leçon 4. Demain, la leçon 5 : à l'aéroport !"),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+  { num:5, hanzi:"去机场", title:"À l'aéroport", desc:"飞机 · 机场 · 先…然后… · 接",
+    build(){ return [
+N("Bienvenue dans la leçon 5. Aujourd'hui, le grand dialogue du cours : aller chercher quelqu'un à l'aéroport. Écoutez d'abord la conversation entre Zhang Li et Li Wei."),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.4), P(2,"…"),
+  C("差一刻十一点。","Chà yí kè shíyī diǎn.","Onze heures moins le quart.",0.4), P(2,"…"),
+  C("查理的飞机几点到？","Chálǐ de fēijī jǐ diǎn dào?","À quelle heure arrive l'avion de Charlie ?",0.4), P(2,"…"),
+  C("下午两点半到。","Xiàwǔ liǎng diǎn bàn dào.","Il arrive à 14 h 30.",0.4), P(2,"…"),
+  C("我们现在先去吃饭吧，然后去机场接他。","Wǒmen xiànzài xiān qù chī fàn ba, ránhòu qù jīchǎng jiē tā.","Allons d'abord manger, puis à l'aéroport le chercher.",0.4), P(2,"…"),
+  C("从这儿到机场要多长时间？","Cóng zhèr dào jīchǎng yào duō cháng shíjiān?","Combien de temps d'ici à l'aéroport ?",0.4), P(2,"…"),
+  C("大概一个多小时吧。我们一点以前走。","Dàgài yí ge duō xiǎoshí ba. Wǒmen yì diǎn yǐqián zǒu.","Un peu plus d'une heure. Partons avant 13 h.",0.4),
+  N("Beaucoup de choses que vous connaissez déjà ! Apprenons les mots nouveaux."),
+
+  N("« L'avion » se dit [[飞机|fēijī]]. Écoutez et répétez."),
+  ...teach("飞机","fēijī","l'avion"),
+  N("« L'aéroport » se dit [[机场|jīchǎng]]."),
+  ...teach("机场","jīchǎng","l'aéroport"),
+  N("« Arriver » se dit [[到|dào]] — vous le connaissez déjà dans « de… à… ». Demandez : à quelle heure arrive l'avion de Charlie ? « De Charlie » se dit [[查理的|Chálǐ de]]."),
+  TH(),
+  C("查理的飞机几点到？","Chálǐ de fēijī jǐ diǎn dào?","À quelle heure arrive l'avion de Charlie ?",0.55), P(2.5,"…"),
+  C("查理的飞机几点到？","Chálǐ de fēijī jǐ diǎn dào?","À quelle heure arrive l'avion de Charlie ?",0.65), HOLD(),
+  ...drill("Répondez : il arrive à quatorze heures trente — deux heures et demie de l'après-midi.","下午两点半到。","Xiàwǔ liǎng diǎn bàn dào.","Il arrive à 14 h 30."),
+
+  N("« Aller » se dit [[去|qù]]. Et « manger », le repas, se dit [[吃饭|chī fàn]]. Aller manger :"),
+  ...teach("去吃饭","qù chī fàn","aller manger"),
+  N("« Aller chercher quelqu'un » se dit [[接|jiē]]. Aller le chercher :"),
+  ...teach("去接他","qù jiē tā","aller le chercher"),
+
+  N("La structure clé du jour : « d'abord…, ensuite… » se dit [[先|xiān]]… [[然后|ránhòu]]… Écoutez : d'abord aller manger, ensuite aller à l'aéroport."),
+  ...teach("先去吃饭，然后去机场","xiān qù chī fàn, ránhòu qù jīchǎng","d'abord manger, puis l'aéroport"),
+  N("La phrase complète de Zhang Li : allons d'abord manger maintenant, puis à l'aéroport le chercher."),
+  C("我们现在先去吃饭吧，然后去机场接他。","Wǒmen xiànzài xiān qù chī fàn ba, ránhòu qù jīchǎng jiē tā.","Allons d'abord manger, puis le chercher à l'aéroport.",0.5), P(3,"…"),
+  C("我们现在先去吃饭吧，然后去机场接他。","Wǒmen xiànzài xiān qù chī fàn ba, ránhòu qù jīchǎng jiē tā.","Allons d'abord manger, puis le chercher à l'aéroport.",0.6), HOLD(),
+  ...drill("À vous : dites « d'abord aller en cours, ensuite aller manger ».","先去上课，然后去吃饭","xiān qù shàngkè, ránhòu qù chī fàn","d'abord les cours, puis manger"),
+
+  N("« Ici » se dit [[这儿|zhèr]]. Et [[要|yào]] signifie « falloir », « prendre du temps ». Demandez : combien de temps faut-il d'ici à l'aéroport ?"),
+  TH(),
+  C("从这儿到机场要多长时间？","Cóng zhèr dào jīchǎng yào duō cháng shíjiān?","Combien de temps d'ici à l'aéroport ?",0.55), P(2.5,"…"),
+  C("从这儿到机场要多长时间？","Cóng zhèr dào jīchǎng yào duō cháng shíjiān?","Combien de temps d'ici à l'aéroport ?",0.65), HOLD(),
+  N("« Partir » se dit [[走|zǒu]]. Répondez : un peu plus d'une heure. Partons avant une heure."),
+  TH(),
+  C("大概一个多小时吧。我们一点以前走。","Dàgài yí ge duō xiǎoshí ba. Wǒmen yì diǎn yǐqián zǒu.","Un peu plus d'une heure. Partons avant 13 h.",0.55), P(2.5,"…"),
+  C("大概一个多小时吧。我们一点以前走。","Dàgài yí ge duō xiǎoshí ba. Wǒmen yì diǎn yǐqián zǒu.","Un peu plus d'une heure. Partons avant 13 h.",0.65), HOLD(),
+
+  N("Maintenant, rejouons tout le dialogue. Vous êtes Li Wei. Zhang Li demande :"),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65),
+  N("Répondez : onze heures moins le quart."),
+  TH(),
+  C("差一刻十一点。","Chà yí kè shíyī diǎn.","Onze heures moins le quart.",0.65), P(2,"…"),
+  C("查理的飞机几点到？","Chálǐ de fēijī jǐ diǎn dào?","À quelle heure arrive l'avion de Charlie ?",0.65),
+  N("Répondez : il arrive à quatorze heures trente."),
+  TH(),
+  C("下午两点半到。","Xiàwǔ liǎng diǎn bàn dào.","Il arrive à 14 h 30.",0.65), P(2,"…"),
+  N("Maintenant vous êtes Zhang Li. Proposez : allons d'abord manger, puis à l'aéroport le chercher."),
+  TH(),
+  C("我们现在先去吃饭吧，然后去机场接他。","Wǒmen xiànzài xiān qù chī fàn ba, ránhòu qù jīchǎng jiē tā.","Allons d'abord manger, puis le chercher à l'aéroport.",0.6), P(2,"…"),
+  C("从这儿到机场要多长时间？","Cóng zhèr dào jīchǎng yào duō cháng shíjiān?","Combien de temps d'ici à l'aéroport ?",0.65),
+  N("Répondez : un peu plus d'une heure, partons avant une heure."),
+  TH(),
+  C("大概一个多小时吧。我们一点以前走。","Dàgài yí ge duō xiǎoshí ba. Wǒmen yì diǎn yǐqián zǒu.","Un peu plus d'une heure. Partons avant 13 h.",0.65), HOLD(),
+
+  N("Formidable ! Vous venez de tenir tout le dialogue du cours. Fin de la leçon 5. Demain : réserver un restaurant."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+  { num:6, hanzi:"预订", title:"Réserver un restaurant", desc:"预订 · 几个人 · 您贵姓",
+    build(){ return [
+N("Bienvenue dans la leçon 6. Aujourd'hui : réserver une table au restaurant, au téléphone. Écoutez d'abord l'appel."),
+  C("你好，我想预订。","Nǐ hǎo, wǒ xiǎng yùdìng.","Bonjour, je voudrais réserver.",0.4), P(2,"…"),
+  C("你们几个人？","Nǐmen jǐ ge rén?","Vous êtes combien ?",0.4), P(2,"…"),
+  C("大概四个人。","Dàgài sì ge rén.","Environ quatre personnes.",0.4), P(2,"…"),
+  C("你们几点到？","Nǐmen jǐ diǎn dào?","Vous arrivez à quelle heure ?",0.4), P(2,"…"),
+  C("七点左右。","Qī diǎn zuǒyòu.","Vers sept heures.",0.4), P(2,"…"),
+  C("您贵姓？","Nín guìxìng?","Votre nom, je vous prie ?",0.4), P(2,"…"),
+  C("我姓王。","Wǒ xìng Wáng.","Mon nom est Wang.",0.4),
+  N("À la fin de cette leçon, vous passerez cet appel vous-même."),
+
+  N("« Bonjour » se dit [[你好|nǐ hǎo]]. Vous le connaissez peut-être déjà. Répétez."),
+  ...teach("你好","nǐ hǎo","bonjour"),
+  N("« Je voudrais », « je souhaite », se dit [[我想|wǒ xiǎng]]. Et « réserver » se dit [[预订|yùdìng]]. Dites : bonjour, je voudrais réserver."),
+  TH(),
+  C("你好，我想预订。","Nǐ hǎo, wǒ xiǎng yùdìng.","Bonjour, je voudrais réserver.",0.55), P(2.5,"…"),
+  C("你好，我想预订。","Nǐ hǎo, wǒ xiǎng yùdìng.","Bonjour, je voudrais réserver.",0.65), HOLD(),
+  N("Au fait, « le restaurant » se dit [[饭馆儿|fànguǎnr]] — vous y reconnaissez [[饭|fàn]], le repas."),
+  ...teach("饭馆儿","fànguǎnr","le restaurant"),
+
+  N("« Une personne » se dit [[人|rén]]. Le restaurateur demande : vous êtes combien de personnes ? — [[你们|nǐmen]] veut dire « vous », au pluriel."),
+  ...teach("你们几个人？","Nǐmen jǐ ge rén?","Vous êtes combien ?"),
+  ...drill("Répondez : environ quatre personnes.","大概四个人。","Dàgài sì ge rén.","Environ quatre personnes."),
+  ...drill("Et si vous êtes deux ? Attention au mot spécial pour deux.","两个人。","Liǎng ge rén.","Deux personnes."),
+
+  N("Ensuite il demande l'heure d'arrivée. Vous savez déjà tout dire ! Demandez : vous arrivez à quelle heure ?"),
+  TH(),
+  C("你们几点到？","Nǐmen jǐ diǎn dào?","Vous arrivez à quelle heure ?",0.65), HOLD(),
+  ...drill("Répondez : vers sept heures.","七点左右。","Qī diǎn zuǒyòu.","Vers sept heures."),
+
+  N("Pour demander poliment votre nom, il dira [[您贵姓|nín guìxìng]] — littéralement « votre honorable nom de famille ». Écoutez et répétez."),
+  ...teach("您贵姓？","Nín guìxìng?","Votre nom, je vous prie ?"),
+  N("Pour répondre : « mon nom de famille est… » se dit [[我姓|wǒ xìng]], suivi du nom. Par exemple avec le nom Wang :"),
+  ...teach("我姓王。","Wǒ xìng Wáng.","Mon nom est Wang."),
+  N("À vous : répondez avec votre propre nom de famille — wǒ xìng, puis votre nom."),
+  HOLD("Dis-le avec TON nom, puis ▶"),
+
+  N("Rejouons tout l'appel. Vous appelez le restaurant. Commencez : bonjour, je voudrais réserver."),
+  TH(),
+  C("你好，我想预订。","Nǐ hǎo, wǒ xiǎng yùdìng.","Bonjour, je voudrais réserver.",0.65), P(2,"…"),
+  C("你们几个人？","Nǐmen jǐ ge rén?","Vous êtes combien ?",0.65),
+  N("Répondez : environ quatre personnes."),
+  TH(),
+  C("大概四个人。","Dàgài sì ge rén.","Environ quatre personnes.",0.65), P(2,"…"),
+  C("你们几点到？","Nǐmen jǐ diǎn dào?","Vous arrivez à quelle heure ?",0.65),
+  N("Répondez : vers sept heures et demie."),
+  TH(),
+  C("七点半左右。","Qī diǎn bàn zuǒyòu.","Vers 19 h 30.",0.65), P(2,"…"),
+  C("您贵姓？","Nín guìxìng?","Votre nom, je vous prie ?",0.65),
+  N("Répondez avec le nom Wang — ou le vôtre."),
+  TH(),
+  C("我姓王。","Wǒ xìng Wáng.","Mon nom est Wang.",0.65), HOLD(),
+
+  N("Révision finale. Dites : bonjour, je voudrais réserver."),
+  TH(),
+  C("你好，我想预订。","Nǐ hǎo, wǒ xiǎng yùdìng.","Bonjour, je voudrais réserver.",0.65), P(1.5,"…"),
+  N("Vous êtes combien ?"),
+  TH(),
+  C("你们几个人？","Nǐmen jǐ ge rén?","Vous êtes combien ?",0.65), P(1.5,"…"),
+  N("Deux personnes."),
+  TH(),
+  C("两个人。","Liǎng ge rén.","Deux personnes.",0.65), P(1.5,"…"),
+  N("Vous arrivez à quelle heure ?"),
+  TH(),
+  C("你们几点到？","Nǐmen jǐ diǎn dào?","Vous arrivez à quelle heure ?",0.65), P(1.5,"…"),
+  N("Vers sept heures."),
+  TH(),
+  C("七点左右。","Qī diǎn zuǒyòu.","Vers sept heures.",0.65), P(1.5,"…"),
+  N("Bravo ! Fin de la leçon 6. La prochaine leçon est une grande révision de tout le parcours."),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+  { num:7, hanzi:"总复习", title:"Révision totale", desc:"Uniquement des questions — leçons 1 à 6",
+    build(){ return [
+N("Bienvenue dans la grande révision. Ici, pas de nouveau vocabulaire : uniquement des questions sur tout ce que vous avez appris dans les leçons 1 à 6. Répondez à voix haute avant chaque correction. C'est parti."),
+
+  N("Leçon 1. Demandez : quelle heure est-il ?"),
+  TH(),
+  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), P(1.5,"…"),
+  N("Il est dix heures."),
+  TH(),
+  C("现在十点。","Xiànzài shí diǎn.","Il est dix heures.",0.65), P(1.5,"…"),
+  N("Il est deux heures. Attention au mot spécial."),
+  TH(),
+  C("现在两点。","Xiànzài liǎng diǎn.","Il est deux heures.",0.65), P(1.5,"…"),
+  N("Il est neuf heures et demie."),
+  TH(),
+  C("现在九点半。","Xiànzài jiǔ diǎn bàn.","Il est 9 h 30.",0.65), P(1.5,"…"),
+  N("Il est une heure et quart."),
+  TH(),
+  C("现在一点一刻。","Xiànzài yī diǎn yí kè.","Il est 1 h 15.",0.65), P(1.5,"…"),
+  N("Il est quatre heures moins le quart."),
+  TH(),
+  C("现在差一刻四点。","Xiànzài chà yí kè sì diǎn.","Il est 4 h moins le quart.",0.65), P(1.5,"…"),
+  N("Midi moins cinq."),
+  TH(),
+  C("差五分十二点。","Chà wǔ fēn shí'èr diǎn.","Midi moins cinq.",0.65), P(1.5,"…"),
+
+  N("Leçon 2, la routine. Demandez : à quelle heure te lèves-tu chaque jour ?"),
+  TH(),
+  C("你每天几点起床？","Nǐ měitiān jǐ diǎn qǐchuáng?","À quelle heure te lèves-tu ?",0.65), P(1.5,"…"),
+  N("Je me lève à sept heures."),
+  TH(),
+  C("我七点起床。","Wǒ qī diǎn qǐchuáng.","Je me lève à 7 h.",0.65), P(1.5,"…"),
+  N("À quelle heure as-tu cours ?"),
+  TH(),
+  C("你每天几点上课？","Nǐ měitiān jǐ diǎn shàngkè?","À quelle heure as-tu cours ?",0.65), P(1.5,"…"),
+  N("Je déjeune à midi et demi."),
+  TH(),
+  C("我十二点半吃午饭。","Wǒ shí'èr diǎn bàn chī wǔfàn.","Je déjeune à 12 h 30.",0.65), P(1.5,"…"),
+  N("Je me couche à onze heures."),
+  TH(),
+  C("我十一点睡觉。","Wǒ shíyī diǎn shuìjiào.","Je me couche à 23 h.",0.65), P(1.5,"…"),
+
+  N("Les durées. Dites : de huit heures à midi."),
+  TH(),
+  C("从八点到十二点","cóng bā diǎn dào shí'èr diǎn","de 8 h à 12 h",0.65), P(1.5,"…"),
+  N("Quatre heures de temps — attention, pas « diǎn » !"),
+  TH(),
+  C("四个小时","sì ge xiǎoshí","quatre heures (durée)",0.65), P(1.5,"…"),
+  N("Dix minutes de temps."),
+  TH(),
+  C("十分钟","shí fēnzhōng","dix minutes (durée)",0.65), P(1.5,"…"),
+  N("Demandez : combien de temps étudies-tu chaque jour ?"),
+  TH(),
+  C("你每天学习多长时间？","Nǐ měitiān xuéxí duō cháng shíjiān?","Combien de temps étudies-tu ?",0.65), P(1.5,"…"),
+  N("Environ trois heures — avec dàgài."),
+  TH(),
+  C("大概三个小时。","Dàgài sān ge xiǎoshí.","Environ trois heures.",0.65), P(1.5,"…"),
+
+  N("Leçon 3, les moments de la journée. Dites : sept heures du matin."),
+  TH(),
+  C("早上七点","zǎoshang qī diǎn","7 h du matin",0.65), P(1.5,"…"),
+  N("Quatorze heures trente."),
+  TH(),
+  C("下午两点半","xiàwǔ liǎng diǎn bàn","14 h 30",0.65), P(1.5,"…"),
+  N("Vingt heures."),
+  TH(),
+  C("晚上八点","wǎnshang bā diǎn","20 h",0.65), P(1.5,"…"),
+  N("Demandez : quelle heure est-il à Pékin ?"),
+  TH(),
+  C("北京现在几点？","Běijīng xiànzài jǐ diǎn?","Quelle heure est-il à Pékin ?",0.65), P(1.5,"…"),
+  N("Je me couche le soir à onze heures."),
+  TH(),
+  C("我晚上十一点睡觉。","Wǒ wǎnshang shíyī diǎn shuìjiào.","Je me couche à 23 h.",0.65), P(1.5,"…"),
+
+  N("Leçon 4, les approximations. Dites : il est neuf heures passées."),
+  TH(),
+  C("现在九点多。","Xiànzài jiǔ diǎn duō.","Il est 9 h passées.",0.65), P(1.5,"…"),
+  N("Moins d'une heure de temps."),
+  TH(),
+  C("不到一个小时","bú dào yí ge xiǎoshí","moins d'une heure",0.65), P(1.5,"…"),
+  N("Demandez : quel âge a-t-il ?"),
+  TH(),
+  C("他多大？","Tā duō dà?","Quel âge a-t-il ?",0.65), P(1.5,"…"),
+  N("Il a environ trente ans."),
+  TH(),
+  C("他三十岁左右。","Tā sānshí suì zuǒyòu.","Il a environ 30 ans.",0.65), P(1.5,"…"),
+  N("Avant une heure."),
+  TH(),
+  C("一点以前","yì diǎn yǐqián","avant 13 h",0.65), P(1.5,"…"),
+
+  N("Leçon 5, l'aéroport. Demandez : à quelle heure arrive l'avion de Charlie ?"),
+  TH(),
+  C("查理的飞机几点到？","Chálǐ de fēijī jǐ diǎn dào?","À quelle heure arrive l'avion de Charlie ?",0.65), P(1.5,"…"),
+  N("Il arrive à quatorze heures trente."),
+  TH(),
+  C("下午两点半到。","Xiàwǔ liǎng diǎn bàn dào.","Il arrive à 14 h 30.",0.65), P(1.5,"…"),
+  N("Proposez : allons d'abord manger, puis à l'aéroport le chercher."),
+  TH(),
+  C("我们现在先去吃饭吧，然后去机场接他。","Wǒmen xiànzài xiān qù chī fàn ba, ránhòu qù jīchǎng jiē tā.","Allons d'abord manger, puis le chercher à l'aéroport.",0.6), P(2,"…"),
+  N("Demandez : combien de temps faut-il d'ici à l'aéroport ?"),
+  TH(),
+  C("从这儿到机场要多长时间？","Cóng zhèr dào jīchǎng yào duō cháng shíjiān?","Combien de temps d'ici à l'aéroport ?",0.65), P(1.5,"…"),
+  N("Un peu plus d'une heure. Partons avant une heure."),
+  TH(),
+  C("大概一个多小时吧。我们一点以前走。","Dàgài yí ge duō xiǎoshí ba. Wǒmen yì diǎn yǐqián zǒu.","Un peu plus d'une heure. Partons avant 13 h.",0.65), P(2,"…"),
+
+  N("Leçon 6, le restaurant. Dites : bonjour, je voudrais réserver."),
+  TH(),
+  C("你好，我想预订。","Nǐ hǎo, wǒ xiǎng yùdìng.","Bonjour, je voudrais réserver.",0.65), P(1.5,"…"),
+  N("Demandez : vous êtes combien de personnes ?"),
+  TH(),
+  C("你们几个人？","Nǐmen jǐ ge rén?","Vous êtes combien ?",0.65), P(1.5,"…"),
+  N("Environ quatre personnes."),
+  TH(),
+  C("大概四个人。","Dàgài sì ge rén.","Environ quatre personnes.",0.65), P(1.5,"…"),
+  N("Vous arrivez à quelle heure ?"),
+  TH(),
+  C("你们几点到？","Nǐmen jǐ diǎn dào?","Vous arrivez à quelle heure ?",0.65), P(1.5,"…"),
+  N("Vers sept heures."),
+  TH(),
+  C("七点左右。","Qī diǎn zuǒyòu.","Vers sept heures.",0.65), P(1.5,"…"),
+  N("Et pour finir : mon nom est Wang."),
+  TH(),
+  C("我姓王。","Wǒ xìng Wáng.","Mon nom est Wang.",0.65), P(1.5,"…"),
+
+  N("Félicitations ! Vous venez de réviser les six leçons. Refaites cette révision régulièrement : les questions ratées vous disent quelle leçon réécouter. À bientôt !"),
+  C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+];
+
+/* ============================================================ */
+const $ = id => document.getElementById(id);
+const synth = window.speechSynthesis;
+let voices = [], zhVoice=null, frVoice=null;
+let idx = 0, playing = false, showText = true, slowMode = false, continuous = false;
+let pauseTimer = null, pauseRAF = null;
+let runToken = 0;
+let speechPaused = false;          // une phrase est suspendue via synth.pause()
+let pauseRemaining = 0;            // secondes restantes d'une pause chronométrée suspendue
+let pauseTotal = 0;
+const ARC_LEN = 584.3;
+
+/* ---------- estimation des durées (pour ±10 s) ---------- */
+function zhDur(txt, rate){ return (txt.length * 0.38) / ((rate||0.7) * ZH_SLOW); }
+function frDur(txt){ return Math.max(0.6, txt.length / 14); }
+function stepDur(s){
+  if(s.t==='zh') return zhDur(s.zh, s.rate) + 0.3;
+  if(s.t==='pause') return s.sec;
+  if(s.t==='hold') return 5;                    // valeur nominale
+  // narration : segments fr + zh
+  let d = 0.3;
+  parseNarration(s.text).forEach(seg=>{
+    d += seg.lang==='fr' ? frDur(seg.text) : zhDur(seg.hanzi, 0.6);
+  });
+  return d;
+}
+let cum = [], totalDur = 0;
+function buildTimeline(){
+  cum = []; let t = 0;
+  for(const s of steps){ cum.push(t); t += stepDur(s); }
+  totalDur = t;
+}
+function fmt(sec){
+  sec = Math.max(0, Math.round(sec));
+  return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0');
+}
+function seek(deltaSec){
+  stopEverything();
+  const target = Math.min(Math.max(cum[idx] + deltaSec, 0), totalDur - 0.1);
+  let i = 0;
+  while(i+1 < steps.length && cum[i+1] <= target) i++;
+  idx = i;
+  updateProgress();
+  if(playing) runStep();
+  else { renderCaptionFor(idx); setPhase('','⏸','En pause'); }
+}
+
+/* ---------- voix : les meilleures d'abord ---------- */
+function voiceScore(v){
+  const n = (v.name||'').toLowerCase();
+  let s = 0;
+  if(/natural|neural/.test(n)) s += 100;
+  if(/siri/.test(n)) s += 90;
+  if(/premium|enhanced|améliorée/.test(n)) s += 80;
+  if(!v.localService) s += 20;
+  if(/google/.test(n)) s += 10;
+  return s;
+}
+function pickBest(list){ return list.slice().sort((a,b)=>voiceScore(b)-voiceScore(a))[0] || null; }
+let userZhChoice = null, userFrChoice = null;
+function fillSelect(sel, list, current){
+  sel.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (voiceScore(v) >= 80 ? ' ★' : '');
+    if(current && v.name === current.name) o.selected = true;
+    sel.appendChild(o);
+  });
+}
+function loadVoices(){
+  voices = synth.getVoices();
+  const zhList = voices.filter(v=>/^zh/i.test(v.lang));
+  const frList = voices.filter(v=>/^fr/i.test(v.lang));
+  zhVoice = (userZhChoice && zhList.find(v=>v.name===userZhChoice)) || pickBest(zhList.filter(v=>/zh[-_]CN/i.test(v.lang))) || pickBest(zhList);
+  frVoice = (userFrChoice && frList.find(v=>v.name===userFrChoice)) || pickBest(frList.filter(v=>/fr[-_]FR/i.test(v.lang))) || pickBest(frList);
+  if(!zhVoice) $('voiceWarn').style.display='block';
+  if($('zhSelect')){ fillSelect($('zhSelect'), zhList, zhVoice); fillSelect($('frSelect'), frList, frVoice); }
+}
+loadVoices();
+if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
+
+/* ---------- narration mixte fr/zh ---------- */
+function parseNarration(text){
+  const segs = [];
+  const re = /\[\[([^\|\]]+)\|([^\]]+)\]\]/g;
+  let last = 0, m;
+  while((m = re.exec(text)) !== null){
+    if(m.index > last) segs.push({lang:'fr', text:text.slice(last, m.index)});
+    segs.push({lang:'zh', hanzi:m[1], pinyin:m[2]});
+    last = re.lastIndex;
+  }
+  if(last < text.length) segs.push({lang:'fr', text:text.slice(last)});
+  return segs;
+}
+function narrationHTML(text){
+  return text.replace(/\[\[([^\|\]]+)\|([^\]]+)\]\]/g, '<span class="py-inline">$2</span>');
+}
+
+/* ---------- affichage ---------- */
+function setPhase(kind, icon, label){
+  const ph = $('phaseLbl'), ic = $('coreIcon');
+  ph.className = 'phase ' + kind;
+  ph.textContent = label;
+  ic.textContent = icon;
+  ic.classList.toggle('pulse', kind==='speak-zh'||kind==='speak-fr');
+}
+function setArc(f){ $('arc').style.strokeDashoffset = ARC_LEN * (1 - f); }
+function clearTimers(){ if(pauseTimer){clearTimeout(pauseTimer);pauseTimer=null;} if(pauseRAF){cancelAnimationFrame(pauseRAF);pauseRAF=null;} }
+
+function renderContentCaption(step, yourTurnLabel){
+  const c = $('caption'); c.innerHTML='';
+  if(!step) return;
+  if(step.t==='zh'){
+    if(showText){
+      c.innerHTML = `<div class="zh hanzi">${step.zh}</div><div class="py">${step.py}</div>` + (step.fr?`<div class="fr">${step.fr}</div>`:'');
+    } else {
+      c.innerHTML = `<div class="hidden-note">Texte masqué — mode 100 % audio</div>`;
+    }
+  } else if(step.t==='fr'){
+    c.innerHTML = `<div class="fr">${narrationHTML(step.text)}</div>`;
+  }
+  if(yourTurnLabel){
+    const d = document.createElement('div');
+    d.className = 'your-turn';
+    d.textContent = yourTurnLabel;
+    c.appendChild(d);
+  }
+}
+/* le contenu affiché pendant une pause/hold = le dernier vrai contenu */
+function lastContentIndex(i){
+  let j = Math.min(i, steps.length-1);
+  while(j>=0 && (steps[j].t==='pause' || steps[j].t==='hold')) j--;
+  return j;
+}
+function renderCaptionFor(i, yourTurnLabel){
+  renderContentCaption(steps[lastContentIndex(i)], yourTurnLabel);
+}
+
+function updateProgress(){
+  $('barFill').style.width = (idx/steps.length*100).toFixed(1)+'%';
+  $('stepLbl').textContent = `Étape ${Math.min(idx+1,steps.length)} / ${steps.length}`;
+  $('timeLbl').textContent = fmt(cum[Math.min(idx,steps.length-1)]||0) + ' / ' + fmt(totalDur);
+}
+
+/* ---------- parole ---------- */
+function speak(text, voice, lang, rate, token, onend){
+  const u = new SpeechSynthesisUtterance(text);
+  if(voice) u.voice = voice;
+  u.lang = lang;
+  u.rate = rate;
+  const done = ()=>{ if(playing && token===runToken) onend(); };
+  u.onend = done;
+  u.onerror = done;
+  synth.speak(u);
+}
+function speakSegments(segs, i, token, onend){
+  if(!playing || token!==runToken) return;
+  if(i >= segs.length){ onend(); return; }
+  const s = segs[i];
+  if(s.lang==='fr'){
+    const txt = s.text.trim();
+    if(!txt){ speakSegments(segs, i+1, token, onend); return; }
+    setPhase('speak-fr','🗣️','Écoute (français)');
+    speak(txt, frVoice, 'fr-FR', 1.0, token, ()=>speakSegments(segs, i+1, token, onend));
+  } else {
+    setPhase('speak-zh','🀄','Écoute (chinois)');
+    const r = (slowMode ? 0.45 : 0.6) * ZH_SLOW;
+    speak(s.hanzi, zhVoice, 'zh-CN', r, token, ()=>speakSegments(segs, i+1, token, onend));
+  }
+}
+
+function stopEverything(){
+  runToken++;
+  synth.cancel();
+  clearTimers();
+  speechPaused = false;
+  pauseRemaining = 0;
+}
+
+/* ---------- déroulement ---------- */
+function startTimedPause(sec, total, token){
+  const t0 = performance.now();
+  const tick = (now)=>{
+    const elapsed = (now-t0)/1000;
+    pauseRemaining = Math.max(0, sec - elapsed);
+    const f = Math.min((total - pauseRemaining)/total, 1);
+    setArc((idx + f)/steps.length);
+    if(pauseRemaining>0 && playing && token===runToken) pauseRAF = requestAnimationFrame(tick);
+  };
+  pauseRAF = requestAnimationFrame(tick);
+  pauseTimer = setTimeout(()=>{ if(playing && token===runToken){ pauseRemaining=0; next(); } }, sec*1000);
+}
+
+function runStep(){
+  clearTimers();
+  speechPaused = false;
+  pauseRemaining = 0;
+  updateProgress();
+  const token = ++runToken;
+  if(idx >= steps.length){
+    playing=false; syncPlayBtn();
+    setPhase('','🎉','Leçon terminée'); setArc(1);
+    const hasNext = cur + 1 < LESSONS.length;
+    $('caption').innerHTML =
+      '<div class="fr">🎉 Bravo, leçon terminée ! Refais-la demain — la répétition espacée fait tout.</div>' +
+      (hasNext ? '<button class="menu-inline" onclick="openLesson('+(cur+1)+')">▶ Leçon suivante : '+LESSONS[cur+1].title+'</button>' : '') +
+      '<button class="menu-inline ghost" onclick="showMenu()">☰ Retour au menu</button>';
+    if(recState.active){ setTimeout(stopRecording, 1500); }
+    return;
+  }
+  const s = steps[idx];
+  setArc(idx/steps.length);
+  if(s.t==='fr'){
+    renderContentCaption(s);
+    speakSegments(parseNarration(s.text), 0, token, next);
+  } else if(s.t==='zh'){
+    renderContentCaption(s);
+    setPhase('speak-zh','🀄','Écoute (chinois)');
+    const r = (slowMode ? Math.min(s.rate, 0.45) : s.rate) * ZH_SLOW;
+    speak(s.zh, zhVoice, 'zh-CN', r, token, next);
+  } else if(s.t==='hold'){
+    renderCaptionFor(idx, s.label);
+    if(continuous){
+      // MODE CONTINU : pause chronométrée de 5 s au lieu d'un arrêt
+      setPhase('pause-p','⏳','À toi…');
+      pauseTotal = 5;
+      startTimedPause(5, 5, token);
+    } else {
+      // PAUSE AUTOMATIQUE : le texte précédent reste affiché
+      playing = false; syncPlayBtn();
+      setPhase('pause-p','✋', 'À toi — ▶ pour continuer');
+    }
+  } else { // pause chronométrée : le texte reste affiché
+    renderCaptionFor(idx);
+    setPhase('pause-p','⏳', s.label);
+    pauseTotal = s.sec;
+    startTimedPause(s.sec, s.sec, token);
+  }
+}
+function next(){ idx++; runStep(); }
+
+function syncPlayBtn(){
+  $('playIcon').style.display = playing?'none':'block';
+  $('pauseIcon').style.display = playing?'block':'none';
+  syncBg();
+}
+
+function play(){
+  if(playing) return;
+  playing = true; syncPlayBtn();
+  // 1) une phrase était suspendue en plein milieu → on la reprend là où elle s'était arrêtée
+  if(speechPaused){
+    speechPaused = false;
+    const cur = steps[idx];
+    if(cur){
+      if(cur.t==='zh'){ renderContentCaption(cur); setPhase('speak-zh','🀄','Écoute (chinois)'); }
+      else if(cur.t==='fr'){ renderContentCaption(cur); }
+    }
+    synth.resume();
+    return;
+  }
+  // 2) une pause chronométrée était suspendue → on reprend le compte à rebours restant
+  if(pauseRemaining > 0){
+    const token = ++runToken;
+    renderCaptionFor(idx);
+    setPhase('pause-p','⏳','…');
+    startTimedPause(pauseRemaining, pauseTotal, token);
+    return;
+  }
+  // 3) on est sur une étape HOLD → on passe à la suite
+  if(steps[idx] && steps[idx].t==='hold'){ idx++; }
+  runStep();
+}
+
+function pause(){
+  if(!playing) return;
+  playing = false; syncPlayBtn();
+  if(synth.speaking && !synth.paused){
+    // suspendre la phrase EN COURS sans la perdre
+    synth.pause();
+    speechPaused = true;
+  } else {
+    // suspendre une pause chronométrée (pauseRemaining déjà tenu à jour)
+    clearTimers();
+  }
+  setPhase('','⏸','En pause — ▶ pour reprendre');
+}
+
+$('playBtn').addEventListener('click', ()=> playing?pause():play());
+$('fwdBtn').addEventListener('click', ()=> seek(+10));
+$('backBtn').addEventListener('click', ()=> seek(-10));
+$('replayChip').addEventListener('click', ()=>{
+  stopEverything();
+  let j = Math.min(idx, steps.length-1);
+  while(j>=0 && steps[j].t!=='zh') j--;
+  if(j>=0){ idx=j; if(!playing){playing=true;syncPlayBtn();} runStep(); }
+});
+$('textChip').addEventListener('click', e=>{
+  showText=!showText; e.target.classList.toggle('on',showText);
+  renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+});
+$('slowChip').addEventListener('click', e=>{
+  slowMode=!slowMode; e.target.classList.toggle('on',slowMode);
+});
+$('contChip').addEventListener('click', e=>{
+  continuous=!continuous; e.target.classList.toggle('on',continuous);
+  // si on active le mode continu pendant un arrêt automatique, on repart aussitôt
+  if(continuous && !playing && steps[idx] && steps[idx].t==='hold'){ play(); }
+});
+
+/* ---- panneau voix ---- */
+$('voiceChip').addEventListener('click', ()=>{ $('voicePanel').classList.toggle('open'); loadVoices(); });
+$('zhSelect').addEventListener('change', e=>{ userZhChoice=e.target.value; zhVoice=voices.find(v=>v.name===userZhChoice)||zhVoice; });
+$('frSelect').addEventListener('change', e=>{ userFrChoice=e.target.value; frVoice=voices.find(v=>v.name===userFrChoice)||frVoice; });
+$('zhTest').addEventListener('click', ()=>{
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance('现在几点？现在十点半。');
+  if(zhVoice) u.voice=zhVoice; u.lang='zh-CN'; u.rate=0.6*ZH_SLOW;
+  synth.speak(u);
+});
+$('frTest').addEventListener('click', ()=>{
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance('Bonjour, je suis la voix du narrateur.');
+  if(frVoice) u.voice=frVoice; u.lang='fr-FR';
+  synth.speak(u);
+});
+
+/* ============================================================
+   Contrôle par les écouteurs (AirPods, casques Bluetooth)
+   Une piste silencieuse en boucle enregistre la leçon comme un
+   « média » auprès du système : la pince des AirPods met en
+   pause / reprend, et double/triple pince = +10 s / -10 s.
+   ============================================================ */
+const bg = new Audio('data:audio/wav;base64,UklGRmQfAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YUAfAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==');
+bg.loop = true;
+let syncingBg = false;
+function syncBg(){
+  syncingBg = true;
+  try{
+    if(playing){ const p = bg.play(); if(p && p.catch) p.catch(()=>{}); }
+    else bg.pause();
+    if('mediaSession' in navigator){
+      navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+    }
+  }catch(e){}
+  setTimeout(()=>{ syncingBg = false; }, 350);
+}
+// si le système (AirPods, écran verrouillé…) met la piste en pause/lecture, on suit
+bg.addEventListener('pause', ()=>{ if(!syncingBg && playing) pause(); });
+bg.addEventListener('play',  ()=>{ if(!syncingBg && !playing) play(); });
+
+if('mediaSession' in navigator){
+  try{
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: document.title,
+      artist: 'Leçon de chinois mandarin',
+      album: 'Méthode audio'
+    });
+  }catch(e){}
+  const H = (name, fn)=>{ try{ navigator.mediaSession.setActionHandler(name, fn); }catch(e){} };
+  H('play',  ()=>{ if(!playing) play(); });
+  H('pause', ()=>{ if(playing) pause(); });
+  H('nexttrack',     ()=> seek(+10));
+  H('previoustrack', ()=> seek(-10));
+  H('seekforward',   ()=> seek(+10));
+  H('seekbackward',  ()=> seek(-10));
+}
+
+buildTimeline();
+updateProgress();
+
+/* ============================================================
+   Export MP3 — capture l'audio de l'onglet (Edge/Chrome, PC)
+   puis encode en MP3 dans le navigateur (lamejs).
+   ============================================================ */
+const recState = {active:false, recorder:null, chunks:[], stream:null, prevContinuous:false};
+function recSupported(){ return !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia); }
+
+async function startRecording(){
+  if(!recSupported()){
+    $('recHint').textContent = "⚠️ Disponible uniquement sur ordinateur (Edge ou Chrome) — pas sur iPhone/iPad.";
+    return;
+  }
+  try{
+    const stream = await navigator.mediaDevices.getDisplayMedia({video:true, audio:true});
+    const atracks = stream.getAudioTracks();
+    if(!atracks.length){
+      stream.getTracks().forEach(t=>t.stop());
+      $('recHint').textContent = "⚠️ Aucun son capturé : dans la fenêtre de partage, choisis « Cet onglet » et coche « Partager aussi l'audio de l'onglet », puis réessaie.";
+      return;
+    }
+    const rec = new MediaRecorder(new MediaStream(atracks));
+    recState.active = true; recState.recorder = rec; recState.chunks = []; recState.stream = stream;
+    rec.ondataavailable = e=>{ if(e.data.size) recState.chunks.push(e.data); };
+    rec.onstop = finishRecording;
+    rec.start(1000);
+    // rejouer la leçon depuis le début, en mode continu
+    recState.prevContinuous = continuous;
+    continuous = true; $('contChip').classList.add('on');
+    stopEverything(); idx = 0;
+    $('recBtn').style.display='none'; $('recStopBtn').style.display='inline-block';
+    $('recHint').textContent = "⏺ Enregistrement en cours… La leçon se joue en entier : laisse l'onglet ouvert, le son activé, et ne touche à rien. Le fichier sera téléchargé à la fin.";
+    if(!playing){ playing=true; syncPlayBtn(); }
+    runStep();
+  }catch(err){
+    $('recHint').textContent = "Capture annulée ou refusée.";
+  }
+}
+function stopRecording(){
+  if(recState.recorder && recState.recorder.state !== 'inactive') recState.recorder.stop();
+}
+async function finishRecording(){
+  recState.active = false;
+  if(recState.stream) recState.stream.getTracks().forEach(t=>t.stop());
+  $('recBtn').style.display='inline-block'; $('recStopBtn').style.display='none';
+  if(!recState.prevContinuous){ continuous=false; $('contChip').classList.remove('on'); }
+  const blob = new Blob(recState.chunks, {type: (recState.recorder && recState.recorder.mimeType) || 'audio/webm'});
+  $('recHint').textContent = "Encodage du MP3… (quelques secondes)";
+  try{
+    const mp3 = await encodeMp3(blob);
+    offerDownload(mp3, document.title.replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'_') + '.mp3');
+    $('recHint').textContent = "✅ MP3 prêt — le téléchargement a démarré.";
+  }catch(e){
+    offerDownload(blob, 'lecon.webm');
+    $('recHint').textContent = "MP3 impossible ici (bibliothèque inaccessible) : fichier .webm téléchargé à la place — lisible par VLC et la plupart des lecteurs, convertible en MP3 en ligne.";
+  }
+}
+function offerDownload(blob, name){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 8000);
+}
+function loadLame(){
+  return new Promise((res, rej)=>{
+    if(window.lamejs) return res();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js';
+    s.onload = ()=>res(); s.onerror = ()=>rej(new Error('lamejs indisponible'));
+    document.head.appendChild(s);
+  });
+}
+async function encodeMp3(blob){
+  await loadLame();
+  const buf = await blob.arrayBuffer();
+  const ctx = new (window.AudioContext||window.webkitAudioContext)();
+  const audio = await ctx.decodeAudioData(buf);
+  const ch = audio.numberOfChannels >= 2 ? 2 : 1;
+  const enc = new lamejs.Mp3Encoder(ch, audio.sampleRate, 128);
+  const block = 1152;
+  const l = audio.getChannelData(0);
+  const r = ch===2 ? audio.getChannelData(1) : null;
+  const toI16 = f => { const v = Math.max(-1, Math.min(1, f)); return v<0 ? v*32768 : v*32767; };
+  const out = [];
+  const li = new Int16Array(block), ri = ch===2 ? new Int16Array(block) : null;
+  for(let i=0;i<l.length;i+=block){
+    const n = Math.min(block, l.length-i);
+    for(let j=0;j<n;j++){ li[j]=toI16(l[i+j]); if(ri) ri[j]=toI16(r[i+j]); }
+    const d = ch===2 ? enc.encodeBuffer(li.subarray(0,n), ri.subarray(0,n)) : enc.encodeBuffer(li.subarray(0,n));
+    if(d.length) out.push(new Int8Array(d));
+  }
+  const end = enc.flush();
+  if(end.length) out.push(new Int8Array(end));
+  ctx.close();
+  return new Blob(out, {type:'audio/mpeg'});
+}
+$('recChip').addEventListener('click', ()=>{ $('recPanel').classList.toggle('open'); });
+$('recBtn').addEventListener('click', startRecording);
+$('recStopBtn').addEventListener('click', ()=>{ pause(); stopRecording(); });
+
+/* ============================================================
+   Menu du chapitre
+   ============================================================ */
+function buildMenu(){
+  const el = $('menuList'); el.innerHTML = '';
+  LESSONS.forEach((L, i)=>{
+    const b = document.createElement('button');
+    b.className = 'menu-item';
+    const isRev = L.num >= 7;
+    b.innerHTML = '<span class="mi-num'+(isRev?' star':'')+'">'+(isRev?'★':L.num)+'</span>'
+      + '<span class="mi-hz hanzi">'+L.hanzi+'</span>'
+      + '<span class="mi-tx"><b>'+L.title+'</b><small>'+L.desc+'</small></span>';
+    b.addEventListener('click', ()=>openLesson(i));
+    el.appendChild(b);
+  });
+}
+function openLesson(i){
+  cur = i;
+  const L = LESSONS[i];
+  stopEverything();
+  steps = L.build();
+  idx = 0; playing = false; syncPlayBtn();
+  buildTimeline(); updateProgress();
+  $('lessonTag').textContent = (L.num >= 7 ? 'Révision' : 'Leçon ' + L.num);
+  document.querySelector('header h1').innerHTML = '<span class="hanzi">'+L.hanzi+'</span>'+L.title;
+  document.title = L.hanzi + ' · Leçon ' + L.num + ' — ' + L.title;
+  if('mediaSession' in navigator){
+    try{ navigator.mediaSession.metadata = new MediaMetadata({
+      title:'Leçon '+L.num+' — '+L.title, artist:'Cours de chinois · Le temps'}); }catch(e){}
+  }
+  $('overlay').style.display = 'none';
+  $('voicePanel').classList.remove('open');
+  $('recPanel').classList.remove('open');
+  // premier geste utilisateur : débloque l'audio
+  const warm = new SpeechSynthesisUtterance(' ');
+  warm.volume = 0; synth.speak(warm);
+  try{ const p = bg.play(); if(p && p.catch) p.catch(()=>{}); }catch(e){}
+  play();
+}
+function showMenu(){
+  stopEverything();
+  playing = false; syncPlayBtn();
+  setPhase('','🎧','Prêt');
+  $('overlay').style.display = 'flex';
+}
+window.openLesson = openLesson;
+window.showMenu = showMenu;
+buildMenu();
+$('menuBtn').addEventListener('click', showMenu);
+</script>
+</body>
+</html>

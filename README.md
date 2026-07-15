@@ -6,7 +6,7 @@ reprendre le projet et de créer de nouveaux chapitres/leçons au même format.
 ## 1. Vue d'ensemble
 
 Application d'apprentissage audio du chinois mandarin dans l'esprit **Pimsleur** :
-narrateur français + phrases chinoises lues par la voix système (Web Speech API),
+narrateur français + phrases chinoises lues depuis des MP3 pré-générés,
 pauses pour répéter, questions avec pause automatique, rappels espacés.
 
 Un cours = **un fichier HTML autonome** (moteur + données), utilisable sur
@@ -23,12 +23,10 @@ Fichier de référence existant : `Cours_Chinois_Le_Temps.html`
 - **HTML** : écran menu (overlay listant les leçons) + écran lecteur
   (anneau de progression, sous-titres, contrôles).
 - **JS — moteur** (ne pas modifier pour ajouter du contenu) :
-  lecture des étapes, voix, navigation ±10 s, pause/reprise réelle
-  (`speechSynthesis.pause/resume`), Media Session (contrôle AirPods :
-  pince = pause, double = +10 s, triple = −10 s via piste silencieuse en
-  boucle), export MP3 (capture d'onglet `getDisplayMedia` + encodage
-  `lamejs` depuis cdnjs, fallback .webm), panneau de choix des voix
-  (tri automatique : Natural/Neural > Siri > Premium/Enhanced).
+  lecture MP3 obligatoire, timeline fondée sur les durées réelles,
+  pause/reprise exacte au milieu d'un fichier, navigation −/+ par séquence,
+  Media Session pour les AirPods et casques Bluetooth, export MP3 par capture
+  d'onglet (`getDisplayMedia` + encodage `lamejs`, fallback `.webm`).
 - **JS — données** : tableau `const LESSONS = [...]` (voir §3).
 
 Contrainte : PAS de `localStorage` (le fichier doit fonctionner dans

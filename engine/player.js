@@ -8,8 +8,6 @@
    Les données de contenu vivent dans chapters/*.js, chargés
    APRÈS ce fichier. Chaque chapitre appelle registerChapter(...).
    ============================================================ */
-const ZH_SLOW = 0.75;   // ralentissement global du chinois (multiplié aux vitesses)
-
 const N = (text) => ({t:'fr', text});
 const C = (zh, py, fr, rate) => ({t:'zh', zh, py, fr, rate});
 const P = (sec, label) => ({t:'pause', sec, label: label||'…'});
@@ -43,110 +41,65 @@ let LESSONS = [];            // leçons du chapitre courant
 
 /* ============================================================ */
 const $ = id => document.getElementById(id);
-const synth = window.speechSynthesis;
-let voices = [], zhVoice=null, frVoice=null;
 let idx = 0, playing = false, showText = true, continuous = false, autoChain = false;
 let showPinyin = true, showFr = true;   // pinyin / traduction FR sous les phrases chinoises
 let pauseTimer = null, pauseRAF = null;
 let runToken = 0;
-let speechPaused = false;          // une phrase a été coupée par pause() (à redire à la reprise)
+let audioPaused = false;           // MP3 suspendu au milieu d'une phrase
 let pauseRemaining = 0;            // secondes restantes d'une pause chronométrée suspendue
 let pauseTotal = 0;
+let activeStepAudioOffset = 0;      // durée des fragments déjà lus dans une narration mixte
+let activeAudioStep = -1;
 const ARC_LEN = 584.3;
 
-/* ---------- estimation des durées (pour ±10 s) ---------- */
-function zhDur(txt, rate){ return (txt.length * 0.38) / ((rate||0.7) * ZH_SLOW); }
-function frDur(txt){ return Math.max(0.6, txt.length / 14); }
+/* ---------- timeline fondée sur les vraies durées des MP3 ---------- */
 function stepDur(s){
-  if(s.t==='zh') return zhDur(s.zh, s.rate) + 0.3;
+  if(!AUDIO) return 0;
+  if(s.t==='zh') return audioDurationFor('zh', s.zh);
   if(s.t==='pause') return s.sec;
-  if(s.t==='hold') return 5;                    // valeur nominale
-  // narration : segments fr + zh
-  let d = 0.3;
-  parseNarration(s.text).forEach(seg=>{
-    d += seg.lang==='fr' ? frDur(seg.text) : zhDur(seg.hanzi, 0.6);
-  });
-  return d;
+  if(s.t==='hold') return continuous ? (s.sec || 5) : 0;
+  return playableNarrationSegments(s.text).reduce((total, seg)=>
+    total + audioDurationFor(seg.lang, segmentText(seg)), 0);
 }
-let cum = [], totalDur = 0;
+let cum = [], stepDurations = [], totalDur = 0;
 function buildTimeline(){
-  cum = []; let t = 0;
-  for(const s of steps){ cum.push(t); t += stepDur(s); }
+  cum = []; stepDurations = []; let t = 0;
+  for(const s of steps){
+    const duration = stepDur(s);
+    cum.push(t); stepDurations.push(duration); t += duration;
+  }
   totalDur = t;
 }
 function fmt(sec){
-  sec = Math.max(0, Math.round(sec));
+  sec = Math.max(0, Math.floor(sec));
   return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0');
 }
 function seekToIndex(i){
   if(!steps.length) return;
+  const wasPlaying = playing;
   stopEverything();
   idx = Math.max(0, Math.min(i, steps.length-1));
   updateProgress();
-  if(playing) runStep();
+  if(wasPlaying){ playing=true; syncPlayBtn(); runStep(); }
   else { renderCaptionFor(idx); setPhase('','⏸','En pause'); }
 }
-function seekToTime(target){
+function moveSequence(direction){
   if(!steps.length) return;
-  target = Math.min(Math.max(target, 0), totalDur - 0.1);
-  let i = 0;
-  while(i+1 < steps.length && cum[i+1] <= target) i++;
-  seekToIndex(i);
-}
-function seek(deltaSec){
-  if(!steps.length) return;
-  const target = (cum[idx]||0) + deltaSec;
-  let i = 0;
-  while(i+1 < steps.length && cum[i+1] <= target) i++;
-  // les durées sont des estimations : si l'étape en cours est plus longue
-  // que le saut demandé, le calcul ne bouge pas d'étape — on avance/recule
-  // quand même d'au moins une étape pour que ±10 sec fasse toujours effet
-  // au lieu de relancer la même phrase depuis le début.
-  if(deltaSec > 0 && i <= idx) i = Math.min(idx+1, steps.length-1);
-  else if(deltaSec < 0 && i >= idx) i = Math.max(idx-1, 0);
-  seekToIndex(i);
+  let target = idx + direction;
+  while(target >= 0 && target < steps.length &&
+        steps[target].t !== 'fr' && steps[target].t !== 'zh'){
+    target += direction;
+  }
+  if(target < 0) target = 0;
+  if(target >= steps.length) target = steps.length - 1;
+  seekToIndex(target);
 }
 
-/* ---------- voix : c'est toi qui choisis ---------- */
-/* mémorisation locale des préférences (voix, vitesses) */
+/* ---------- préférences d'affichage ---------- */
 const store = {
   get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
   set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 };
-let userZhChoice = store.get('zhVoice'), userFrChoice = store.get('frVoice');
-function fillSelect(sel, list, current){
-  sel.innerHTML = '';
-  list.forEach(v=>{
-    const o = document.createElement('option');
-    o.value = v.name;
-    o.textContent = v.name;
-    if(current && v.name === current.name) o.selected = true;
-    sel.appendChild(o);
-  });
-}
-/* On ne (ré)assigne une voix que dans deux cas : ton choix manuel (menu
-   déroulant 🎙 Voix) vient d'apparaître dans la liste, ou aucune voix
-   n'est encore active pour cette langue (tout premier chargement — il
-   faut bien un son par défaut avant que tu n'aies choisi). Une fois une
-   voix établie, on ne la remplace plus jamais automatiquement : certains
-   navigateurs redéclenchent onvoiceschanged en cours de lecture avec une
-   liste momentanément incomplète (mise en pause, Bluetooth, verrouillage
-   d'écran…), et une ancienne version rebasculait alors toute seule vers
-   une autre voix, coupant la lecture en cours. Seul le menu 🎙 Voix
-   change la voix active. */
-function loadVoices(){
-  voices = synth.getVoices();
-  const zhList = voices.filter(v=>/^zh/i.test(v.lang));
-  const frList = voices.filter(v=>/^fr/i.test(v.lang));
-  if(userZhChoice){ const f = zhList.find(v=>v.name===userZhChoice); if(f) zhVoice = f; }
-  else if(!zhVoice && zhList.length) zhVoice = zhList.find(v=>/zh[-_]CN/i.test(v.lang)) || zhList[0];
-  if(userFrChoice){ const f = frList.find(v=>v.name===userFrChoice); if(f) frVoice = f; }
-  else if(!frVoice && frList.length) frVoice = frList.find(v=>/fr[-_]FR/i.test(v.lang)) || frList[0];
-  if(!zhVoice && $('voiceWarn')) $('voiceWarn').style.display='block';
-  if($('zhSelect')){ fillSelect($('zhSelect'), zhList, zhVoice); fillSelect($('frSelect'), frList, frVoice); }
-}
-loadVoices();
-if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
 
 /* ---------- narration mixte fr/zh ---------- */
 /* Un fragment de texte français peut contenir du chinois « brut »,
@@ -179,6 +132,11 @@ function parseNarration(text){
   }
   if(last < text.length) segs.push(...splitBareHanzi(text.slice(last)));
   return segs;
+}
+function segmentText(seg){ return seg.lang === 'fr' ? seg.text.trim() : seg.hanzi; }
+function hasSpeakableChars(text){ return /[A-Za-zÀ-ÿ0-9一-鿿]/.test(text); }
+function playableNarrationSegments(text){
+  return parseNarration(text).filter(seg=>hasSpeakableChars(segmentText(seg)));
 }
 function narrationHTML(text){
   return text.replace(/\[\[([^\|\]]+)\|([^\]]+)\]\]/g, '<span class="py-inline">$2</span>');
@@ -226,49 +184,188 @@ function renderCaptionFor(i, yourTurnLabel){
   renderContentCaption(steps[lastContentIndex(i)], yourTurnLabel);
 }
 
+function currentTimelineTime(){
+  let t = cum[Math.min(idx, steps.length-1)] || 0;
+  if(activeAudioStep === idx && Number.isFinite(sfx.duration)){
+    t += activeStepAudioOffset + Math.min(sfx.currentTime || 0, sfx.duration);
+  } else if(steps[idx] && steps[idx].t === 'pause' && pauseTotal > 0){
+    t += Math.max(0, pauseTotal - pauseRemaining);
+  } else if(steps[idx] && steps[idx].t === 'hold' && continuous && pauseTotal > 0){
+    t += Math.max(0, pauseTotal - pauseRemaining);
+  }
+  return Math.min(t, totalDur || 0);
+}
 function updateProgress(){
-  const t = cum[Math.min(idx,steps.length-1)]||0;
+  const t = currentTimelineTime();
   $('barFill').style.width = (totalDur ? t/totalDur*100 : 0).toFixed(1)+'%';
-  $('stepLbl').textContent = `Étape ${Math.min(idx+1,steps.length)} / ${steps.length}`;
-  $('timeLbl').textContent = fmt(cum[Math.min(idx,steps.length-1)]||0) + ' / ' + fmt(totalDur);
+  $('stepLbl').textContent = `Séquence ${Math.min(idx+1,steps.length)} / ${steps.length}`;
+  $('timeLbl').textContent = fmt(t) + ' / ' + fmt(totalDur);
+  setArc(totalDur ? t/totalDur : 0);
 }
 
-/* ---------- parole ---------- */
-function speak(text, voice, lang, rate, token, onend){
-  const u = new SpeechSynthesisUtterance(text);
-  if(voice) u.voice = voice;
-  u.lang = lang;
-  u.rate = Math.max(0.1, Math.min(rate, 2));
-  const done = ()=>{ if(playing && token===runToken) onend(); };
-  u.onend = done;
-  u.onerror = done;
-  // Bug connu d'Edge/Chrome : si la synthèse est restée coincée en état
-  // « paused » (typiquement après un ancien pause() sur une voix online),
-  // tout speak() suivant est ignoré en silence. On la débloque d'abord.
-  if(synth.paused) synth.resume();
-  synth.speak(u);
+/* ============================================================
+   Audio pré-généré (MP3) — obligatoire, par leçon
+   Pour un chapitre HSK, si audio/<chapitre>-<partie>/manifest.json
+   existe ; pour un bonus, si audio/bonus/<numéro>/<partie>/manifest.json
+   existe, chaque phrase est jouée depuis son MP3. Le manifeste et
+   tous les fichiers sont vérifiés avant le démarrage de la leçon.
+   Une absence ou une erreur de chargement arrête le lecteur et affiche
+   un message explicite : il n'existe plus de synthèse vocale de secours.
+   ============================================================ */
+let AUDIO = null;          // { base, lookup, durations } de la partie en cours
+const sfx = document.createElement('audio'); // média réel pour lecture et AirPods
+sfx.id = 'lessonAudio';
+sfx.hidden = true;
+sfx.setAttribute('playsinline', '');
+document.body.appendChild(sfx);
+sfx.preload = 'auto';
+async function loadAudioManifest(chapterId, lessonNum){
+  AUDIO = null;
+  const chapter = CHAPTERS.find(ch => ch.id === chapterId);
+  let bonusNum = '';
+  if(chapter && chapter.group === 'bonus'){
+    const match = String(chapter.id).match(/^(\d+)/);
+    if(match) bonusNum = match[1];
+  }
+  const base = bonusNum
+    ? 'audio/bonus/' + bonusNum + '/' + lessonNum
+    : 'audio/' + chapterId + '-' + lessonNum;
+  let m;
+  if(location.protocol === 'file:'){
+    // fetch() des fichiers JSON locaux est bloqué par les navigateurs.
+    // Le catalogue est chargé par une balise <script>, autorisée en file://.
+    const lookup = window.AUDIO_CATALOG && window.AUDIO_CATALOG[base];
+    if(!lookup) throw new Error('Manifeste absent du catalogue audio local : ' + base);
+    m = {lookup};
+  } else {
+    const r = await fetch(base + '/manifest.json');
+    if(!r.ok) throw new Error('Manifeste audio introuvable (' + r.status + ')');
+    m = await r.json();
+  }
+  if(!m || !m.lookup) throw new Error('Manifeste audio invalide');
+  AUDIO = { base, lookup: m.lookup, durations: new Map() };
+  await prepareLessonAudio();
 }
-function speakSegments(segs, i, token, onend){
+function resetAudioFile(){
+  try{ sfx.pause(); }catch(e){}
+  sfx.onended = null; sfx.onerror = null; sfx.onloadedmetadata = null;
+  try{ sfx.currentTime = 0; }catch(e){}
+  activeAudioStep = -1;
+  activeStepAudioOffset = 0;
+}
+function audioFileFor(lang, text){
+  if(!AUDIO) return null;
+  const k = AUDIO.lookup[lang.slice(0,2) + '|' + text];
+  return k ? AUDIO.base + '/' + k + '.mp3' : null;
+}
+function audioDurationFor(lang, text){
+  const url = audioFileFor(lang, text);
+  return url && AUDIO ? (AUDIO.durations.get(url) || 0) : 0;
+}
+function requiredAudioItems(){
+  const items = [];
+  steps.forEach(step=>{
+    if(step.t === 'zh') items.push(['zh', step.zh]);
+    else if(step.t === 'fr') playableNarrationSegments(step.text)
+      .forEach(seg=>items.push([seg.lang, segmentText(seg)]));
+  });
+  return items;
+}
+function loadAudioDuration(url){
+  return new Promise((resolve, reject)=>{
+    const probe = new Audio();
+    const timer = setTimeout(()=>reject(new Error('Délai dépassé pour ' + url)), 15000);
+    const clean = ()=>{ clearTimeout(timer); probe.onloadedmetadata=null; probe.onerror=null; };
+    probe.preload = 'metadata';
+    probe.onloadedmetadata = ()=>{
+      const duration = probe.duration;
+      clean();
+      if(Number.isFinite(duration) && duration > 0) resolve(duration);
+      else reject(new Error('Durée audio invalide pour ' + url));
+    };
+    probe.onerror = ()=>{ clean(); reject(new Error('MP3 introuvable ou illisible : ' + url)); };
+    probe.src = url;
+  });
+}
+async function prepareLessonAudio(){
+  const urls = new Set();
+  for(const [lang, text] of requiredAudioItems()){
+    const url = audioFileFor(lang, text);
+    if(!url) throw new Error('MP3 absent du manifeste pour : « ' + text.slice(0,80) + ' »');
+    urls.add(url);
+  }
+  // Limiter le nombre de requêtes simultanées : Safari/iOS supporte mal
+  // l'ouverture de dizaines d'éléments Audio en même temps.
+  const list = [...urls];
+  for(let i=0; i<list.length; i+=8){
+    await Promise.all(list.slice(i, i+8).map(async url=>{
+      AUDIO.durations.set(url, await loadAudioDuration(url));
+    }));
+  }
+  buildTimeline();
+}
+function showAudioError(error){
+  playing = false;
+  audioPaused = false;
+  resetAudioFile();
+  clearTimers();
+  syncPlayBtn();
+  setPhase('error','⚠️','Erreur audio');
+  $('caption').innerHTML = '<div class="audio-error"><b>Impossible de lire cette leçon.</b><br>'
+    + String(error && error.message ? error.message : error) + '<br><small>Vérifie que le dossier audio et son manifeste sont accessibles, puis recharge la page.</small></div>';
+}
+function handlePlayFailure(error){
+  if(error && error.name === 'NotAllowedError'){
+    playing = false;
+    audioPaused = true;
+    syncPlayBtn();
+    setPhase('','▶','Appuie sur lecture');
+  } else {
+    showAudioError(error);
+  }
+}
+
+/* ---------- lecture MP3 ---------- */
+function playAudioSegment(text, lang, token, onend, startAt, stepOffset){
+  const done = ()=>{ if(playing && token===runToken) onend(); };
+  const url = audioFileFor(lang, text);
+  if(!url){ showAudioError(new Error('MP3 absent pour « ' + text.slice(0,80) + ' »')); return; }
+  resetAudioFile();
+  activeAudioStep = idx;
+  activeStepAudioOffset = stepOffset || 0;
+  sfx.src = url;
+  sfx.playbackRate = 1;
+  sfx.onended = done;
+  sfx.onerror = ()=>showAudioError(new Error('MP3 impossible à charger : ' + url));
+  const start = ()=>{
+    if(startAt > 0) sfx.currentTime = Math.min(startAt, Math.max(0, sfx.duration - .05));
+    const p = sfx.play();
+    if(p && p.catch) p.catch(handlePlayFailure);
+  };
+  if(sfx.readyState >= 1) start();
+  else sfx.onloadedmetadata = start;
+}
+function playNarrationSegments(segs, i, token, onend, elapsed){
   if(!playing || token!==runToken) return;
   if(i >= segs.length){ onend(); return; }
   const s = segs[i];
+  const text = segmentText(s);
   if(s.lang==='fr'){
-    const txt = s.text.trim();
-    if(!txt){ speakSegments(segs, i+1, token, onend); return; }
     setPhase('speak-fr','🗣️','Écoute (français)');
-    speak(txt, frVoice, 'fr-FR', frSpeedMult, token, ()=>speakSegments(segs, i+1, token, onend));
+    playAudioSegment(text, 'fr', token, ()=>playNarrationSegments(
+      segs, i+1, token, onend, elapsed + audioDurationFor('fr', text)), 0, elapsed);
   } else {
     setPhase('speak-zh','🀄','Écoute (chinois)');
-    const r = 0.6 * ZH_SLOW * zhSpeedMult;
-    speak(s.hanzi, zhVoice, 'zh-CN', r, token, ()=>speakSegments(segs, i+1, token, onend));
+    playAudioSegment(text, 'zh', token, ()=>playNarrationSegments(
+      segs, i+1, token, onend, elapsed + audioDurationFor('zh', text)), 0, elapsed);
   }
 }
 
 function stopEverything(){
   runToken++;
-  synth.cancel();
+  resetAudioFile();
   clearTimers();
-  speechPaused = false;
+  audioPaused = false;
   pauseRemaining = 0;
 }
 
@@ -288,7 +385,7 @@ function startTimedPause(sec, total, token){
 
 function runStep(){
   clearTimers();
-  speechPaused = false;
+  audioPaused = false;
   pauseRemaining = 0;
   updateProgress();
   const token = ++runToken;
@@ -324,15 +421,14 @@ function runStep(){
     return;
   }
   const s = steps[idx];
-  setArc(idx/steps.length);
   if(s.t==='fr'){
     renderContentCaption(s);
-    speakSegments(parseNarration(s.text), 0, token, next);
+    playNarrationSegments(playableNarrationSegments(s.text), 0, token, next, 0);
   } else if(s.t==='zh'){
     renderContentCaption(s);
     setPhase('speak-zh','🀄','Écoute (chinois)');
-    const r = s.rate * ZH_SLOW * zhSpeedMult;
-    speak(s.zh, zhVoice, 'zh-CN', r, token, next);
+    activeStepAudioOffset = 0;
+    playAudioSegment(s.zh, 'zh', token, next, 0, 0);
   } else if(s.t==='hold'){
     renderCaptionFor(idx, s.label);
     if(continuous){
@@ -358,7 +454,9 @@ function next(){ idx++; runStep(); }
 function syncPlayBtn(){
   $('playIcon').style.display = playing?'none':'block';
   $('pauseIcon').style.display = playing?'block':'none';
-  syncBg();
+  if('mediaSession' in navigator){
+    try{ navigator.mediaSession.playbackState = playing ? 'playing' : 'paused'; }catch(e){}
+  }
 }
 
 function play(){
@@ -366,13 +464,12 @@ function play(){
   // Accueil, aucune leçon chargée : rien à jouer, on ouvre le menu.
   if(playerChapterIdx < 0){ showFolders(); return; }
   playing = true; syncPlayBtn();
-  // 1) une phrase était coupée en cours → on la redit depuis le début.
-  //    On NE fait PAS synth.resume() : sur les voix Microsoft « online »
-  //    d'Edge, pause()/resume() laisse souvent la synthèse bloquée et la
-  //    leçon ne défile plus. Redire l'étape courante est fiable partout.
-  if(speechPaused){
-    speechPaused = false;
-    runStep();
+  // 1) un MP3 était suspendu au milieu d'une phrase : reprendre exactement
+  //    à la même position, sans recréer l'élément et sans revenir au début.
+  if(audioPaused && activeAudioStep === idx && sfx.src){
+    audioPaused = false;
+    const p = sfx.play();
+    if(p && p.catch) p.catch(handlePlayFailure);
     return;
   }
   // 2) une pause chronométrée était suspendue → on reprend le compte à rebours restant
@@ -391,13 +488,9 @@ function play(){
 function pause(){
   if(!playing) return;
   playing = false; syncPlayBtn();
-  if(synth.speaking || synth.pending){
-    // On COUPE la phrase en cours (synth.cancel) au lieu de synth.pause() :
-    // pause()/resume() casse les voix Microsoft online. À la reprise, play()
-    // redira l'étape courante depuis le début (voir la branche speechPaused).
-    // playing est déjà à false, donc le onend de la phrase coupée n'avance pas.
-    speechPaused = true;
-    synth.cancel();
+  if(activeAudioStep === idx && sfx.src && !sfx.ended){
+    audioPaused = true;
+    sfx.pause();
   } else {
     // suspendre une pause chronométrée (pauseRemaining déjà tenu à jour)
     clearTimers();
@@ -406,8 +499,8 @@ function pause(){
 }
 
 $('playBtn').addEventListener('click', ()=> playing?pause():play());
-$('fwdBtn').addEventListener('click', ()=> seek(+10));
-$('backBtn').addEventListener('click', ()=> seek(-10));
+$('fwdBtn').addEventListener('click', ()=> moveSequence(+1));
+$('backBtn').addEventListener('click', ()=> moveSequence(-1));
 $('replayChip').addEventListener('click', ()=>{
   stopEverything();
   let j = Math.min(idx, steps.length-1);
@@ -437,6 +530,7 @@ $('frTradChip').addEventListener('click', e=>{
 })();
 $('contChip').addEventListener('click', e=>{
   continuous=!continuous; e.target.classList.toggle('on',continuous);
+  buildTimeline(); updateProgress();
   // si on active le mode continu pendant un arrêt automatique, on repart aussitôt
   if(continuous && !playing && steps[idx] && steps[idx].t==='hold'){ play(); }
 });
@@ -444,63 +538,9 @@ $('chainChip').addEventListener('click', e=>{
   autoChain=!autoChain; e.target.classList.toggle('on',autoChain);
 });
 
-/* ---- curseurs de vitesse 🐢→🐇 (0–100, 50 = vitesse normale)
-       0 = moitié moins vite (×0.5) · 100 = moitié plus vite (×1.5).
-       S'applique à la prochaine phrase prononcée. ---- */
-let zhSpeedMult = 1, frSpeedMult = 1;
-const speedMult = v => Math.pow(3, (v-50)/50);   // 0→×0.33 · 50→×1 · 100→×3
-$('zhSpeed').addEventListener('input', e=>{ zhSpeedMult = speedMult(+e.target.value); store.set('zhSpeed', e.target.value); });
-$('frSpeed').addEventListener('input', e=>{ frSpeedMult = speedMult(+e.target.value); store.set('frSpeed', e.target.value); });
-/* restaurer les vitesses mémorisées */
-(function(){
-  const zs = store.get('zhSpeed'), fs = store.get('frSpeed');
-  if(zs !== null){ $('zhSpeed').value = zs; zhSpeedMult = speedMult(+zs); }
-  if(fs !== null){ $('frSpeed').value = fs; frSpeedMult = speedMult(+fs); }
-})();
-
-/* ---- panneau voix ---- */
-$('voiceChip').addEventListener('click', ()=>{ $('voicePanel').classList.toggle('open'); loadVoices(); });
-$('zhSelect').addEventListener('change', e=>{ userZhChoice=e.target.value; zhVoice=voices.find(v=>v.name===userZhChoice)||zhVoice; store.set('zhVoice', userZhChoice); });
-$('frSelect').addEventListener('change', e=>{ userFrChoice=e.target.value; frVoice=voices.find(v=>v.name===userFrChoice)||frVoice; store.set('frVoice', userFrChoice); });
-$('zhTest').addEventListener('click', ()=>{
-  synth.cancel();
-  if(synth.paused) synth.resume();
-  const u = new SpeechSynthesisUtterance('现在几点？现在十点半。');
-  if(zhVoice) u.voice=zhVoice; u.lang='zh-CN'; u.rate=0.6*ZH_SLOW*zhSpeedMult;
-  synth.speak(u);
-});
-$('frTest').addEventListener('click', ()=>{
-  synth.cancel();
-  if(synth.paused) synth.resume();
-  const u = new SpeechSynthesisUtterance('Bonjour, je suis la voix du narrateur.');
-  if(frVoice) u.voice=frVoice; u.lang='fr-FR'; u.rate=frSpeedMult;
-  synth.speak(u);
-});
-
 /* ============================================================
-   Contrôle par les écouteurs (AirPods, casques Bluetooth)
-   Une piste silencieuse en boucle enregistre la leçon comme un
-   « média » auprès du système : la pince des AirPods met en
-   pause / reprend, et double/triple pince = +10 s / -10 s.
+   Contrôle AirPods et casques Bluetooth via le vrai média MP3.
    ============================================================ */
-const bg = new Audio('data:audio/wav;base64,UklGRmQfAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YUAfAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==');
-bg.loop = true;
-let syncingBg = false;
-function syncBg(){
-  syncingBg = true;
-  try{
-    if(playing){ const p = bg.play(); if(p && p.catch) p.catch(()=>{}); }
-    else bg.pause();
-    if('mediaSession' in navigator){
-      navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
-    }
-  }catch(e){}
-  setTimeout(()=>{ syncingBg = false; }, 350);
-}
-// si le système (AirPods, écran verrouillé…) met la piste en pause/lecture, on suit
-bg.addEventListener('pause', ()=>{ if(!syncingBg && playing) pause(); });
-bg.addEventListener('play',  ()=>{ if(!syncingBg && !playing) play(); });
-
 if('mediaSession' in navigator){
   try{
     navigator.mediaSession.metadata = new MediaMetadata({
@@ -512,10 +552,10 @@ if('mediaSession' in navigator){
   const H = (name, fn)=>{ try{ navigator.mediaSession.setActionHandler(name, fn); }catch(e){} };
   H('play',  ()=>{ if(!playing) play(); });
   H('pause', ()=>{ if(playing) pause(); });
-  H('nexttrack',     ()=> seek(+10));
-  H('previoustrack', ()=> seek(-10));
-  H('seekforward',   ()=> seek(+10));
-  H('seekbackward',  ()=> seek(-10));
+  H('nexttrack',     ()=> moveSequence(+1));
+  H('previoustrack', ()=> moveSequence(-1));
+  H('seekforward',   ()=> moveSequence(+1));
+  H('seekbackward',  ()=> moveSequence(-1));
 }
 
 buildTimeline();
@@ -739,6 +779,7 @@ function renderPlayer(i){
     playerChapterIdx = curChapterIdx;
     playerLessons = LESSONS;
     stopEverything();
+    AUDIO = null;
     steps = L.build();
     idx = 0; playing = false;
     buildTimeline();
@@ -758,14 +799,21 @@ function renderPlayer(i){
   $('folderOverlay').style.display = 'none';
   $('chapterOverlay').style.display = 'none';
   $('overlay').style.display = 'none';
-  $('voicePanel').classList.remove('open');
   $('recPanel').classList.remove('open');
   if(!resuming){
-    // premier geste utilisateur : débloque l'audio
-    const warm = new SpeechSynthesisUtterance(' ');
-    warm.volume = 0; synth.speak(warm);
-    try{ const p = bg.play(); if(p && p.catch) p.catch(()=>{}); }catch(e){}
-    play();
+    $('caption').innerHTML = '<div class="fr">Chargement et vérification des MP3…</div>';
+    setPhase('','⏳','Chargement audio');
+    // On vérifie le manifeste et chaque MP3 avant le démarrage. Le jeton
+    // protège d'une navigation ailleurs entre-temps.
+    const startToken = runToken;
+    loadAudioManifest(curChapter.id, L.num).then(()=>{
+      if(startToken !== runToken) return;
+      updateProgress();
+      play();
+    }).catch(error=>{
+      if(startToken !== runToken) return;
+      showAudioError(error);
+    });
   }
 }
 
@@ -860,44 +908,12 @@ window.initApp = initApp;
 $('menuBtn').addEventListener('click', showMenu);
 
 /* ============================================================
-   Timeline cliquable / glissable
-   Clic ou glisser sur la barre de progression = se déplacer
-   dans la leçon. Pendant le glisser, seule la barre bouge ;
-   le saut est fait au relâchement.
+   Timeline continue : la position réelle de l'élément MP3 est lue à
+   chaque image. La barre et les deux compteurs avancent donc pendant
+   la phrase, au lieu de sauter seulement au changement de séquence.
    ============================================================ */
-const barEl = document.querySelector('.progress .bar');
-let barDragging = false;
-function barFrac(clientX){
-  const r = barEl.getBoundingClientRect();
-  return Math.min(Math.max((clientX - r.left)/r.width, 0), 1);
+function progressLoop(){
+  if(steps.length) updateProgress();
+  requestAnimationFrame(progressLoop);
 }
-function barPreview(f){
-  $('barFill').style.width = (f*100).toFixed(1)+'%';
-  $('timeLbl').textContent = fmt(f*totalDur) + ' / ' + fmt(totalDur);
-}
-barEl.addEventListener('pointerdown', e=>{
-  if(!steps.length) return;
-  barDragging = true;
-  barEl.classList.add('dragging');
-  try{ barEl.setPointerCapture(e.pointerId); }catch(err){}
-  barPreview(barFrac(e.clientX));
-  e.preventDefault();
-});
-barEl.addEventListener('pointermove', e=>{
-  if(barDragging) barPreview(barFrac(e.clientX));
-});
-let lastPointerSeek = 0;
-barEl.addEventListener('pointerup', e=>{
-  if(!barDragging) return;
-  barDragging = false;
-  barEl.classList.remove('dragging');
-  lastPointerSeek = Date.now();
-  seekToTime(barFrac(e.clientX) * totalDur);
-});
-barEl.addEventListener('pointercancel', ()=>{ barDragging = false; barEl.classList.remove('dragging'); updateProgress(); });
-// fallback : simple clic (navigateurs sans pointer events fiables)
-barEl.addEventListener('click', e=>{
-  if(!steps.length) return;
-  if(Date.now() - lastPointerSeek < 600) return;  // déjà géré par pointerup
-  seekToTime(barFrac(e.clientX) * totalDur);
-});
+requestAnimationFrame(progressLoop);

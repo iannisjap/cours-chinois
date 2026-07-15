@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TEMPLATE — Cours audio de chinois</title>
+<style>
+  :root{
+    --ink:#14213d; --ink-2:#1e3358; --cinnabar:#c73e2e;
+    --gold:#e8b84b; --paper:#f7f3ea; --muted:#8a94a8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    background:var(--ink); color:var(--paper);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    display:flex;flex-direction:column;align-items:center;
+    min-height:100dvh;overflow-x:hidden;
+  }
+  .hanzi{font-family:"Noto Serif SC","Songti SC","STSong",serif}
+
+  header{width:100%;max-width:520px;padding:18px 20px 6px;display:flex;justify-content:space-between;align-items:baseline}
+  header h1{font-size:15px;font-weight:600;letter-spacing:.04em}
+  header h1 .hanzi{color:var(--gold);font-size:17px;margin-right:6px}
+  header .lesson-tag{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+
+  .progress{width:100%;max-width:520px;padding:0 20px;margin-top:6px}
+  .bar{height:3px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+  .bar>div{height:100%;width:0%;background:var(--gold);transition:width .4s ease}
+  .progress .lbl{font-size:11px;color:var(--muted);margin-top:5px;display:flex;justify-content:space-between}
+
+  .stage{flex:1;width:100%;max-width:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 24px;gap:16px;text-align:center}
+
+  .ring-wrap{position:relative;width:170px;height:170px;flex:0 0 auto}
+  svg.ring{width:170px;height:170px;transform:rotate(-90deg)}
+  .ring circle{fill:none;stroke-width:5}
+  .ring .track{stroke:rgba(255,255,255,.10)}
+  .ring .arc{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+  .ring-core{
+    position:absolute;inset:14px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--ink-2), var(--ink) 70%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    border:1px solid rgba(232,184,75,.25);padding:8px;
+  }
+  .phase{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1.4}
+  .phase.speak-zh{color:var(--cinnabar);font-weight:700}
+  .phase.speak-fr{color:var(--paper)}
+  .phase.pause-p{color:var(--gold);font-weight:700}
+  .core-icon{font-size:30px;line-height:1}
+  .pulse{animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(1.12);opacity:1}}
+  @media (prefers-reduced-motion: reduce){.pulse{animation:none}}
+
+  .caption{min-height:130px;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:flex-start;width:100%}
+  .caption .zh{font-size:32px;color:var(--paper);line-height:1.25}
+  .caption .py{font-size:16px;color:var(--gold)}
+  .caption .fr{font-size:14.5px;color:var(--muted);max-width:36ch;line-height:1.5}
+  .caption .fr .py-inline{color:var(--gold);font-weight:600;font-style:normal}
+  .caption .hidden-note{font-size:12px;color:var(--muted);font-style:italic}
+  .caption .your-turn{
+    margin-top:6px;font-size:12.5px;color:var(--gold);font-weight:600;
+    border:1px dashed rgba(232,184,75,.5);border-radius:999px;padding:6px 14px;
+  }
+
+  .controls{width:100%;max-width:520px;padding:8px 24px calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px}
+  .main-row{display:flex;align-items:center;justify-content:center;gap:22px}
+  button{border:none;background:none;color:var(--paper);cursor:pointer;font-family:inherit}
+  button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+  .skip{font-size:12px;color:var(--muted);padding:10px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:56px}
+  .skip .big{font-size:17px;font-weight:700;color:var(--paper)}
+  .play{
+    width:78px;height:78px;border-radius:50%;background:var(--cinnabar);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 22px rgba(199,62,46,.45);transition:transform .12s ease;
+  }
+  .play:active{transform:scale(.94)}
+  .play svg{width:32px;height:32px;fill:var(--paper)}
+
+  .opts{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+  .chip{font-size:12px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.22);color:var(--paper);background:rgba(255,255,255,.05)}
+  .chip.on{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600}
+
+  .voice-panel{display:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:14px;gap:10px;flex-direction:column;font-size:13px}
+  .voice-panel.open{display:flex}
+  .voice-panel label{color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .voice-panel select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:var(--ink-2);color:var(--paper);font-size:13px}
+  .voice-panel .row{display:flex;gap:8px;align-items:center}
+  .voice-panel .test{flex:0 0 auto;font-size:12px;padding:9px 14px;border-radius:10px;background:var(--gold);color:var(--ink);font-weight:600}
+  .voice-panel .hint{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+  .overlay{position:fixed;inset:0;background:var(--ink);z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:38px 22px calc(30px + env(safe-area-inset-bottom));text-align:center;gap:14px;overflow-y:auto}
+  .menu-list{width:100%;max-width:440px;display:flex;flex-direction:column;gap:10px;margin-top:6px}
+  .menu-item{
+    display:flex;align-items:center;gap:14px;text-align:left;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    border-radius:14px;padding:13px 15px;color:var(--paper);width:100%;
+  }
+  .menu-item:active{background:rgba(255,255,255,.12)}
+  .mi-num{
+    flex:0 0 34px;height:34px;border-radius:50%;background:var(--cinnabar);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;
+  }
+  .mi-num.star{background:var(--gold);color:var(--ink)}
+  .mi-hz{flex:0 0 auto;font-size:20px;color:var(--gold)}
+  .mi-tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .mi-tx b{font-size:14px}
+  .mi-tx small{font-size:11.5px;color:var(--muted)}
+  .menu-inline{
+    display:block;margin:10px auto 0;background:var(--cinnabar);color:var(--paper);
+    font-size:14px;font-weight:600;padding:12px 22px;border-radius:999px;
+    box-shadow:0 4px 16px rgba(199,62,46,.4);
+  }
+  .menu-inline.ghost{background:transparent;border:1px solid rgba(255,255,255,.3);box-shadow:none;color:var(--muted)}
+  .overlay .big-hanzi{font-size:64px;color:var(--gold)}
+  .overlay h2{font-size:20px;font-weight:600}
+  .overlay p{font-size:14px;color:var(--muted);max-width:36ch;line-height:1.55}
+  .overlay .start{margin-top:10px;background:var(--cinnabar);color:var(--paper);font-size:16px;font-weight:600;padding:15px 42px;border-radius:999px;box-shadow:0 6px 22px rgba(199,62,46,.45)}
+  .overlay .tip{font-size:12px;color:var(--muted)}
+  .voice-warn{font-size:12px;color:var(--gold);max-width:38ch;line-height:1.5;display:none}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay">
+  <div class="big-hanzi hanzi" style="font-size:52px">模板</div>
+  <h2>TEMPLATE · Nouveau chapitre</h2>
+  <p>Moteur complet + 1 leçon d'exemple. Remplacer le tableau LESSONS dans le code par le contenu du nouveau chapitre (voir README).</p>
+  <p class="voice-warn" id="voiceWarn">⚠️ Aucune voix chinoise détectée sur cet appareil. (Sur iPhone : Réglages → Accessibilité → Contenu énoncé → Voix → Chinois.)</p>
+  <div class="menu-list" id="menuList"></div>
+  <div class="tip">Écouteurs conseillés · voix réglables dans 🎙 Voix · export ⏺ MP3 sur ordinateur</div>
+</div>
+
+<header>
+  <h1><span class="hanzi">谈时间</span>Parler de l'heure</h1>
+  <span style="display:flex;gap:10px;align-items:center"><span class="lesson-tag" id="lessonTag">—</span><button class="chip" id="menuBtn" style="padding:6px 12px">☰ Menu</button></span>
+</header>
+
+<div class="progress">
+  <div class="bar"><div id="barFill"></div></div>
+  <div class="lbl"><span id="stepLbl">—</span><span id="timeLbl"></span></div>
+</div>
+
+<main class="stage">
+  <div class="ring-wrap">
+    <svg class="ring" viewBox="0 0 200 200">
+      <circle class="track" cx="100" cy="100" r="93"/>
+      <circle class="arc" id="arc" cx="100" cy="100" r="93" stroke-dasharray="584.3" stroke-dashoffset="584.3"/>
+    </svg>
+    <div class="ring-core">
+      <div class="core-icon" id="coreIcon">🎧</div>
+      <div class="phase" id="phaseLbl">Prêt</div>
+    </div>
+  </div>
+
+  <div class="caption" id="caption">
+    <div class="fr">Appuie sur lecture pour commencer.</div>
+  </div>
+</main>
+
+<div class="controls">
+  <div class="main-row">
+    <button class="skip" id="backBtn" aria-label="Reculer de 10 secondes">
+      <span class="big">−10</span>sec
+    </button>
+    <button class="play" id="playBtn" aria-label="Lecture / pause">
+      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+    </button>
+    <button class="skip" id="fwdBtn" aria-label="Avancer de 10 secondes">
+      <span class="big">+10</span>sec
+    </button>
+  </div>
+  <div class="opts">
+    <button class="chip on" id="textChip">Afficher le texte</button>
+    <button class="chip" id="slowChip">Encore + lent</button>
+    <button class="chip" id="contChip">Mode continu</button>
+    <button class="chip" id="replayChip">🔁 Réécouter</button>
+    <button class="chip" id="voiceChip">🎙 Voix</button>
+    <button class="chip" id="recChip">⏺ MP3</button>
+  </div>
+  <div class="voice-panel" id="voicePanel">
+    <label for="zhSelect">Voix chinoise</label>
+    <div class="row">
+      <select id="zhSelect"></select>
+      <button class="test" id="zhTest">Tester</button>
+    </div>
+    <label for="frSelect">Voix française (narrateur)</label>
+    <div class="row">
+      <select id="frSelect"></select>
+      <button class="test" id="frTest">Tester</button>
+    </div>
+    <div class="hint">💡 Pour une meilleure voix gratuite : sur iPhone, télécharge une voix chinoise « Premium / Améliorée » (Réglages → Accessibilité → Contenu énoncé → Voix). Sur PC/Android, ouvre ce fichier dans Microsoft Edge pour les voix neuronales « Natural ». Elles apparaîtront ensuite dans cette liste.</div>
+  </div>
+  <div class="voice-panel" id="recPanel">
+    <label>Exporter la leçon en MP3 (ordinateur)</label>
+    <div class="hint">Sur PC avec <b>Edge</b> ou Chrome : clique « Démarrer », choisis <b>Cet onglet</b> dans la fenêtre de partage et coche <b>Partager aussi l'audio de l'onglet</b>. La leçon se rejoue alors en entier en mode continu, et le MP3 est téléchargé automatiquement à la fin. Astuce : choisis d'abord une voix « Natural » dans 🎙 Voix, et ne touche à rien pendant l'enregistrement.</div>
+    <div class="row">
+      <button class="test" id="recBtn">⏺ Démarrer</button>
+      <button class="test" id="recStopBtn" style="display:none">⏹ Arrêter et sauvegarder</button>
+    </div>
+    <div class="hint" id="recHint"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Moteur v3
+   - N  : narrateur français ([[汉字|pinyin]] = voix chinoise)
+   - C  : phrase chinoise {zh, py, fr, rate}
+   - P  : petite pause chronométrée (le texte reste affiché)
+   - HOLD : PAUSE AUTOMATIQUE — la leçon attend que tu appuies ▶
+   ============================================================ */
+const ZH_SLOW = 0.75;   // ralentissement global du chinois (multiplié aux vitesses)
+
+const N = (text) => ({t:'fr', text});
+const C = (zh, py, fr, rate) => ({t:'zh', zh, py, fr, rate});
+const P = (sec, label) => ({t:'pause', sec, label: label||'…'});
+const HOLD = (label) => ({t:'hold', label: label||'Répète à voix haute, puis ▶'});
+const TH = () => ({t:'hold', label:'À toi de répondre à voix haute — ▶ pour entendre la réponse'});
+
+function teach(zh, py, fr){
+  return [ C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.5), P(2), C(zh,py,fr,0.7), HOLD() ];
+}
+function drill(promptFr, zh, py, fr){
+  return [ N(promptFr), TH(), C(zh,py,fr,0.65), P(2.5), C(zh,py,fr,0.65), HOLD() ];
+}
+
+let steps = [];
+let cur = 0;
+
+/* ============================================================
+   DONNÉES DU COURS — pour ajouter une leçon : ajouter un objet
+   { num, hanzi, title, desc, build(){ return [ ...étapes... ]; } }
+   (les étapes utilisent N, C, P, HOLD, TH, teach, drill ci-dessus)
+   ============================================================ */
+const LESSONS = [
+  /* ============================================================
+     LEÇON D'EXEMPLE — à remplacer par le contenu du chapitre.
+     Format : voir README_Cours_Audio_Chinois.md
+     Étapes : N (narrateur, [[汉字|pinyin]] = voix chinoise),
+              C (phrase zh), P (pause chrono), HOLD / TH (pause auto),
+              teach (présentation), drill (question-réponse).
+     ============================================================ */
+  { num:1, hanzi:"你好", title:"Leçon d'exemple", desc:"structure type d'une leçon",
+    build(){ return [
+      N("Bienvenue. Ceci est une leçon d'exemple qui montre le format. « Bonjour » se dit [[你好|nǐ hǎo]]. Écoutez et répétez."),
+      ...teach("你好","nǐ hǎo","bonjour"),
+      ...drill("Dites : bonjour.","你好","nǐ hǎo","bonjour"),
+      N("Fin de la leçon d'exemple. Remplacez ce contenu par vos leçons."),
+      C("再见！","Zàijiàn!","Au revoir !",0.65),
+    ]; } },
+];
+
+/* ============================================================ */
+const $ = id => document.getElementById(id);
+const synth = window.speechSynthesis;
+let voices = [], zhVoice=null, frVoice=null;
+let idx = 0, playing = false, showText = true, slowMode = false, continuous = false;
+let pauseTimer = null, pauseRAF = null;
+let runToken = 0;
+let speechPaused = false;          // une phrase est suspendue via synth.pause()
+let pauseRemaining = 0;            // secondes restantes d'une pause chronométrée suspendue
+let pauseTotal = 0;
+const ARC_LEN = 584.3;
+
+/* ---------- estimation des durées (pour ±10 s) ---------- */
+function zhDur(txt, rate){ return (txt.length * 0.38) / ((rate||0.7) * ZH_SLOW); }
+function frDur(txt){ return Math.max(0.6, txt.length / 14); }
+function stepDur(s){
+  if(s.t==='zh') return zhDur(s.zh, s.rate) + 0.3;
+  if(s.t==='pause') return s.sec;
+  if(s.t==='hold') return 5;                    // valeur nominale
+  // narration : segments fr + zh
+  let d = 0.3;
+  parseNarration(s.text).forEach(seg=>{
+    d += seg.lang==='fr' ? frDur(seg.text) : zhDur(seg.hanzi, 0.6);
+  });
+  return d;
+}
+let cum = [], totalDur = 0;
+function buildTimeline(){
+  cum = []; let t = 0;
+  for(const s of steps){ cum.push(t); t += stepDur(s); }
+  totalDur = t;
+}
+function fmt(sec){
+  sec = Math.max(0, Math.round(sec));
+  return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0');
+}
+function seek(deltaSec){
+  stopEverything();
+  const target = Math.min(Math.max(cum[idx] + deltaSec, 0), totalDur - 0.1);
+  let i = 0;
+  while(i+1 < steps.length && cum[i+1] <= target) i++;
+  idx = i;
+  updateProgress();
+  if(playing) runStep();
+  else { renderCaptionFor(idx); setPhase('','⏸','En pause'); }
+}
+
+/* ---------- voix : les meilleures d'abord ---------- */
+function voiceScore(v){
+  const n = (v.name||'').toLowerCase();
+  let s = 0;
+  if(/natural|neural/.test(n)) s += 100;
+  if(/siri/.test(n)) s += 90;
+  if(/premium|enhanced|améliorée/.test(n)) s += 80;
+  if(!v.localService) s += 20;
+  if(/google/.test(n)) s += 10;
+  return s;
+}
+function pickBest(list){ return list.slice().sort((a,b)=>voiceScore(b)-voiceScore(a))[0] || null; }
+let userZhChoice = null, userFrChoice = null;
+function fillSelect(sel, list, current){
+  sel.innerHTML = '';
+  list.forEach(v=>{
+    const o = document.createElement('option');
+    o.value = v.name;
+    o.textContent = v.name + (voiceScore(v) >= 80 ? ' ★' : '');
+    if(current && v.name === current.name) o.selected = true;
+    sel.appendChild(o);
+  });
+}
+function loadVoices(){
+  voices = synth.getVoices();
+  const zhList = voices.filter(v=>/^zh/i.test(v.lang));
+  const frList = voices.filter(v=>/^fr/i.test(v.lang));
+  zhVoice = (userZhChoice && zhList.find(v=>v.name===userZhChoice)) || pickBest(zhList.filter(v=>/zh[-_]CN/i.test(v.lang))) || pickBest(zhList);
+  frVoice = (userFrChoice && frList.find(v=>v.name===userFrChoice)) || pickBest(frList.filter(v=>/fr[-_]FR/i.test(v.lang))) || pickBest(frList);
+  if(!zhVoice) $('voiceWarn').style.display='block';
+  if($('zhSelect')){ fillSelect($('zhSelect'), zhList, zhVoice); fillSelect($('frSelect'), frList, frVoice); }
+}
+loadVoices();
+if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
+
+/* ---------- narration mixte fr/zh ---------- */
+function parseNarration(text){
+  const segs = [];
+  const re = /\[\[([^\|\]]+)\|([^\]]+)\]\]/g;
+  let last = 0, m;
+  while((m = re.exec(text)) !== null){
+    if(m.index > last) segs.push({lang:'fr', text:text.slice(last, m.index)});
+    segs.push({lang:'zh', hanzi:m[1], pinyin:m[2]});
+    last = re.lastIndex;
+  }
+  if(last < text.length) segs.push({lang:'fr', text:text.slice(last)});
+  return segs;
+}
+function narrationHTML(text){
+  return text.replace(/\[\[([^\|\]]+)\|([^\]]+)\]\]/g, '<span class="py-inline">$2</span>');
+}
+
+/* ---------- affichage ---------- */
+function setPhase(kind, icon, label){
+  const ph = $('phaseLbl'), ic = $('coreIcon');
+  ph.className = 'phase ' + kind;
+  ph.textContent = label;
+  ic.textContent = icon;
+  ic.classList.toggle('pulse', kind==='speak-zh'||kind==='speak-fr');
+}
+function setArc(f){ $('arc').style.strokeDashoffset = ARC_LEN * (1 - f); }
+function clearTimers(){ if(pauseTimer){clearTimeout(pauseTimer);pauseTimer=null;} if(pauseRAF){cancelAnimationFrame(pauseRAF);pauseRAF=null;} }
+
+function renderContentCaption(step, yourTurnLabel){
+  const c = $('caption'); c.innerHTML='';
+  if(!step) return;
+  if(step.t==='zh'){
+    if(showText){
+      c.innerHTML = `<div class="zh hanzi">${step.zh}</div><div class="py">${step.py}</div>` + (step.fr?`<div class="fr">${step.fr}</div>`:'');
+    } else {
+      c.innerHTML = `<div class="hidden-note">Texte masqué — mode 100 % audio</div>`;
+    }
+  } else if(step.t==='fr'){
+    c.innerHTML = `<div class="fr">${narrationHTML(step.text)}</div>`;
+  }
+  if(yourTurnLabel){
+    const d = document.createElement('div');
+    d.className = 'your-turn';
+    d.textContent = yourTurnLabel;
+    c.appendChild(d);
+  }
+}
+/* le contenu affiché pendant une pause/hold = le dernier vrai contenu */
+function lastContentIndex(i){
+  let j = Math.min(i, steps.length-1);
+  while(j>=0 && (steps[j].t==='pause' || steps[j].t==='hold')) j--;
+  return j;
+}
+function renderCaptionFor(i, yourTurnLabel){
+  renderContentCaption(steps[lastContentIndex(i)], yourTurnLabel);
+}
+
+function updateProgress(){
+  $('barFill').style.width = (idx/steps.length*100).toFixed(1)+'%';
+  $('stepLbl').textContent = `Étape ${Math.min(idx+1,steps.length)} / ${steps.length}`;
+  $('timeLbl').textContent = fmt(cum[Math.min(idx,steps.length-1)]||0) + ' / ' + fmt(totalDur);
+}
+
+/* ---------- parole ---------- */
+function speak(text, voice, lang, rate, token, onend){
+  const u = new SpeechSynthesisUtterance(text);
+  if(voice) u.voice = voice;
+  u.lang = lang;
+  u.rate = rate;
+  const done = ()=>{ if(playing && token===runToken) onend(); };
+  u.onend = done;
+  u.onerror = done;
+  synth.speak(u);
+}
+function speakSegments(segs, i, token, onend){
+  if(!playing || token!==runToken) return;
+  if(i >= segs.length){ onend(); return; }
+  const s = segs[i];
+  if(s.lang==='fr'){
+    const txt = s.text.trim();
+    if(!txt){ speakSegments(segs, i+1, token, onend); return; }
+    setPhase('speak-fr','🗣️','Écoute (français)');
+    speak(txt, frVoice, 'fr-FR', 1.0, token, ()=>speakSegments(segs, i+1, token, onend));
+  } else {
+    setPhase('speak-zh','🀄','Écoute (chinois)');
+    const r = (slowMode ? 0.45 : 0.6) * ZH_SLOW;
+    speak(s.hanzi, zhVoice, 'zh-CN', r, token, ()=>speakSegments(segs, i+1, token, onend));
+  }
+}
+
+function stopEverything(){
+  runToken++;
+  synth.cancel();
+  clearTimers();
+  speechPaused = false;
+  pauseRemaining = 0;
+}
+
+/* ---------- déroulement ---------- */
+function startTimedPause(sec, total, token){
+  const t0 = performance.now();
+  const tick = (now)=>{
+    const elapsed = (now-t0)/1000;
+    pauseRemaining = Math.max(0, sec - elapsed);
+    const f = Math.min((total - pauseRemaining)/total, 1);
+    setArc((idx + f)/steps.length);
+    if(pauseRemaining>0 && playing && token===runToken) pauseRAF = requestAnimationFrame(tick);
+  };
+  pauseRAF = requestAnimationFrame(tick);
+  pauseTimer = setTimeout(()=>{ if(playing && token===runToken){ pauseRemaining=0; next(); } }, sec*1000);
+}
+
+function runStep(){
+  clearTimers();
+  speechPaused = false;
+  pauseRemaining = 0;
+  updateProgress();
+  const token = ++runToken;
+  if(idx >= steps.length){
+    playing=false; syncPlayBtn();
+    setPhase('','🎉','Leçon terminée'); setArc(1);
+    const hasNext = cur + 1 < LESSONS.length;
+    $('caption').innerHTML =
+      '<div class="fr">🎉 Bravo, leçon terminée ! Refais-la demain — la répétition espacée fait tout.</div>' +
+      (hasNext ? '<button class="menu-inline" onclick="openLesson('+(cur+1)+')">▶ Leçon suivante : '+LESSONS[cur+1].title+'</button>' : '') +
+      '<button class="menu-inline ghost" onclick="showMenu()">☰ Retour au menu</button>';
+    if(recState.active){ setTimeout(stopRecording, 1500); }
+    return;
+  }
+  const s = steps[idx];
+  setArc(idx/steps.length);
+  if(s.t==='fr'){
+    renderContentCaption(s);
+    speakSegments(parseNarration(s.text), 0, token, next);
+  } else if(s.t==='zh'){
+    renderContentCaption(s);
+    setPhase('speak-zh','🀄','Écoute (chinois)');
+    const r = (slowMode ? Math.min(s.rate, 0.45) : s.rate) * ZH_SLOW;
+    speak(s.zh, zhVoice, 'zh-CN', r, token, next);
+  } else if(s.t==='hold'){
+    renderCaptionFor(idx, s.label);
+    if(continuous){
+      // MODE CONTINU : pause chronométrée de 5 s au lieu d'un arrêt
+      setPhase('pause-p','⏳','À toi…');
+      pauseTotal = 5;
+      startTimedPause(5, 5, token);
+    } else {
+      // PAUSE AUTOMATIQUE : le texte précédent reste affiché
+      playing = false; syncPlayBtn();
+      setPhase('pause-p','✋', 'À toi — ▶ pour continuer');
+    }
+  } else { // pause chronométrée : le texte reste affiché
+    renderCaptionFor(idx);
+    setPhase('pause-p','⏳', s.label);
+    pauseTotal = s.sec;
+    startTimedPause(s.sec, s.sec, token);
+  }
+}
+function next(){ idx++; runStep(); }
+
+function syncPlayBtn(){
+  $('playIcon').style.display = playing?'none':'block';
+  $('pauseIcon').style.display = playing?'block':'none';
+  syncBg();
+}
+
+function play(){
+  if(playing) return;
+  playing = true; syncPlayBtn();
+  // 1) une phrase était suspendue en plein milieu → on la reprend là où elle s'était arrêtée
+  if(speechPaused){
+    speechPaused = false;
+    const cur = steps[idx];
+    if(cur){
+      if(cur.t==='zh'){ renderContentCaption(cur); setPhase('speak-zh','🀄','Écoute (chinois)'); }
+      else if(cur.t==='fr'){ renderContentCaption(cur); }
+    }
+    synth.resume();
+    return;
+  }
+  // 2) une pause chronométrée était suspendue → on reprend le compte à rebours restant
+  if(pauseRemaining > 0){
+    const token = ++runToken;
+    renderCaptionFor(idx);
+    setPhase('pause-p','⏳','…');
+    startTimedPause(pauseRemaining, pauseTotal, token);
+    return;
+  }
+  // 3) on est sur une étape HOLD → on passe à la suite
+  if(steps[idx] && steps[idx].t==='hold'){ idx++; }
+  runStep();
+}
+
+function pause(){
+  if(!playing) return;
+  playing = false; syncPlayBtn();
+  if(synth.speaking && !synth.paused){
+    // suspendre la phrase EN COURS sans la perdre
+    synth.pause();
+    speechPaused = true;
+  } else {
+    // suspendre une pause chronométrée (pauseRemaining déjà tenu à jour)
+    clearTimers();
+  }
+  setPhase('','⏸','En pause — ▶ pour reprendre');
+}
+
+$('playBtn').addEventListener('click', ()=> playing?pause():play());
+$('fwdBtn').addEventListener('click', ()=> seek(+10));
+$('backBtn').addEventListener('click', ()=> seek(-10));
+$('replayChip').addEventListener('click', ()=>{
+  stopEverything();
+  let j = Math.min(idx, steps.length-1);
+  while(j>=0 && steps[j].t!=='zh') j--;
+  if(j>=0){ idx=j; if(!playing){playing=true;syncPlayBtn();} runStep(); }
+});
+$('textChip').addEventListener('click', e=>{
+  showText=!showText; e.target.classList.toggle('on',showText);
+  renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+});
+$('slowChip').addEventListener('click', e=>{
+  slowMode=!slowMode; e.target.classList.toggle('on',slowMode);
+});
+$('contChip').addEventListener('click', e=>{
+  continuous=!continuous; e.target.classList.toggle('on',continuous);
+  // si on active le mode continu pendant un arrêt automatique, on repart aussitôt
+  if(continuous && !playing && steps[idx] && steps[idx].t==='hold'){ play(); }
+});
+
+/* ---- panneau voix ---- */
+$('voiceChip').addEventListener('click', ()=>{ $('voicePanel').classList.toggle('open'); loadVoices(); });
+$('zhSelect').addEventListener('change', e=>{ userZhChoice=e.target.value; zhVoice=voices.find(v=>v.name===userZhChoice)||zhVoice; });
+$('frSelect').addEventListener('change', e=>{ userFrChoice=e.target.value; frVoice=voices.find(v=>v.name===userFrChoice)||frVoice; });
+$('zhTest').addEventListener('click', ()=>{
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance('现在几点？现在十点半。');
+  if(zhVoice) u.voice=zhVoice; u.lang='zh-CN'; u.rate=0.6*ZH_SLOW;
+  synth.speak(u);
+});
+$('frTest').addEventListener('click', ()=>{
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance('Bonjour, je suis la voix du narrateur.');
+  if(frVoice) u.voice=frVoice; u.lang='fr-FR';
+  synth.speak(u);
+});
+
+/* ============================================================
+   Contrôle par les écouteurs (AirPods, casques Bluetooth)
+   Une piste silencieuse en boucle enregistre la leçon comme un
+   « média » auprès du système : la pince des AirPods met en
+   pause / reprend, et double/triple pince = +10 s / -10 s.
+   ============================================================ */
+const bg = new Audio('data:audio/wav;base64,UklGRmQfAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YUAfAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==');
+bg.loop = true;
+let syncingBg = false;
+function syncBg(){
+  syncingBg = true;
+  try{
+    if(playing){ const p = bg.play(); if(p && p.catch) p.catch(()=>{}); }
+    else bg.pause();
+    if('mediaSession' in navigator){
+      navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+    }
+  }catch(e){}
+  setTimeout(()=>{ syncingBg = false; }, 350);
+}
+// si le système (AirPods, écran verrouillé…) met la piste en pause/lecture, on suit
+bg.addEventListener('pause', ()=>{ if(!syncingBg && playing) pause(); });
+bg.addEventListener('play',  ()=>{ if(!syncingBg && !playing) play(); });
+
+if('mediaSession' in navigator){
+  try{
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: document.title,
+      artist: 'Leçon de chinois mandarin',
+      album: 'Méthode audio'
+    });
+  }catch(e){}
+  const H = (name, fn)=>{ try{ navigator.mediaSession.setActionHandler(name, fn); }catch(e){} };
+  H('play',  ()=>{ if(!playing) play(); });
+  H('pause', ()=>{ if(playing) pause(); });
+  H('nexttrack',     ()=> seek(+10));
+  H('previoustrack', ()=> seek(-10));
+  H('seekforward',   ()=> seek(+10));
+  H('seekbackward',  ()=> seek(-10));
+}
+
+buildTimeline();
+updateProgress();
+
+/* ============================================================
+   Export MP3 — capture l'audio de l'onglet (Edge/Chrome, PC)
+   puis encode en MP3 dans le navigateur (lamejs).
+   ============================================================ */
+const recState = {active:false, recorder:null, chunks:[], stream:null, prevContinuous:false};
+function recSupported(){ return !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia); }
+
+async function startRecording(){
+  if(!recSupported()){
+    $('recHint').textContent = "⚠️ Disponible uniquement sur ordinateur (Edge ou Chrome) — pas sur iPhone/iPad.";
+    return;
+  }
+  try{
+    const stream = await navigator.mediaDevices.getDisplayMedia({video:true, audio:true});
+    const atracks = stream.getAudioTracks();
+    if(!atracks.length){
+      stream.getTracks().forEach(t=>t.stop());
+      $('recHint').textContent = "⚠️ Aucun son capturé : dans la fenêtre de partage, choisis « Cet onglet » et coche « Partager aussi l'audio de l'onglet », puis réessaie.";
+      return;
+    }
+    const rec = new MediaRecorder(new MediaStream(atracks));
+    recState.active = true; recState.recorder = rec; recState.chunks = []; recState.stream = stream;
+    rec.ondataavailable = e=>{ if(e.data.size) recState.chunks.push(e.data); };
+    rec.onstop = finishRecording;
+    rec.start(1000);
+    // rejouer la leçon depuis le début, en mode continu
+    recState.prevContinuous = continuous;
+    continuous = true; $('contChip').classList.add('on');
+    stopEverything(); idx = 0;
+    $('recBtn').style.display='none'; $('recStopBtn').style.display='inline-block';
+    $('recHint').textContent = "⏺ Enregistrement en cours… La leçon se joue en entier : laisse l'onglet ouvert, le son activé, et ne touche à rien. Le fichier sera téléchargé à la fin.";
+    if(!playing){ playing=true; syncPlayBtn(); }
+    runStep();
+  }catch(err){
+    $('recHint').textContent = "Capture annulée ou refusée.";
+  }
+}
+function stopRecording(){
+  if(recState.recorder && recState.recorder.state !== 'inactive') recState.recorder.stop();
+}
+async function finishRecording(){
+  recState.active = false;
+  if(recState.stream) recState.stream.getTracks().forEach(t=>t.stop());
+  $('recBtn').style.display='inline-block'; $('recStopBtn').style.display='none';
+  if(!recState.prevContinuous){ continuous=false; $('contChip').classList.remove('on'); }
+  const blob = new Blob(recState.chunks, {type: (recState.recorder && recState.recorder.mimeType) || 'audio/webm'});
+  $('recHint').textContent = "Encodage du MP3… (quelques secondes)";
+  try{
+    const mp3 = await encodeMp3(blob);
+    offerDownload(mp3, document.title.replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'_') + '.mp3');
+    $('recHint').textContent = "✅ MP3 prêt — le téléchargement a démarré.";
+  }catch(e){
+    offerDownload(blob, 'lecon.webm');
+    $('recHint').textContent = "MP3 impossible ici (bibliothèque inaccessible) : fichier .webm téléchargé à la place — lisible par VLC et la plupart des lecteurs, convertible en MP3 en ligne.";
+  }
+}
+function offerDownload(blob, name){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 8000);
+}
+function loadLame(){
+  return new Promise((res, rej)=>{
+    if(window.lamejs) return res();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js';
+    s.onload = ()=>res(); s.onerror = ()=>rej(new Error('lamejs indisponible'));
+    document.head.appendChild(s);
+  });
+}
+async function encodeMp3(blob){
+  await loadLame();
+  const buf = await blob.arrayBuffer();
+  const ctx = new (window.AudioContext||window.webkitAudioContext)();
+  const audio = await ctx.decodeAudioData(buf);
+  const ch = audio.numberOfChannels >= 2 ? 2 : 1;
+  const enc = new lamejs.Mp3Encoder(ch, audio.sampleRate, 128);
+  const block = 1152;
+  const l = audio.getChannelData(0);
+  const r = ch===2 ? audio.getChannelData(1) : null;
+  const toI16 = f => { const v = Math.max(-1, Math.min(1, f)); return v<0 ? v*32768 : v*32767; };
+  const out = [];
+  const li = new Int16Array(block), ri = ch===2 ? new Int16Array(block) : null;
+  for(let i=0;i<l.length;i+=block){
+    const n = Math.min(block, l.length-i);
+    for(let j=0;j<n;j++){ li[j]=toI16(l[i+j]); if(ri) ri[j]=toI16(r[i+j]); }
+    const d = ch===2 ? enc.encodeBuffer(li.subarray(0,n), ri.subarray(0,n)) : enc.encodeBuffer(li.subarray(0,n));
+    if(d.length) out.push(new Int8Array(d));
+  }
+  const end = enc.flush();
+  if(end.length) out.push(new Int8Array(end));
+  ctx.close();
+  return new Blob(out, {type:'audio/mpeg'});
+}
+$('recChip').addEventListener('click', ()=>{ $('recPanel').classList.toggle('open'); });
+$('recBtn').addEventListener('click', startRecording);
+$('recStopBtn').addEventListener('click', ()=>{ pause(); stopRecording(); });
+
+/* ============================================================
+   Menu du chapitre
+   ============================================================ */
+function buildMenu(){
+  const el = $('menuList'); el.innerHTML = '';
+  LESSONS.forEach((L, i)=>{
+    const b = document.createElement('button');
+    b.className = 'menu-item';
+    const isRev = L.num >= 7;
+    b.innerHTML = '<span class="mi-num'+(isRev?' star':'')+'">'+(isRev?'★':L.num)+'</span>'
+      + '<span class="mi-hz hanzi">'+L.hanzi+'</span>'
+      + '<span class="mi-tx"><b>'+L.title+'</b><small>'+L.desc+'</small></span>';
+    b.addEventListener('click', ()=>openLesson(i));
+    el.appendChild(b);
+  });
+}
+function openLesson(i){
+  cur = i;
+  const L = LESSONS[i];
+  stopEverything();
+  steps = L.build();
+  idx = 0; playing = false; syncPlayBtn();
+  buildTimeline(); updateProgress();
+  $('lessonTag').textContent = (L.num >= 7 ? 'Révision' : 'Leçon ' + L.num);
+  document.querySelector('header h1').innerHTML = '<span class="hanzi">'+L.hanzi+'</span>'+L.title;
+  document.title = L.hanzi + ' · Leçon ' + L.num + ' — ' + L.title;
+  if('mediaSession' in navigator){
+    try{ navigator.mediaSession.metadata = new MediaMetadata({
+      title:'Leçon '+L.num+' — '+L.title, artist:'Cours de chinois · Le temps'}); }catch(e){}
+  }
+  $('overlay').style.display = 'none';
+  $('voicePanel').classList.remove('open');
+  $('recPanel').classList.remove('open');
+  // premier geste utilisateur : débloque l'audio
+  const warm = new SpeechSynthesisUtterance(' ');
+  warm.volume = 0; synth.speak(warm);
+  try{ const p = bg.play(); if(p && p.catch) p.catch(()=>{}); }catch(e){}
+  play();
+}
+function showMenu(){
+  stopEverything();
+  playing = false; syncPlayBtn();
+  setPhase('','🎧','Prêt');
+  $('overlay').style.display = 'flex';
+}
+window.openLesson = openLesson;
+window.showMenu = showMenu;
+buildMenu();
+$('menuBtn').addEventListener('click', showMenu);
+</script>
+</body>
+</html>
