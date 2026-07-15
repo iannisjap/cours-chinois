@@ -398,7 +398,7 @@ N("Bienvenue dans la leçon 5. Aujourd'hui : les fêtes, les soirées, et offrir
   // ---------- 晚会 / 参加 ----------
   N("« Une soirée », « une fête » où l'on se réunit, se dit [[晚会|wǎnhuì]]. « La soirée de Noël » se dit alors [[圣诞晚会|Shèngdàn wǎnhuì]]."),
   ...teach("晚会","wǎnhuì","une soirée, une fête"),
-  N("« Participer à », « aller à » un événement, se dit [[参加|cānjiā]]. Demandez : tu vas à la soirée de Noël ?"),
+  N("« Participer à », « aller à » un événement, se dit [[参加|cānjiā]]. Répétez."),
   ...teach("参加","cānjiā","participer à, aller à"),
   ...drill("Demandez : tu vas à la soirée de Noël ?","你参加圣诞晚会吗？","Nǐ cānjiā Shèngdàn wǎnhuì ma?","Tu vas à la soirée de Noël ?"),
   N("Pour répondre « oui, j'y vais », on répète simplement le verbe seul : [[参加|cānjiā]] !"),
