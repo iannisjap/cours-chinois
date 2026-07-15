@@ -25,8 +25,8 @@ Fichier de référence existant : `Cours_Chinois_Le_Temps.html`
 - **JS — moteur** (ne pas modifier pour ajouter du contenu) :
   lecture MP3 obligatoire, timeline fondée sur les durées réelles,
   pause/reprise exacte au milieu d'un fichier, navigation −/+ par séquence,
-  Media Session pour les AirPods et casques Bluetooth, export MP3 par capture
-  d'onglet (`getDisplayMedia` + encodage `lamejs`, fallback `.webm`).
+  Media Session pour les AirPods et casques Bluetooth, et bouton « + lent »
+  pour ralentir la voix chinoise de 20 %.
 - **JS — données** : tableau `const LESSONS = [...]` (voir §3).
 
 Contrainte : PAS de `localStorage` (le fichier doit fonctionner dans

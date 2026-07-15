@@ -11,7 +11,8 @@ aucune voix du navigateur n'est utilisée en secours.
 - Phrases chinoises : `zh-CN-XiaoxiaoNeural` (Microsoft Edge, mandarin)
 
 Le chinois est généré à `-25 %` afin de rester suffisamment lent pour
-l'apprentissage. Le lecteur conserve ensuite la vitesse d'origine du MP3.
+l'apprentissage. Le bouton « + lent » du lecteur ralentit uniquement les MP3
+chinois de 20 % supplémentaires ; le français reste à vitesse normale.
 
 ## Préparation
 

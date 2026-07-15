@@ -42,6 +42,7 @@ let LESSONS = [];            // leçons du chapitre courant
 /* ============================================================ */
 const $ = id => document.getElementById(id);
 let idx = 0, playing = false, showText = true, continuous = false, autoChain = false;
+let slowMode = false;             // bouton « + lent » : voix ralenties de 20 %
 let showPinyin = true, showFr = true;   // pinyin / traduction FR sous les phrases chinoises
 let pauseTimer = null, pauseRAF = null;
 let runToken = 0;
@@ -50,7 +51,23 @@ let pauseRemaining = 0;            // secondes restantes d'une pause chronométr
 let pauseTotal = 0;
 let activeStepAudioOffset = 0;      // durée des fragments déjà lus dans une narration mixte
 let activeAudioStep = -1;
+let activeAudioLang = '';
+let audioBoundaryTimer = null;
+let activeAudioEarlyFinish = 0;
+let activeAudioDone = null;
 const ARC_LEN = 584.3;
+function voicePlaybackRate(lang){ return slowMode && lang === 'zh' ? 0.8 : 1; }
+
+/* Les MP3 Edge contiennent une courte queue de silence. Pour les narrations
+   mêlant français et chinois, on la retire au changement de langue : moitié
+   de la pause français → chinois, trois quarts chinois → français. */
+const MIXED_SEGMENT_GAP = 0.24;
+function narrationEarlyFinish(current, next){
+  if(!next || current.lang === next.lang) return 0;
+  if(current.lang === 'fr' && next.lang === 'zh') return MIXED_SEGMENT_GAP / 2;
+  if(current.lang === 'zh' && next.lang === 'fr') return MIXED_SEGMENT_GAP * 3 / 4;
+  return 0;
+}
 
 /* ---------- timeline fondée sur les vraies durées des MP3 ---------- */
 function stepDur(s){
@@ -58,8 +75,9 @@ function stepDur(s){
   if(s.t==='zh') return audioDurationFor('zh', s.zh);
   if(s.t==='pause') return s.sec;
   if(s.t==='hold') return continuous ? (s.sec || 5) : 0;
-  return playableNarrationSegments(s.text).reduce((total, seg)=>
-    total + audioDurationFor(seg.lang, segmentText(seg)), 0);
+  const segs = playableNarrationSegments(s.text);
+  return segs.reduce((total, seg, i)=>
+    total + narrationSegmentDuration(seg, segs[i+1]), 0);
 }
 let cum = [], stepDurations = [], totalDur = 0;
 function buildTimeline(){
@@ -187,7 +205,8 @@ function renderCaptionFor(i, yourTurnLabel){
 function currentTimelineTime(){
   let t = cum[Math.min(idx, steps.length-1)] || 0;
   if(activeAudioStep === idx && Number.isFinite(sfx.duration)){
-    t += activeStepAudioOffset + Math.min(sfx.currentTime || 0, sfx.duration);
+    t += activeStepAudioOffset
+      + Math.min(sfx.currentTime || 0, sfx.duration) / voicePlaybackRate(activeAudioLang);
   } else if(steps[idx] && steps[idx].t === 'pause' && pauseTotal > 0){
     t += Math.max(0, pauseTotal - pauseRemaining);
   } else if(steps[idx] && steps[idx].t === 'hold' && continuous && pauseTotal > 0){
@@ -248,10 +267,14 @@ async function loadAudioManifest(chapterId, lessonNum){
 }
 function resetAudioFile(){
   try{ sfx.pause(); }catch(e){}
+  if(audioBoundaryTimer){ clearTimeout(audioBoundaryTimer); audioBoundaryTimer = null; }
   sfx.onended = null; sfx.onerror = null; sfx.onloadedmetadata = null;
   try{ sfx.currentTime = 0; }catch(e){}
   activeAudioStep = -1;
+  activeAudioLang = '';
   activeStepAudioOffset = 0;
+  activeAudioEarlyFinish = 0;
+  activeAudioDone = null;
 }
 function audioFileFor(lang, text){
   if(!AUDIO) return null;
@@ -260,7 +283,12 @@ function audioFileFor(lang, text){
 }
 function audioDurationFor(lang, text){
   const url = audioFileFor(lang, text);
-  return url && AUDIO ? (AUDIO.durations.get(url) || 0) : 0;
+  const original = url && AUDIO ? (AUDIO.durations.get(url) || 0) : 0;
+  return original / voicePlaybackRate(lang);
+}
+function narrationSegmentDuration(segment, next){
+  return Math.max(0, audioDurationFor(segment.lang, segmentText(segment))
+    - narrationEarlyFinish(segment, next) / voicePlaybackRate(segment.lang));
 }
 function requiredAudioItems(){
   const items = [];
@@ -326,21 +354,50 @@ function handlePlayFailure(error){
 }
 
 /* ---------- lecture MP3 ---------- */
-function playAudioSegment(text, lang, token, onend, startAt, stepOffset){
-  const done = ()=>{ if(playing && token===runToken) onend(); };
+function armAudioBoundary(){
+  if(audioBoundaryTimer){ clearTimeout(audioBoundaryTimer); audioBoundaryTimer = null; }
+  if(!activeAudioEarlyFinish || !activeAudioDone || !Number.isFinite(sfx.duration)) return;
+  const remaining = sfx.duration - sfx.currentTime - activeAudioEarlyFinish;
+  audioBoundaryTimer = setTimeout(()=>{
+    audioBoundaryTimer = null;
+    if(!playing || !activeAudioDone) return;
+    if(sfx.duration - sfx.currentTime > activeAudioEarlyFinish + .02){
+      armAudioBoundary();
+      return;
+    }
+    const done = activeAudioDone;
+    activeAudioDone = null;
+    sfx.onended = null;
+    sfx.pause();
+    done();
+  }, Math.max(0, remaining / voicePlaybackRate(activeAudioLang) * 1000));
+}
+function playAudioSegment(text, lang, token, onend, startAt, stepOffset, earlyFinish){
+  const done = ()=>{
+    if(audioBoundaryTimer){ clearTimeout(audioBoundaryTimer); audioBoundaryTimer = null; }
+    activeAudioDone = null;
+    if(playing && token===runToken) onend();
+  };
   const url = audioFileFor(lang, text);
   if(!url){ showAudioError(new Error('MP3 absent pour « ' + text.slice(0,80) + ' »')); return; }
   resetAudioFile();
   activeAudioStep = idx;
-  activeStepAudioOffset = stepOffset || 0;
+  activeAudioLang = lang;
+  activeStepAudioOffset = (stepOffset || 0) - (startAt || 0) / voicePlaybackRate(lang);
+  activeAudioEarlyFinish = earlyFinish || 0;
+  activeAudioDone = done;
   sfx.src = url;
-  sfx.playbackRate = 1;
+  sfx.playbackRate = voicePlaybackRate(lang);
   sfx.onended = done;
   sfx.onerror = ()=>showAudioError(new Error('MP3 impossible à charger : ' + url));
   const start = ()=>{
     if(startAt > 0) sfx.currentTime = Math.min(startAt, Math.max(0, sfx.duration - .05));
+    // Ne jamais rogner un très court MP3 : on garde toujours au moins 80 ms.
+    activeAudioEarlyFinish = Math.min(activeAudioEarlyFinish,
+      Math.max(0, sfx.duration - sfx.currentTime - .08));
     const p = sfx.play();
     if(p && p.catch) p.catch(handlePlayFailure);
+    armAudioBoundary();
   };
   if(sfx.readyState >= 1) start();
   else sfx.onloadedmetadata = start;
@@ -350,14 +407,17 @@ function playNarrationSegments(segs, i, token, onend, elapsed){
   if(i >= segs.length){ onend(); return; }
   const s = segs[i];
   const text = segmentText(s);
+  const nextSegment = segs[i+1];
+  const segmentDuration = narrationSegmentDuration(s, nextSegment);
+  const earlyFinish = narrationEarlyFinish(s, nextSegment);
   if(s.lang==='fr'){
     setPhase('speak-fr','🗣️','Écoute (français)');
     playAudioSegment(text, 'fr', token, ()=>playNarrationSegments(
-      segs, i+1, token, onend, elapsed + audioDurationFor('fr', text)), 0, elapsed);
+      segs, i+1, token, onend, elapsed + segmentDuration), 0, elapsed, earlyFinish);
   } else {
     setPhase('speak-zh','🀄','Écoute (chinois)');
     playAudioSegment(text, 'zh', token, ()=>playNarrationSegments(
-      segs, i+1, token, onend, elapsed + audioDurationFor('zh', text)), 0, elapsed);
+      segs, i+1, token, onend, elapsed + segmentDuration), 0, elapsed, earlyFinish);
   }
 }
 
@@ -397,7 +457,6 @@ function runStep(){
     // parcouru dans le menu en arrière-plan pendant que ça joue).
     const hasNext = cur + 1 < playerLessons.length;
     const backToMenuHash = '#/dossier/'+CHAPTERS[playerChapterIdx].group+'/ch/'+(playerChapterIdx+1);
-    if(recState.active){ setTimeout(stopRecording, 1500); }
     if(autoChain){
       const nxt = nextLessonRef();
       if(nxt){
@@ -470,6 +529,7 @@ function play(){
     audioPaused = false;
     const p = sfx.play();
     if(p && p.catch) p.catch(handlePlayFailure);
+    armAudioBoundary();
     return;
   }
   // 2) une pause chronométrée était suspendue → on reprend le compte à rebours restant
@@ -537,6 +597,16 @@ $('contChip').addEventListener('click', e=>{
 $('chainChip').addEventListener('click', e=>{
   autoChain=!autoChain; e.target.classList.toggle('on',autoChain);
 });
+$('slowChip').addEventListener('click', e=>{
+  slowMode = !slowMode;
+  e.currentTarget.classList.toggle('on', slowMode);
+  e.currentTarget.setAttribute('aria-pressed', slowMode ? 'true' : 'false');
+  // Le changement s'applique immédiatement, y compris au MP3 en cours.
+  sfx.playbackRate = voicePlaybackRate(activeAudioLang);
+  armAudioBoundary();
+  buildTimeline();
+  updateProgress();
+});
 
 /* ============================================================
    Contrôle AirPods et casques Bluetooth via le vrai média MP3.
@@ -560,105 +630,6 @@ if('mediaSession' in navigator){
 
 buildTimeline();
 updateProgress();
-
-/* ============================================================
-   Export MP3 — capture l'audio de l'onglet (Edge/Chrome, PC)
-   puis encode en MP3 dans le navigateur (lamejs).
-   ============================================================ */
-const recState = {active:false, recorder:null, chunks:[], stream:null, prevContinuous:false};
-function recSupported(){ return !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia); }
-
-async function startRecording(){
-  if(!recSupported()){
-    $('recHint').textContent = "⚠️ Disponible uniquement sur ordinateur (Edge ou Chrome) — pas sur iPhone/iPad.";
-    return;
-  }
-  try{
-    const stream = await navigator.mediaDevices.getDisplayMedia({video:true, audio:true});
-    const atracks = stream.getAudioTracks();
-    if(!atracks.length){
-      stream.getTracks().forEach(t=>t.stop());
-      $('recHint').textContent = "⚠️ Aucun son capturé : dans la fenêtre de partage, choisis « Cet onglet » et coche « Partager aussi l'audio de l'onglet », puis réessaie.";
-      return;
-    }
-    const rec = new MediaRecorder(new MediaStream(atracks));
-    recState.active = true; recState.recorder = rec; recState.chunks = []; recState.stream = stream;
-    rec.ondataavailable = e=>{ if(e.data.size) recState.chunks.push(e.data); };
-    rec.onstop = finishRecording;
-    rec.start(1000);
-    // rejouer la leçon depuis le début, en mode continu
-    recState.prevContinuous = continuous;
-    continuous = true; $('contChip').classList.add('on');
-    stopEverything(); idx = 0;
-    $('recBtn').style.display='none'; $('recStopBtn').style.display='inline-block';
-    $('recHint').textContent = "⏺ Enregistrement en cours… La leçon se joue en entier : laisse l'onglet ouvert, le son activé, et ne touche à rien. Le fichier sera téléchargé à la fin.";
-    if(!playing){ playing=true; syncPlayBtn(); }
-    runStep();
-  }catch(err){
-    $('recHint').textContent = "Capture annulée ou refusée.";
-  }
-}
-function stopRecording(){
-  if(recState.recorder && recState.recorder.state !== 'inactive') recState.recorder.stop();
-}
-async function finishRecording(){
-  recState.active = false;
-  if(recState.stream) recState.stream.getTracks().forEach(t=>t.stop());
-  $('recBtn').style.display='inline-block'; $('recStopBtn').style.display='none';
-  if(!recState.prevContinuous){ continuous=false; $('contChip').classList.remove('on'); }
-  const blob = new Blob(recState.chunks, {type: (recState.recorder && recState.recorder.mimeType) || 'audio/webm'});
-  $('recHint').textContent = "Encodage du MP3… (quelques secondes)";
-  try{
-    const mp3 = await encodeMp3(blob);
-    offerDownload(mp3, document.title.replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'_') + '.mp3');
-    $('recHint').textContent = "✅ MP3 prêt — le téléchargement a démarré.";
-  }catch(e){
-    offerDownload(blob, 'lecon.webm');
-    $('recHint').textContent = "MP3 impossible ici (bibliothèque inaccessible) : fichier .webm téléchargé à la place — lisible par VLC et la plupart des lecteurs, convertible en MP3 en ligne.";
-  }
-}
-function offerDownload(blob, name){
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = name; document.body.appendChild(a); a.click();
-  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 8000);
-}
-function loadLame(){
-  return new Promise((res, rej)=>{
-    if(window.lamejs) return res();
-    const s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js';
-    s.onload = ()=>res(); s.onerror = ()=>rej(new Error('lamejs indisponible'));
-    document.head.appendChild(s);
-  });
-}
-async function encodeMp3(blob){
-  await loadLame();
-  const buf = await blob.arrayBuffer();
-  const ctx = new (window.AudioContext||window.webkitAudioContext)();
-  const audio = await ctx.decodeAudioData(buf);
-  const ch = audio.numberOfChannels >= 2 ? 2 : 1;
-  const enc = new lamejs.Mp3Encoder(ch, audio.sampleRate, 128);
-  const block = 1152;
-  const l = audio.getChannelData(0);
-  const r = ch===2 ? audio.getChannelData(1) : null;
-  const toI16 = f => { const v = Math.max(-1, Math.min(1, f)); return v<0 ? v*32768 : v*32767; };
-  const out = [];
-  const li = new Int16Array(block), ri = ch===2 ? new Int16Array(block) : null;
-  for(let i=0;i<l.length;i+=block){
-    const n = Math.min(block, l.length-i);
-    for(let j=0;j<n;j++){ li[j]=toI16(l[i+j]); if(ri) ri[j]=toI16(r[i+j]); }
-    const d = ch===2 ? enc.encodeBuffer(li.subarray(0,n), ri.subarray(0,n)) : enc.encodeBuffer(li.subarray(0,n));
-    if(d.length) out.push(new Int8Array(d));
-  }
-  const end = enc.flush();
-  if(end.length) out.push(new Int8Array(end));
-  ctx.close();
-  return new Blob(out, {type:'audio/mpeg'});
-}
-$('recChip').addEventListener('click', ()=>{ $('recPanel').classList.toggle('open'); });
-$('recBtn').addEventListener('click', startRecording);
-$('recStopBtn').addEventListener('click', ()=>{ pause(); stopRecording(); });
 
 /* ============================================================
    Menu des chapitres et des leçons
@@ -799,7 +770,6 @@ function renderPlayer(i){
   $('folderOverlay').style.display = 'none';
   $('chapterOverlay').style.display = 'none';
   $('overlay').style.display = 'none';
-  $('recPanel').classList.remove('open');
   if(!resuming){
     $('caption').innerHTML = '<div class="fr">Chargement et vérification des MP3…</div>';
     setPhase('','⏳','Chargement audio');

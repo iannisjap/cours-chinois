@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cours audio de chinois</title>
-<link rel="stylesheet" href="engine/style.css?v=41">
+<link rel="stylesheet" href="engine/style.css?v=42">
 </head>
 <body>
 
@@ -83,22 +83,13 @@
     <button class="chip" id="contChip">Mode continu</button>
     <button class="chip" id="chainChip">🔗 Enchaînement</button>
     <button class="chip" id="replayChip">🔁 Réécouter</button>
-    <button class="chip" id="recChip">⏺ MP3</button>
-  </div>
-  <div class="voice-panel" id="recPanel">
-    <label>Exporter la leçon en MP3 (ordinateur)</label>
-    <div class="hint">Sur PC avec <b>Edge</b> ou Chrome : clique « Démarrer », choisis <b>Cet onglet</b> dans la fenêtre de partage et coche <b>Partager aussi l'audio de l'onglet</b>. La leçon se rejoue alors en entier en mode continu, et le MP3 est téléchargé automatiquement à la fin.</div>
-    <div class="row">
-      <button class="test" id="recBtn">⏺ Démarrer</button>
-      <button class="test" id="recStopBtn" style="display:none">⏹ Arrêter et sauvegarder</button>
-    </div>
-    <div class="hint" id="recHint"></div>
+    <button class="chip" id="slowChip" aria-pressed="false" title="Ralentir le chinois de 20 %">🐢 + lent</button>
   </div>
 </div>
 
 <!-- Catalogue local, moteur, puis chapitres (ordre important), puis démarrage -->
 <script src="audio/catalog.js?v=1"></script>
-<script src="engine/player.js?v=43"></script>
+<script src="engine/player.js?v=46"></script>
 <script src="chapters/hsk1/01-bonjour.js?v=40"></script>
 <script src="chapters/hsk1/02-mon-nom.js?v=40"></script>
 <script src="chapters/hsk1/03-nationalites.js?v=40"></script>
