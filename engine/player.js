@@ -255,6 +255,15 @@ document.body.appendChild(sfx);
 sfx.preload = 'auto';
 sfx.addEventListener('timeupdate', updateProgress);
 sfx.addEventListener('loadedmetadata', updateProgress);
+sfx.addEventListener('play', ()=>{
+  // Certains appareils Apple envoient directement « play » au média plutôt
+  // qu'à Media Session lorsque la leçon attend une réponse. On intercepte ce
+  // signal pour reprendre la séquence suivante sans rejouer la fin du MP3.
+  if(!playing && steps[idx] && steps[idx].t === 'hold'){
+    sfx.pause();
+    play();
+  }
+});
 async function loadAudioManifest(chapterId, lessonNum){
   AUDIO = null;
   const chapter = CHAPTERS.find(ch => ch.id === chapterId);
@@ -446,6 +455,18 @@ function stopEverything(){
   pauseRemaining = 0;
 }
 
+// Un <audio> arrivé à son terme perd parfois le contrôle des AirPods. À un
+// arrêt pédagogique, on le replace silencieusement juste avant la fin : il
+// reste un vrai média en pause, donc les boutons casque gardent « play ».
+function keepMediaControlsReady(){
+  if(!sfx.src || !Number.isFinite(sfx.duration) || sfx.duration <= 0) return;
+  try{
+    sfx.onended = null;
+    sfx.currentTime = Math.max(0, sfx.duration - .05);
+    sfx.pause();
+  }catch(e){}
+}
+
 /* ---------- déroulement ---------- */
 function startTimedPause(sec, total, token){
   const t0 = performance.now();
@@ -516,6 +537,7 @@ function runStep(){
     } else {
       // PAUSE AUTOMATIQUE : le texte précédent reste affiché
       playing = false; syncPlayBtn();
+      keepMediaControlsReady();
       setPhase('pause-p','✋', 'À toi — ▶ pour continuer');
     }
   } else { // pause chronométrée : le texte reste affiché
