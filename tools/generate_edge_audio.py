@@ -47,12 +47,19 @@ def narration_segments(text: str):
         yield from bare(text[last:])
 
 
-def collect_segments(source: str, part: int):
+def collect_segments(source: str, part: int, is_hsk1: bool = False):
     marker = f"// ================= PARTIE {part} ================="
     start = source.find(marker)
     if start != -1:
         next_marker = source.find(f"// ================= PARTIE {part + 1} =================", start + 1)
-        section = source[start: next_marker if next_marker != -1 else len(source)]
+        end = next_marker if next_marker != -1 else len(source)
+        # Les exercices (num:4) suivent parfois directement la partie 3 sans
+        # commentaire PARTIE 4 : ils constituent une leçon distincte.
+        if next_marker == -1:
+            exercise = re.search(r'\{\s*num\s*:\s*4\s*,', source[start + 1:])
+            if exercise:
+                end = start + 1 + exercise.start()
+        section = source[start:end]
     else:
         # Les anciens bonus regroupent leurs leçons dans un tableau d'objets
         # { num: 1, ..., build(){ return [...] } } sans marqueur PARTIE.
@@ -66,6 +73,7 @@ def collect_segments(source: str, part: int):
     items = []
     # Les chaînes de ce projet n'utilisent pas de guillemet double non échappé.
     pattern = re.compile(r'\b(N|C|teach2|teach|drill)\("((?:[^"\\]|\\.)*)"(?:,"((?:[^"\\]|\\.)*)")?(?:,"((?:[^"\\]|\\.)*)")?(?:,[^)]*)?\)')
+    direct_phrases = []
     for kind, one, two, three in pattern.findall(section):
         if kind == "N":
             for lang, text in narration_segments(js_string(one)):
@@ -75,7 +83,10 @@ def collect_segments(source: str, part: int):
                 if text.strip() and any(char.isalnum() for char in text):
                     items.append((lang, text.strip()))
         elif kind == "C":
-            items.append(("zh", js_string(one)))
+            zh, py, fr = js_string(one), js_string(two), js_string(three)
+            items.append(("zh", zh))
+            if is_hsk1 and part != 4 and fr and all(zh != phrase[0] for phrase in direct_phrases):
+                direct_phrases.append((zh, py, fr))
         elif kind == "drill":
             # drill(promptFr, chinois, pinyin, traduction) produit lui aussi
             # une consigne française et deux étapes chinoises dans le lecteur.
@@ -85,13 +96,18 @@ def collect_segments(source: str, part: int):
             items.append(("zh", js_string(two)))
         else:  # teach / teach2 : plusieurs lectures, un seul MP3 suffit.
             items.append(("zh", js_string(one)))
+    if is_hsk1 and part != 4 and len(direct_phrases) >= 3:
+        picks = [direct_phrases[0], direct_phrases[len(direct_phrases) // 2], direct_phrases[-1]]
+        for _, _, fr in picks:
+            items.append(("fr", "Rappel espacé. Dites en chinois : " + fr))
     # Le moteur recherche par texte : les doublons doivent partager le même MP3.
     return list(dict.fromkeys(items))
 
 
 async def main(source_file: Path, part: int, output: Path):
     output.mkdir(parents=True, exist_ok=True)
-    items = collect_segments(source_file.read_text(encoding="utf-8"), part)
+    is_hsk1 = "chapters/hsk1/" in source_file.as_posix()
+    items = collect_segments(source_file.read_text(encoding="utf-8"), part, is_hsk1)
     lookup = {}
     for index, (lang, text) in enumerate(items, 1):
         voice = FR_VOICE if lang == "fr" else ZH_VOICE

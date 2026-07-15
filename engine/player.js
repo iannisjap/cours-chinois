@@ -9,21 +9,39 @@
    APRÈS ce fichier. Chaque chapitre appelle registerChapter(...).
    ============================================================ */
 const N = (text) => ({t:'fr', text});
-const C = (zh, py, fr, rate) => ({t:'zh', zh, py, fr, rate});
+const C = (zh, py, fr, rate, origin) => ({t:'zh', zh, py, fr, rate, origin:origin||'direct'});
 const P = (sec, label) => ({t:'pause', sec, label: label||'…'});
 const HOLD = (label, sec) => ({t:'hold', label: label||'Répète à voix haute, puis ▶', sec: sec||5});
 const TH = () => ({t:'hold', label:'À toi de répondre à voix haute — ▶ pour entendre la réponse'});
 
 function teach(zh, py, fr){
-  return [ C(zh,py,fr,0.5), C(zh,py,fr,0.5), C(zh,py,fr,0.7), HOLD() ];
+  return [ C(zh,py,fr,0.5,'teach'), C(zh,py,fr,0.5,'teach'), C(zh,py,fr,0.7,'teach'), HOLD() ];
 }
 /* variante « 2 fois suffit » : 1× lent + 1× normal, enchaînés sans pause,
    puis HOLD pour que l'élève répète (seul moment où l'on marque un temps). */
 function teach2(zh, py, fr){
-  return [ C(zh,py,fr,0.5), C(zh,py,fr,0.65), HOLD() ];
+  return [ C(zh,py,fr,0.5,'teach'), C(zh,py,fr,0.65,'teach'), HOLD() ];
 }
 function drill(promptFr, zh, py, fr){
-  return [ N(promptFr), TH(), C(zh,py,fr,0.65), C(zh,py,fr,0.65), HOLD() ];
+  return [ N(promptFr), TH(), C(zh,py,fr,0.65,'drill'), C(zh,py,fr,0.65,'drill'), HOLD() ];
+}
+
+function addSpacedHskReview(lessonSteps){
+  const seen = new Set();
+  const candidates = lessonSteps.filter(step=>{
+    if(step.t !== 'zh' || step.origin !== 'direct' || !step.fr) return false;
+    if(seen.has(step.zh)){ return false; }
+    seen.add(step.zh);
+    return true;
+  });
+  if(candidates.length < 3) return lessonSteps;
+  const picks = [candidates[0], candidates[Math.floor(candidates.length / 2)], candidates[candidates.length - 1]];
+  return lessonSteps.concat(...picks.map(step=>[
+    N('Rappel espacé. Dites en chinois : ' + step.fr),
+    TH(),
+    C(step.zh, step.py, step.fr, .65, 'spaced-review'),
+    HOLD('Répète à voix haute, puis ▶')
+  ]));
 }
 
 /* ---------- registre des chapitres ---------- */
@@ -134,6 +152,38 @@ const store = {
   set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 };
 
+let practiceRecorder = null, practiceStream = null, practiceChunks = [];
+let practiceUrl = null, practiceStep = -1, practiceGeneration = 0;
+function clearPracticeRecording(){
+  practiceGeneration++;
+  if(practiceRecorder && practiceRecorder.state === 'recording') practiceRecorder.stop();
+  if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
+  practiceRecorder = null; practiceStream = null; practiceChunks = [];
+  if(practiceUrl){ URL.revokeObjectURL(practiceUrl); practiceUrl = null; }
+  practiceStep = -1;
+}
+async function startPracticeRecording(){
+  clearPracticeRecording();
+  if(!navigator.mediaDevices || !window.MediaRecorder) throw new Error('Enregistrement micro non pris en charge par ce navigateur.');
+  practiceStream = await navigator.mediaDevices.getUserMedia({audio:true});
+  const chunks = practiceChunks = []; practiceStep = idx;
+  const generation = ++practiceGeneration;
+  const recorder = practiceRecorder = new MediaRecorder(practiceStream);
+  recorder.ondataavailable = event=>{ if(event.data.size) chunks.push(event.data); };
+  recorder.onstop = ()=>{
+    if(generation !== practiceGeneration) return;
+    if(chunks.length){
+      practiceUrl = URL.createObjectURL(new Blob(chunks, {type:recorder.mimeType||'audio/webm'}));
+    }
+    if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
+    practiceStream = null;
+    renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+  };
+  practiceRecorder.start();
+  renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
+}
+function stopPracticeRecording(){ if(practiceRecorder && practiceRecorder.state === 'recording') practiceRecorder.stop(); }
+
 /* ---------- narration mixte fr/zh ---------- */
 /* Un fragment de texte français peut contenir du chinois « brut »,
    glissé sans balisage [[...]] (ex. « avec 吧 », « la structure 是……的 »).
@@ -205,6 +255,24 @@ function renderContentCaption(step, yourTurnLabel){
     d.className = 'your-turn';
     d.textContent = yourTurnLabel;
     c.appendChild(d);
+    const controls = document.createElement('div');
+    controls.className = 'record-controls';
+    const recording = practiceRecorder && practiceRecorder.state === 'recording';
+    const record = document.createElement('button');
+    record.className = 'record-btn' + (recording ? ' recording' : '');
+    record.textContent = recording ? '■ Stop' : '● Enregistrer';
+    record.addEventListener('click', async ()=>{
+      try{ recording ? stopPracticeRecording() : await startPracticeRecording(); }
+      catch(error){ alert(error.message || 'Micro indisponible.'); }
+    });
+    controls.appendChild(record);
+    if(practiceUrl && practiceStep === idx){
+      const replay = document.createElement('button');
+      replay.className = 'record-play'; replay.textContent = '▶ Écouter mon essai';
+      replay.addEventListener('click', ()=>{ new Audio(practiceUrl).play(); });
+      controls.appendChild(replay);
+    }
+    c.appendChild(controls);
   }
 }
 /* le contenu affiché pendant une pause/hold = le dernier vrai contenu */
@@ -448,6 +516,7 @@ function playNarrationSegments(segs, i, token, onend, elapsed){
 }
 
 function stopEverything(){
+  clearPracticeRecording();
   runToken++;
   resetAudioFile();
   clearTimers();
@@ -580,7 +649,7 @@ function play(){
     return;
   }
   // 3) on est sur une étape HOLD → on passe à la suite
-  if(steps[idx] && steps[idx].t==='hold'){ idx++; }
+  if(steps[idx] && steps[idx].t==='hold'){ clearPracticeRecording(); idx++; }
   runStep();
 }
 
@@ -849,6 +918,7 @@ function renderPlayer(i){
     stopEverything();
     AUDIO = null;
     steps = L.build();
+    if(curChapter.group === 'hsk1' && L.num !== 4) steps = addSpacedHskReview(steps);
     idx = 0; playing = false;
     buildTimeline();
   }

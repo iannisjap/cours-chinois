@@ -224,7 +224,7 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice audio du cahier", desc:"Exercice immersif adapté du cahier HSK 1 — tout en chinois",
     build(){ return [
 N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 

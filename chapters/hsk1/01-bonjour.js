@@ -22,6 +22,12 @@ registerChapter({
   N("Bienvenue dans la leçon 1 du HSK niveau 1. Aujourd'hui, les tout premiers mots : dire bonjour, merci et au revoir. Voici le petit dialogue que vous saurez tenir à la fin de cette partie. Écoutez."),
   C("你好！","Nǐ hǎo!","Bonjour !",0.5),
   C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.5),
+  N("Avant les premiers mots, une minute d'écoute : en mandarin, le ton change le mot. Écoutez les quatre tons sur la même syllabe : haut et stable, montant, descendant-remontant, puis descendant."),
+  ...teach2("妈","mā","mā — ton haut et stable"),
+  ...teach2("麻","má","má — ton montant"),
+  ...teach2("马","mǎ","mǎ — ton descendant puis remontant"),
+  ...teach2("骂","mà","mà — ton descendant"),
+  N("Ne cherchez pas encore à les mémoriser. Écoutez leur contour, puis revenez à ces quatre sons quand vous voulez travailler votre prononciation."),
   N("Dans quelques minutes, vous pourrez tenir cette conversation vous-même. Apprenons les mots un par un. « Bonjour » se dit [[你好|nǐ hǎo]]. Écoutez et répétez."),
   ...teach2("你好","nǐ hǎo","bonjour"),
   N("Ce mot est fait de deux parties. [[你|nǐ]] veut dire « toi ». Répétez."),
@@ -183,7 +189,7 @@ registerChapter({
   C("再见！","Zàijiàn!","Au revoir !",0.6),
     ]; } },
 
-  { num:4, hanzi:"练习", title:"Partie 4 · Exercice HSK officiel", desc:"Exercice immersif — tout en chinois, questions du cahier officiel HSK 1",
+  { num:4, hanzi:"练习", title:"Partie 4 · Exercice audio du cahier", desc:"Exercice immersif adapté du cahier HSK 1 — tout en chinois",
     build(){ return [
 N("Exercice, tout en chinois. Écoute la question, réfléchis, puis écoute les trois réponses. Choisis la bonne à voix haute, puis écoute la correction."),
 
