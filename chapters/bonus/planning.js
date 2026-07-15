@@ -557,8 +557,9 @@ N("Bienvenue dans la leçon 7. Aujourd'hui : parler de son emploi du temps pour 
   ...drill("Dites : la semaine prochaine.","下周","xiàzhōu","la semaine prochaine"),
 
   // ---------- 安排 ----------
-  N("« Ce qui est prévu », « le programme », se dit [[安排|ānpái]]. Demandez : qu'est-ce que tu as de prévu la semaine prochaine ?"),
+  N("« Ce qui est prévu », « le programme », se dit [[安排|ānpái]]."),
   ...teach("安排","ānpái","ce qui est prévu, le programme"),
+  N("Demandez : qu'est-ce que tu as de prévu la semaine prochaine ?"),
   TH(),
   C("你下周有什么安排？","Nǐ xiàzhōu yǒu shénme ānpái?","Qu'est-ce que tu as de prévu la semaine prochaine ?",0.6), HOLD(),
 
