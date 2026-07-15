@@ -71,7 +71,7 @@ N("Bienvenue dans ce chapitre bonus sur les dates et le planning. On va tout rep
   C("明天星期四。","Míngtiān xīngqīsì.","Demain, c'est jeudi.",0.6), HOLD(),
   N("Et hier, quel jour était-ce ? Dites : hier, c'était mardi."),
   TH(),
-  C("昨天星期二。","Zuótiān xīngqī'èr.","Hier, c'était mardi.",0.6), HOLD(),
+  C("昨天星期二。","Zuótiān xīngqī èr.","Hier, c'était mardi.",0.6), HOLD(),
 
   // ---------- Mini-conversation ----------
   N("Mini-conversation. On vous demande :"),
@@ -124,12 +124,16 @@ N("Bienvenue dans la leçon 2. Aujourd'hui : dire la date complète — le mois,
   N("À la fin de cette leçon, cette conversation sera à vous."),
 
   // ---------- 月 / 号 / 日 ----------
-  N("« Le mois » se dit [[月|yuè]]. Pour dire un mois, on met simplement le chiffre devant. Septembre, le neuvième mois, se dit [[九月|jiǔyuè]] — « neuf-mois »."),
+  N("« Le mois » se dit [[月|yuè]]."),
+  ...teach("月","yuè","le mois"),
+  N("Pour dire un mois, on met simplement le chiffre devant. Septembre, le neuvième mois, se dit [[九月|jiǔyuè]] — « neuf-mois »."),
   ...teach("九月","jiǔyuè","septembre"),
-  N("« Le jour du mois », la date, se dit [[号|hào]] à l'oral. On met le chiffre devant. Le 24 se dit [[二十四号|èrshísì hào]]."),
+  N("« Le jour du mois », la date, se dit [[号|hào]] à l'oral."),
+  ...teach("号","hào","jour du mois (oral)"),
+  N("On met le chiffre devant. Le 24 se dit [[二十四号|èrshísì hào]]."),
   ...teach("二十四号","èrshísì hào","le 24 (du mois)"),
   N("À l'écrit, ou de façon plus formelle, on remplace [[号|hào]] par [[日|rì]]. Les deux veulent dire « jour du mois »."),
-  ...teach("日","rì","jour (du mois, écrit/formel)"),
+  ...teach("日","rì","jour du mois (écrit ou formel)"),
   N("Attention à l'ordre chinois : le mois d'abord, le jour ensuite — l'inverse du français. « Le 24 septembre » se dit donc « neuf-mois vingt-quatre » : [[九月二十四号|jiǔyuè èrshísì hào]]."),
   ...teach("九月二十四号","jiǔyuè èrshísì hào","le 24 septembre"),
   N("Pour demander la date, on utilise [[几|jǐ]] deux fois : [[几月几号|jǐ yuè jǐ hào]], « quel mois, quel jour ». Là encore, pas de verbe « être »."),
@@ -291,7 +295,7 @@ N("Bienvenue dans la leçon 4. Aujourd'hui : parler des anniversaires, de l'âge
   P(2,"…"),
   C("我的生日是九月二十四号。","Wǒ de shēngrì shì jiǔ yuè èrshísì hào.","Mon anniversaire est le 24 septembre.",0.4),
   P(2,"…"),
-  C("今年的生日你想要什么礼物？","Jīnnián de shēngrì nǐ xiǎngyào shénme lǐwù?","Pour ton anniversaire cette année, tu veux quel cadeau ?",0.4),
+  C("你今年生日想要什么礼物？","Nǐ jīnnián shēngrì xiǎngyào shénme lǐwù?","Pour ton anniversaire cette année, tu veux quel cadeau ?",0.4),
   P(2,"…"),
   C("我想要一个蛋糕。","Wǒ xiǎngyào yí ge dàngāo.","Je veux un gâteau.",0.4),
   N("À la fin de cette leçon, cette conversation sera à vous."),
@@ -320,7 +324,7 @@ N("Bienvenue dans la leçon 4. Aujourd'hui : parler des anniversaires, de l'âge
   ...teach("我想要一个蛋糕。","Wǒ xiǎngyào yí ge dàngāo.","Je veux un gâteau."),
   N("Pour demander ce que quelqu'un veut, on remplace l'objet par [[什么|shénme]], « quoi ». Demandez : pour ton anniversaire cette année, tu veux quel cadeau ?"),
   TH(),
-  C("今年的生日你想要什么礼物？","Jīnnián de shēngrì nǐ xiǎngyào shénme lǐwù?","Pour ton anniversaire cette année, tu veux quel cadeau ?",0.55), HOLD(),
+  C("你今年生日想要什么礼物？","Nǐ jīnnián shēngrì xiǎngyào shénme lǐwù?","Pour ton anniversaire cette année, tu veux quel cadeau ?",0.55), HOLD(),
   ...drill("Répondez : je veux un cadeau.","我想要一个礼物。","Wǒ xiǎngyào yí ge lǐwù.","Je veux un cadeau."),
 
   // ---------- Enquête façon Pimsleur ----------
@@ -331,7 +335,7 @@ N("Bienvenue dans la leçon 4. Aujourd'hui : parler des anniversaires, de l'âge
   C("我的生日是三月八号。","Wǒ de shēngrì shì sān yuè bā hào.","Mon anniversaire est le 8 mars.",0.6),
   N("Demandez maintenant ce qu'il ou elle veut comme cadeau cette année."),
   TH(),
-  C("今年的生日你想要什么礼物？","Jīnnián de shēngrì nǐ xiǎngyào shénme lǐwù?","Cette année, tu veux quel cadeau ?",0.6), HOLD(),
+  C("你今年生日想要什么礼物？","Nǐ jīnnián shēngrì xiǎngyào shénme lǐwù?","Cette année, tu veux quel cadeau ?",0.6), HOLD(),
 
   // ---------- Mini-conversation ----------
   N("Mini-conversation. Un ami vous demande :"),
@@ -339,7 +343,7 @@ N("Bienvenue dans la leçon 4. Aujourd'hui : parler des anniversaires, de l'âge
   N("Répondez avec votre date d'anniversaire — ou avec l'exemple : le 24 septembre."),
   TH(),
   C("我的生日是九月二十四号。","Wǒ de shēngrì shì jiǔ yuè èrshísì hào.","Mon anniversaire est le 24 septembre.",0.6),
-  C("今年的生日你想要什么礼物？","Jīnnián de shēngrì nǐ xiǎngyào shénme lǐwù?","Cette année, tu veux quel cadeau ?",0.65),
+  C("你今年生日想要什么礼物？","Nǐ jīnnián shēngrì xiǎngyào shénme lǐwù?","Cette année, tu veux quel cadeau ?",0.65),
   N("Répondez : je veux un gâteau."),
   TH(),
   C("我想要一个蛋糕。","Wǒ xiǎngyào yí ge dàngāo.","Je veux un gâteau.",0.65), HOLD(),
@@ -456,13 +460,13 @@ N("Bienvenue dans la leçon 6. Aujourd'hui : parler d'un mariage, et demander «
 
   // ---------- Dialogue cible ----------
   N("Écoutez la conversation d'aujourd'hui, une amie vous annonce une nouvelle."),
-  C("我朋友要结婚了！","Wǒ péngyou yào jié hūn le!","Mon amie va se marier !",0.4),
+  C("我有个朋友要结婚了！","Wǒ yǒu ge péngyou yào jié hūn le!","Un(e) ami(e) va se marier !",0.4),
   P(2,"…"),
   C("婚礼是什么时候？","Hūnlǐ shì shénme shíhou?","Le mariage, c'est quand ?",0.4),
   P(2,"…"),
   C("大后天。你参加吗？","Dàhòutiān. Nǐ cānjiā ma?","Dans trois jours. Tu y vas ?",0.4),
   P(2,"…"),
-  C("参加！我送一个红包。","Cānjiā! Wǒ sòng yí ge hóngbāo.","J'y vais ! J'offre une enveloppe rouge.",0.4),
+  C("我参加！我会送红包。","Wǒ cānjiā! Wǒ huì sòng hóngbāo.","Oui, j'y vais ! Je donnerai une enveloppe rouge.",0.4),
   N("À la fin de cette leçon, cette conversation sera à vous."),
 
   // ---------- 结婚 / 婚礼 ----------
@@ -470,12 +474,14 @@ N("Bienvenue dans la leçon 6. Aujourd'hui : parler d'un mariage, et demander «
   ...teach("结婚","jié hūn","se marier"),
   N("« Le mariage », la cérémonie, se dit [[婚礼|hūnlǐ]]."),
   ...teach("婚礼","hūnlǐ","le mariage (la cérémonie)"),
-  N("Annoncez une nouvelle : mon amie va se marier ! Le [[要|yào]] au début et le [[了|le]] à la fin signalent ensemble un événement qui va bientôt arriver."),
+  N("Annoncez une nouvelle : un(e) ami(e) va se marier ! Le [[要|yào]] au début et le [[了|le]] à la fin signalent ensemble un événement qui va bientôt arriver."),
   TH(),
-  C("我朋友要结婚了！","Wǒ péngyou yào jié hūn le!","Mon amie va se marier !",0.6), HOLD(),
+  C("我有个朋友要结婚了！","Wǒ yǒu ge péngyou yào jié hūn le!","Un(e) ami(e) va se marier !",0.6), HOLD(),
 
   // ---------- 时候 / 什么时候 ----------
-  N("« Le moment » se dit [[时候|shíhou]]. Pour demander « quand », on dit [[什么时候|shénme shíhou]] — mot à mot « quel moment »."),
+  N("« Le moment » se dit [[时候|shíhou]]."),
+  ...teach("时候","shíhou","le moment"),
+  N("Pour demander « quand », on dit [[什么时候|shénme shíhou]] — mot à mot « quel moment »."),
   ...teach("什么时候","shénme shíhou","quand"),
   ...drill("Demandez : le mariage, c'est quand ?","婚礼是什么时候？","Hūnlǐ shì shénme shíhou?","Le mariage, c'est quand ?"),
   N("Répondez avec ce que vous avez appris : dans trois jours."),
@@ -495,14 +501,14 @@ N("Bienvenue dans la leçon 6. Aujourd'hui : parler d'un mariage, et demander «
 
   // ---------- Mini-conversation ----------
   N("Mini-conversation. Une amie vous annonce :"),
-  C("我朋友要结婚了！","Wǒ péngyou yào jié hūn le!","Mon amie va se marier !",0.65),
+  C("我有个朋友要结婚了！","Wǒ yǒu ge péngyou yào jié hūn le!","Un(e) ami(e) va se marier !",0.65),
   N("Demandez : le mariage, c'est quand ?"),
   TH(),
   C("婚礼是什么时候？","Hūnlǐ shì shénme shíhou?","Le mariage, c'est quand ?",0.6),
   C("大后天。你参加吗？","Dàhòutiān. Nǐ cānjiā ma?","Dans trois jours. Tu y vas ?",0.65),
   N("Répondez : j'y vais ! J'offre une enveloppe rouge."),
   TH(),
-  C("参加！我送一个红包。","Cānjiā! Wǒ sòng yí ge hóngbāo.","J'y vais ! J'offre une enveloppe rouge.",0.6), HOLD(),
+  C("我参加！我会送红包。","Wǒ cānjiā! Wǒ huì sòng hóngbāo.","Oui, j'y vais ! Je donnerai une enveloppe rouge.",0.6), HOLD(),
 
   // ---------- Révision finale ----------
   N("Révision finale. Dites : se marier."),
@@ -540,7 +546,7 @@ N("Bienvenue dans la leçon 7. Aujourd'hui : parler de son emploi du temps pour 
   N("Écoutez la conversation d'aujourd'hui."),
   C("你下周有什么安排？","Nǐ xiàzhōu yǒu shénme ānpái?","Qu'est-ce que tu as de prévu la semaine prochaine ?",0.4),
   P(2,"…"),
-  C("下周一我上课，下周三我有事，下周六我参加一个婚礼。","Xiàzhōuyī wǒ shàngkè, xiàzhōusān wǒ yǒu shì, xiàzhōuliù wǒ cānjiā yí ge hūnlǐ.","Lundi j'ai cours, mercredi j'ai quelque chose, samedi je vais à un mariage.",0.4),
+  C("下周一我上课，下周三我有事，下周六我参加婚礼。","Xiàzhōuyī wǒ shàngkè, xiàzhōusān wǒ yǒu shì, xiàzhōuliù wǒ cānjiā hūnlǐ.","Lundi prochain, j'ai cours ; mercredi, j'ai quelque chose à faire ; samedi, j'assiste à un mariage.",0.4),
   N("À la fin de cette leçon, cette conversation sera à vous."),
 
   // ---------- 周 / 下 / 下周 ----------
@@ -561,9 +567,10 @@ N("Bienvenue dans la leçon 7. Aujourd'hui : parler de son emploi du temps pour 
   ...teach("下周一","xiàzhōuyī","lundi prochain"),
   N("« Mercredi prochain » : [[下周三|xiàzhōusān]]. « Samedi prochain » : [[下周六|xiàzhōuliù]]."),
   ...teach("下周三","xiàzhōusān","mercredi prochain"),
-  N("Répondez à la question : lundi j'ai cours, mercredi j'ai quelque chose, samedi je vais à un mariage."),
+  ...teach("下周六","xiàzhōuliù","samedi prochain"),
+  N("Répondez à la question : lundi prochain, j'ai cours ; mercredi, j'ai quelque chose à faire ; samedi, j'assiste à un mariage."),
   TH(),
-  C("下周一我上课，下周三我有事，下周六我参加一个婚礼。","Xiàzhōuyī wǒ shàngkè, xiàzhōusān wǒ yǒu shì, xiàzhōuliù wǒ cānjiā yí ge hūnlǐ.","Lundi j'ai cours, mercredi j'ai quelque chose, samedi un mariage.",0.5), HOLD(),
+  C("下周一我上课，下周三我有事，下周六我参加婚礼。","Xiàzhōuyī wǒ shàngkè, xiàzhōusān wǒ yǒu shì, xiàzhōuliù wǒ cānjiā hūnlǐ.","Lundi prochain, j'ai cours ; mercredi, j'ai quelque chose à faire ; samedi, j'assiste à un mariage.",0.5), HOLD(),
 
   // ---------- 日程 ----------
   N("Enfin, le mot du titre de ce chapitre : [[日程|rìchéng]], « l'emploi du temps », « l'agenda ». Faire son emploi du temps de la semaine prochaine, et le présenter, c'est exactement l'objectif de ce chapitre."),
@@ -574,7 +581,7 @@ N("Bienvenue dans la leçon 7. Aujourd'hui : parler de son emploi du temps pour 
   C("你下周有什么安排？","Nǐ xiàzhōu yǒu shénme ānpái?","Qu'est-ce que tu as de prévu la semaine prochaine ?",0.65),
   N("Présentez votre semaine avec vos propres activités, ou reprenez l'exemple."),
   TH(),
-  C("下周一我上课，下周三我有事，下周六我参加一个婚礼。","Xiàzhōuyī wǒ shàngkè, xiàzhōusān wǒ yǒu shì, xiàzhōuliù wǒ cānjiā yí ge hūnlǐ.","Lundi j'ai cours, mercredi j'ai quelque chose, samedi un mariage.",0.6), HOLD(),
+  C("下周一我上课，下周三我有事，下周六我参加婚礼。","Xiàzhōuyī wǒ shàngkè, xiàzhōusān wǒ yǒu shì, xiàzhōuliù wǒ cānjiā hūnlǐ.","Lundi prochain, j'ai cours ; mercredi, j'ai quelque chose à faire ; samedi, j'assiste à un mariage.",0.6), HOLD(),
 
   // ---------- Révision finale ----------
   N("Révision finale. Dites : la semaine prochaine."),
@@ -659,9 +666,9 @@ N("Bienvenue dans la grande révision de ce chapitre. Ici, pas de nouveau vocabu
   N("Demandez : le mariage, c'est quand ?"),
   TH(),
   C("婚礼是什么时候？","Hūnlǐ shì shénme shíhou?","Le mariage, c'est quand ?",0.65),
-  N("J'offre une enveloppe rouge."),
+  N("Je donnerai une enveloppe rouge."),
   TH(),
-  C("我送一个红包。","Wǒ sòng yí ge hóngbāo.","J'offre une enveloppe rouge.",0.65),
+  C("我会送红包。","Wǒ huì sòng hóngbāo.","Je donnerai une enveloppe rouge.",0.65),
 
   N("Leçon 7, l'emploi du temps. Demandez : qu'est-ce que tu as de prévu la semaine prochaine ?"),
   TH(),
