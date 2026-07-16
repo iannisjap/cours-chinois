@@ -319,7 +319,7 @@ function renderContentCaption(step, yourTurnLabel){
     c.appendChild(d);
     // Une pause de question attend une réponse personnelle : elle n'a pas de
     // modèle à imiter. L'enregistreur est réservé aux phrases à répéter.
-    if(yourTurnLabel.startsWith('À toi de répondre')) return;
+    if(continuous || yourTurnLabel.startsWith('À toi de répondre')) return;
     const controls = document.createElement('div');
     controls.className = 'record-controls';
     const recording = practiceRecorder && practiceRecorder.state === 'recording';
@@ -838,7 +838,11 @@ $('frTradChip').addEventListener('click', e=>{
 })();
 $('contChip').addEventListener('click', e=>{
   continuous=!continuous; e.target.classList.toggle('on',continuous);
+  // En mode continu, il n'y a pas d'arrêt pour s'enregistrer. Si le mode est
+  // activé pendant une répétition, on ferme donc aussi le micro en cours.
+  if(continuous) clearPracticeRecording();
   buildTimeline(); updateProgress();
+  if(steps[idx] && steps[idx].t==='hold') renderCaptionFor(idx, steps[idx].label);
   // si on active le mode continu pendant un arrêt automatique, on repart aussitôt
   if(continuous && !playing && steps[idx] && steps[idx].t==='hold'){ play(); }
 });
