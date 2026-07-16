@@ -749,6 +749,17 @@ function pause(){
 }
 
 $('playBtn').addEventListener('click', ()=> playing?pause():play());
+// Raccourci ordinateur : Espace pilote le lecteur comme dans un lecteur audio
+// classique, sans faire défiler la page. On le laisse aux boutons/menus quand
+// ils ont le focus afin que leurs propres raccourcis restent accessibles.
+document.addEventListener('keydown', event=>{
+  if(event.code !== 'Space' || event.repeat) return;
+  const target = event.target;
+  if(target && target.closest && target.closest('button, input, textarea, select, [contenteditable]')) return;
+  if(['folderOverlay','chapterOverlay','overlay'].some(id=>$(id).style.display !== 'none')) return;
+  event.preventDefault();
+  playing ? pause() : play();
+});
 $('fwdBtn').addEventListener('click', ()=> moveSequence(+1));
 $('backBtn').addEventListener('click', ()=> moveSequence(-1));
 let previousTrackTimer = null;
