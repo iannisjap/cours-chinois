@@ -155,6 +155,14 @@ const store = {
 let practiceRecorder = null, practiceStream = null, practiceChunks = [];
 let practiceUrl = null, practiceStep = -1, practiceGeneration = 0;
 let practiceStarting = false;
+let practiceStopTimer = null, practicePlayback = null, referencePlayback = null;
+function stopPracticePlayback(){
+  [practicePlayback, referencePlayback].forEach(audio=>{
+    if(!audio) return;
+    audio.pause();
+    try{ audio.currentTime = 0; }catch(e){}
+  });
+}
 function comparisonTargetFor(stepIndex){
   // Après une phrase enseignée, on répète cette phrase. Après une question
   // française (TH), la prochaine phrase chinoise est au contraire la réponse
@@ -169,11 +177,15 @@ function comparisonTargetFor(stepIndex){
 function listenToReference(){
   const target = comparisonTargetFor(idx), url = target && audioFileFor('zh', target.zh);
   if(!target || !url){ alert('Référence chinoise introuvable pour cette séquence.'); return; }
-  new Audio(url).play().catch(()=>alert('Impossible de lire la référence.'));
+  stopPracticePlayback();
+  referencePlayback = new Audio(url);
+  referencePlayback.play().catch(()=>alert('Impossible de lire la référence.'));
 }
 function clearPracticeRecording(){
   practiceGeneration++;
   practiceStarting = false;
+  if(practiceStopTimer){ clearTimeout(practiceStopTimer); practiceStopTimer = null; }
+  stopPracticePlayback();
   if(practiceRecorder && practiceRecorder.state === 'recording') practiceRecorder.stop();
   if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
   practiceRecorder = null; practiceStream = null; practiceChunks = [];
@@ -209,6 +221,8 @@ async function startPracticeRecording(){
     };
     recorder.onstop = ()=>{
       if(generation !== practiceGeneration) return;
+      if(practiceStopTimer){ clearTimeout(practiceStopTimer); practiceStopTimer = null; }
+      practiceStarting = false;
       if(chunks.length){
         practiceUrl = URL.createObjectURL(new Blob(chunks, {type:recorder.mimeType||'audio/webm'}));
       }
@@ -219,6 +233,11 @@ async function startPracticeRecording(){
     // Un court timeslice permet d'attendre une vraie donnée du micro plutôt
     // que de présenter « Stop » dès l'appel asynchrone à MediaRecorder.start.
     recorder.start(250);
+    // Protection : même si l'on oublie le bouton Stop, le micro est coupé
+    // après trente secondes et l'essai est alors conservé normalement.
+    practiceStopTimer = setTimeout(()=>{
+      if(generation === practiceGeneration && recorder.state === 'recording') recorder.stop();
+    }, 30000);
   }catch(error){
     practiceStarting = false;
     renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
@@ -317,7 +336,18 @@ function renderContentCaption(step, yourTurnLabel){
     if(practiceUrl && practiceStep === idx){
       const replay = document.createElement('button');
       replay.className = 'record-play'; replay.textContent = '▶ Écouter mon essai';
-      replay.addEventListener('click', ()=>{ new Audio(practiceUrl).play(); });
+      replay.addEventListener('click', ()=>{
+        // Un seul lecteur d'essai existe : plusieurs clics redémarrent le même
+        // son au lieu de superposer plusieurs enregistrements.
+        if(!practicePlayback || practicePlayback.src !== practiceUrl){
+          stopPracticePlayback();
+          practicePlayback = new Audio(practiceUrl);
+        } else {
+          practicePlayback.pause();
+          practicePlayback.currentTime = 0;
+        }
+        practicePlayback.play().catch(()=>alert('Impossible de lire votre essai.'));
+      });
       controls.appendChild(replay);
       const reference = document.createElement('button');
       reference.className = 'record-compare'; reference.textContent = '🎧 Écouter la référence';
