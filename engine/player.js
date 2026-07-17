@@ -174,6 +174,9 @@ function stopRepeatPlayback(){
 function repeatLastContent(){
   const step = steps[lastContentIndex(idx)];
   if(!step || (step.t !== 'fr' && step.t !== 'zh')) return;
+  // Un contrôle Bluetooth peut être actionné pendant la lecture : on immobilise
+  // alors la leçon avant de rejouer la séquence, pour éviter tout chevauchement.
+  if(playing) pause();
   stopPracticePlayback();
   stopRepeatPlayback();
   const token = ++repeatToken;
@@ -924,7 +927,9 @@ if('mediaSession' in navigator){
   const H = (name, fn)=>{ try{ navigator.mediaSession.setActionHandler(name, fn); }catch(e){} };
   H('play',  ()=>{ if(!playing) play(); });
   H('pause', ()=>{ if(playing) pause(); });
-  H('nexttrack',     ()=> nextTrack());
+  // Sur les AirPods, le double-clic envoie généralement « piste suivante ».
+  // Il sert ici à réécouter le dernier segment plutôt qu'à quitter la phrase.
+  H('nexttrack',     ()=> repeatLastContent());
   H('previoustrack', ()=> previousTrack());
   H('seekforward',   ()=> moveSequence(+1));
   H('seekbackward',  ()=> moveSequence(-1));
