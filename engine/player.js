@@ -791,16 +791,18 @@ function pause(){
 }
 
 $('playBtn').addEventListener('click', ()=> playing?pause():play());
-// Raccourci ordinateur : Espace pilote le lecteur comme dans un lecteur audio
-// classique, sans faire défiler la page. On le laisse aux boutons/menus quand
-// ils ont le focus afin que leurs propres raccourcis restent accessibles.
+// Raccourcis ordinateur : Espace lit/pause, N répète la dernière séquence et
+// les flèches vont à la séquence précédente/suivante. On les laisse aux
+// boutons/menus/champs lorsqu'ils ont le focus.
 document.addEventListener('keydown', event=>{
-  if(event.code !== 'Space' || event.repeat) return;
+  if(!['Space','KeyN','ArrowLeft','ArrowRight'].includes(event.code) || event.repeat) return;
   const target = event.target;
   if(target && target.closest && target.closest('button, input, textarea, select, [contenteditable]')) return;
   if(['folderOverlay','chapterOverlay','overlay'].some(id=>$(id).style.display !== 'none')) return;
   event.preventDefault();
-  playing ? pause() : play();
+  if(event.code === 'Space') playing ? pause() : play();
+  else if(event.code === 'KeyN') repeatLastContent();
+  else moveSequence(event.code === 'ArrowRight' ? +1 : -1);
 });
 $('fwdBtn').addEventListener('click', ()=> moveSequence(+1));
 $('backBtn').addEventListener('click', ()=> moveSequence(-1));
