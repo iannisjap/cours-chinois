@@ -8,6 +8,7 @@ Usage :
 import asyncio
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -21,7 +22,8 @@ MAX_ATTEMPTS = 6
 # La voix chinoise reste à vitesse naturelle. On ajoute plutôt une courte
 # respiration entre les frontières de mots/syllabes renvoyées par Edge : les
 # sons restent nets, sans l'effet pâteux d'un ralentissement global.
-ZH_INTER_WORD_GAP_MS = 90
+ZH_RATE = os.environ.get("ZH_RATE", "+0%")
+ZH_INTER_WORD_GAP_MS = int(os.environ.get("ZH_GAP_MS", "90"))
 PCM_SAMPLE_RATE = 24000
 PCM_BYTES_PER_SAMPLE = 2
 
@@ -147,7 +149,7 @@ def add_chinese_gaps(source: Path, target: Path, boundaries):
 async def save_chinese_with_gaps(text: str, voice: str, target: Path):
     raw_target = target.with_suffix(".edge.mp3")
     boundaries = []
-    communicate = edge_tts.Communicate(text, voice=voice, rate="+0%", boundary="WordBoundary")
+    communicate = edge_tts.Communicate(text, voice=voice, rate=ZH_RATE, boundary="WordBoundary")
     with raw_target.open("wb") as audio:
         async for chunk in communicate.stream():
             if chunk["type"] == "audio":
@@ -166,12 +168,12 @@ async def main(source_file: Path, part: int, output: Path):
         voice = FR_VOICE if lang == "fr" else ZH_VOICE
         # La voix et le profil de diction font partie du nom : un changement
         # de production ne peut pas réutiliser un ancien MP3 du navigateur.
-        profile = "normal+gaps90ms" if lang == "zh" else None
+        profile = f"rate={ZH_RATE},gap={ZH_INTER_WORD_GAP_MS}ms" if lang == "zh" else None
         digest_source = f"{voice}|{lang}|{profile}|{text}" if profile else f"{voice}|{lang}|{text}"
         digest = hashlib.sha256(digest_source.encode()).hexdigest()[:12]
         stem = f"{lang}-{digest}"
         target = output / f"{stem}.mp3"
-        rate = "+0%"
+        rate = ZH_RATE if lang == "zh" else "+0%"
         print(f"[{index}/{len(items)}] {lang}: {text[:72]}")
         if not target.exists() or target.stat().st_size < 1000:
             for attempt in range(1, MAX_ATTEMPTS + 1):
