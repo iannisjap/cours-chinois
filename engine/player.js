@@ -156,12 +156,40 @@ let practiceRecorder = null, practiceStream = null, practiceChunks = [];
 let practiceUrl = null, practiceStep = -1, practiceGeneration = 0;
 let practiceStarting = false;
 let practiceStopTimer = null, practicePlayback = null, referencePlayback = null;
+let repeatPlayback = null, repeatToken = 0;
 function stopPracticePlayback(){
   [practicePlayback, referencePlayback].forEach(audio=>{
     if(!audio) return;
     audio.pause();
     try{ audio.currentTime = 0; }catch(e){}
   });
+}
+function stopRepeatPlayback(){
+  repeatToken++;
+  if(!repeatPlayback) return;
+  repeatPlayback.pause();
+  try{ repeatPlayback.currentTime = 0; }catch(e){}
+  repeatPlayback = null;
+}
+function repeatLastContent(){
+  const step = steps[lastContentIndex(idx)];
+  if(!step || (step.t !== 'fr' && step.t !== 'zh')) return;
+  stopPracticePlayback();
+  stopRepeatPlayback();
+  const token = ++repeatToken;
+  const items = step.t === 'zh'
+    ? [{lang:'zh', text:step.zh}]
+    : playableNarrationSegments(step.text).map(segment=>({lang:segment.lang, text:segmentText(segment)}));
+  const playItem = position=>{
+    if(token !== repeatToken || position >= items.length) return;
+    const item = items[position], url = audioFileFor(item.lang, item.text);
+    if(!url){ alert('Référence audio introuvable.'); return; }
+    const audio = repeatPlayback = new Audio(url);
+    audio.playbackRate = voicePlaybackRate(item.lang);
+    audio.onended = ()=>playItem(position + 1);
+    audio.play().catch(()=>alert('Impossible de répéter cette séquence.'));
+  };
+  playItem(0);
 }
 function comparisonTargetFor(stepIndex){
   // Après une phrase enseignée, on répète cette phrase. Après une question
@@ -186,6 +214,7 @@ function clearPracticeRecording(){
   practiceStarting = false;
   if(practiceStopTimer){ clearTimeout(practiceStopTimer); practiceStopTimer = null; }
   stopPracticePlayback();
+  stopRepeatPlayback();
   if(practiceRecorder && practiceRecorder.state === 'recording') practiceRecorder.stop();
   if(practiceStream) practiceStream.getTracks().forEach(track=>track.stop());
   practiceRecorder = null; practiceStream = null; practiceChunks = [];
@@ -317,44 +346,51 @@ function renderContentCaption(step, yourTurnLabel){
     d.className = 'your-turn';
     d.textContent = yourTurnLabel;
     c.appendChild(d);
-    // Une pause de question attend une réponse personnelle : elle n'a pas de
-    // modèle à imiter. L'enregistreur est réservé aux phrases à répéter.
-    if(continuous || yourTurnLabel.startsWith('À toi de répondre')) return;
-    const controls = document.createElement('div');
-    controls.className = 'record-controls';
-    const recording = practiceRecorder && practiceRecorder.state === 'recording';
-    const starting = practiceStarting;
-    const record = document.createElement('button');
-    record.className = 'record-btn' + (recording ? ' recording' : '') + (starting ? ' starting' : '');
-    record.textContent = recording ? '■ Stop' : (starting ? 'Connexion au micro…' : '● Enregistrer');
-    record.disabled = starting;
-    record.addEventListener('click', async ()=>{
-      try{ recording ? stopPracticeRecording() : await startPracticeRecording(); }
-      catch(error){ alert(error.message || 'Micro indisponible.'); }
-    });
-    controls.appendChild(record);
-    if(practiceUrl && practiceStep === idx){
-      const replay = document.createElement('button');
-      replay.className = 'record-play'; replay.textContent = '▶ Écouter mon essai';
-      replay.addEventListener('click', ()=>{
-        // Un seul lecteur d'essai existe : plusieurs clics redémarrent le même
-        // son au lieu de superposer plusieurs enregistrements.
-        if(!practicePlayback || practicePlayback.src !== practiceUrl){
-          stopPracticePlayback();
-          practicePlayback = new Audio(practiceUrl);
-        } else {
-          practicePlayback.pause();
-          practicePlayback.currentTime = 0;
-        }
-        practicePlayback.play().catch(()=>alert('Impossible de lire votre essai.'));
+    // Une pause de question attend une réponse personnelle : pas de micro,
+    // mais le bouton Répéter reste disponible pour réécouter la consigne.
+    if(!continuous && !yourTurnLabel.startsWith('À toi de répondre')){
+      const controls = document.createElement('div');
+      controls.className = 'record-controls';
+      const recording = practiceRecorder && practiceRecorder.state === 'recording';
+      const starting = practiceStarting;
+      const record = document.createElement('button');
+      record.className = 'record-btn' + (recording ? ' recording' : '') + (starting ? ' starting' : '');
+      record.textContent = recording ? '■ Stop' : (starting ? 'Connexion au micro…' : '● Enregistrer');
+      record.disabled = starting;
+      record.addEventListener('click', async ()=>{
+        try{ recording ? stopPracticeRecording() : await startPracticeRecording(); }
+        catch(error){ alert(error.message || 'Micro indisponible.'); }
       });
-      controls.appendChild(replay);
-      const reference = document.createElement('button');
-      reference.className = 'record-compare'; reference.textContent = '🎧 Écouter la référence';
-      reference.addEventListener('click', listenToReference);
-      controls.appendChild(reference);
+      controls.appendChild(record);
+      if(practiceUrl && practiceStep === idx){
+        const replay = document.createElement('button');
+        replay.className = 'record-play'; replay.textContent = '▶ Écouter mon essai';
+        replay.addEventListener('click', ()=>{
+          // Un seul lecteur d'essai existe : plusieurs clics redémarrent le même
+          // son au lieu de superposer plusieurs enregistrements.
+          if(!practicePlayback || practicePlayback.src !== practiceUrl){
+            stopPracticePlayback();
+            practicePlayback = new Audio(practiceUrl);
+          } else {
+            practicePlayback.pause();
+            practicePlayback.currentTime = 0;
+          }
+          practicePlayback.play().catch(()=>alert('Impossible de lire votre essai.'));
+        });
+        controls.appendChild(replay);
+        const reference = document.createElement('button');
+        reference.className = 'record-compare'; reference.textContent = '🎧 Écouter la référence';
+        reference.addEventListener('click', listenToReference);
+        controls.appendChild(reference);
+      }
+      c.appendChild(controls);
     }
-    c.appendChild(controls);
+  }
+  if(!playing && (yourTurnLabel || audioPaused || pauseRemaining > 0) && (step.t === 'fr' || step.t === 'zh')){
+    const repeat = document.createElement('button');
+    repeat.className = 'repeat-last'; repeat.textContent = '↻ Répéter';
+    repeat.addEventListener('click', repeatLastContent);
+    c.appendChild(repeat);
   }
 }
 /* le contenu affiché pendant une pause/hold = le dernier vrai contenu */
@@ -678,8 +714,8 @@ function runStep(){
     activeStepAudioOffset = 0;
     playAudioSegment(s.zh, 'zh', token, next, 0, 0);
   } else if(s.t==='hold'){
-    renderCaptionFor(idx, s.label);
     if(continuous){
+      renderCaptionFor(idx, s.label);
       // MODE CONTINU : pause chronométrée (5 s par défaut, personnalisable) au lieu d'un arrêt
       const sec = s.sec || 5;
       setPhase('pause-p','⏳','À toi…');
@@ -688,6 +724,7 @@ function runStep(){
     } else {
       // PAUSE AUTOMATIQUE : le texte précédent reste affiché
       playing = false; syncPlayBtn();
+      renderCaptionFor(idx, s.label);
       keepMediaControlsReady();
       setPhase('pause-p','✋', 'À toi — ▶ pour continuer');
     }
@@ -713,6 +750,7 @@ function play(){
   // Accueil, aucune leçon chargée : rien à jouer, on ouvre le menu.
   if(playerChapterIdx < 0){ showFolders(); return; }
   playing = true; syncPlayBtn();
+  stopRepeatPlayback();
   // 1) un MP3 était suspendu au milieu d'une phrase : reprendre exactement
   //    à la même position, sans recréer l'élément et sans revenir au début.
   if(audioPaused && activeAudioStep === idx && sfx.src){
@@ -745,6 +783,7 @@ function pause(){
     // suspendre une pause chronométrée (pauseRemaining déjà tenu à jour)
     clearTimers();
   }
+  renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
   setPhase('','⏸','En pause — ▶ pour reprendre');
 }
 
