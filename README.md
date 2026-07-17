@@ -56,7 +56,9 @@ l'aperçu de l'app Claude). État en mémoire uniquement.
 - Dialogue d'introduction d'une leçon : **0.4** avec `P(2,"…")` entre les répliques
 - Présentation lente d'un mot : 0.5 · vitesse « normale » : 0.65–0.7
 - Phrases longues : 0.5–0.6
-- Un facteur global `ZH_SLOW = 0.75` s'applique en plus dans le moteur.
+- Les MP3 chinois sont produits à vitesse naturelle, avec une respiration de
+  90 ms entre les unités prononcées : les syllabes restent nettes sans effet
+  de ralenti. Le bouton « + lent » du lecteur reste disponible au besoin.
 
 ## 4. Structure pédagogique d'une leçon (~15 min)
 

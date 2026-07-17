@@ -9,6 +9,7 @@ import asyncio
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -17,6 +18,12 @@ import edge_tts
 FR_VOICE = "fr-CH-ArianeNeural"
 ZH_VOICE = "zh-CN-XiaoxiaoNeural"
 MAX_ATTEMPTS = 6
+# La voix chinoise reste à vitesse naturelle. On ajoute plutôt une courte
+# respiration entre les frontières de mots/syllabes renvoyées par Edge : les
+# sons restent nets, sans l'effet pâteux d'un ralentissement global.
+ZH_INTER_WORD_GAP_MS = 90
+PCM_SAMPLE_RATE = 24000
+PCM_BYTES_PER_SAMPLE = 2
 
 
 def js_string(value: str) -> str:
@@ -104,6 +111,52 @@ def collect_segments(source: str, part: int, is_hsk1: bool = False):
     return list(dict.fromkeys(items))
 
 
+def add_chinese_gaps(source: Path, target: Path, boundaries):
+    """Ajoute 90 ms de silence après chaque unité chinoise prononcée.
+
+    Edge fournit les WordBoundary avec des temps précis. Les insérer dans le
+    PCM, plutôt que ralentir le MP3, conserve la vitesse et les tons naturels
+    de Xiaoxiao tout en laissant le temps de distinguer les caractères.
+    """
+    decoded = subprocess.run(
+        ["ffmpeg", "-v", "error", "-i", str(source), "-f", "s16le", "-ac", "1", "-ar", str(PCM_SAMPLE_RATE), "pipe:1"],
+        check=True,
+        capture_output=True,
+    ).stdout
+    if len(boundaries) < 2:
+        source.replace(target)
+        return
+
+    gap = b"\0" * round(PCM_SAMPLE_RATE * PCM_BYTES_PER_SAMPLE * ZH_INTER_WORD_GAP_MS / 1000)
+    result = bytearray()
+    cursor = 0
+    for boundary_end in boundaries[:-1]:
+        end = min(len(decoded), max(cursor, round(boundary_end * PCM_SAMPLE_RATE) * PCM_BYTES_PER_SAMPLE))
+        result.extend(decoded[cursor:end])
+        result.extend(gap)
+        cursor = end
+    result.extend(decoded[cursor:])
+    subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-f", "s16le", "-ar", str(PCM_SAMPLE_RATE), "-ac", "1", "-i", "pipe:0", "-codec:a", "libmp3lame", "-b:a", "48k", str(target)],
+        check=True,
+        input=bytes(result),
+    )
+    source.unlink(missing_ok=True)
+
+
+async def save_chinese_with_gaps(text: str, voice: str, target: Path):
+    raw_target = target.with_suffix(".edge.mp3")
+    boundaries = []
+    communicate = edge_tts.Communicate(text, voice=voice, rate="+0%", boundary="WordBoundary")
+    with raw_target.open("wb") as audio:
+        async for chunk in communicate.stream():
+            if chunk["type"] == "audio":
+                audio.write(chunk["data"])
+            elif chunk["type"] == "WordBoundary":
+                boundaries.append((chunk["offset"] + chunk["duration"]) / 10_000_000)
+    add_chinese_gaps(raw_target, target, boundaries)
+
+
 async def main(source_file: Path, part: int, output: Path):
     output.mkdir(parents=True, exist_ok=True)
     is_hsk1 = "chapters/hsk1/" in source_file.as_posix()
@@ -111,19 +164,23 @@ async def main(source_file: Path, part: int, output: Path):
     lookup = {}
     for index, (lang, text) in enumerate(items, 1):
         voice = FR_VOICE if lang == "fr" else ZH_VOICE
-        # La voix fait partie du nom : un changement de voix ne peut pas
-        # réutiliser un MP3 déjà mis en cache par le navigateur.
-        digest = hashlib.sha256(f"{voice}|{lang}|{text}".encode()).hexdigest()[:12]
+        # La voix et le profil de diction font partie du nom : un changement
+        # de production ne peut pas réutiliser un ancien MP3 du navigateur.
+        profile = "normal+gaps90ms" if lang == "zh" else None
+        digest_source = f"{voice}|{lang}|{profile}|{text}" if profile else f"{voice}|{lang}|{text}"
+        digest = hashlib.sha256(digest_source.encode()).hexdigest()[:12]
         stem = f"{lang}-{digest}"
         target = output / f"{stem}.mp3"
-        # -25 % pour le chinois : il correspond à la référence du lecteur.
-        rate = "+0%" if lang == "fr" else "-25%"
+        rate = "+0%"
         print(f"[{index}/{len(items)}] {lang}: {text[:72]}")
         if not target.exists() or target.stat().st_size < 1000:
             for attempt in range(1, MAX_ATTEMPTS + 1):
                 try:
                     target.unlink(missing_ok=True)
-                    await edge_tts.Communicate(text, voice=voice, rate=rate).save(str(target))
+                    if lang == "zh":
+                        await save_chinese_with_gaps(text, voice, target)
+                    else:
+                        await edge_tts.Communicate(text, voice=voice, rate=rate).save(str(target))
                     if target.stat().st_size < 1000:
                         raise RuntimeError("fichier audio vide ou incomplet")
                     break
