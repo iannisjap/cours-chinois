@@ -19,8 +19,8 @@ registerChapter({
   star: true,
   hanzi: "谈饮食",
   title: "Bonus 3 · Parler de la nourriture",
-  desc: "Menu, goûts, plats, commande, restrictions et addition — 9 leçons",
-  intro: "Neuf leçons audio progressives adaptées du cours Parler de la nourriture en chinois. Vous apprendrez à lire les rubriques d'un menu, parler de vos goûts, commander des plats et des boissons, signaler une restriction alimentaire et demander l'addition. La dernière leçon est un entraînement très pratique aux expressions réellement utiles au restaurant. Faites les leçons dans l'ordre : chacune révise les précédentes.",
+  desc: "Menu, goûts, plats, commande, restrictions et addition — 10 leçons",
+  intro: "Dix leçons audio progressives adaptées du cours Parler de la nourriture en chinois. Vous apprendrez à lire les rubriques d'un menu, parler de vos goûts, commander des plats et des boissons, signaler une restriction alimentaire et demander l'addition. Les deux dernières leçons sont des jeux de rôle très pratiques au restaurant. Faites les leçons dans l'ordre : chacune révise les précédentes.",
   lessons: [
 
 // ================= PARTIE 1 =================
@@ -576,6 +576,49 @@ registerChapter({
 
   N("Vous avez terminé le Bonus 3. Vous savez maintenant entrer dans un restaurant, obtenir une table, commander oralement avec 来, préciser ce que vous ne voulez pas, terminer une commande, payer et emporter les restes. Refaites ce dernier dialogue jusqu'à pouvoir répondre sans regarder le texte."),
   C("谢谢，再见！","Xièxie, zàijiàn!","Merci, au revoir !",0.65),
+    ]; } },
+
+// ================= PARTIE 10 =================
+  { num:10, hanzi:"餐厅角色扮演", title:"★ Jeu de rôle : un repas complet", desc:"欢迎光临 · 点菜 · 酒水 · 忌口 · 买单",
+    build(){ return [
+  N("Dernier jeu de rôle du Bonus 3. Cette fois, vous jouez les deux personnages : le serveur et le client. Après chaque réplique, mettez la leçon en pause et dites vous-même la phrase demandée. Écoutez ensuite le modèle, puis continuez."),
+
+  N("Serveur : accueillez le client et demandez combien de personnes sont présentes."), TH(),
+  C("欢迎光临，您几位？","Huānyíng guānglín, nín jǐ wèi?","Bienvenue. Vous êtes combien ?",0.6), HOLD(),
+  N("Client : répondez : deux personnes."), TH(),
+  C("两位。","Liǎng wèi.","Deux personnes.",0.6), HOLD(),
+
+  N("Serveur : invitez les deux clients à s'asseoir et donnez-leur le menu."), TH(),
+  C("两位坐这儿吧。这是菜单。","Liǎng wèi zuò zhèr ba. Zhè shì càidān.","Asseyez-vous ici. Voici le menu.",0.6), HOLD(),
+  N("Serveur : demandez maintenant si le client commande."), TH(),
+  C("您现在点菜吗？","Nín xiànzài diǎncài ma?","Vous commandez maintenant ?",0.6), HOLD(),
+  N("Client : répondez oui, puis commandez une salade de fruits, des œufs sautés à la tomate et une soupe aigre-piquante."), TH(),
+  C("对。来一份水果沙拉，一份西红柿炒鸡蛋，再来一碗酸辣汤。","Duì. Lái yí fèn shuǐguǒ shālā, yí fèn xīhóngshì chǎo jīdàn, zài lái yì wǎn suānlà tāng.","Oui. Une portion de salade de fruits, une portion d'œufs sautés à la tomate et un bol de soupe aigre-piquante.",0.6), HOLD(),
+
+  N("Serveur : demandez quel féculent le client souhaite prendre."), TH(),
+  C("主食点什么？","Zhǔshí diǎn shénme?","Et comme féculent, vous prenez quoi ?",0.6), HOLD(),
+  N("Client : répondez : deux bols de riz."), TH(),
+  C("两碗米饭。","Liǎng wǎn mǐfàn.","Deux bols de riz.",0.6), HOLD(),
+
+  N("Serveur : demandez quelles boissons alcoolisées ou non alcoolisées le client souhaite. [[酒水|jiǔshuǐ]] désigne l'ensemble des boissons, alcool et boissons ordinaires."), TH(),
+  C("您点什么酒水？","Nín diǎn shénme jiǔshuǐ?","Quelles boissons prenez-vous ?",0.6), HOLD(),
+  N("Client : commandez une théière de thé."), TH(),
+  C("来一壶茶。","Lái yì hú chá.","Une théière de thé.",0.6), HOLD(),
+
+  N("Serveur : demandez si le client a des aliments qu'il évite."), TH(),
+  C("您有什么忌口的吗？","Nín yǒu shénme jìkǒu de ma?","Avez-vous des restrictions alimentaires ?",0.6), HOLD(),
+  N("Client : demandez que le plat ne soit pas trop pimenté."), TH(),
+  C("别太辣。","Bié tài là.","Ne le faites pas trop pimenté, s'il vous plaît.",0.6), HOLD(),
+
+  N("Serveur : répondez poliment que le client doit patienter un instant."), TH(),
+  C("好的，请稍等。","Hǎo de, qǐng shāo děng.","D'accord, veuillez patienter un instant.",0.6), HOLD(),
+  N("Client : appelez le serveur et demandez l'addition."), TH(),
+  C("服务员，买单。","Fúwùyuán, mǎidān.","Serveur, l'addition s'il vous plaît.",0.6), HOLD(),
+  N("Serveur : annoncez que le total est de 56 yuans."), TH(),
+  C("一共五十六块。","Yígòng wǔshíliù kuài.","Cela fait 56 yuans au total.",0.6), HOLD(),
+
+  N("Rejouez toute la scène sans regarder le texte. Alternez bien les deux voix : serveur, client, serveur, client. Pour terminer, dites merci et au revoir."), TH(),
+  C("谢谢，再见！","Xièxie, zàijiàn!","Merci, au revoir !",0.65), HOLD(),
     ]; } },
 
   ]
