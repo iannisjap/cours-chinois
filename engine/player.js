@@ -389,7 +389,9 @@ function renderContentCaption(step, yourTurnLabel){
       c.appendChild(controls);
     }
   }
-  if(!playing && (yourTurnLabel || audioPaused || pauseRemaining > 0) && (step.t === 'fr' || step.t === 'zh')){
+  // La répétition reste disponible à tout moment, y compris pendant la
+  // lecture : repeatLastContent() met alors la leçon en pause proprement.
+  if(step.t === 'fr' || step.t === 'zh'){
     const repeat = document.createElement('button');
     repeat.className = 'repeat-last'; repeat.textContent = '↻ Répéter';
     repeat.addEventListener('click', repeatLastContent);

@@ -32,7 +32,7 @@ registerChapter({
   N("Montrez un objet plus loin : dites « celui-là n'est pas à moi »."), TH(),
   C("那个不是我的。","Nàge bú shì wǒ de.","Celui-là n'est pas à moi.",0.65), HOLD(),
   N("Dialogue. Votre ami montre un livre. Répondez en indiquant l'autre livre."),
-  C("这是你的书吗？","Zhè shì nǐ de shū ma?","C'est ton livre-ci ?",0.6),
+  C("这是你的书吗？","Zhè shì nǐ de shū ma?","C'est ton livre ?",0.6),
   N("Répondez : non, celui-là est mon livre."), TH(),
   C("不是，那个是我的书。","Bú shì, nàge shì wǒ de shū.","Non, celui-là est mon livre.",0.65), HOLD(),
   N("Révision : dites « ce livre-ci »."), TH(), C("这本书","zhè běn shū","ce livre-ci",0.65),

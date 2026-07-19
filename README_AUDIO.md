@@ -10,9 +10,12 @@ aucune voix du navigateur n'est utilisée en secours.
 - Narrateur français : `fr-CH-ArianeNeural` (Microsoft Edge, français suisse)
 - Phrases chinoises : `zh-CN-XiaoxiaoNeural` (Microsoft Edge, mandarin)
 
-Le chinois est généré à `-25 %` afin de rester suffisamment lent pour
-l'apprentissage. Le bouton « + lent » du lecteur ralentit uniquement les MP3
-chinois de 20 % supplémentaires ; le français reste à vitesse normale.
+Le chinois est généré à `-20 %` (soit 80 % de la vitesse naturelle). Le
+générateur n'utilise ni frontières de mots ni silences artificiels : le MP3
+fourni directement par le service vocal est conservé sans traitement ni
+seconde compression. Le bouton
+« + lent » du lecteur ralentit uniquement les MP3 chinois de 20 %
+supplémentaires ; le français reste à vitesse normale.
 
 ## Préparation
 
