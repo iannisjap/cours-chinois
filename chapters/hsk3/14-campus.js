@@ -1,0 +1,131 @@
+/* Nouveau HSK 3.0 · Leçon 14 — 这本书被别人借走了
+   Source : « 新HSK教程 3 », leçon 14. Exercices audio originaux. */
+registerChapter({group:"hsk3",id:"hsk3-14",badge:14,hanzi:"这本书被别人借走了",
+title:"Leçon 14 · Bibliothèque et activités du campus",desc:"6 cours · 被 · 先…再/然后… · X什么 · encouragement",
+intro:"Vous allez emprunter un livre, organiser plusieurs activités et préparer un spectacle. Le parcours introduit le passif avec 被 sans en abuser, puis travaille des encouragements naturels et la narration d'un événement scolaire.",lessons:[
+
+{num:1,hanzi:"书被别人借走了",title:"Partie 1 · Emprunter à la bibliothèque",desc:"Dialogue 1 · aide · premier passif avec 被",build(){return[
+N("Partie 1. Li Wen doit rendre un dictionnaire et cherche un autre livre."),
+HC("我借的这本词典最好今天还，但是我没时间去。", "Il vaudrait mieux rendre aujourd'hui le dictionnaire que j'ai emprunté, mais je n'ai pas le temps d'y aller.", .56),
+HC("下午我只有两节课，可以帮你去图书馆还书。", "Je n'ai que deux cours cet après-midi ; je peux rendre le livre pour toi.", .6),
+HC("那太谢谢了。你能再帮我借本书吗？", "Merci beaucoup. Peux-tu aussi m'emprunter un livre ?", .62),
+HC("行，你告诉我书名。", "D'accord, donne-moi le titre.", .72),
+HC("我把名字写在纸上吧。我去了好几次图书馆，这本书都被别人借走了。", "Je vais écrire le titre sur le papier. Je suis allé plusieurs fois à la bibliothèque, mais ce livre était toujours emprunté.", .54),
+HC("《名人的故事》？我有这本书。明天我借给你吧。", "Histoires de célébrités ? Je l'ai. Je te le prêterai demain.", .6),
+
+N("Le passif avec [[被|bèi]] met en tête ce qui subit ou reçoit l'action : sujet affecté + 被 + agent + verbe + résultat."),
+HC("这本书被别人借走了。", "Ce livre a été emprunté par quelqu'un.", .72),
+HC("水果可能被弟弟吃了。", "Les fruits ont peut-être été mangés par mon petit frère.", .7),
+HC("我们的名字经常被叫错。", "Nos noms sont souvent mal prononcés.", .7),
+N("Le passif est utile quand le résultat subi compte davantage que l'auteur, souvent inconnu ou secondaire. L'agent peut disparaître : 书被借走了."),
+...h3drill("Votre vélo a été emprunté par un camarade.", "我的自行车被同学借走了。", "Mon vélo a été emprunté par un camarade."),
+...h3drill("Vous ignorez l'agent : le café que je viens d'acheter a été bu.", "我刚买的咖啡被喝了。", "Le café que je viens d'acheter a été bu."),
+...h3drill("Possibilité avant 被 : l'appareil photo a peut-être été emporté par mon frère.", "照相机可能被我弟弟拿走了。", "L'appareil photo a peut-être été emporté par mon frère."),
+N("Fin de la partie 1. Vous savez mettre l'accent sur un objet affecté, avec ou sans agent exprimé."),
+];}},
+
+{num:2,hanzi:"先借书然后游泳",title:"Partie 2 · Organiser son après-midi",desc:"Dialogue 2 · carte perdue · ordre des actions",build(){return[
+N("Partie 2. Bai Jiayue a beaucoup de choses à faire, mais sa carte de campus a disparu."),
+HC("今天下课早，你一会儿做什么？", "Les cours finissent tôt aujourd'hui ; que fais-tu après ?", .64),
+HC("我今天忙得很，要先去图书馆借书，然后去游泳。", "Je suis très occupée : je dois d'abord emprunter un livre, puis aller nager.", .6),
+HC("我也想去图书馆看看中文报纸。", "Moi aussi, j'aimerais aller lire les journaux chinois à la bibliothèque.", .66),
+HC("但是我的校园卡不见了，没有卡进不去图书馆。", "Mais ma carte de campus a disparu ; sans elle, je ne peux pas entrer.", .62),
+HC("你想想上一次用是什么时候？", "Essaie de te rappeler quand tu l'as utilisée pour la dernière fois.", .64),
+HC("进不去图书馆也没关系，上网看看有没有电子书。", "Ce n'est pas grave si tu ne peux pas entrer ; regarde s'il existe une version numérique.", .58),
+HC("不行，我必须去，我还得帮李文还书呢。", "Non, je dois y aller : il faut aussi que je rende un livre pour Li Wen.", .62),
+
+N("[[先 A，再/然后 B|xiān A, zài/ránhòu B]] ordonne deux étapes. 再 est compact ; 然后 souligne plus nettement la succession."),
+HC("我先去图书馆，然后去游泳。", "Je vais d'abord à la bibliothèque, puis nager.", .7),
+HC("你先买票，再来这里找我。", "Achète d'abord le billet, puis reviens me retrouver ici.", .7),
+HC("你们先回房间休息，然后再出来吃饭。", "Retournez d'abord vous reposer, puis ressortez manger.", .68),
+...h3drill("Programme d'étude : révisez d'abord, puis faites les devoirs.", "先复习，然后再写作业。", "Révisez d'abord, puis faites les devoirs."),
+...h3drill("Programme pratique : cherchez d'abord la carte, puis allez à la bibliothèque.", "先找校园卡，再去图书馆。", "Cherchez d'abord la carte, puis allez à la bibliothèque."),
+
+N("Mission : votre carte reste introuvable. Proposez deux solutions dans l'ordre."),
+...h3drill("Dites : je cherche d'abord une version numérique, puis je demande de l'aide.", "我先找电子书，找不到的话再请同学帮忙。", "Je cherche d'abord une version numérique ; si je ne la trouve pas, je demande de l'aide."),
+N("Fin de la partie 2. Vous savez transformer une liste de tâches en plan clair."),
+];}},
+
+{num:3,hanzi:"被还是把",title:"Partie 3 · Focus intermédiaire : 把 ou 被",desc:"Agent · objet affecté · résultat",build(){return[
+N("Focus intermédiaire. 把 et 被 décrivent parfois le même événement, mais changent le point de vue."),
+HC("别人把这本书借走了。", "Quelqu'un a emprunté ce livre.", .72),
+N("Avec 把, le locuteur part de l'agent et suit ce qu'il fait à l'objet."),
+HC("这本书被别人借走了。", "Ce livre a été emprunté par quelqu'un.", .72),
+N("Avec 被, il part de l'objet affecté et remonte vers l'action."),
+HC("弟弟把水果吃了。", "Mon petit frère a mangé les fruits.", .72),
+HC("水果被弟弟吃了。", "Les fruits ont été mangés par mon petit frère.", .72),
+
+N("Transformez vers 被 : un camarade a pris ma carte par erreur."),
+...h3drill("Mettez la carte en premier.", "我的校园卡被同学拿错了。", "Ma carte de campus a été prise par erreur par un camarade."),
+N("Transformez vers 把 : le professeur a appelé mon nom de travers."),
+...h3drill("Mettez l'agent en premier.", "老师把我的名字叫错了。", "Le professeur a mal prononcé mon nom."),
+N("Agent inconnu : la porte a déjà été refermée."),
+...h3drill("Omettez l'agent.", "门已经被关上了。", "La porte a déjà été refermée."),
+N("Le chinois actif reste souvent plus naturel quand aucun besoin ne justifie le passif. Utilisez 被 pour mettre en relief l'effet subi, non pour calquer chaque passif français."),
+N("Fin du focus. Vous choisissez désormais le point de départ de la scène."),
+];}},
+
+{num:4,hanzi:"紧张什么啊",title:"Partie 4 · Encourager avant un spectacle",desc:"Dialogue 3 · inquiétude · X什么",build(){return[
+N("Partie 4. L'école prépare une soirée et Li Wen hésite à chanter seul."),
+HC("下周学校有晚会，你知道吗？", "Il y a une soirée à l'école la semaine prochaine ; tu le sais ?", .66),
+HC("知道，我和几个女生要表演一个节目。你也参加吗？", "Oui. Quelques filles et moi allons présenter un numéro. Tu participes ?", .58),
+HC("我想唱中文歌，但是还没找到人一起表演，不知道怎么办。", "Je veux chanter en chinois, mais je n'ai trouvé personne pour m'accompagner et je ne sais pas quoi faire.", .56),
+HC("找不到人，你就一个人唱吧。", "Si tu ne trouves personne, chante seul.", .66),
+HC("一想到要在校长、老师和那么多同学面前表演，我就有些紧张。", "Dès que je pense à devoir jouer devant le directeur, les professeurs et tant d'élèves, je deviens nerveux.", .54),
+HC("紧张什么啊，我们都喜欢听你唱歌，你要相信自己。", "Pourquoi être nerveux ? Nous aimons tous t'entendre chanter ; aie confiance en toi.", .6),
+
+N("Dans [[X 什么啊|X shénme a]], le verbe ou l'adjectif répète l'inquiétude pour la rejeter et rassurer : « pourquoi t'inquiéter ? ». Le ton doit rester chaleureux."),
+HC("紧张什么啊，你准备得很好。", "Pourquoi être nerveux ? Tu es très bien préparé.", .7),
+HC("急什么啊，马上就到了。", "Pourquoi te presser ? Nous arrivons.", .72),
+HC("怕什么啊，大家都相信你。", "Pourquoi avoir peur ? Tout le monde croit en toi.", .72),
+...h3drill("Votre amie craint de mal chanter. Rassurez-la.", "怕什么啊，你唱得很好听。", "Pourquoi avoir peur ? Tu chantes très bien."),
+...h3drill("Votre ami se presse inutilement. Rassurez-le.", "急什么啊，还有半个小时呢。", "Pourquoi te presser ? Il reste encore une demi-heure."),
+
+N("Encouragement plus neutre, adapté à toutes les situations : 你要相信自己, essaie de croire en toi."),
+...h3drill("Dites : aie confiance en toi, tu peux le faire.", "你要相信自己，你一定能做到。", "Aie confiance en toi ; tu peux y arriver."),
+N("Fin de la partie 4. Vous savez rassurer sans traduire littéralement une question française."),
+];}},
+
+{num:5,hanzi:"新年晚会",title:"Partie 5 · Raconter la soirée",desc:"Journal guidé · passif · bilan d'événement",build(){return[
+N("Partie 5. Bai Jiayue raconte la soirée du Nouvel An de son école."),
+HC("昨天是我们学校的新年晚会，每个班级的同学都表演节目了。", "Hier avait lieu la soirée du Nouvel An de l'école ; les élèves de chaque classe ont présenté un numéro.", .56),
+HC("晚会八点开始，差不多十二点才结束。", "La soirée a commencé à huit heures et ne s'est terminée que vers minuit.", .64),
+HC("我一个晚上跟大家一起又唱又跳，开心极了，也累坏了。", "J'ai chanté et dansé avec tout le monde toute la soirée ; j'étais ravie et épuisée.", .58),
+HC("我最喜欢的节目是留学生跳舞。", "Mon numéro préféré était la danse des étudiants étrangers.", .66),
+HC("最后，老师和校长也被叫起来一块儿跳，特别有意思。", "À la fin, les professeurs et le directeur ont eux aussi été invités à se lever et à danser ; c'était très amusant.", .58),
+HC("过几天学校的网站上会有晚会的视频，我打算再看一遍。", "Dans quelques jours, la vidéo sera sur le site de l'école ; je compte la revoir.", .58),
+
+N("Compréhension. Combien de temps la soirée a-t-elle duré ?"),
+TH(),HC("从晚上八点到差不多十二点。", "De huit heures du soir à presque minuit.", .72),HOLD(),
+N("Qui a été appelé à danser à la fin ?"),
+TH(),HC("老师和校长也被叫起来一起跳舞。", "Les professeurs et le directeur ont aussi été invités à se lever et danser.", .68),HOLD(),
+
+N("Mission orale. Racontez une fête en quatre étapes : début, activité, moment préféré, fin. Modèle bref :"),
+TH(),HC("晚会七点开始。我们先吃饭，然后一起唱歌。我最喜欢大家跳舞的节目，十点多才回家。", "La soirée a commencé à sept heures. Nous avons d'abord mangé, puis chanté. J'ai surtout aimé la danse et je ne suis rentré qu'après dix heures.", .58),HOLD("Répète ce modèle ou raconte ton propre événement, puis ▶"),
+N("Fin de la partie 5. Vous savez organiser un récit d'événement et employer un passif motivé."),
+];}},
+
+{num:6,hanzi:"综合练习",title:"Partie 6 · Exercices créés",desc:"Passif · étapes · encouragement · récit",exercise:true,build(){return[
+N("Exercices originaux de la leçon 14. Répondez avant la correction."),
+N("Exercice 1. Le dictionnaire a été emprunté par un étudiant."),
+TH(),HC("词典被一个学生借走了。", "Le dictionnaire a été emprunté par un étudiant.", .72),HOLD(),
+N("Exercice 2. Le cadeau a peut-être été ouvert par Xiaoming."),
+TH(),HC("礼物可能被小明打开了。", "Le cadeau a peut-être été ouvert par Xiaoming.", .72),HOLD(),
+N("Exercice 3. D'abord rendez le livre, puis lisez le journal."),
+TH(),HC("先还书，然后再看报纸。", "Rendez d'abord le livre, puis lisez le journal.", .72),HOLD(),
+N("Exercice 4. Transformez en actif avec 把 : ma sœur a emporté l'appareil photo."),
+TH(),HC("我姐姐把照相机拿走了。", "Ma sœur a emporté l'appareil photo.", .72),HOLD(),
+N("Exercice 5. Rassurez une personne nerveuse."),
+TH(),HC("紧张什么啊，你练习了这么久，一定能唱好。", "Pourquoi être nerveux ? Tu t'es entraîné si longtemps ; tu chanteras bien.", .68),HOLD(),
+N("Exercice 6. Carte perdue : proposez d'abord une recherche, puis une solution numérique."),
+TH(),HC("先找找校园卡，找不到的话就看电子书。", "Cherche d'abord ta carte ; si tu ne la trouves pas, lis une version numérique.", .68),HOLD(),
+N("Exercice 7. Expliquez pourquoi Li Wen n'emprunte pas le livre."),
+TH(),HC("因为这本书每次都被别人借走。", "Parce que ce livre est chaque fois emprunté par quelqu'un d'autre.", .7),HOLD(),
+N("Exercice 8. Présentez votre projet pour la soirée et votre inquiétude ; un ami vous encourage."),
+TH(),HC("我想唱中文歌，但是怕自己唱不好。", "Je veux chanter en chinois, mais j'ai peur de mal chanter.", .72),
+HC("怕什么啊，你要相信自己。打不好、唱不好都没关系，参加最重要。", "Pourquoi avoir peur ? Aie confiance en toi. Ce n'est pas grave de mal jouer ou chanter ; participer est le plus important.", .64),HOLD(),
+N("Bravo. Vous savez raconter ce qui a affecté un objet ou une personne et encourager avec naturel."),
+HC("先试一试，再相信自己能做得到。", "Commencez par essayer, puis croyez en votre capacité à réussir.", .7),
+HC("再见！", "Au revoir !", .74),
+];}}
+]});

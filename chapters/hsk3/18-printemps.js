@@ -1,0 +1,141 @@
+/* Nouveau HSK 3.0 · Leçon 18 — 我学会了包饺子
+   Source : « 新HSK教程 3 », leçon 18. Exercices audio originaux. */
+registerChapter({group:"hsk3",id:"hsk3-18",badge:18,hanzi:"我学会了包饺子",
+title:"Leçon 18 · Nouvel An et parcours personnel",desc:"6 cours · nombres approximatifs · 刚才/刚刚 · 只要…就… · 从…起",
+intro:"Cette dernière leçon vous fait vivre le Nouvel An chinois en famille, parler d'une compétence nouvellement acquise et raconter un parcours de persévérance. Elle se termine par une synthèse active de tout le HSK3.",lessons:[
+
+{num:1,hanzi:"大概七八天",title:"Partie 1 · Parler des traditions du Nouvel An",desc:"Dialogue 1 · coutumes · quantités approximatives",build(){return[
+N("Partie 1. Dans l'avion, Bai Jiayue se réjouit de célébrer le Nouvel An en Chine pour la première fois."),
+HC("我要在中国过年，真开心。", "Je vais fêter le Nouvel An en Chine ; je suis vraiment heureuse.", .7),
+HC("第一次请外国朋友来家里过春节，我也很高兴。", "C'est la première fois que j'invite une amie étrangère chez nous pour le Nouvel An ; j'en suis très heureux.", .62),
+HC("你们怎样过节？", "Comment célébrez-vous cette fête ?", .72),
+HC("春节是中国最重要的节日，我们一般会回家，跟家人一起过。", "La fête du Printemps est la fête chinoise la plus importante. En général, nous rentrons la célébrer en famille.", .58),
+HC("那你跟家人会一起做什么？", "Que faites-vous ensemble ?", .66),
+HC("我们家会一边包饺子，一边看春节联欢晚会，一直到十二点以后才睡觉。", "Dans ma famille, nous préparons des raviolis tout en regardant le gala du Nouvel An et nous ne nous couchons qu'après minuit.", .54),
+HC("听起来很有意思。春节放几天假？", "Cela paraît très intéressant. Combien de jours de congé avez-vous ?", .62),
+HC("大概七八天。", "Environ sept ou huit jours.", .76),
+
+N("Deux nombres voisins placés ensemble donnent une quantité approximative : 七八天, sept ou huit jours ; 五六个人, cinq ou six personnes ; 三四年前, il y a trois ou quatre ans."),
+HC("春节大概放七八天假。", "Le congé du Nouvel An dure environ sept ou huit jours.", .7),
+HC("教室里来了五六个学生。", "Cinq ou six élèves sont arrivés dans la classe.", .7),
+HC("这些照片是三四年前照的。", "Ces photos ont été prises il y a trois ou quatre ans.", .7),
+N("Les nombres doivent être proches et dans l'ordre naturel. Pour une approximation plus large, employez 大概 ou 左右 plutôt que d'assembler des nombres éloignés."),
+...h3drill("Temps approximatif : j'étudie le chinois deux ou trois heures par jour.", "我每天学两三个小时中文。", "J'étudie le chinois deux ou trois heures par jour."),
+...h3drill("Nombre approximatif : huit ou neuf amis viendront.", "会来八九个朋友。", "Huit ou neuf amis viendront."),
+...h3drill("Moment approximatif : je me couche vers onze ou douze heures.", "我一般十一二点睡觉。", "Je me couche généralement vers onze heures ou minuit."),
+N("Fin de la partie 1. Vous pouvez donner une estimation sans prétendre connaître un chiffre exact."),
+];}},
+
+{num:2,hanzi:"刚刚学会包饺子",title:"Partie 2 · Présenter ses vœux",desc:"Dialogue 2 · accueil · 刚才 et 刚刚",build(){return[
+N("Partie 2. Chez Li Wen, Bai Jiayue présente ses vœux et offre un cadeau."),
+HC("张阿姨，叔叔，过年好！这是我准备的礼物，请收下。", "Tante Zhang, monsieur, bonne année ! Voici le cadeau que j'ai préparé ; acceptez-le, s'il vous plaît.", .58),
+HC("谢谢家月，你太客气了！总听小文说起你，今天终于有机会见面了。", "Merci, Jiayue, il ne fallait pas ! Xiaowen nous parle souvent de toi ; nous avons enfin l'occasion de nous rencontrer.", .56),
+HC("谢谢您和叔叔请我来家里做客。", "Merci à vous deux de m'accueillir chez vous.", .66),
+HC("桌子上有饮料，还有矿泉水，你想喝什么就自己拿。", "Il y a des boissons et de l'eau minérale sur la table ; prends ce que tu veux.", .6),
+HC("你先坐着看会儿电视，饺子很快就包好了。", "Assieds-toi et regarde un peu la télévision ; les raviolis seront bientôt prêts.", .62),
+HC("我刚刚看视频学会了包饺子，我跟你们一起包吧。", "Je viens justement d'apprendre à faire des raviolis avec une vidéo ; je vais vous aider.", .6),
+
+N("[[刚才|gāngcái]] est un nom temporel : il désigne les quelques instants précédents et peut modifier un nom : 刚才的电话, l'appel de tout à l'heure."),
+HC("刚才的电话是我妈妈打来的。", "L'appel de tout à l'heure venait de ma mère.", .68),
+HC("我刚才看过一遍，不想再看了。", "Je l'ai regardé tout à l'heure ; je ne veux pas le revoir.", .68),
+N("[[刚刚|gānggāng]] est un adverbe placé après le sujet et avant le verbe. La proximité est relative : quelques minutes, jours ou même mois selon le contexte."),
+HC("我刚刚看视频学会了包饺子。", "Je viens d'apprendre à faire des raviolis avec une vidéo.", .68),
+HC("他刚刚来北京两个月。", "Cela ne fait que deux mois qu'il est arrivé à Pékin.", .68),
+...h3drill("Employez 刚才 avec un nom : répétez la question de tout à l'heure.", "请再说一遍刚才的问题。", "Répétez la question de tout à l'heure, s'il vous plaît."),
+...h3drill("Employez 刚刚 devant le verbe : je viens de finir les raviolis.", "我刚刚包完饺子。", "Je viens de finir de préparer les raviolis."),
+N("Fin de la partie 2. Vous savez situer un passé immédiat et nommer ce qui vient d'être appris."),
+];}},
+
+{num:3,hanzi:"只要还是只有",title:"Partie 3 · Focus intermédiaire décisif",desc:"Condition suffisante · condition nécessaire",build(){return[
+N("Focus intermédiaire. 只要…就… et 只有…才… sont presque inverses. Cette distinction mérite un entraînement lent."),
+N("[[只要 A，就 B|zhǐyào A, jiù B]] : A suffit pour obtenir B. Il peut exister d'autres conditions suffisantes."),
+HC("只要你同意，我们就这么决定。", "Il suffit que tu sois d'accord pour que nous décidions ainsi.", .7),
+HC("只要每天练习，中文就会进步。", "Du moment que l'on pratique chaque jour, le chinois progressera.", .7),
+N("[[只有 A，才 B|zhǐyǒu A, cái B]] : A est indispensable ; sans A, B n'arrive pas."),
+HC("只有每天练习，中文才能进步。", "Ce n'est qu'en pratiquant chaque jour que le chinois peut progresser.", .7),
+HC("只有想清楚，才能做决定。", "Ce n'est qu'après y avoir réfléchi clairement que l'on peut décider.", .7),
+
+N("Comparez directement. 只要有票，就能进去 : avoir un billet suffit."),
+HC("只要有票，就能进去。", "Du moment que l'on a un billet, on peut entrer.", .72),
+N("只有有票的人才能进去 : seuls les détenteurs d'un billet entrent ; le billet est indispensable."),
+HC("只有买了票的人才能进去。", "Seules les personnes ayant acheté un billet peuvent entrer.", .72),
+
+N("Condition suffisante : appelle-moi dès que tu as un problème."),
+...h3drill("Utilisez 只要…就…", "只要遇到问题，就给我打电话。", "Dès que tu rencontres un problème, appelle-moi."),
+N("Condition indispensable : seul un passeport permet de franchir ce contrôle."),
+...h3drill("Utilisez 只有…才…", "只有带着护照，才能通过这个检查。", "Ce n'est qu'avec un passeport que l'on peut passer ce contrôle."),
+N("Sujets différents : il suffit que tu persévères pour que ton niveau progresse."),
+...h3drill("Placez le second sujet avant 就.", "只要你坚持练习，你的水平就会提高。", "Du moment que tu persévères, ton niveau progressera."),
+N("Fin du focus. Demandez-vous : A suffit-il, ou A est-il la seule voie présentée comme possible ?"),
+];}},
+
+{num:4,hanzi:"只要几天不视频",title:"Partie 4 · Grandir loin de sa famille",desc:"Dialogue 3 · souvenirs · condition suffisante",build(){return[
+N("Partie 4. La mère de Li Wen regarde des photos prises avant son départ à l'étranger."),
+HC("这张照片是李文出国前照的吗？", "Cette photo a-t-elle été prise avant le départ de Li Wen ?", .66),
+HC("对，这是他从北京出发时，我们全家在机场照的。", "Oui, nous l'avons prise en famille à l'aéroport lorsqu'il a quitté Pékin.", .6),
+HC("是啊，时间过得真快，好像是不久前发生的一样。", "Oui, le temps passe si vite ; on dirait que c'était hier.", .6),
+HC("他刚离开家时，我很不习惯。只要几天不跟他视频，我就很想他。", "Lorsqu'il venait de partir, j'avais beaucoup de mal. Quelques jours sans appel vidéo suffisaient pour qu'il me manque.", .56),
+HC("还有最后一个学期就要毕业了，他很快就会回来了。", "Il ne lui reste qu'un dernier semestre avant son diplôme ; il reviendra bientôt.", .6),
+
+N("Ici, 只要 ne signifie pas « seulement vouloir ». La condition 几天不跟他视频 suffit à déclencher 想他."),
+...h3drill("Même logique : deux jours sans appeler ma famille suffisent pour qu'elle me manque.", "只要两天不给家人打电话，我就会想他们。", "Deux jours sans appeler ma famille suffisent pour qu'elle me manque."),
+N("Compréhension. Quand la photo a-t-elle été prise ?"),
+TH(),HC("李文从北京出发的时候，在机场照的。", "Elle a été prise à l'aéroport lors du départ de Li Wen.", .7),HOLD(),
+N("Combien de temps lui reste-t-il avant le diplôme ?"),
+TH(),HC("还有最后一个学期。", "Il lui reste un dernier semestre.", .72),HOLD(),
+
+N("Réponse personnelle. Parlez d'une chose qui déclenche rapidement une émotion. Modèle :"),
+TH(),HC("只要听到这首歌，我就会想起以前的朋友。", "Dès que j'entends cette chanson, je repense à mes anciens amis.", .7),HOLD("Répète ce modèle ou donne ta propre réponse, puis ▶"),
+N("Fin de la partie 4. Vous savez relier une condition suffisante à une émotion ou un souvenir."),
+];}},
+
+{num:5,hanzi:"从那时起一直坚持",title:"Partie 5 · Raconter un parcours de persévérance",desc:"Journal guidé · 从…起 · objectif accompli",build(){return[
+N("Partie 5. Bai Jiayue raconte ce qu'elle a appris du parcours de Li Wen."),
+HC("这次来中国，我最高兴的是认识了李文的父母。", "Ce qui m'a rendue le plus heureuse pendant ce voyage en Chine, c'est de rencontrer les parents de Li Wen.", .58),
+HC("他们给我看了李文出生时的照片，还给我讲了很多他过去的故事。", "Ils m'ont montré des photos de sa naissance et raconté beaucoup d'histoires de son enfance.", .56),
+HC("李文高中的时候想学医，从那时起就努力学习。", "Au lycée, Li Wen voulait étudier la médecine ; dès lors, il s'est mis à travailler sérieusement.", .6),
+HC("高三的时候，因为成绩特别好，他得到了出国留学的机会。", "En dernière année de lycée, ses excellents résultats lui ont permis d'étudier à l'étranger.", .58),
+HC("在他身上，我懂得了，只要一直坚持，就能完成自己的目标。", "Son parcours m'a appris qu'en persévérant, on peut atteindre son objectif.", .58),
+HC("我相信，他以后一定会发展得更好。", "Je suis certaine qu'il continuera à progresser.", .64),
+
+N("[[从…起|cóng…qǐ]] signifie « à partir de ». Il marque le début d'une nouvelle période ou habitude."),
+HC("他从那时起就努力学习。", "À partir de ce moment, il a étudié sérieusement.", .7),
+HC("从那天起，我们就变成了好朋友。", "À partir de ce jour, nous sommes devenus de bons amis.", .7),
+HC("从那次旅行起，我对中国文化更感兴趣了。", "Depuis ce voyage, je m'intéresse davantage à la culture chinoise.", .68),
+...h3drill("Nouvelle habitude : depuis le mois dernier, je m'entraîne chaque jour.", "从上个月起，我每天都练习。", "Depuis le mois dernier, je m'entraîne chaque jour."),
+...h3drill("Nouveau lien : depuis cette réunion, nous travaillons ensemble.", "从那次会议起，我们就一起工作了。", "Depuis cette réunion, nous travaillons ensemble."),
+
+N("Projet final HSK3. Racontez un apprentissage : point de départ, difficulté, méthode, progrès et prochain objectif. Modèle :"),
+TH(),HC("我从去年起学习中文。开始的时候，我常常听不懂，也怕说错。后来我每天练习，向认真的人学习。现在我能说很多生活中的话了。只要继续坚持，我的中文就会越来越自然。", "J'apprends le chinois depuis l'année dernière. Au début, je comprenais mal et j'avais peur de me tromper. Ensuite, j'ai pratiqué chaque jour et pris exemple sur des personnes sérieuses. Maintenant, je peux dire beaucoup de choses du quotidien. En persévérant, mon chinois deviendra de plus en plus naturel.", .48),HOLD("Répète par groupes de sens, puis raconte ton propre parcours, puis ▶"),
+N("Fin de la partie 5. Vous venez de réunir temps, difficulté, méthode, progrès et projection dans un récit autonome."),
+];}},
+
+{num:6,hanzi:"HSK3综合挑战",title:"Partie 6 · Défi final HSK3",desc:"Exercices de synthèse · compréhension · production libre",exercise:true,build(){return[
+N("Défi final du HSK3. Ces exercices réemploient les structures du niveau dans des situations nouvelles."),
+N("Exercice 1. Donnez une estimation : cinq ou six amis viendront dîner."),
+TH(),HC("会有五六个朋友来吃饭。", "Cinq ou six amis viendront dîner.", .72),HOLD(),
+N("Exercice 2. Distinguez le passé immédiat : l'appel de tout à l'heure venait du professeur."),
+TH(),HC("刚才的电话是老师打来的。", "L'appel de tout à l'heure venait du professeur.", .72),HOLD(),
+N("Exercice 3. Dites que vous venez juste d'apprendre à préparer ce plat."),
+TH(),HC("我刚刚学会做这个菜。", "Je viens juste d'apprendre à préparer ce plat.", .72),HOLD(),
+N("Exercice 4. Condition suffisante : du moment que tout le monde est là, nous pouvons commencer."),
+TH(),HC("只要大家都到了，我们就可以开始。", "Du moment que tout le monde est arrivé, nous pouvons commencer.", .7),HOLD(),
+N("Exercice 5. Condition indispensable : seul un entraînement sérieux permet de réussir."),
+TH(),HC("只有认真练习，才能做好。", "Ce n'est qu'avec un entraînement sérieux que l'on peut réussir.", .7),HOLD(),
+N("Exercice 6. Point de départ : depuis ce jour, je prends des notes chaque jour."),
+TH(),HC("从那天起，我每天都认真记笔记。", "Depuis ce jour, je prends sérieusement des notes chaque jour.", .72),HOLD(),
+N("Exercice 7. Mission sociale. Présentez vos vœux, offrez un cadeau puis complimentez le repas."),
+TH(),HC("过年好！这是我准备的小礼物，请收下。今天的菜又漂亮又好吃，谢谢你们请我来做客。", "Bonne année ! Voici un petit cadeau ; acceptez-le. Les plats sont beaux et délicieux ; merci de m'avoir invité.", .6),HOLD(),
+N("Exercice 8. Mission intégrée. Vous avez raté un examen. Décrivez le problème, la méthode choisie et la condition de votre progrès."),
+TH(),HC("这次考试我没看清楚要求，做错了好几道题。从今天起，我要把重要的题记在本子上。只要每天认真复习，成绩就会慢慢提高。", "Lors de cet examen, j'ai mal lu les consignes et raté plusieurs exercices. Dès aujourd'hui, je noterai les exercices importants dans mon cahier. En révisant sérieusement chaque jour, mes résultats progresseront.", .54),HOLD(),
+
+N("Dernière production. Sans reprendre le modèle mot pour mot, présentez-vous pendant une minute : lieu de vie, habitudes, expérience récente, projet et raison. Utilisez au moins trois structures du HSK3."),
+TH(),
+HC("我住的地方环境挺好的，附近买东西也很方便。我平时一边散步，一边听中文。最近我刚刚学会做中国菜。从下个月起，我想每天多说一点儿。只要一直练习，我就会越来越有信心。", "Mon quartier est agréable et les achats sont faciles. D'habitude, j'écoute du chinois en marchant. Je viens d'apprendre à cuisiner chinois. Dès le mois prochain, je veux parler un peu plus chaque jour. En continuant à pratiquer, j'aurai de plus en plus confiance.", .5),HOLD("Écoute ce modèle une fois, puis construis ta propre présentation avant de terminer, puis ▶"),
+
+N("Vous avez terminé le parcours HSK3. Vous avez appris à décrire, comparer, raconter, expliquer une cause, poser une condition, exprimer un point de vue et gérer de vraies interactions."),
+HC("学会不是结束，用得出来才是真正的进步。", "Savoir n'est pas la fin ; le vrai progrès, c'est parvenir à utiliser ce que l'on sait.", .68),
+HC("恭喜你完成HSK三级课程！", "Félicitations, vous avez terminé le parcours HSK3 !", .7),
+HC("再见！", "Au revoir !", .74),
+];}}
+]});

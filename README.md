@@ -56,9 +56,9 @@ l'aperçu de l'app Claude). État en mémoire uniquement.
 - Dialogue d'introduction d'une leçon : **0.4** avec `P(2,"…")` entre les répliques
 - Présentation lente d'un mot : 0.5 · vitesse « normale » : 0.65–0.7
 - Phrases longues : 0.5–0.6
-- Les MP3 chinois sont produits à vitesse naturelle, avec une respiration de
-  90 ms entre les unités prononcées : les syllabes restent nettes sans effet
-  de ralenti. Le bouton « + lent » du lecteur reste disponible au besoin.
+- Les MP3 chinois sont produits directement par Edge TTS à 80 % de la vitesse
+  naturelle, sans silence artificiel ni seconde compression. Le bouton
+  « + lent » du lecteur reste disponible au besoin.
 
 ## 4. Structure pédagogique d'une leçon (~15 min)
 
@@ -74,6 +74,41 @@ l'aperçu de l'app Claude). État en mémoire uniquement.
 Règles : max ~8 mots nouveaux par leçon ; toujours donner la traduction
 française ; ordre des mots chinois expliqué quand il diffère du français ;
 jamais de pinyin seul dans le texte parlé du narrateur (toujours `[[汉字|pinyin]]`).
+
+### Parcours pédagogique du HSK3
+
+Les 18 leçons du nouveau HSK3 sont réparties en six cours afin de laisser le
+temps d'intégrer dialogues, grammaire et production autonome :
+
+1. deux cours reprennent les premiers dialogues et font varier les phrases ;
+2. un focus intermédiaire compare le nouveau point à des structures proches ;
+3. un cours pratique réemploie le troisième dialogue dans un autre contexte ;
+4. un récit guidé travaille compréhension, reconstruction et réponse libre ;
+5. la sixième partie contient des exercices audio originaux et corrigés ;
+6. les phrases longues sont préparées par groupes de sens et trois rappels
+   actifs sont espacés dans chaque partie d'apprentissage.
+
+Les fichiers HSK3 utilisent `HC`, `h3teach` et `h3drill`. Leur pinyin est
+centralisé dans `chapters/hsk3/pinyin.js`, régénéré avec
+`tools/build_hsk3_pinyin.py`. Le parcours audio est extrait par
+`tools/generate_edge_audio.py`. Aucun texte ne doit être envoyé au service
+Edge TTS sans l'autorisation explicite de l'utilisateur pour le niveau HSK3.
+Après cette autorisation, `tools/generate_hsk3_audio.py` produit les 108 cours
+par lots et reconstruit le catalogue après chaque partie. Une génération
+interrompue peut être relancée : les MP3 déjà valides sont conservés. L'option
+`--plan` contrôle le nombre de segments sans contacter le service vocal.
+
+### Bonus 5 · Construction des phrases HSK1–HSK2
+
+Le Bonus 5 répartit la syntaxe essentielle en dix-huit épisodes : types de
+prédicat, groupe nominal en `的`, ordre temps–lieu–action, négation, questions,
+classificateurs, verbes modaux, actions successives, `了/过/正在`, `是…的`,
+compléments en `得`, comparaisons et connecteurs. Les deux dernières parties
+sont des ateliers de réparation et de dialogue. Son pinyin est généré par
+`tools/build_bonus5_pinyin.py` et ses MP3 sont rangés dans
+`audio/bonus/05/<numéro>`. Après autorisation explicite d'envoyer les textes
+de ce bonus à Edge TTS, `tools/generate_bonus5_audio.py` produit les dix-huit
+épisodes et met à jour le catalogue après chaque partie.
 
 ## 5. Chapitres existants et à venir
 

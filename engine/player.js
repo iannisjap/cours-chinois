@@ -26,10 +26,18 @@ function drill(promptFr, zh, py, fr){
   return [ N(promptFr), TH(), C(zh,py,fr,0.65,'drill'), C(zh,py,fr,0.65,'drill'), HOLD() ];
 }
 
-function addSpacedHskReview(lessonSteps){
+function hanziLength(text){
+  return (String(text || '').match(/[\u4e00-\u9fff]/g) || []).length;
+}
+
+function addSpacedHskReview(lessonSteps, maxHanzi){
   const seen = new Set();
   const candidates = lessonSteps.filter(step=>{
     if(step.t !== 'zh' || step.origin !== 'direct' || !step.fr) return false;
+    // Au HSK2, une phrase longue ne doit jamais être réclamée « à froid » :
+    // elle reste travaillée dans son dialogue, tandis que les rappels actifs
+    // portent sur des unités que l'élève peut réellement reconstruire.
+    if(maxHanzi && hanziLength(step.zh) > maxHanzi) return false;
     if(seen.has(step.zh)){ return false; }
     seen.add(step.zh);
     return true;
@@ -42,6 +50,34 @@ function addSpacedHskReview(lessonSteps){
     C(step.zh, step.py, step.fr, .65, 'spaced-review'),
     HOLD('Répète à voix haute, puis ▶')
   ]));
+}
+
+function splitHsk2LongPhrase(step){
+  const clean = values=>values.map(value=>value.trim()).filter(Boolean);
+  const zh = clean(step.zh.split(/[，。！？；：]+/));
+  const py = clean(step.py.split(/[,，.!?;:。！？；：]+/));
+  const fr = clean(step.fr.split(/[,;:.!?]+/));
+  if(zh.length < 2 || zh.length > 4 || zh.length !== py.length || zh.length !== fr.length) return null;
+  if(zh.some(part=>hanziLength(part) < 2)) return null;
+  return zh.map((part, index)=>C(part, py[index], fr[index], .65, 'guided-chunk'));
+}
+
+function addHsk2LongPhraseScaffold(lessonSteps){
+  let target = null, chunks = null;
+  for(const step of lessonSteps){
+    if(step.t !== 'zh' || step.origin !== 'direct' || hanziLength(step.zh) <= 18) continue;
+    const candidate = splitHsk2LongPhrase(step);
+    if(candidate){ target = step; chunks = candidate; break; }
+  }
+  if(!target) return lessonSteps;
+  return lessonSteps.concat(
+    N("Construction guidée. Cette phrase est longue : entraînez-vous d'abord par groupes de sens."),
+    ...chunks.flatMap(chunk=>[chunk, HOLD('Répète ce groupe de sens, puis ▶')]),
+    N('Maintenant, reconstruisez toute la phrase : ' + target.fr),
+    TH(),
+    C(target.zh, target.py, target.fr, .6, 'guided-whole'),
+    HOLD('Répète toute la phrase, puis ▶')
+  );
 }
 
 /* ---------- registre des chapitres ---------- */
@@ -948,6 +984,7 @@ updateProgress();
 const FOLDERS = [
   { key: 'hsk1', hanzi: 'HSK1', title: 'HSK 1', desc: 'Les 15 leçons du manuel officiel' },
   { key: 'hsk2', hanzi: 'HSK2', title: 'HSK 2', desc: 'Les 15 leçons du manuel officiel' },
+  { key: 'hsk3', hanzi: 'HSK3', title: 'HSK 3', desc: 'Les 18 leçons du nouveau programme HSK 3.0' },
   { key: 'bonus', hanzi: '★', title: 'Bonus', desc: 'Chapitres thématiques complémentaires' }
 ];
 function buildFolderMenu(){
@@ -1064,6 +1101,7 @@ function renderPlayer(i){
     AUDIO = null;
     steps = L.build();
     if(curChapter.group === 'hsk1' && L.num !== 4) steps = addSpacedHskReview(steps);
+    if(curChapter.group === 'hsk3' && !L.exercise) steps = enhanceHsk3Lesson(steps);
     idx = 0; playing = false;
     buildTimeline();
   }

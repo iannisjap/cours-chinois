@@ -1,0 +1,165 @@
+/* Nouveau HSK 3.0 · Leçon 5 — 这样的照片才好看
+   Source : « 新HSK教程 3 », leçon 5. Exercices audio originaux. */
+registerChapter({
+  group:"hsk3", id:"hsk3-05", badge:5,
+  hanzi:"这样的照片才好看", title:"Leçon 5 · Photos et loisirs",
+  desc:"6 cours · 得很 · redoublement · phrases existentielles · actions successives",
+  intro:"Cette leçon relie loisirs, photographie et récit. Vous apprendrez à renforcer une qualité avec 得很, à parler de chaque élément d'un groupe, à annoncer l'apparition d'une personne ou d'un objet et à enchaîner naturellement deux actions.",
+  lessons:[
+
+  {num:1, hanzi:"天气好得很", title:"Partie 1 · Profitons du beau temps", desc:"Dialogue 1 · loisirs · 得很", build(){return[
+  N("Partie 1. Après plusieurs jours gris, le soleil revient. Bai Jiayue et Li Wen décident d'en profiter."),
+  HC("这个星期总是阴天，今天终于晴了。", "Cette semaine, le ciel était toujours couvert ; aujourd'hui, il fait enfin beau.", .6),
+  HC("是啊，现在天气好得很！我们去爬山，怎么样？", "Oui, il fait vraiment très beau ! Et si nous allions marcher en montagne ?", .58),
+  HC("好啊！又能锻炼身体，又能照好看的照片。", "Bonne idée ! Nous pourrons à la fois faire de l'exercice et prendre de belles photos.", .58),
+  HC("那我带点儿水和吃的，咱们现在就去？", "Alors, j'emporte un peu d'eau et de quoi manger. On part tout de suite ?", .6),
+  HC("等一下。我回去穿上运动鞋，拿上大衣。要不要叫一雪姐一起去？", "Attends. Je rentre mettre mes chaussures de sport et prendre mon manteau. On propose à Yixue de venir ?", .52),
+  HC("好啊，我现在给她打个电话。", "D'accord, je l'appelle tout de suite.", .64),
+
+  N("[[终于|zhōngyú]] marque l'aboutissement attendu après une attente : enfin. [[总是|zǒngshì]] décrit au contraire une répétition constante."),
+  ...h3teach("今天终于晴了。", "Aujourd'hui, il fait enfin beau."),
+  ...h3drill("Après plusieurs jours de travail : j'ai enfin terminé.", "我终于做完了。", "J'ai enfin terminé."),
+
+  N("Le complément [[得很|de hěn]] vient après un adjectif et renforce fortement le degré, surtout à l'oral : 好得很, 热得很, 累得很."),
+  HC("现在天气好得很。", "Il fait vraiment très beau maintenant.", .7),
+  HC("房间里面热得很。", "Il fait vraiment très chaud dans la chambre.", .7),
+  HC("我觉得爬山累得很。", "Je trouve la randonnée vraiment fatigante.", .68),
+  ...h3drill("Dites que l'hôtel est vraiment très calme.", "宾馆安静得很。", "L'hôtel est vraiment très calme."),
+  ...h3drill("Dites que cette photo est vraiment très jolie.", "这张照片漂亮得很。", "Cette photo est vraiment très jolie."),
+
+  N("Jeu de rôle. Proposez un loisir différent : aller prendre des photos au parc."),
+  ...h3drill("Faites la proposition.", "今天天气好得很，我们去公园拍照吧。", "Il fait vraiment très beau aujourd'hui ; allons prendre des photos au parc."),
+  N("Votre ami accepte et donne deux avantages."),
+  ...h3drill("Répondez.", "好啊，又能散步，又能拍照。", "Bonne idée : nous pourrons nous promener et prendre des photos."),
+  N("Fin de la partie 1. Vous savez proposer un loisir et renforcer une appréciation orale."),
+  ];}},
+
+  {num:2, hanzi:"张张都好看", title:"Partie 2 · Commenter des photos", desc:"Dialogue 2 · intérêt · redoublement des classificateurs", build(){return[
+  N("Partie 2. Dans un taxi, Bai Jiayue regarde des photos de Wang Yixue."),
+  HC("这些照片是谁给您拍的？张张都非常好看。", "Qui a pris ces photos pour vous ? Elles sont toutes très belles.", .58),
+  HC("是一飞。她对拍照一直很感兴趣，经常给我照相。", "C'est Yifei. Elle s'intéresse depuis toujours à la photographie et me prend souvent en photo.", .58),
+  HC("我喜欢您大笑的这张，看起来很漂亮。", "J'aime celle où vous riez franchement ; vous y êtes très belle.", .6),
+  HC("我觉得这张有点儿难看，那时候我不知道她在给我照相。", "Je trouve celle-ci un peu laide ; à ce moment-là, je ne savais pas qu'elle me prenait en photo.", .54),
+  HC("这样的照片才好看。我也喜欢拍照，爬山的时候我给您照几张照片吧。", "C'est justement ce genre de photo qui est réussi. J'aime aussi la photo ; pendant la randonnée, je vous en prendrai quelques-unes.", .52),
+  HC("好啊，我可以比较一下你们两个谁的水平高。", "D'accord ! Je pourrai comparer pour voir laquelle de vous deux est la meilleure.", .58),
+
+  N("[[对…感兴趣|duì…gǎn xìngqù]] signifie s'intéresser à quelque chose. Le sujet est la personne ; l'objet d'intérêt suit 对."),
+  ...h3teach("我对拍照很感兴趣。", "Je m'intéresse beaucoup à la photographie."),
+  ...h3drill("Changez de loisir : je m'intéresse à la musique chinoise.", "我对中国音乐很感兴趣。", "Je m'intéresse beaucoup à la musique chinoise."),
+
+  N("Un classificateur redoublé suivi de 都 signifie « chacun sans exception ». 张张都 = chaque photo ; 件件都 = chaque vêtement ; 个个都 = chacun."),
+  HC("这些照片张张都很好看。", "Toutes ces photos sont belles.", .68),
+  HC("这些衣服件件都很贵。", "Tous ces vêtements sont chers.", .68),
+  HC("这些苹果个个都很大。", "Toutes ces pommes sont grosses.", .68),
+  HC("最近天天都下雨。", "Ces derniers temps, il pleut tous les jours.", .68),
+  ...h3drill("Complimentez toutes les tables : elles sont toutes propres.", "这些桌子张张都很干净。", "Toutes ces tables sont propres."),
+  ...h3drill("Dites que chaque plat est bon.", "这些菜道道都好吃。", "Tous ces plats sont bons."),
+
+  N("Attention : 才 dans 这样的照片才好看 insiste sur la condition jugée décisive : « c'est ce genre de photo qui est vraiment réussi »."),
+  ...h3drill("Dites : une photo naturelle, c'est cela qui est beau.", "自然的照片才好看。", "Ce sont les photos naturelles qui sont belles."),
+  N("Fin de la partie 2. Vous savez parler de tous les éléments d'un ensemble sans les énumérer."),
+  ];}},
+
+  {num:3, hanzi:"程度和整体", title:"Partie 3 · Focus intermédiaire", desc:"得很 · 坏了 · 太…了 · chaque / tous", build(){return[
+  N("Focus intermédiaire. Consolidons deux familles souvent confondues : l'intensité d'une qualité et la totalité d'un groupe."),
+  N("Intensité neutre et orale : adjectif + 得很."),
+  HC("今天凉快得很。", "Aujourd'hui, il fait vraiment très frais.", .7),
+  N("Intensité extrême, souvent pénible : adjectif + 坏了."),
+  HC("爬完山，我累坏了。", "Après la randonnée, j'étais épuisé.", .7),
+  N("Réaction ou excès : 太 + adjectif + 了."),
+  HC("这张照片太漂亮了！", "Cette photo est vraiment magnifique !", .7),
+
+  N("Totalité vue depuis chaque membre : classificateur redoublé + 都."),
+  HC("这些照片张张都不一样。", "Toutes ces photos sont différentes les unes des autres.", .68),
+  N("Totalité sans restriction : interrogatif + 都."),
+  HC("哪张照片都好看。", "Toutes les photos sont belles.", .7),
+  N("Négation totale : 一 + classificateur + 也/都 + 不/没."),
+  HC("我一张照片也没照。", "Je n'ai pris aucune photo.", .7),
+
+  N("Test 1. Toutes les pommes sont fraîches : partez du classificateur 个."),
+  ...h3drill("Répondez.", "这些苹果个个都很新鲜。", "Toutes ces pommes sont fraîches."),
+  N("Test 2. Aucune photo n'est laide."),
+  ...h3drill("Répondez.", "这些照片一张也不难看。", "Aucune de ces photos n'est laide."),
+  N("Test 3. Vous êtes très satisfait de chaque photo."),
+  ...h3drill("Répondez.", "这些照片张张都好看，我满意得很。", "Toutes ces photos sont belles ; j'en suis vraiment très satisfait."),
+  N("Fin du focus. Le degré porte sur une qualité ; 张张, 个个 ou 件件 distribuent cette qualité à chaque membre."),
+  ];}},
+
+  {num:4, hanzi:"树上飞来了几只鸟", title:"Partie 4 · Quelque chose apparaît", desc:"Dialogue 3 · photo naturelle · phrase existentielle", build(){return[
+  N("Partie 4. Sur la montagne, les deux amies cherchent un endroit naturel pour une photo."),
+  HC("家月，这里挺漂亮的，咱们在这里拍照吧。", "Jiayue, c'est plutôt joli ici. Prenons une photo.", .6),
+  HC("这边没有太阳，咱们去那边吧。", "Il n'y a pas de soleil de ce côté ; allons là-bas.", .64),
+  HC("好。你觉得我站在这些树中间怎么样？", "D'accord. Qu'en penses-tu si je me place au milieu de ces arbres ?", .6),
+  HC("挺好的。等一下，后边走过去两个人。", "C'est très bien. Attends : deux personnes passent derrière toi.", .6),
+  HC("我准备好了，你照的时候告诉我。", "Je suis prête ; dis-moi quand tu prends la photo.", .64),
+  HC("你不用看着我，想干什么都可以。", "Tu n'as pas besoin de regarder l'objectif ; fais ce que tu veux.", .62),
+  HC("树上飞来了几只鸟，我就看它们吧。", "Quelques oiseaux viennent de se poser dans l'arbre ; je vais les regarder.", .6),
+  HC("啊，手机没电了。", "Ah, mon téléphone n'a plus de batterie.", .72),
+
+  N("La phrase existentielle commence par le lieu, puis décrit l'apparition ou la disparition : lieu + mouvement/résultat + quantité + chose. L'élément nouveau arrive à la fin."),
+  HC("树上飞来了几只鸟。", "Quelques oiseaux sont arrivés en volant dans l'arbre.", .68),
+  HC("前面开过来一辆车。", "Une voiture arrive devant nous.", .68),
+  HC("教室里走进来一位老师。", "Un professeur entre dans la salle de classe.", .68),
+  HC("桌子上少了一本书。", "Un livre a disparu de la table.", .68),
+  N("On ne commence pas par 几只鸟 dans ce modèle : le lieu sert de cadre, puis l'information nouvelle apparaît."),
+  ...h3drill("Annoncez ce qui arrive : deux personnes entrent dans le café.", "咖啡厅里走进来两个人。", "Deux personnes entrent dans le café."),
+  ...h3drill("Annoncez ce qui passe : beaucoup de voitures arrivent devant.", "前面开过来很多车。", "Beaucoup de voitures arrivent devant."),
+  ...h3drill("Signalez une disparition : une photo manque dans l'album.", "相册里少了一张照片。", "Une photo manque dans l'album."),
+
+  N("Rejouez la scène avec un nouvel imprévu. La photographe vous demande de ne pas bouger."),
+  HC("别动，我现在拍。", "Ne bouge pas, je prends la photo maintenant.", .7),
+  N("Vous voyez un enfant passer derrière elle. Prévenez-la."),
+  ...h3drill("Répondez.", "等一下，后边跑过去一个孩子。", "Attends, un enfant passe en courant derrière toi."),
+  N("Fin de la partie 4. Vous savez présenter une apparition comme une information nouvelle dans un lieu."),
+  ];}},
+
+  {num:5, hanzi:"听完了就来", title:"Partie 5 · Invitation après le concert", desc:"Message · actions successives · réponse personnelle", build(){return[
+  N("Partie 5. Dans un café, Wang Yixue envoie un message à Bai Jiayue."),
+  HC("家月，我收到了你的那封邮件，也看到了你给我照的照片，张张都很漂亮。", "Jiayue, j'ai reçu ton courriel et vu les photos que tu as prises de moi ; elles sont toutes très belles.", .52),
+  HC("我已经告诉了一飞，你的拍照水平比她高，她难过得很，哈哈。", "J'ai déjà dit à Yifei que ton niveau en photo était meilleur que le sien ; elle est vraiment vexée, ha ha.", .54),
+  HC("不知道你对中国的音乐有没有兴趣？", "Je me demande si la musique chinoise t'intéresse.", .62),
+  HC("我送你一张明天下午音乐会的门票。", "Je t'offre un billet pour le concert de demain après-midi.", .64),
+  HC("音乐会七点多结束，你听完了音乐会就来我家吃饭，尝尝我做的中国菜。你觉得怎么样？", "Le concert finit un peu après sept heures. Dès qu'il sera terminé, viens dîner chez moi et goûter les plats chinois que je prépare. Qu'en dis-tu ?", .5),
+
+  N("Pour deux actions immédiatement successives : verbe 1 + 了 + objet + 就 + verbe 2. Ici, 了 marque l'achèvement de la première action."),
+  HC("你听完了音乐会就来我家吃饭。", "Dès que tu as fini le concert, viens manger chez moi.", .66),
+  HC("我吃了早饭就去学校。", "Dès que j'ai pris le petit déjeuner, je vais à l'école.", .68),
+  HC("昨天下了课，我们就回家了。", "Hier, dès la fin du cours, nous sommes rentrés.", .68),
+  ...h3drill("Enchaînez : après avoir pris les photos, je rentre.", "我照完了照片就回家。", "Dès que j'ai fini de prendre les photos, je rentre."),
+  ...h3drill("Enchaînez : dès que nous arrivons à l'hôtel, nous nous reposons.", "我们到了宾馆就休息。", "Dès que nous arrivons à l'hôtel, nous nous reposons."),
+
+  N("Compréhension. Quel cadeau Wang Yixue envoie-t-elle ?"),
+  TH(), HC("她送给家月一张音乐会的门票。", "Elle offre à Jiayue un billet de concert.", .68), HOLD(),
+  N("Que doit faire Jiayue après le concert ?"),
+  TH(), HC("她听完音乐会就去一雪家吃饭。", "Après le concert, elle doit aller manger chez Yixue.", .68), HOLD(),
+
+  N("Réponse personnelle. Acceptez l'invitation, puis dites ce que vous ferez avant de venir."),
+  TH(), HC("好啊，我听完了音乐会就去你家。", "Avec plaisir ; dès la fin du concert, je viendrai chez toi.", .68), HOLD("Répète ce modèle ou donne une autre réponse, puis ▶"),
+  N("Fin de la partie 5. Vous savez relier deux actions sans ajouter un lourd « puis » français."),
+  ];}},
+
+  {num:6, hanzi:"综合练习", title:"Partie 6 · Exercices créés", desc:"Degré · groupes · apparition · chronologie", exercise:true, build(){return[
+  N("Exercices originaux de la leçon 5. Répondez avant la correction."),
+  N("Exercice 1. Dites que le paysage est vraiment magnifique avec 得很."),
+  TH(), HC("风景漂亮得很。", "Le paysage est vraiment magnifique.", .72), HOLD(),
+  N("Exercice 2. Toutes les photos sont naturelles : utilisez 张张都."),
+  TH(), HC("这些照片张张都很自然。", "Toutes ces photos sont naturelles.", .7), HOLD(),
+  N("Exercice 3. Tous les vêtements sont différents : utilisez 件件都."),
+  TH(), HC("这些衣服件件都不一样。", "Tous ces vêtements sont différents.", .7), HOLD(),
+  N("Exercice 4. Présentez une apparition : un chat entre dans la pièce."),
+  TH(), HC("房间里跑进来一只猫。", "Un chat entre en courant dans la pièce.", .7), HOLD(),
+  N("Exercice 5. Présentez un passage : deux bus arrivent devant."),
+  TH(), HC("前面开过来两辆公共汽车。", "Deux bus arrivent devant nous.", .68), HOLD(),
+  N("Exercice 6. Enchaînez : après avoir mis mes chaussures de sport, je pars."),
+  TH(), HC("我穿上了运动鞋就出发。", "Dès que j'ai mis mes chaussures de sport, je pars.", .68), HOLD(),
+  N("Exercice 7. Compréhension : pourquoi Bai Jiayue préfère-t-elle la photo où Wang Yixue rit ?"),
+  TH(), HC("因为那张照片看起来很自然。", "Parce que cette photo a l'air très naturelle.", .68), HOLD(),
+  N("Exercice 8. Mini-dialogue. Proposez d'aller prendre des photos ; votre ami demande à finir son repas d'abord."),
+  TH(), HC("今天天气好得很，我们去拍照吧。", "Il fait vraiment très beau ; allons prendre des photos.", .68),
+  HC("好啊，我吃完了饭就去。", "D'accord, j'y vais dès que j'ai fini de manger.", .7), HOLD(),
+  N("Bravo. Vous savez parler d'un loisir, évaluer chaque élément d'un groupe et raconter ce qui apparaît ou s'enchaîne."),
+  HC("照片张张都不一样，这样才有意思。", "Chaque photo est différente ; c'est justement ce qui les rend intéressantes.", .68),
+  HC("再见！", "Au revoir !", .74),
+  ];}}
+  ]
+});
