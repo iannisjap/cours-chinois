@@ -9,7 +9,7 @@ function B5C(zh, fr, rate, origin){
   return C(zh, bonus5Pinyin(zh), fr, rate || .66, origin || 'direct');
 }
 function b5teach(zh, fr){
-  return [B5C(zh, fr, .58, 'teach'), B5C(zh, fr, .7, 'teach'), HOLD('Répète à voix haute, puis ▶')];
+  return [B5C(zh, fr, .66, 'teach'), HOLD('Répète à voix haute, puis ▶')];
 }
 function b5drill(prompt, zh, fr){
   return [N(prompt), TH(), B5C(zh, fr, .68, 'drill'), HOLD('Répète le modèle, puis ▶')];

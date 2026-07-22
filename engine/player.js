@@ -11,19 +11,44 @@
 const N = (text) => ({t:'fr', text});
 const C = (zh, py, fr, rate, origin) => ({t:'zh', zh, py, fr, rate, origin:origin||'direct'});
 const P = (sec, label) => ({t:'pause', sec, label: label||'…'});
-const HOLD = (label, sec) => ({t:'hold', label: label||'Répète à voix haute, puis ▶', sec: sec||5});
+const HOLD = (label, sec) => ({t:'hold', label: label||'Répète à voix haute, puis ▶', sec: sec||5, recordable:true});
 const TH = () => ({t:'hold', label:'À toi de répondre à voix haute — ▶ pour entendre la réponse'});
+// Pause légère ajoutée après une réplique chinoise qui n'avait pas de temps
+// d'entraînement explicite. Elle n'affiche pas le micro : la réécoute se fait
+// avec le bouton « Répéter » déjà visible sous le texte.
+const LISTEN_HOLD = () => ({t:'hold', label:'Réécoute si besoin, puis ▶', sec:1.5, recordable:false});
 
 function teach(zh, py, fr){
-  return [ C(zh,py,fr,0.5,'teach'), C(zh,py,fr,0.5,'teach'), C(zh,py,fr,0.7,'teach'), HOLD() ];
+  return [ C(zh,py,fr,0.65,'teach'), HOLD() ];
 }
-/* variante « 2 fois suffit » : 1× lent + 1× normal, enchaînés sans pause,
-   puis HOLD pour que l'élève répète (seul moment où l'on marque un temps). */
+/* Variante conservée pour les fichiers de cours existants : désormais, une
+   seule écoute suffit avant la pause et la réécoute reste volontaire. */
 function teach2(zh, py, fr){
-  return [ C(zh,py,fr,0.5,'teach'), C(zh,py,fr,0.65,'teach'), HOLD() ];
+  return [ C(zh,py,fr,0.65,'teach'), HOLD() ];
 }
 function drill(promptFr, zh, py, fr){
-  return [ N(promptFr), TH(), C(zh,py,fr,0.65,'drill'), C(zh,py,fr,0.65,'drill'), HOLD() ];
+  return [ N(promptFr), TH(), C(zh,py,fr,0.65,'drill'), HOLD() ];
+}
+
+/* Toutes les leçons, anciennes comme nouvelles, suivent la même règle : une
+   réplique chinoise est entendue une seule fois, puis le lecteur attend.
+   Les cours écrits directement avec C(...) bénéficient donc eux aussi des
+   pauses, sans devoir modifier les fichiers audio. */
+function normalizeChinesePractice(lessonSteps){
+  const singlePass = [];
+  lessonSteps.forEach(step=>{
+    const previous = singlePass[singlePass.length - 1];
+    // Les anciens générateurs plaçaient la même phrase deux ou trois fois
+    // d'affilée. On conserve la première diction, quelle que soit sa vitesse.
+    if(step.t === 'zh' && previous && previous.t === 'zh' && previous.zh === step.zh) return;
+    singlePass.push(step);
+  });
+  return singlePass.flatMap((step, index)=>{
+    const next = singlePass[index + 1];
+    return step.t === 'zh' && (!next || next.t !== 'hold')
+      ? [step, LISTEN_HOLD()]
+      : [step];
+  });
 }
 
 function hanziLength(text){
@@ -366,7 +391,7 @@ function setPhase(kind, icon, label){
 function setArc(f){ $('arc').style.strokeDashoffset = ARC_LEN * (1 - f); }
 function clearTimers(){ if(pauseTimer){clearTimeout(pauseTimer);pauseTimer=null;} if(pauseRAF){cancelAnimationFrame(pauseRAF);pauseRAF=null;} }
 
-function renderContentCaption(step, yourTurnLabel){
+function renderContentCaption(step, yourTurnLabel, holdStep){
   const c = $('caption'); c.innerHTML='';
   if(!step) return;
   if(step.t==='zh'){
@@ -387,7 +412,7 @@ function renderContentCaption(step, yourTurnLabel){
     c.appendChild(d);
     // Une pause de question attend une réponse personnelle : pas de micro,
     // mais le bouton Répéter reste disponible pour réécouter la consigne.
-    if(!continuous && !yourTurnLabel.startsWith('À toi de répondre')){
+    if(!continuous && holdStep?.recordable !== false && !yourTurnLabel.startsWith('À toi de répondre')){
       const controls = document.createElement('div');
       controls.className = 'record-controls';
       const recording = practiceRecorder && practiceRecorder.state === 'recording';
@@ -441,7 +466,8 @@ function lastContentIndex(i){
   return j;
 }
 function renderCaptionFor(i, yourTurnLabel){
-  renderContentCaption(steps[lastContentIndex(i)], yourTurnLabel);
+  const holdStep = steps[i] && steps[i].t === 'hold' ? steps[i] : null;
+  renderContentCaption(steps[lastContentIndex(i)], yourTurnLabel, holdStep);
 }
 
 function currentTimelineTime(){
@@ -1104,6 +1130,7 @@ function renderPlayer(i){
     steps = L.build();
     if(curChapter.group === 'hsk1' && L.num !== 4) steps = addSpacedHskReview(steps);
     if(curChapter.group === 'hsk3' && !L.exercise) steps = enhanceHsk3Lesson(steps);
+    steps = normalizeChinesePractice(steps);
     idx = 0; playing = false;
     buildTimeline();
   }

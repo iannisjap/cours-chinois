@@ -10,8 +10,7 @@ function HC(zh, fr, rate, origin){
 
 function h3teach(zh, fr){
   return [
-    HC(zh, fr, .6, 'teach'),
-    HC(zh, fr, .7, 'teach'),
+    HC(zh, fr, .65, 'teach'),
     HOLD('Répète à voix haute, puis ▶')
   ];
 }
