@@ -7,7 +7,7 @@ registerChapter({
   badge:"5B",
   hanzi:"对话",
   title:"Dialogues guidés",
-  desc:"15 leçons · 150 répliques utiles de la vie quotidienne",
+  desc:"15 leçons · 156 répliques utiles de la vie quotidienne",
   intro:"Jouez les deux personnages. Avant chaque réplique, une consigne française précise qui parle et exactement quelle information transmettre.",
   lessons:[
 
@@ -37,6 +37,8 @@ registerChapter({
   ...b5item("Jouez la personne au comptoir. Annoncez que cela coûte trente-huit yuans en tout.","一共三十八块。","Cela fait trente-huit yuans en tout."),
   ...b5item("Jouez le client. Demandez si vous pouvez payer avec votre téléphone.","可以用手机付款吗？","Puis-je payer avec mon téléphone ?"),
   ...b5item("Jouez la personne au comptoir. Acceptez et dites que la commande sera prête dans cinq minutes.","可以，五分钟以后就好了。","Oui. Votre commande sera prête dans cinq minutes."),
+  ...b5item("Jouez la personne au comptoir cinq minutes plus tard. Donnez le café et invitez le client à le goûter.","您的咖啡好了，请尝一下。","Votre café est prêt. Goûtez-le, s'il vous plaît."),
+  ...b5item("Jouez le client. Dites que le café a une légère amertume et demandez s'il est possible d'ajouter un peu de lait.","这杯咖啡有一点儿苦味，可以加一点儿牛奶吗？","Ce café a un goût légèrement amer. Peut-on ajouter un peu de lait ?"),
   ...b5item("Jouez le client. Remerciez puis demandez le mot de passe du Wi-Fi.","谢谢。请问，无线网密码是什么？","Merci. Quel est le mot de passe du Wi-Fi ?"),
   N("Fin du dialogue 2."),
   ];}},
@@ -52,6 +54,8 @@ registerChapter({
   ...b5item("Jouez le serveur. Demandez s'ils ont des aliments qu'ils ne mangent pas.","您有什么忌口的吗？","Y a-t-il des aliments que vous évitez ?"),
   ...b5item("Jouez le client. Dites que vous ne mangez pas de viande et demandez de ne pas mettre trop de piment.","我不吃肉，也请别放太多辣椒。","Je ne mange pas de viande et, s'il vous plaît, ne mettez pas trop de piment."),
   ...b5item("Jouez le serveur. Confirmez et demandez aux clients d'attendre un moment.","好的，请稍等。","Très bien, veuillez patienter un instant."),
+  ...b5item("Jouez le client après avoir goûté la soupe. Dites qu'elle a une légère saveur acide, mais qu'elle est très bonne.","这个汤有一点儿酸味，但是很好喝。","Cette soupe a une saveur légèrement acide, mais elle est très bonne."),
+  ...b5item("Jouez le serveur. Remerciez le client et expliquez qu'il y a un peu de vinaigre dans la soupe.","谢谢，汤里放了一点儿醋。","Merci. Il y a un peu de vinaigre dans la soupe."),
   ...b5item("Jouez le client après le repas. Appelez le serveur et demandez l'addition.","服务员，买单。","Serveur ! L'addition, s'il vous plaît."),
   N("Fin du dialogue 3."),
   ];}},
@@ -232,6 +236,8 @@ registerChapter({
   ...b5item("Jouez la personne qui reçoit. Dites que vous avez préparé du poisson, des légumes et une soupe.","我做了鱼和蔬菜，还有汤。","J'ai préparé du poisson, des légumes et une soupe."),
   ...b5item("Jouez l'invité. Dites que vous adorez le poisson et que vous avez très faim.","我最喜欢吃鱼，而且我真的饿了。","J'adore le poisson et j'ai vraiment faim."),
   ...b5item("Jouez la personne qui reçoit. Invitez votre ami à commencer à manger sans attendre.","那我们别等了，开始吃吧！","Alors n'attendons pas, commençons à manger !"),
+  ...b5item("Jouez la personne qui reçoit après le repas. Proposez aussi un gâteau au citron et invitez votre ami à le goûter.","还有柠檬蛋糕，你尝一下。","Il y a aussi un gâteau au citron. Goûte-le."),
+  ...b5item("Jouez l'invité. Dites que le gâteau a un goût de citron, qu'il est sucré et très bon.","这个蛋糕有柠檬的味道，甜甜的，很好吃。","Ce gâteau a un goût de citron ; il est sucré et très bon."),
   ...b5item("Jouez l'invité après le repas. Remerciez pour l'invitation et dites que vous avez passé une excellente soirée.","谢谢你请我来，我今天晚上过得很开心。","Merci de m'avoir invité. J'ai passé une excellente soirée."),
   N("Vous avez terminé les quinze dialogues guidés du Bonus 5."),
   ];}}

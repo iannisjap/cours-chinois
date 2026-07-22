@@ -105,8 +105,8 @@ prédicat, groupe nominal en `的`, ordre temps–lieu–action, négation, ques
 classificateurs, verbes modaux, actions successives, `了/过/正在`, `是…的`,
 compléments en `得`, comparaisons et connecteurs. Les deux dernières parties
 sont des ateliers de réparation et de dialogue. Deux sous-dossiers le
-complètent : **5A**, quinze ateliers totalisant 182 situations à formuler, et
-**5B**, quinze dialogues guidés totalisant 150 répliques. Les consignes y
+complètent : **5A**, quinze ateliers totalisant 187 situations à formuler, et
+**5B**, quinze dialogues guidés totalisant 156 répliques. Les consignes y
 décrivent explicitement la situation et le message attendu, sans imposer une
 traduction littérale.
 

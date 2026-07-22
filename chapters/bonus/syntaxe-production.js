@@ -7,7 +7,7 @@ registerChapter({
   badge:"5A",
   hanzi:"造句",
   title:"Ateliers de phrases",
-  desc:"15 leçons · 182 situations quotidiennes à formuler",
+  desc:"15 leçons · 187 situations quotidiennes à formuler",
   intro:"Produisez directement la phrase demandée. Chaque consigne précise la situation et le contenu attendu, sans imposer un calque mot à mot du français.",
   lessons:[
 
@@ -45,7 +45,7 @@ registerChapter({
   N("Fin de l'atelier 2."),
   ];}},
 
-  {num:3,hanzi:"吃饭喝水",title:"Manger et boire",desc:"commander · préférences · besoins précis",build(){return[
+  {num:3,hanzi:"吃饭喝水",title:"Manger et boire",desc:"commander · goûts · préférences · besoins précis",build(){return[
   N("Atelier 3. Commandez, répondez et exprimez clairement vos préférences."),
   ...b5item("Au petit-déjeuner, dites que vous voulez un café et deux tranches de pain.","我要一杯咖啡和两片面包。","Je voudrais un café et deux tranches de pain."),
   ...b5item("Le serveur vous propose du thé. Refusez et dites que vous voulez de l'eau.","我不喝茶，我想喝水。","Je ne prendrai pas de thé ; je voudrais de l'eau."),
@@ -54,6 +54,10 @@ registerChapter({
   ...b5item("Précisez que vous ne mangez pas de viande.","我不吃肉。","Je ne mange pas de viande."),
   ...b5item("Demandez si la soupe contient des œufs.","这个汤里有鸡蛋吗？","Est-ce qu'il y a des œufs dans cette soupe ?"),
   ...b5item("Goûtez le plat et dites qu'il est délicieux, mais un peu trop salé.","这个菜很好吃，但是有点儿咸。","Ce plat est délicieux, mais un peu trop salé."),
+  ...b5item("Décrivez simplement le goût du citron : dites qu'il a une saveur acide.","柠檬有酸味。","Le citron a une saveur acide."),
+  ...b5item("Dites que le gâteau a un goût sucré.","蛋糕有甜味。","Le gâteau a un goût sucré."),
+  ...b5item("Dites que le café a une légère amertume.","咖啡有一点儿苦味。","Le café a un goût légèrement amer."),
+  ...b5item("Après avoir goûté une soupe, dites qu'elle a une saveur particulière.","这个汤有一种特别的味道。","Cette soupe a une saveur particulière."),
   ...b5item("Demandez au serveur de mettre un peu moins de piment.","请少放一点儿辣椒。","Mettez un peu moins de piment, s'il vous plaît."),
   ...b5item("Votre ami hésite. Demandez-lui ce qu'il veut manger.","你想吃什么？","Qu'est-ce que tu veux manger ?"),
   ...b5item("Dites que vous avez déjà mangé ce plat et que vous l'aimez beaucoup.","我吃过这个菜，我很喜欢。","J'ai déjà goûté ce plat et je l'aime beaucoup."),
@@ -254,6 +258,7 @@ registerChapter({
   ...b5item("Un ami vous appelle pendant que vous conduisez. Dites que vous le rappellerez dans dix minutes.","我正在开车，十分钟以后给你回电话。","Je conduis ; je te rappelle dans dix minutes."),
   ...b5item("À la gare, demandez si le train de Pékin est déjà arrivé.","去北京的火车已经到了吗？","Le train pour Pékin est-il déjà arrivé ?"),
   ...b5item("Au café, dites que votre boisson est trop chaude et demandez un verre d'eau froide.","这个太热了，请给我一杯凉水。","C'est trop chaud ; donnez-moi un verre d'eau froide, s'il vous plaît."),
+  ...b5item("Goûtez une boisson. Dites qu'elle a un goût de citron, mais qu'elle n'est pas acide.","这杯饮料有柠檬的味道，但是不酸。","Cette boisson a un goût de citron, mais elle n'est pas acide."),
   ...b5item("Votre ami a perdu ses clés. Demandez-lui où il les a vues pour la dernière fois.","你最后一次是在哪儿看到钥匙的？","Où as-tu vu tes clés pour la dernière fois ?"),
   ...b5item("Dites que vous pensez qu'elles sont peut-être restées dans la voiture.","我觉得钥匙可能还在车里。","Je pense que les clés sont peut-être encore dans la voiture."),
   ...b5item("On vous propose une réunion à quatorze heures. Dites que vous avez déjà un rendez-vous à cette heure-là.","两点我已经有约了。","J'ai déjà un rendez-vous à quatorze heures."),
