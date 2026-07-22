@@ -116,6 +116,8 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-rad
   border-radius:14px;padding:13px 15px;color:var(--paper);width:100%;
 }
 .menu-item:active{background:rgba(255,255,255,.12)}
+.menu-item.subfolder{width:calc(100% - 24px);margin-left:24px;border-left:3px solid rgba(216,178,90,.7);background:rgba(216,178,90,.07)}
+.menu-item.subfolder .mi-num{background:rgba(216,178,90,.2);color:var(--gold);border:1px solid rgba(216,178,90,.45)}
 .mi-num{
   flex:0 0 34px;height:34px;border-radius:50%;background:var(--cinnabar);
   display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;

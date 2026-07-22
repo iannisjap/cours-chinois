@@ -499,9 +499,11 @@ async function loadAudioManifest(chapterId, lessonNum){
     const match = String(chapter.id).match(/^(\d+)/);
     if(match) bonusNum = match[1];
   }
-  const base = bonusNum
-    ? 'audio/bonus/' + bonusNum + '/' + lessonNum
-    : 'audio/' + chapterId + '-' + lessonNum;
+  const base = chapter && chapter.audioBase
+    ? chapter.audioBase + '/' + lessonNum
+    : bonusNum
+      ? 'audio/bonus/' + bonusNum + '/' + lessonNum
+      : 'audio/' + chapterId + '-' + lessonNum;
   let m;
   if(location.protocol === 'file:'){
     // fetch() des fichiers JSON locaux est bloqué par les navigateurs.
@@ -990,7 +992,7 @@ const FOLDERS = [
 function buildFolderMenu(){
   const el = $('folderList'); el.innerHTML = '';
   FOLDERS.forEach(f=>{
-    const count = CHAPTERS.filter(ch=>ch.group===f.key).length;
+    const count = CHAPTERS.filter(ch=>ch.group===f.key && !ch.parentId).length;
     const b = document.createElement('button');
     b.className = 'menu-item';
     b.innerHTML = '<span class="mi-num">'+count+'</span>'
@@ -1005,12 +1007,12 @@ function buildChapterMenu(folderKey){
   CHAPTERS.forEach((ch, i)=>{
     if(ch.group !== folderKey) return;
     const b = document.createElement('button');
-    b.className = 'menu-item';
+    b.className = 'menu-item' + (ch.parentId ? ' subfolder' : '');
     const badge = ch.badge != null ? ch.badge : (i+1);
     const starCls = ch.star ? ' star' : '';
     b.innerHTML = '<span class="mi-num'+starCls+'">'+badge+'</span>'
       + '<span class="mi-hz hanzi">'+ch.hanzi+'</span>'
-      + '<span class="mi-tx"><b>'+ch.title+'</b><small>'+ch.desc+'</small></span>';
+      + '<span class="mi-tx"><b>'+(ch.parentId ? 'Sous-dossier · ' : '')+ch.title+'</b><small>'+ch.desc+'</small></span>';
     b.addEventListener('click', ()=>openChapter(i));
     el.appendChild(b);
   });

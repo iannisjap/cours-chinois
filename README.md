@@ -100,15 +100,25 @@ interrompue peut être relancée : les MP3 déjà valides sont conservés. L'opt
 
 ### Bonus 5 · Construction des phrases HSK1–HSK2
 
-Le Bonus 5 répartit la syntaxe essentielle en dix-huit épisodes : types de
+Le parcours principal du Bonus 5 répartit la syntaxe essentielle en dix-huit épisodes : types de
 prédicat, groupe nominal en `的`, ordre temps–lieu–action, négation, questions,
 classificateurs, verbes modaux, actions successives, `了/过/正在`, `是…的`,
 compléments en `得`, comparaisons et connecteurs. Les deux dernières parties
-sont des ateliers de réparation et de dialogue. Son pinyin est généré par
-`tools/build_bonus5_pinyin.py` et ses MP3 sont rangés dans
-`audio/bonus/05/<numéro>`. Après autorisation explicite d'envoyer les textes
-de ce bonus à Edge TTS, `tools/generate_bonus5_audio.py` produit les dix-huit
-épisodes et met à jour le catalogue après chaque partie.
+sont des ateliers de réparation et de dialogue. Deux sous-dossiers le
+complètent : **5A**, quinze ateliers totalisant 182 situations à formuler, et
+**5B**, quinze dialogues guidés totalisant 150 répliques. Les consignes y
+décrivent explicitement la situation et le message attendu, sans imposer une
+traduction littérale.
+
+Le pinyin des trois parcours est généré ensemble par
+`tools/build_bonus5_pinyin.py`. Les MP3 du parcours principal sont rangés dans
+`audio/bonus/05/<numéro>` et produits par `tools/generate_bonus5_audio.py`.
+Ceux des deux sous-dossiers sont rangés dans
+`audio/bonus/05/production/<numéro>` et
+`audio/bonus/05/dialogues/<numéro>` ;
+`tools/generate_bonus5_practice_audio.py` produit les trente leçons et met à
+jour le catalogue. Aucun texte ne doit être envoyé à Edge TTS sans
+l'autorisation explicite de l'utilisateur pour le Bonus 5.
 
 ## 5. Chapitres existants et à venir
 

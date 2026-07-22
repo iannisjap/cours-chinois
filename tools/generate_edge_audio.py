@@ -143,7 +143,7 @@ def collect_segments(source: str, part: int, course_group: str = ""):
     # Le Bonus 5 emploie un dictionnaire de pinyin comme le HSK3, avec des
     # helpers dédiés afin que les 18 épisodes restent lisibles et faciles à
     # auditer. Les consignes de b5drill sont parlées avant la correction.
-    bonus5_pattern = re.compile(r'\b(B5C|b5teach|b5drill)\(\s*"((?:[^"\\]|\\.)*)"(?:\s*,\s*"((?:[^"\\]|\\.)*)")?(?:\s*,\s*"((?:[^"\\]|\\.)*)")?(?:\s*,[^)]*)?\)')
+    bonus5_pattern = re.compile(r'\b(B5C|b5teach|b5drill|b5item)\(\s*"((?:[^"\\]|\\.)*)"(?:\s*,\s*"((?:[^"\\]|\\.)*)")?(?:\s*,\s*"((?:[^"\\]|\\.)*)")?(?:\s*,[^)]*)?\)')
     for kind, one, two, _three in bonus5_pattern.findall(section):
         if kind == "B5C":
             items.append(("zh", js_string(one)))

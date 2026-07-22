@@ -14,6 +14,9 @@ function b5teach(zh, fr){
 function b5drill(prompt, zh, fr){
   return [N(prompt), TH(), B5C(zh, fr, .68, 'drill'), HOLD('Répète le modèle, puis ▶')];
 }
+function b5item(prompt, zh, fr){
+  return b5drill(prompt, zh, fr);
+}
 
 registerChapter({
   group: "bonus",

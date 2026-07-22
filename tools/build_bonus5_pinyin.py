@@ -8,7 +8,11 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "chapters/bonus/syntaxe.js"
+SOURCES = [
+    ROOT / "chapters/bonus/syntaxe.js",
+    ROOT / "chapters/bonus/syntaxe-production.js",
+    ROOT / "chapters/bonus/syntaxe-dialogues.js",
+]
 OUTPUT = ROOT / "chapters/bonus/syntaxe-pinyin.js"
 
 
@@ -27,11 +31,13 @@ def decode_js(value: str) -> str:
 
 
 def main():
-    text = SOURCE.read_text(encoding="utf-8")
     first_arg = re.compile(r'\b(?:B5C|b5teach)\(\s*"((?:[^"\\]|\\.)*)"')
-    second_arg = re.compile(r'\bb5drill\(\s*"(?:[^"\\]|\\.)*"\s*,\s*"((?:[^"\\]|\\.)*)"')
-    phrases = {decode_js(value) for value in first_arg.findall(text)}
-    phrases.update(decode_js(value) for value in second_arg.findall(text))
+    second_arg = re.compile(r'\b(?:b5drill|b5item)\(\s*"(?:[^"\\]|\\.)*"\s*,\s*"((?:[^"\\]|\\.)*)"')
+    phrases = set()
+    for source in SOURCES:
+        text = source.read_text(encoding="utf-8")
+        phrases.update(decode_js(value) for value in first_arg.findall(text))
+        phrases.update(decode_js(value) for value in second_arg.findall(text))
     builder = load_hsk3_builder()
     lookup = {phrase: builder.make_pinyin(phrase) for phrase in sorted(phrases)}
     OUTPUT.write_text(
