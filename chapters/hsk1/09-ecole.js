@@ -45,19 +45,19 @@ registerChapter({
   N("Dites : « Il y a un cinéma devant l'école. »"),
   TH(),
   C("学校前边有一家电影院。","Xuéxiào qiánbian yǒu yì jiā diànyǐngyuàn.","Il y a un cinéma devant l'école.",0.55),
-  C("学校前边有一家电影院。","Xuéxiào qiánbian yǒu yì jiā diànyǐngyuàn.","Il y a un cinéma devant l'école.",0.6), HOLD(),
+   HOLD(),
 
   N("« Ce », « celui-là » se dit [[那个|nàge]] — vous connaissez déjà [[个|ge]]. Répondez : « Oui. Allons voir un film dans ce cinéma ce soir. »"),
   TH(),
   C("对。我们晚上去那个电影院看电影吧。","Duì. Wǒmen wǎnshang qù nàge diànyǐngyuàn kàn diànyǐng ba.","Oui. Allons voir un film dans ce cinéma ce soir.",0.5),
-  C("对。我们晚上去那个电影院看电影吧。","Duì. Wǒmen wǎnshang qù nàge diànyǐngyuàn kàn diànyǐng ba.","Oui. Allons voir un film dans ce cinéma ce soir.",0.55), HOLD(),
+   HOLD(),
 
   N("Comme [[前边|qiánbian]], « dehors » se dit plus complètement [[外边|wàibian]] — vous connaissez déjà [[外|wài]]. Écoutez et répétez."),
   ...teach2("外边","wàibian","dehors"),
   N("Proposez : « D'accord ! Retrouvons-nous devant le cinéma à 19 h, ça te va ? »"),
   TH(),
   C("好！我们七点在电影院外边见，好吗？","Hǎo! Wǒmen qī diǎn zài diànyǐngyuàn wàibian jiàn, hǎo ma?","D'accord ! Retrouvons-nous devant le cinéma à 19 h, ça te va ?",0.5),
-  C("好！我们七点在电影院外边见，好吗？","Hǎo! Wǒmen qī diǎn zài diànyǐngyuàn wàibian jiàn, hǎo ma?","D'accord ! Retrouvons-nous devant le cinéma à 19 h, ça te va ?",0.55), HOLD(),
+   HOLD(),
 
   N("Répondez : « D'accord, à 19 h ce soir ! »"),
   TH(),
@@ -105,14 +105,14 @@ registerChapter({
   N("« Celui-là », « cela », se dit [[那|nà]] — le contraire de [[这|zhè]] que vous connaissez. Dites : « Il y a un livre de chinois sur la chaise, c'est le livre de qui ? »"),
   TH(),
   C("椅子上有一本中文书，那是谁的书？","Yǐzi shang yǒu yì běn Zhōngwén shū, nà shì shéi de shū?","Il y a un livre de chinois sur la chaise, c'est le livre de qui ?",0.5),
-  C("椅子上有一本中文书，那是谁的书？","Yǐzi shang yǒu yì běn Zhōngwén shū, nà shì shéi de shū?","Il y a un livre de chinois sur la chaise, c'est le livre de qui ?",0.55), HOLD(),
+   HOLD(),
 
   N("Pour dire « le premier », « le deuxième », on place [[第|dì]] devant le nombre. « Le deuxième » se dit [[第二|dì-èr]]. Écoutez et répétez."),
   ...teach2("第二本","dì-èr běn","le deuxième (livre)"),
   N("Répondez : « C'est mon livre, merci. C'est mon deuxième livre de chinois. »"),
   TH(),
   C("是我的书，谢谢。这是我的第二本中文书。","Shì wǒ de shū, xièxie. Zhè shì wǒ de dì-èr běn Zhōngwén shū.","C'est mon livre, merci. C'est mon deuxième livre de chinois.",0.5),
-  C("是我的书，谢谢。这是我的第二本中文书。","Shì wǒ de shū, xièxie. Zhè shì wǒ de dì-èr běn Zhōngwén shū.","C'est mon livre, merci. C'est mon deuxième livre de chinois.",0.55), HOLD(),
+   HOLD(),
 
   N("Demandez : « De rien. Tu seras où demain matin ? »"),
   TH(),
@@ -164,7 +164,7 @@ registerChapter({
   N("Demandez : « Demain c'est samedi, qu'est-ce que tu vas faire ? »"),
   TH(),
   C("明天星期六，你做什么？","Míngtiān Xīngqīliù, nǐ zuò shénme?","Demain c'est samedi, qu'est-ce que tu vas faire ?",0.55),
-  C("明天星期六，你做什么？","Míngtiān Xīngqīliù, nǐ zuò shénme?","Demain c'est samedi, qu'est-ce que tu vas faire ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Le jour », « la journée », se dit [[白天|báitiān]] — le contraire de [[晚上|wǎnshang]] que vous connaissez. Et « lire un livre » se dit [[读书|dúshū]] — vous reconnaissez [[书|shū]]. Écoutez et répétez."),
   ...teach2("白天读书","báitiān dúshū","lire pendant la journée"),
@@ -175,7 +175,7 @@ registerChapter({
   N("Répondez : « Le jour je lirai à la maison, le soir j'irai chanter dehors avec des amis. »"),
   TH(),
   C("我白天在家里读书，晚上和朋友们去外边唱歌。","Wǒ báitiān zài jiā li dúshū, wǎnshang hé péngyoumen qù wàibian chàng gē.","Le jour je lirai à la maison, le soir j'irai chanter dehors avec des amis.",0.5),
-  C("我白天在家里读书，晚上和朋友们去外边唱歌。","Wǒ báitiān zài jiā li dúshū, wǎnshang hé péngyoumen qù wàibian chàng gē.","Le jour je lirai à la maison, le soir j'irai chanter dehors avec des amis.",0.55), HOLD(),
+   HOLD(),
 
   N("« Agréable à entendre », « qui chante bien », se dit [[好听|hǎotīng]] — sur le même modèle que [[好吃|hǎochī]] et [[好看|hǎokàn]] que vous connaissez. Dites : « Tu chantes très bien. »"),
   TH(),
@@ -191,7 +191,7 @@ registerChapter({
   N("Répondez : « Je cuisinerai, regarderai la télé, et jouerai avec mes enfants et mon chien à la maison. »"),
   TH(),
   C("我在家里做饭、看电视，和孩子们、小狗玩。","Wǒ zài jiā li zuò fàn, kàn diànshì, hé háizimen, xiǎo gǒu wán.","Je cuisinerai, regarderai la télé, et jouerai avec mes enfants et mon chien à la maison.",0.5),
-  C("我在家里做饭、看电视，和孩子们、小狗玩。","Wǒ zài jiā li zuò fàn, kàn diànshì, hé háizimen, xiǎo gǒu wán.","Je cuisinerai, regarderai la télé, et jouerai avec mes enfants et mon chien à la maison.",0.55), HOLD(),
+   HOLD(),
 
   N("Dites : « J'ai aussi un petit chien. »"),
   TH(),

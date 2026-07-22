@@ -42,7 +42,7 @@ registerChapter({
   N("Dites : « oui, mais l'arrêt est un peu loin »."),
   TH(),
   C("有，但车站有点儿远。","Yǒu, dàn chēzhàn yǒudiǎnr yuǎn.","Oui, mais l'arrêt est un peu loin.",0.55),
-  C("有，但车站有点儿远。","Yǒu, dàn chēzhàn yǒudiǎnr yuǎn.","Oui, mais l'arrêt est un peu loin.",0.6), HOLD(),
+   HOLD(),
 
   N("« Prendre un taxi », « héler un taxi » se dit [[打车|dǎchē]]. Écoutez et répétez."),
   ...teach2("打车","dǎchē","prendre un taxi"),
@@ -51,7 +51,7 @@ registerChapter({
   N("Demandez : « est-ce facile de prendre un taxi ici ? »"),
   TH(),
   C("这儿好打车吗？","Zhèr hǎo dǎchē ma?","Est-ce facile de prendre un taxi ici ?",0.55),
-  C("这儿好打车吗？","Zhèr hǎo dǎchē ma?","Est-ce facile de prendre un taxi ici ?",0.6), HOLD(),
+   HOLD(),
 
   N("Grammaire : la structure fixe 还是……吧 exprime un choix préférentiel — l'idée que « cette solution est meilleure ». Écoutez ces exemples."),
   C("我们还是打车去吧。","Wǒmen háishi dǎchē qù ba.","On ferait mieux d'y aller en taxi.",0.55),
@@ -165,7 +165,7 @@ registerChapter({
   N("Dites : « les billets qu'ils vendent sont aussi très bon marché. »"),
   TH(),
   C("他们卖的电影票也很便宜。","Tāmen mài de diànyǐngpiào yě hěn piányi.","Les billets qu'ils vendent sont aussi très bon marché.",0.55),
-  C("他们卖的电影票也很便宜。","Tāmen mài de diànyǐngpiào yě hěn piányi.","Les billets qu'ils vendent sont aussi très bon marché.",0.6), HOLD(),
+   HOLD(),
 
   N("[[别|bié]] veut dire « ne pas », comme un ordre : « ne fais pas ». Écoutez et répétez."),
   ...teach2("别","bié","ne pas (impératif négatif)"),

@@ -42,7 +42,7 @@ registerChapter({
   N("Remarquez : il n'y a pas de verbe « être » dans cette phrase ! En chinois, pour les dates, on peut dire directement « aujourd'hui neuf mois huit » sans [[是|shì]]. Pour demander la date, on utilise [[几|jǐ]] avec [[号|hào]] : « Aujourd'hui, quelle date ? »"),
   TH(),
   C("今天几号？","Jīntiān jǐ hào?","Quelle est la date aujourd'hui ?",0.6),
-  C("今天几号？","Jīntiān jǐ hào?","Quelle est la date aujourd'hui ?",0.6), HOLD(),
+   HOLD(),
 
   N("« La semaine » se dit [[星期|xīngqī]]. Les jours de la semaine se disent [[星期|xīngqī]] plus un nombre : lundi, [[星期一|xīngqīyī]] ; mardi, [[星期二|xīngqī'èr]] ; et ainsi de suite jusqu'à samedi, [[星期六|xīngqīliù]]."),
   ...teach2("星期一，星期二，星期六","xīngqīyī, xīngqī'èr, xīngqīliù","lundi, mardi, samedi"),
@@ -57,7 +57,7 @@ registerChapter({
   N("Répondez : « C'est dimanche. Aujourd'hui, je suis en repos. »"),
   TH(),
   C("星期日。今天我休息。","Xīngqīrì. Jīntiān wǒ xiūxi.","C'est dimanche. Aujourd'hui, je suis en repos.",0.55),
-  C("星期日。今天我休息。","Xīngqīrì. Jīntiān wǒ xiūxi.","C'est dimanche. Aujourd'hui, je suis en repos.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Wang Yixue demande : « Quelle est la date aujourd'hui ? »"),
@@ -100,7 +100,7 @@ registerChapter({
   N("Demandez : « Sais-tu cuisiner ? »"),
   TH(),
   C("你会做饭吗？","Nǐ huì zuò fàn ma?","Sais-tu cuisiner ?",0.6),
-  C("你会做饭吗？","Nǐ huì zuò fàn ma?","Sais-tu cuisiner ?",0.6), HOLD(),
+   HOLD(),
   N("Répondez : « Je sais cuisiner. »"),
   TH(),
   C("我会做。","Wǒ huì zuò.","Je sais cuisiner.",0.6), HOLD(),
@@ -167,7 +167,7 @@ registerChapter({
   N("Demandez : « C'est ton nouvel ordinateur ? »"),
   TH(),
   C("这是你的新电脑吗？","Zhè shì nǐ de xīn diànnǎo ma?","C'est ton nouvel ordinateur ?",0.6),
-  C("这是你的新电脑吗？","Zhè shì nǐ de xīn diànnǎo ma?","C'est ton nouvel ordinateur ?",0.6), HOLD(),
+   HOLD(),
   N("Répondez : « Oui, c'est mon nouvel ordinateur. »"),
   TH(),
   C("是的，是我的新电脑。","Shì de, shì wǒ de xīn diànnǎo.","Oui, c'est mon nouvel ordinateur.",0.6), HOLD(),

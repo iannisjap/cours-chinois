@@ -45,7 +45,7 @@ registerChapter({
   N("Demandez : « Quelle heure est-il maintenant ? »"),
   TH(),
   C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.6),
-  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Le matin », tôt le matin, se dit [[早上|zǎoshang]]. Écoutez et répétez."),
   ...teach2("早上","zǎoshang","le matin"),
@@ -54,7 +54,7 @@ registerChapter({
   N("Répondez : « Il est 8 h 40 du matin. »"),
   TH(),
   C("早上八点四十。","Zǎoshang bā diǎn sìshí.","Il est 8 h 40 du matin.",0.6),
-  C("早上八点四十。","Zǎoshang bā diǎn sìshí.","Il est 8 h 40 du matin.",0.6), HOLD(),
+   HOLD(),
 
   N("« La matinée » se dit [[上午|shàngwǔ]]. Écoutez et répétez."),
   ...teach2("上午","shàngwǔ","la matinée"),
@@ -72,7 +72,7 @@ registerChapter({
   N("Répondez : « D'accord, retrouvons-nous à 14 h. » — littéralement « après-midi deux heures se voir [[吧|ba]] »."),
   TH(),
   C("好的，我们下午两点见吧。","Hǎo de, wǒmen xiàwǔ liǎng diǎn jiàn ba.","D'accord, retrouvons-nous à 14 h.",0.55),
-  C("好的，我们下午两点见吧。","Hǎo de, wǒmen xiàwǔ liǎng diǎn jiàn ba.","D'accord, retrouvons-nous à 14 h.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. On vous demande : « Quelle heure est-il ? »"),
@@ -116,14 +116,14 @@ registerChapter({
   N("Proposez : « Cet après-midi je veux aller au cinéma voir un film, tu viens ? »"),
   TH(),
   C("下午我想去电影院看电影，你去吗？","Xiàwǔ wǒ xiǎng qù diànyǐngyuàn kàn diànyǐng, nǐ qù ma?","Cet après-midi je veux aller au cinéma voir un film, tu viens ?",0.5),
-  C("下午我想去电影院看电影，你去吗？","Xiàwǔ wǒ xiǎng qù diànyǐngyuàn kàn diànyǐng, nǐ qù ma?","Cet après-midi je veux aller au cinéma voir un film, tu viens ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Une affaire », « quelque chose à faire », se dit [[事|shì]]. Écoutez et répétez."),
   ...teach2("事","shì","une affaire, quelque chose à faire"),
   N("Répondez : « Je ne veux pas venir, j'ai encore des choses à faire cet après-midi. »"),
   TH(),
   C("我不想去，下午还有事。","Wǒ bù xiǎng qù, xiàwǔ hái yǒu shì.","Je ne veux pas venir, j'ai encore des choses à faire cet après-midi.",0.55),
-  C("我不想去，下午还有事。","Wǒ bù xiǎng qù, xiàwǔ hái yǒu shì.","Je ne veux pas venir, j'ai encore des choses à faire cet après-midi.",0.6), HOLD(),
+   HOLD(),
 
   N("« Aller en cours », « commencer les cours », se dit [[上课|shàngkè]]. Écoutez et répétez."),
   ...teach2("上课","shàngkè","aller en cours"),
@@ -180,7 +180,7 @@ registerChapter({
   N("Demandez au téléphone : « Allô, où es-tu ? »"),
   TH(),
   C("喂，你在哪儿呢？","Wèi, nǐ zài nǎr ne?","Allô, où es-tu ?",0.6),
-  C("喂，你在哪儿呢？","Wèi, nǐ zài nǎr ne?","Allô, où es-tu ?",0.6), HOLD(),
+   HOLD(),
   N("Répondez : « Je suis à la maison. »"),
   TH(),
   C("我在家里呢。","Wǒ zài jiā li ne.","Je suis à la maison.",0.6), HOLD(),
@@ -188,14 +188,14 @@ registerChapter({
   N("« Le soir » se dit [[晚上|wǎnshang]]. Dites : « Je finis le travail à 18 h 30 ce soir. » Vous connaissez déjà [[下班|xiàbān]] depuis la leçon 5."),
   TH(),
   C("我晚上六点半下班。","Wǒ wǎnshang liù diǎn bàn xiàbān.","Je finis le travail à 18 h 30 ce soir.",0.55),
-  C("我晚上六点半下班。","Wǒ wǎnshang liù diǎn bàn xiàbān.","Je finis le travail à 18 h 30 ce soir.",0.6), HOLD(),
+   HOLD(),
 
   N("« L'hôpital » se dit [[医院|yīyuàn]]. Et voici le contraire de [[下班|xiàbān]] : « commencer le travail », « aller travailler », se dit [[上班|shàngbān]]. Écoutez et répétez."),
   ...teach2("上班","shàngbān","commencer le travail"),
   N("Dites : « Je vais travailler à l'hôpital à 8 h. »"),
   TH(),
   C("我八点去医院上班。","Wǒ bā diǎn qù yīyuàn shàngbān.","Je vais travailler à l'hôpital à 8 h.",0.6),
-  C("我八点去医院上班。","Wǒ bā diǎn qù yīyuàn shàngbān.","Je vais travailler à l'hôpital à 8 h.",0.6), HOLD(),
+   HOLD(),
 
   N("« Un magasin », « une boutique », se dit [[店|diàn]]. Et souvenez-vous : [[菜|cài]] veut dire « des plats » — ici, il désigne plus précisément « des légumes ». Écoutez et répétez."),
   ...teach2("你去店里买些菜吧。","Nǐ qù diàn li mǎi xiē cài ba.","Passe au magasin acheter des légumes."),

@@ -41,7 +41,7 @@ registerChapter({
   N("Pour demander un numéro, on utilise [[多少|duōshao]], « combien », déjà vu à la leçon 4. Demandez : « Quel est ton numéro de portable ? »"),
   TH(),
   C("你的手机号是多少？","Nǐ de shǒujīhào shì duōshao?","Quel est ton numéro de portable ?",0.55),
-  C("你的手机号是多少？","Nǐ de shǒujīhào shì duōshao?","Quel est ton numéro de portable ?",0.6), HOLD(),
+   HOLD(),
 
   N("Pour donner un numéro, on lit chaque chiffre un par un. « Zéro » se dit [[零|líng]]. Écoutez et répétez."),
   ...teach2("零","líng","zéro"),
@@ -91,7 +91,7 @@ registerChapter({
   N("Demandez : « Où vas-tu demain ? »"),
   TH(),
   C("明天你去哪儿？","Míngtiān nǐ qù nǎr?","Où vas-tu demain ?",0.6),
-  C("明天你去哪儿？","Míngtiān nǐ qù nǎr?","Où vas-tu demain ?",0.6), HOLD(),
+   HOLD(),
 
   N("Nouveau mot important : [[想|xiǎng]]. Vous connaissez déjà ce caractère au sens de « penser à, manquer » — ici, placé devant un verbe, il veut dire « vouloir, avoir envie de ». Écoutez et répétez."),
   ...teach2("想","xiǎng","vouloir (faire quelque chose)"),
@@ -102,7 +102,7 @@ registerChapter({
   N("En chinois, on enchaîne souvent deux verbes pour dire « aller quelque part pour faire quelque chose » : aller — supermarché — acheter — choses. Répondez : « Je veux aller au supermarché acheter des choses. »"),
   TH(),
   C("我想去超市买东西。","Wǒ xiǎng qù chāoshì mǎi dōngxi.","Je veux aller au supermarché acheter des choses.",0.55),
-  C("我想去超市买东西。","Wǒ xiǎng qù chāoshì mǎi dōngxi.","Je veux aller au supermarché acheter des choses.",0.6), HOLD(),
+   HOLD(),
 
   N("Demandez : « Qu'est-ce que tu vas acheter au supermarché ? »"),
   TH(),
@@ -165,7 +165,7 @@ registerChapter({
   N("Répondez : « Je veux aller au restaurant Xi'an, leurs [[包子|bāozi]] sont délicieux là-bas. »"),
   TH(),
   C("我想去西安饭店，那边的包子非常好吃。","Wǒ xiǎng qù Xī'ān Fàndiàn, nàbian de bāozi fēicháng hǎochī.","Je veux aller au restaurant Xi'an, leurs bāozi sont délicieux là-bas.",0.5),
-  C("我想去西安饭店，那边的包子非常好吃。","Wǒ xiǎng qù Xī'ān Fàndiàn, nàbian de bāozi fēicháng hǎochī.","Je veux aller au restaurant Xi'an, leurs bāozi sont délicieux là-bas.",0.6), HOLD(),
+   HOLD(),
 
   N("« Le riz cuit » se dit [[米饭|mǐfàn]]. Écoutez et répétez."),
   ...teach2("米饭","mǐfàn","le riz cuit"),

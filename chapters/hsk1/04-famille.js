@@ -51,11 +51,11 @@ registerChapter({
   N("Demandez : « Combien d'étudiants a-t-elle ? » — mot à mot « elle avoir combien [[个|ge]] étudiant ? »"),
   TH(),
   C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.55),
-  C("她有多少个学生？","Tā yǒu duōshao ge xuéshēng?","Combien d'étudiants a-t-elle ?",0.6), HOLD(),
+   HOLD(),
   N("Répondez : « Elle a vingt étudiants. »"),
   TH(),
   C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.6),
-  C("她有二十个学生。","Tā yǒu èrshí ge xuéshēng.","Elle a vingt étudiants.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Liu Ming demande : « Yifei est-elle occupée ? »"),
@@ -102,7 +102,7 @@ registerChapter({
   N("Ainsi : « J'ai deux grands frères, et toi ? »"),
   TH(),
   C("我有两个哥哥，你呢？","Wǒ yǒu liǎng ge gēge, nǐ ne?","J'ai deux grands frères, et toi ?",0.55),
-  C("我有两个哥哥，你呢？","Wǒ yǒu liǎng ge gēge, nǐ ne?","J'ai deux grands frères, et toi ?",0.6), HOLD(),
+   HOLD(),
   N("Répondez : « Je n'ai pas de grand frère. »"),
   TH(),
   C("我没有哥哥。","Wǒ méiyǒu gēge.","Je n'ai pas de grand frère.",0.6), HOLD(),
@@ -116,7 +116,7 @@ registerChapter({
   N("Demandez : « Combien de personnes dans ta famille ? » — mot à mot « ta famille avoir combien [[口|kǒu]] personne ? »"),
   TH(),
   C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.55),
-  C("你家有几口人？","Nǐ jiā yǒu jǐ kǒu rén?","Combien de personnes dans ta famille ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Papa » se dit [[爸爸|bàba]], et « maman » se dit [[妈妈|māma]]. Écoutez et répétez."),
   ...teach2("爸爸，妈妈","bàba, māma","papa, maman"),
@@ -127,7 +127,7 @@ registerChapter({
   N("Répondez : « Ma famille a quatre personnes : papa, maman, petite sœur et moi. »"),
   TH(),
   C("我家有四口人，爸爸、妈妈、妹妹和我。","Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.","Ma famille a quatre personnes : papa, maman, petite sœur et moi.",0.5),
-  C("我家有四口人，爸爸、妈妈、妹妹和我。","Wǒ jiā yǒu sì kǒu rén, bàba, māma, mèimei hé wǒ.","Ma famille a quatre personnes : papa, maman, petite sœur et moi.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Dites : « J'ai deux grands frères, et toi ? »"),
@@ -172,7 +172,7 @@ registerChapter({
   N("Dites : « J'ai deux enfants, un fils, une fille. »"),
   TH(),
   C("我有两个孩子，一个儿子，一个女儿。","Wǒ yǒu liǎng ge háizi, yí ge érzi, yí ge nǚ'ér.","J'ai deux enfants, un fils, une fille.",0.5),
-  C("我有两个孩子，一个儿子，一个女儿。","Wǒ yǒu liǎng ge háizi, yí ge érzi, yí ge nǚ'ér.","J'ai deux enfants, un fils, une fille.",0.6), HOLD(),
+   HOLD(),
 
   N("Pour parler de l'âge, « les années », « l'âge » en années se dit [[岁|suì]]. Écoutez et répétez."),
   ...teach2("岁","suì","an(s), (âge)"),
@@ -183,7 +183,7 @@ registerChapter({
   N("« Cette année », pour dire l'âge actuel, se dit [[今年|jīnnián]]. Répondez : « Cette année, il a cinq ans. »"),
   TH(),
   C("他今年五岁。","Tā jīnnián wǔ suì.","Cette année, il a cinq ans.",0.6),
-  C("他今年五岁。","Tā jīnnián wǔ suì.","Cette année, il a cinq ans.",0.6), HOLD(),
+   HOLD(),
 
   N("Attention : cette question avec [[几|jǐ]] sert pour un enfant. Pour l'âge d'un adulte, on demande autrement, avec [[多|duō]], « combien », et [[大|dà]], « grand » : « quel âge a-t-il ? », mot à mot « combien grand ? »"),
   ...teach2("你女儿多大？","Nǐ nǚ'ér duō dà?","Quel âge a ta fille ?"),

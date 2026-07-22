@@ -47,7 +47,7 @@ registerChapter({
   N("À vous : demandez poliment « Comment t'appelles-tu ? »"),
   TH(),
   C("请问，你叫什么名字？","Qǐngwèn, nǐ jiào shénme míngzi?","Excusez-moi, comment t'appelles-tu ?",0.55),
-  C("请问，你叫什么名字？","Qǐngwèn, nǐ jiào shénme míngzi?","Excusez-moi, comment t'appelles-tu ?",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Le professeur Wang fait connaissance. Elle demande :"),
@@ -85,7 +85,7 @@ registerChapter({
   N("À vous : dites « je suis professeur ». Souvenez-vous, professeur se dit [[老师|lǎoshī]]."),
   TH(),
   C("我是老师。","Wǒ shì lǎoshī.","Je suis professeur.",0.6),
-  C("我是老师。","Wǒ shì lǎoshī.","Je suis professeur.",0.6), HOLD(),
+   HOLD(),
 
   N("Pour dire « ne pas », « non », on utilise [[不|bù]]. Écoutez et répétez."),
   ...teach2("不","bù","ne pas, non"),
@@ -106,7 +106,7 @@ registerChapter({
   N("Mais c'est Bai Jiayue. Elle corrige : « Je ne suis pas Annie, je suis Bai Jiayue. »"),
   TH(),
   C("我不是安妮，我是白家月。","Wǒ bú shì Ānnī, wǒ shì Bái Jiāyuè.","Je ne suis pas Annie, je suis Bai Jiayue.",0.55),
-  C("我不是安妮，我是白家月。","Wǒ bú shì Ānnī, wǒ shì Bái Jiāyuè.","Je ne suis pas Annie, je suis Bai Jiayue.",0.6), HOLD(),
+   HOLD(),
   N("Chen Tianzhong s'excuse. Dites : « Pardon ! »"),
   TH(),
   C("对不起！","Duìbuqǐ!","Pardon !",0.6),
@@ -149,7 +149,7 @@ registerChapter({
   N("À vous : dites « enchanté de te connaître »."),
   TH(),
   C("很高兴认识你。","Hěn gāoxìng rènshi nǐ.","Très heureux de te connaître.",0.6),
-  C("很高兴认识你。","Hěn gāoxìng rènshi nǐ.","Très heureux de te connaître.",0.6), HOLD(),
+   HOLD(),
 
   N("Pour répondre « moi aussi », on utilise [[也|yě]], « aussi », placé avant le verbe ou l'adjectif. Écoutez et répétez."),
   ...teach2("也","yě","aussi"),
@@ -160,7 +160,7 @@ registerChapter({
   N("Rejouons le dialogue du début. Li Wen et Bai Jiayue se rencontrent. Li Wen dit : « Bonjour ! Je m'appelle Li Wen. » À vous."),
   TH(),
   C("你好！我叫李文。","Nǐ hǎo! Wǒ jiào Lǐ Wén.","Bonjour ! Je m'appelle Li Wen.",0.6),
-  C("你好！我叫李文。","Nǐ hǎo! Wǒ jiào Lǐ Wén.","Bonjour ! Je m'appelle Li Wen.",0.6), HOLD(),
+   HOLD(),
   N("Li Wen ajoute : « Très heureux de te connaître. » À vous."),
   TH(),
   C("很高兴认识你。","Hěn gāoxìng rènshi nǐ.","Très heureux de te connaître.",0.6),

@@ -43,7 +43,7 @@ registerChapter({
   N("Demandez : « Après être montés dans le train, avez-vous vu le professeur Wang ? »"),
   TH(),
   C("你们上火车后看见王老师了吗？","Nǐmen shàng huǒchē hòu kànjiàn Wáng lǎoshī le ma?","Après être montés dans le train, avez-vous vu le professeur Wang ?",0.5),
-  C("你们上火车后看见王老师了吗？","Nǐmen shàng huǒchē hòu kànjiàn Wáng lǎoshī le ma?","Après être montés dans le train, avez-vous vu le professeur Wang ?",0.55), HOLD(),
+   HOLD(),
 
   N("« Midi » se dit [[中午|zhōngwǔ]]. Et « partir », pour un véhicule, se dit [[开|kāi]] — vous connaissez déjà [[开车|kāichē]], conduire. Écoutez et répétez."),
   ...teach2("车开了","chē kāi le","le véhicule est parti"),
@@ -52,7 +52,7 @@ registerChapter({
   N("Répondez : « Non. Après le départ du train à midi, certains lisaient, d'autres se sont endormis. »"),
   TH(),
   C("没看见。中午车开后，有些人在看书，有些人睡觉了。","Méi kànjiàn. Zhōngwǔ chē kāi hòu, yǒuxiē rén zài kàn shū, yǒuxiē rén shuìjiào le.","Non. Après le départ du train à midi, certains lisaient, d'autres se sont endormis.",0.5),
-  C("没看见。中午车开后，有些人在看书，有些人睡觉了。","Méi kànjiàn. Zhōngwǔ chē kāi hòu, yǒuxiē rén zài kàn shū, yǒuxiē rén shuìjiào le.","Non. Après le départ du train à midi, certains lisaient, d'autres se sont endormis.",0.55), HOLD(),
+   HOLD(),
 
   N("Attention, nouveau sens pour [[了|le]] : placé juste après le verbe, il marque qu'une action a eu lieu, s'est accomplie — différent du [[了|le]] de fin de phrase vu à la leçon 12, qui marquait un changement de situation. « J'ai regardé un film » se dit :"),
   ...teach2("我看了一个电影。","Wǒ kànle yí ge diànyǐng.","J'ai regardé un film."),
@@ -101,14 +101,14 @@ registerChapter({
   N("Demandez : « Vous savez parler chinois maintenant, savez-vous aussi écrire des caractères chinois ? »"),
   TH(),
   C("你们会说汉语了，也会写汉字了吗？","Nǐmen huì shuō Hànyǔ le, yě huì xiě Hànzì le ma?","Vous savez parler chinois maintenant, savez-vous aussi écrire des caractères chinois ?",0.5),
-  C("你们会说汉语了，也会写汉字了吗？","Nǐmen huì shuō Hànyǔ le, yě huì xiě Hànzì le ma?","Vous savez parler chinois maintenant, savez-vous aussi écrire des caractères chinois ?",0.55), HOLD(),
+   HOLD(),
 
   N("« Tous », « tout le monde ensemble », se dit [[都|dōu]] — il se place devant le verbe, après le groupe qu'il résume. Écoutez et répétez."),
   ...teach2("我们都会","wǒmen dōu huì","nous savons tous"),
   N("Répondez : « Nous savons tous écrire maintenant. »"),
   TH(),
   C("我们都会写了。","Wǒmen dōu huì xiě le.","Nous savons tous écrire maintenant.",0.6),
-  C("我们都会写了。","Wǒmen dōu huì xiě le.","Nous savons tous écrire maintenant.",0.6), HOLD(),
+   HOLD(),
 
   N("« Entendre », « percevoir un son », se dit [[听见|tīngjiàn]] — formé comme [[看见|kànjiàn]] que vous connaissez. Dites : « Professeur, je n'entends pas. »"),
   TH(),
@@ -121,7 +121,7 @@ registerChapter({
   N("« Lesquels », se dit [[哪些|nǎxiē]] — comme [[这些|zhèxiē]] et [[那些|nàxiē]] que vous connaissez. Et « un caractère » se dit [[字|zì]]. Dites : « Que tout le monde arrête de parler s'il vous plaît ! Écoutez la question du professeur : quels caractères chinois savez-vous tous écrire ? »"),
   TH(),
   C("请大家不要说话！请听老师的问题：你们都会写哪些汉字了？","Qǐng dàjiā búyào shuōhuà! Qǐng tīng lǎoshī de wèntí: Nǐmen dōu huì xiě nǎxiē Hànzì le?","Que tout le monde arrête de parler s'il vous plaît ! Écoutez la question du professeur : quels caractères chinois savez-vous tous écrire ?",0.5),
-  C("请大家不要说话！请听老师的问题：你们都会写哪些汉字了？","Qǐng dàjiē búyào shuōhuà! Qǐng tīng lǎoshī de wèntí: Nǐmen dōu huì xiě nǎxiē Hànzì le?","Que tout le monde arrête de parler s'il vous plaît ! Écoutez la question du professeur : quels caractères chinois savez-vous tous écrire ?",0.55), HOLD(),
+   HOLD(),
 
   N("Répondez : « Je sais écrire ces caractères maintenant, regardez ! »"),
   TH(),
@@ -169,12 +169,12 @@ registerChapter({
   N("« L'an prochain » se dit [[明年|míngnián]] — vous connaissez déjà [[今年|jīnnián]]. « Le collège » se dit [[中学|zhōngxué]]. Dites : « L'an prochain, notre fille entrera au collège. »"),
   TH(),
   C("明年女儿上中学。","Míngnián nǚ'ér shàng zhōngxué.","L'an prochain, notre fille entrera au collège.",0.6),
-  C("明年女儿上中学。","Míngnián nǚ'ér shàng zhōngxué.","L'an prochain, notre fille entrera au collège.",0.6), HOLD(),
+   HOLD(),
 
   N("« L'école primaire » se dit [[小学|xiǎoxué]]. Répondez : « Oui. Notre fils aussi commencera l'école primaire. »"),
   TH(),
   C("对。儿子也上小学了。","Duì. Érzi yě shàng xiǎoxué le.","Oui. Notre fils aussi commencera l'école primaire.",0.6),
-  C("对。儿子也上小学了。","Duì. Érzi yě shàng xiǎoxué le.","Oui. Notre fils aussi commencera l'école primaire.",0.6), HOLD(),
+   HOLD(),
 
   N("« Un collégien » se dit [[中学生|zhōngxuéshēng]], et « un écolier » se dit [[小学生|xiǎoxuéshēng]]. Dites : « Notre famille aura un collégien. »"),
   TH(),
@@ -187,12 +187,12 @@ registerChapter({
   N("« Commencer l'école », « aller en cours » comme étape de la vie, se dit [[上学|shàngxué]]. Et « ils » se dit [[他们|tāmen]] — vous connaissez déjà le suffixe pluriel [[们|men]]. Dites : « Une fois à l'école, ils seront tous les deux occupés. »"),
   TH(),
   C("上学后，他们都忙了。","Shàngxué hòu, tāmen dōu máng le.","Une fois à l'école, ils seront tous les deux occupés.",0.6),
-  C("上学后，他们都忙了。","Shàngxué hòu, tāmen dōu máng le.","Une fois à l'école, ils seront tous les deux occupés.",0.6), HOLD(),
+   HOLD(),
 
   N("« Tard » se dit [[晚|wǎn]] — vous connaissez déjà [[晚上|wǎnshang]], le soir. Répondez : « Oui. Il est tard, allons nous coucher. »"),
   TH(),
   C("是的。太晚了，睡觉吧。","Shì de. Tài wǎn le, shuìjiào ba.","Oui. Il est tard, allons nous coucher.",0.6),
-  C("是的。太晚了，睡觉吧。","Shì de. Tài wǎn le, shuìjiào ba.","Oui. Il est tard, allons nous coucher.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Dites : « L'an prochain, notre fille entrera au collège. »"),

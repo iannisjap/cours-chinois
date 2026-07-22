@@ -41,14 +41,14 @@ registerChapter({
   N("« Le temps », la météo, se dit [[天气|tiānqì]]. Demandez : « Comment est le temps aujourd'hui ? »"),
   TH(),
   C("今天天气怎么样？","Jīntiān tiānqì zěnmeyàng?","Comment est le temps aujourd'hui ?",0.6),
-  C("今天天气怎么样？","Jīntiān tiānqì zěnmeyàng?","Comment est le temps aujourd'hui ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Ici » se dit aussi [[这里|zhèlǐ]] — comme [[这儿|zhèr]] et [[这边|zhèbiān]] que vous connaissez. Et voici un mot très important : [[了|le]], placé à la fin d'une phrase pour dire qu'une situation a changé, qu'il y a du nouveau. « Il s'est mis à pleuvoir » — mot à mot « tombe pluie, changement » — se dit [[下雨了|xià yǔ le]]. Écoutez et répétez."),
   ...teach2("下雨了","xià yǔ le","il s'est mis à pleuvoir"),
   N("Répondez : « Il ne fait pas très beau ici, il s'est mis à pleuvoir. »"),
   TH(),
   C("这里的天不太好，下雨了。","Zhèlǐ de tiān bú tài hǎo, xià yǔ le.","Il ne fait pas très beau ici, il s'est mis à pleuvoir.",0.55),
-  C("这里的天不太好，下雨了。","Zhèlǐ de tiān bú tài hǎo, xià yǔ le.","Il ne fait pas très beau ici, il s'est mis à pleuvoir.",0.6), HOLD(),
+   HOLD(),
 
   N("« La pluie » se dit [[雨|yǔ]]. Demandez : « Il pleut fort ? »"),
   TH(),
@@ -57,7 +57,7 @@ registerChapter({
   N("« Un peu », « plutôt », se dit [[有点儿|yǒudiǎnr]] — placé avant un adjectif. Et « trouver que », « avoir l'impression que », se dit [[觉得|juéde]]. « Froid » se dit [[冷|lěng]]. Répondez : « Un peu fort, je trouve qu'il fait froid. »"),
   TH(),
   C("有点儿大，我觉得很冷。","Yǒudiǎnr dà, wǒ juéde hěn lěng.","Un peu fort, je trouve qu'il fait froid.",0.55),
-  C("有点儿大，我觉得很冷。","Yǒudiǎnr dà, wǒ juéde hěn lěng.","Un peu fort, je trouve qu'il fait froid.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Demandez : « Comment est le temps aujourd'hui ? »"),
@@ -96,7 +96,7 @@ registerChapter({
   N("Dites : « Il a neigé hier. »"),
   TH(),
   C("昨天下雪了。","Zuótiān xià xuě le.","Il a neigé hier.",0.6),
-  C("昨天下雪了。","Zuótiān xià xuě le.","Il a neigé hier.",0.6), HOLD(),
+   HOLD(),
 
   N("Pour une exclamation forte, on encadre l'adjectif avec [[太|tài]]…[[了|le]] : «[[太冷了|tài lěng le]] » veut dire « il faisait vraiment trop froid ». Écoutez et répétez."),
   ...teach2("太冷了","tài lěng le","il fait vraiment trop froid"),
@@ -109,12 +109,12 @@ registerChapter({
   N("« Tomber malade » se dit [[生病|shēngbìng]]. Demandez : « Tu n'es pas venu à l'entreprise hier, tu étais malade ? »"),
   TH(),
   C("你昨天没来公司，生病了？","Nǐ zuótiān méi lái gōngsī, shēngbìng le?","Tu n'es pas venu à l'entreprise hier, tu étais malade ?",0.55),
-  C("你昨天没来公司，生病了？","Nǐ zuótiān méi lái gōngsī, shēngbìng le?","Tu n'es pas venu à l'entreprise hier, tu étais malade ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Consulter un médecin », pour le patient, se dit [[看病|kànbìng]] — vous connaissez déjà [[看|kàn]]. Répondez : « Oui, je suis allé à l'hôpital voir un médecin hier. »"),
   TH(),
   C("对，我昨天去医院看病了。","Duì, wǒ zuótiān qù yīyuàn kànbìng le.","Oui, je suis allé à l'hôpital voir un médecin hier.",0.55),
-  C("对，我昨天去医院看病了。","Duì, wǒ zuótiān qù yīyuàn kànbìng le.","Oui, je suis allé à l'hôpital voir un médecin hier.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Dites : « Il a neigé hier. »"),
@@ -154,7 +154,7 @@ registerChapter({
   N("« Être malade », comme état, se dit [[病|bìng]] tout seul — vous connaissez déjà [[生病|shēngbìng]]. Dites : « Docteur, je suis malade. »"),
   TH(),
   C("医生，我病了。","Yīshēng, wǒ bìng le.","Docteur, je suis malade.",0.6),
-  C("医生，我病了。","Yīshēng, wǒ bìng le.","Docteur, je suis malade.",0.6), HOLD(),
+   HOLD(),
 
   N("Le médecin répond : « Laissez-moi voir. Comment vous sentez-vous ? » Puis répondez : « J'ai très froid. »"),
   TH(),
@@ -181,7 +181,7 @@ registerChapter({
   N("Le médecin ajoute : « Une fois rentré à la maison, buvez aussi de l'eau chaude. »"),
   TH(),
   C("回家后再喝些热水。","Huí jiā hòu zài hē xiē rè shuǐ.","Une fois rentré à la maison, buvez aussi de l'eau chaude.",0.55),
-  C("回家后再喝些热水。","Huí jiā hòu zài hē xiē rè shuǐ.","Une fois rentré à la maison, buvez aussi de l'eau chaude.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Dites : « Docteur, je suis malade. »"),

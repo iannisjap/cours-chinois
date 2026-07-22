@@ -38,7 +38,7 @@ registerChapter({
   N("Dites : « tu rentres tard aujourd'hui ! »"),
   TH(),
   C("今天回来这么晚啊！","Jīntiān huílái zhème wǎn a!","Tu rentres tard aujourd'hui !",0.55),
-  C("今天回来这么晚啊！","Jīntiān huílái zhème wǎn a!","Tu rentres tard aujourd'hui !",0.6), HOLD(),
+   HOLD(),
 
   N("Grammaire : le complément de résultat. Certains verbes ou adjectifs, placés juste après un verbe, expriment le résultat de l'action. Écoutez ces exemples."),
   C("菜都做好了。","Cài dōu zuòhǎo le.","Les plats sont tous prêts (littéralement : faits-bien).",0.55),
@@ -93,7 +93,7 @@ registerChapter({
   N("Proposez : « si on trouvait le temps de partir en voyage, qu'en penses-tu ? »"),
   TH(),
   C("我们找个时间去旅游，怎么样？","Wǒmen zhǎo ge shíjiān qù lǚyóu, zěnmeyàng?","Si on trouvait le temps de partir en voyage, qu'en penses-tu ?",0.5),
-  C("我们找个时间去旅游，怎么样？","Wǒmen zhǎo ge shíjiān qù lǚyóu, zěnmeyàng?","Si on trouvait le temps de partir en voyage, qu'en penses-tu ?",0.55), HOLD(),
+   HOLD(),
   N("Répondez : « bonne idée, moi aussi j'ai très envie qu'on sorte s'amuser ensemble. »"),
   TH(),
   C("好啊，我也很想一起出去玩。","Hǎo a, wǒ yě hěn xiǎng yìqǐ chūqù wán.","Bonne idée, moi aussi j'ai très envie qu'on sorte s'amuser ensemble.",0.5), HOLD(),
@@ -148,7 +148,7 @@ registerChapter({
   N("Dites : « elles sont juste sur la table, sers-toi toi-même. »"),
   TH(),
   C("就在桌子上，你自己拿。","Jiù zài zhuōzi shang, nǐ zìjǐ ná.","Elles sont juste sur la table, sers-toi toi-même.",0.55),
-  C("就在桌子上，你自己拿。","Jiù zài zhuōzi shang, nǐ zìjǐ ná.","Elles sont juste sur la table, sers-toi toi-même.",0.6), HOLD(),
+   HOLD(),
 
   N("« La main » se dit [[手|shǒu]]. Écoutez et répétez."),
   ...teach2("手","shǒu","la main"),

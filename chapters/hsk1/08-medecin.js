@@ -48,7 +48,7 @@ registerChapter({
   N("Dites : « Il y a un petit chat dehors, devant la chambre. »"),
   TH(),
   C("房间外有一只小猫。","Fángjiān wài yǒu yì zhī xiǎo māo.","Il y a un petit chat dehors, devant la chambre.",0.55),
-  C("房间外有一只小猫。","Fángjiān wài yǒu yì zhī xiǎo māo.","Il y a un petit chat dehors, devant la chambre.",0.6), HOLD(),
+   HOLD(),
 
   N("« Ne pas » au passé, « pas encore », se dit [[没|méi]] — différent de [[不|bù]]. Et « voir », « apercevoir », se dit [[看见|kànjiàn]]. Écoutez et répétez."),
   ...teach2("没看见","méi kànjiàn","ne pas voir, ne pas avoir vu"),
@@ -108,14 +108,14 @@ registerChapter({
   N("« L'école » se dit [[学校|xuéxiào]]. Demandez : « Où allons-nous nous voir ? »"),
   TH(),
   C("我们在哪儿见呢？","Wǒmen zài nǎr jiàn ne?","Où allons-nous nous voir ?",0.6),
-  C("我们在哪儿见呢？","Wǒmen zài nǎr jiàn ne?","Où allons-nous nous voir ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Une librairie » se dit [[书店|shūdiàn]], et « devant » se dit [[前|qián]]. Écoutez et répétez."),
   ...teach2("书店前","shūdiàn qián","devant la librairie"),
   N("Répondez : « Retrouvons-nous devant la librairie de l'école. »"),
   TH(),
   C("在学校书店前见吧。","Zài xuéxiào shūdiàn qián jiàn ba.","Retrouvons-nous devant la librairie de l'école.",0.55),
-  C("在学校书店前见吧。","Zài xuéxiào shūdiàn qián jiàn ba.","Retrouvons-nous devant la librairie de l'école.",0.6), HOLD(),
+   HOLD(),
 
   N("« Pouvoir », « être capable de », se dit [[能|néng]] — devant le verbe, comme [[会|huì]] et [[想|xiǎng]] que vous connaissez. Et « arriver » se dit [[到|dào]]. Écoutez et répétez."),
   ...teach2("能到","néng dào","pouvoir arriver"),
@@ -171,12 +171,12 @@ registerChapter({
   N("« Un médecin » se dit [[医生|yīshēng]]. Dites : « Dans les grands hôpitaux il y a beaucoup de patients, les médecins sont très occupés. »"),
   TH(),
   C("大医院病人多，医生非常忙。","Dà yīyuàn bìngrén duō, yīshēng fēicháng máng.","Dans les grands hôpitaux il y a beaucoup de patients, les médecins sont très occupés.",0.5),
-  C("大医院病人多，医生非常忙。","Dà yīyuàn bìngrén duō, yīshēng fēicháng máng.","Dans les grands hôpitaux il y a beaucoup de patients, les médecins sont très occupés.",0.55), HOLD(),
+   HOLD(),
 
   N("Vous connaissez déjà [[工作|gōngzuò]] depuis la leçon 3. Dites : « Mon père travaille aussi à l'hôpital, il est très occupé aussi. »"),
   TH(),
   C("我爸爸也在医院工作，他也非常忙。","Wǒ bàba yě zài yīyuàn gōngzuò, tā yě fēicháng máng.","Mon père travaille aussi à l'hôpital, il est très occupé aussi.",0.5),
-  C("我爸爸也在医院工作，他也非常忙。","Wǒ bàba yě zài yīyuàn gōngzuò, tā yě fēicháng máng.","Mon père travaille aussi à l'hôpital, il est très occupé aussi.",0.55), HOLD(),
+   HOLD(),
 
   N("Demandez : « Il y a deux médecins dans ta famille ? »"),
   TH(),

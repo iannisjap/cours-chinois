@@ -42,22 +42,22 @@ registerChapter({
   N("Demandez : « Quel plat aimez-vous manger ? »"),
   TH(),
   C("你们爱吃哪个菜？","Nǐmen ài chī nǎge cài?","Quel plat aimez-vous manger ?",0.6),
-  C("你们爱吃哪个菜？","Nǐmen ài chī nǎge cài?","Quel plat aimez-vous manger ?",0.6), HOLD(),
+   HOLD(),
 
   N("Répondez : « J'aime celui-ci, et j'aime aussi celui-là. » Remarquez la structure « …，[[也|yě]]… » pour relier deux idées semblables."),
   TH(),
   C("我喜欢这个，也喜欢那个。","Wǒ xǐhuan zhège, yě xǐhuan nàge.","J'aime celui-ci, et j'aime aussi celui-là.",0.6),
-  C("我喜欢这个，也喜欢那个。","Wǒ xǐhuan zhège, yě xǐhuan nàge.","J'aime celui-ci, et j'aime aussi celui-là.",0.6), HOLD(),
+   HOLD(),
 
   N("Dites : « Tous ces plats sont délicieux, et ils sont beaux aussi. » — remarquez la structure « …，[[还|hái]]… », qui ajoute une seconde qualité."),
   TH(),
   C("这些菜都好吃，还很好看。","Zhèxiē cài dōu hǎochī, hái hěn hǎokàn.","Tous ces plats sont délicieux, et ils sont beaux aussi.",0.6),
-  C("这些菜都好吃，还很好看。","Zhèxiē cài dōu hǎochī, hái hěn hǎokàn.","Tous ces plats sont délicieux, et ils sont beaux aussi.",0.6), HOLD(),
+   HOLD(),
 
   N("Dites : « J'aime manger la cuisine chinoise, et j'aime aussi la préparer. Servez-vous, mangez-en beaucoup. »"),
   TH(),
   C("我爱吃中国菜，也喜欢做。大家多吃点儿。","Wǒ ài chī Zhōngguó cài, yě xǐhuan zuò. Dàjiā duō chī diǎnr.","J'aime manger la cuisine chinoise, et j'aime aussi la préparer. Servez-vous, mangez-en beaucoup.",0.5),
-  C("我爱吃中国菜，也喜欢做。大家多吃点儿。","Wǒ ài chī Zhōngguó cài, yě xǐhuan zuò. Dàjiā duō chī diǎnr.","J'aime manger la cuisine chinoise, et j'aime aussi la préparer. Servez-vous, mangez-en beaucoup.",0.55), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Demandez : « Quel plat aimez-vous manger ? »"),
@@ -101,19 +101,19 @@ registerChapter({
   N("Dites : « L'an dernier, mon copain et moi sommes allés à Xi'an, cette année je veux aller à Pékin. »"),
   TH(),
   C("去年我和男朋友去了西安，今年我想去北京。","Qùnián wǒ hé nánpéngyou qùle Xī'ān, jīnnián wǒ xiǎng qù Běijīng.","L'an dernier, mon copain et moi sommes allés à Xi'an, cette année je veux aller à Pékin.",0.5),
-  C("去年我和男朋友去了西安，今年我想去北京。","Qùnián wǒ hé nánpéngyou qùle Xī'ān, jīnnián wǒ xiǎng qù Běijīng.","L'an dernier, mon copain et moi sommes allés à Xi'an, cette année je veux aller à Pékin.",0.55), HOLD(),
+   HOLD(),
 
   N("« Quelques », dans une phrase affirmative, se dit aussi [[几|jǐ]] — le même mot que « combien » dans une question. « Une année » se dit [[年|nián]]. Écoutez et répétez."),
   ...teach2("前几年","qián jǐ nián","il y a quelques années"),
   N("« Amusant », « divertissant », se dit [[好玩儿|hǎowánr]] — sur le modèle de [[好吃|hǎochī]], [[好看|hǎokàn]] et [[好听|hǎotīng]] que vous connaissez. Dites : « Il y a quelques années, je suis allée à Xi'an, c'était vraiment amusant. Cette année je veux aussi aller à Pékin. »"),
   TH(),
   C("前几年我去了西安，非常好玩儿。今年我也想去北京。","Qián jǐ nián wǒ qùle Xī'ān, fēicháng hǎowánr. Jīnnián wǒ yě xiǎng qù Běijīng.","Il y a quelques années, je suis allée à Xi'an, c'était vraiment amusant. Cette année je veux aussi aller à Pékin.",0.5),
-  C("前几年我去了西安，非常好玩儿。今年我也想去北京。","Qián jǐ nián wǒ qùle Xī'ān, fēicháng hǎowánr. Jīnnián wǒ yě xiǎng qù Běijīng.","Il y a quelques années, je suis allée à Xi'an, c'était vraiment amusant. Cette année je veux aussi aller à Pékin.",0.55), HOLD(),
+   HOLD(),
 
   N("Dites : « Le professeur Wang et moi sommes tous les deux de Pékin, Pékin est vraiment magnifique. »"),
   TH(),
   C("我和王老师都是北京人，北京非常漂亮。","Wǒ hé Wáng lǎoshī dōu shì Běijīng rén, Běijīng fēicháng piàoliang.","Le professeur Wang et moi sommes tous les deux de Pékin, Pékin est vraiment magnifique.",0.55),
-  C("我和王老师都是北京人，北京非常漂亮。","Wǒ hé Wáng lǎoshī dōu shì Běijīng rén, Běijīng fēicháng piàoliang.","Le professeur Wang et moi sommes tous les deux de Pékin, Pékin est vraiment magnifique.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Demandez : « Où voulez-vous tous aller ? »"),
@@ -159,7 +159,7 @@ registerChapter({
   N("Demandez : « Combien d'heures met votre avion pour arriver à Pékin ? »"),
   TH(),
   C("你们的飞机到北京要几个小时？","Nǐmen de fēijī dào Běijīng yào jǐ ge xiǎoshí?","Combien d'heures met votre avion pour arriver à Pékin ?",0.55),
-  C("你们的飞机到北京要几个小时？","Nǐmen de fēijī dào Běijīng yào jǐ ge xiǎoshí?","Combien d'heures met votre avion pour arriver à Pékin ?",0.6), HOLD(),
+   HOLD(),
 
   N("Répondez : « Neuf heures. »"),
   TH(),
@@ -172,12 +172,12 @@ registerChapter({
   N("Dites : « Toute ma famille est à Pékin, dimanche ma sœur sera aussi libre, elle peut aller vous chercher à l'aéroport, et vous pouvez aussi loger chez moi. »"),
   TH(),
   C("我家人都在北京，星期天我姐姐也有时间，她可以去机场接你们，你们也可以住我家。","Wǒ jiārén dōu zài Běijīng, Xīngqītiān wǒ jiějie yě yǒu shíjiān, tā kěyǐ qù jīchǎng jiē nǐmen, nǐmen yě kěyǐ zhù wǒ jiā.","Toute ma famille est à Pékin, dimanche ma sœur sera aussi libre, elle peut aller vous chercher à l'aéroport, et vous pouvez aussi loger chez moi.",0.5),
-  C("我家人都在北京，星期天我姐姐也有时间，她可以去机场接你们，你们也可以住我家。","Wǒ jiārén dōu zài Běijīng, Xīngqītiān wǒ jiějie yě yǒu shíjiān, tā kěyǐ qù jīchǎng jiē nǐmen, nǐmen yě kěyǐ zhù wǒ jiā.","Toute ma famille est à Pékin, dimanche ma sœur sera aussi libre, elle peut aller vous chercher à l'aéroport, et vous pouvez aussi loger chez moi.",0.55), HOLD(),
+   HOLD(),
 
   N("« Tôt » se dit [[早|zǎo]] — vous connaissez déjà [[早上|zǎoshang]] et [[早饭|zǎofàn]]. Demandez : « Nous arrivons à l'aéroport de Daxing à 8 h dimanche matin, c'est trop tôt ? »"),
   TH(),
   C("我们星期日早上八点到大兴机场，早不早？","Wǒmen Xīngqīrì zǎoshang bā diǎn dào Dàxīng Jīchǎng, zǎo bu zǎo?","Nous arrivons à l'aéroport de Daxing à 8 h dimanche matin, c'est trop tôt ?",0.55),
-  C("我们星期日早上八点到大兴机场，早不早？","Wǒmen Xīngqīrì zǎoshang bā diǎn dào Dàxīng Jīchǎng, zǎo bu zǎo?","Nous arrivons à l'aéroport de Daxing à 8 h dimanche matin, c'est trop tôt ?",0.6), HOLD(),
+   HOLD(),
 
   N("Répondez : « Pas trop tôt. »"),
   TH(),
@@ -186,7 +186,7 @@ registerChapter({
   N("Enfin, [[那|nà]] prend ici un nouveau sens : « alors », « dans ce cas » — en plus de « celui-là » que vous connaissez. Dites : « Merci, professeur ! Alors, rendez-vous avec votre sœur à l'aéroport de Daxing ! »"),
   TH(),
   C("谢谢老师！那我们和您姐姐在大兴机场见！","Xièxie lǎoshī! Nà wǒmen hé nín jiějie zài Dàxīng Jīchǎng jiàn!","Merci, professeur ! Alors, rendez-vous avec votre sœur à l'aéroport de Daxing !",0.5),
-  C("谢谢老师！那我们和您姐姐在大兴机场见！","Xièxie lǎoshī! Nà wǒmen hé nín jiějie zài Dàxīng Jīchǎng jiàn!","Merci, professeur ! Alors, rendez-vous avec votre sœur à l'aéroport de Daxing !",0.55), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début, une dernière fois. Demandez : « Combien d'heures met votre avion pour arriver à Pékin ? »"),

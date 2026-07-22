@@ -40,7 +40,7 @@ registerChapter({
   N("À vous : dites « Quelle heure est-il ? » — littéralement « maintenant, quelle heure ? »"),
   TH(),
   C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65),
-  C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65), HOLD(),
+   HOLD(),
 
   // ---------- Répondre ----------
   N("Pour répondre, on dit le nombre, puis [[点|diǎn]]. « Dix » se dit [[十|shí]]. Écoutez : il est dix heures."),
@@ -110,7 +110,7 @@ registerChapter({
   N("Répondez : « je me lève à sept heures ». « Je » se dit [[我|wǒ]], et « sept » se dit [[七|qī]]."),
   TH(),
   C("我七点起床。","Wǒ qī diǎn qǐchuáng.","Je me lève à sept heures.",0.6),
-  C("我七点起床。","Wǒ qī diǎn qǐchuáng.","Je me lève à sept heures.",0.65), HOLD(),
+   HOLD(),
 
   // ---------- Révision finale ----------
   N("Révision finale. Demandez : quelle heure est-il ?"),
@@ -178,7 +178,7 @@ registerChapter({
   N("Répondez : je déjeune à midi et demi — douze heures et demie."),
   TH(),
   C("我十二点半吃午饭。","Wǒ shí'èr diǎn bàn chī wǔfàn.","Je déjeune à midi et demi.",0.6),
-  C("我十二点半吃午饭。","Wǒ shí'èr diǎn bàn chī wǔfàn.","Je déjeune à midi et demi.",0.65), HOLD(),
+   HOLD(),
   N("Remarquez l'ordre des mots : l'heure se place AVANT le verbe. Je — à midi et demi — déjeune."),
 
   // ---------- 睡觉 ----------
@@ -206,7 +206,7 @@ registerChapter({
   ...teach("四个小时","sì ge xiǎoshí","quatre heures (durée)"),
   N("« En tout » se dit [[一共|yígòng]]. Écoutez la phrase complète : nous avons cours de huit heures à midi, en tout quatre heures."),
   C("我们从八点到十二点上课，一共四个小时。","Wǒmen cóng bā diǎn dào shí'èr diǎn shàngkè, yígòng sì ge xiǎoshí.","Nous avons cours de 8 h à 12 h, soit 4 heures en tout.",0.5),
-  C("我们从八点到十二点上课，一共四个小时。","Wǒmen cóng bā diǎn dào shí'èr diǎn shàngkè, yígòng sì ge xiǎoshí.","Nous avons cours de 8 h à 12 h, soit 4 heures en tout.",0.6), HOLD(),
+   HOLD(),
 
   // ---------- 分钟 ----------
   N("De même pour les minutes : [[分|fēn]] sur l'horloge, mais une durée en minutes se dit [[分钟|fēnzhōng]]."),
@@ -219,7 +219,7 @@ registerChapter({
   N("« Étudier » se dit [[学习|xuéxí]]. Demandez : combien de temps étudies-tu chaque jour ?"),
   TH(),
   C("你每天学习多长时间？","Nǐ měitiān xuéxí duō cháng shíjiān?","Combien de temps étudies-tu chaque jour ?",0.55),
-  C("你每天学习多长时间？","Nǐ měitiān xuéxí duō cháng shíjiān?","Combien de temps étudies-tu chaque jour ?",0.65), HOLD(),
+   HOLD(),
   N("Répondez : trois heures. « Trois » se dit [[三|sān]]. N'oubliez pas [[个|ge]]."),
   TH(),
   C("三个小时。","Sān ge xiǎoshí.","Trois heures (de temps).",0.65), HOLD(),
@@ -303,13 +303,13 @@ N("Bienvenue dans la leçon 3. Aujourd'hui : les moments de la journée, et le d
   N("Vous souvenez-vous ? « Je me couche à onze heures. » Ajoutez maintenant « le soir » : je me couche le soir à onze heures."),
   TH(),
   C("我晚上十一点睡觉。","Wǒ wǎnshang shíyī diǎn shuìjiào.","Je me couche à 23 h.",0.6),
-  C("我晚上十一点睡觉。","Wǒ wǎnshang shíyī diǎn shuìjiào.","Je me couche à 23 h.",0.65), HOLD(),
+   HOLD(),
   ...drill("Dites : je me lève le matin à sept heures.","我早上七点起床。","Wǒ zǎoshang qī diǎn qǐchuáng.","Je me lève à 7 h du matin."),
 
   N("Passons au décalage horaire. « Pékin » se dit [[北京|Běijīng]]. Demandez : quelle heure est-il à Pékin ? Le lieu se place au début."),
   TH(),
   C("北京现在几点？","Běijīng xiànzài jǐ diǎn?","Quelle heure est-il à Pékin ?",0.6),
-  C("北京现在几点？","Běijīng xiànzài jǐ diǎn?","Quelle heure est-il à Pékin ?",0.65), HOLD(),
+   HOLD(),
   N("« Paris » se dit [[巴黎|Bālí]]. Demandez : quelle heure est-il à Paris ?"),
   TH(),
   C("巴黎现在几点？","Bālí xiànzài jǐ diǎn?","Quelle heure est-il à Paris ?",0.65), HOLD(),
@@ -318,7 +318,7 @@ N("Bienvenue dans la leçon 3. Aujourd'hui : les moments de la journée, et le d
   C("巴黎现在是早上九点。","Bālí xiànzài shì zǎoshang jiǔ diǎn.","À Paris il est 9 h du matin.",0.6), HOLD(),
   N("« Le décalage horaire » se dit [[时差|shíchā]]. Écoutez la question : quel est le décalage horaire entre Pékin et Paris ?"),
   C("北京和巴黎的时差是多少？","Běijīng hé Bālí de shíchā shì duōshao?","Quel est le décalage entre Pékin et Paris ?",0.55),
-  C("北京和巴黎的时差是多少？","Běijīng hé Bālí de shíchā shì duōshao?","Quel est le décalage entre Pékin et Paris ?",0.65), HOLD(),
+   HOLD(),
 
   N("Mini-conversation. Un ami à Pékin vous appelle et demande :"),
   C("巴黎现在几点？","Bālí xiànzài jǐ diǎn?","Quelle heure est-il à Paris ?",0.65),
@@ -387,13 +387,13 @@ N("Bienvenue dans la leçon 4. Aujourd'hui : dire « un peu plus de », « moins
   N("Vous ne savez pas exactement. Répondez : environ trente ans, moins de trente-cinq ans."),
   TH(),
   C("他三十岁左右，不到三十五岁。","Tā sānshí suì zuǒyòu, bú dào sānshíwǔ suì.","Environ 30 ans, moins de 35.",0.55),
-  C("他三十岁左右，不到三十五岁。","Tā sānshí suì zuǒyòu, bú dào sānshíwǔ suì.","Environ 30 ans, moins de 35.",0.65), HOLD(),
+   HOLD(),
   N("On vous demande maintenant :"),
   C("他每天几点到教室？","Tā měitiān jǐ diǎn dào jiàoshì?","À quelle heure arrive-t-il en classe ?",0.6),
   N("[[教室|jiàoshì]] veut dire « la salle de classe », et vous connaissez [[到|dào]] : arriver. Répondez : vers huit heures dix, avant huit heures et demie."),
   TH(),
   C("大概八点十分左右，八点半以前。","Dàgài bā diǎn shí fēn zuǒyòu, bā diǎn bàn yǐqián.","Vers 8 h 10, avant 8 h 30.",0.55),
-  C("大概八点十分左右，八点半以前。","Dàgài bā diǎn shí fēn zuǒyòu, bā diǎn bàn yǐqián.","Vers 8 h 10, avant 8 h 30.",0.65), HOLD(),
+   HOLD(),
 
   N("Révision finale. Dites : il est neuf heures passées."),
   TH(),
@@ -432,7 +432,7 @@ N("Bienvenue dans la leçon 5. Aujourd'hui, le grand dialogue du cours : aller c
   N("« Arriver » se dit [[到|dào]] — vous le connaissez déjà dans « de… à… ». Demandez : à quelle heure arrive l'avion de Charlie ? « De Charlie » se dit [[查理的|Chálǐ de]]."),
   TH(),
   C("查理的飞机几点到？","Chálǐ de fēijī jǐ diǎn dào?","À quelle heure arrive l'avion de Charlie ?",0.55),
-  C("查理的飞机几点到？","Chálǐ de fēijī jǐ diǎn dào?","À quelle heure arrive l'avion de Charlie ?",0.65), HOLD(),
+   HOLD(),
   ...drill("Répondez : il arrive à quatorze heures trente — deux heures et demie de l'après-midi.","下午两点半到。","Xiàwǔ liǎng diǎn bàn dào.","Il arrive à 14 h 30."),
 
   N("« Aller » se dit [[去|qù]]. Et « manger », le repas, se dit [[吃饭|chī fàn]]. Aller manger :"),
@@ -444,17 +444,17 @@ N("Bienvenue dans la leçon 5. Aujourd'hui, le grand dialogue du cours : aller c
   ...teach("先去吃饭，然后去机场","xiān qù chī fàn, ránhòu qù jīchǎng","d'abord manger, puis l'aéroport"),
   N("La phrase complète de Zhang Li : allons d'abord manger maintenant, puis à l'aéroport le chercher."),
   C("我们现在先去吃饭吧，然后去机场接他。","Wǒmen xiànzài xiān qù chī fàn ba, ránhòu qù jīchǎng jiē tā.","Allons d'abord manger, puis le chercher à l'aéroport.",0.5),
-  C("我们现在先去吃饭吧，然后去机场接他。","Wǒmen xiànzài xiān qù chī fàn ba, ránhòu qù jīchǎng jiē tā.","Allons d'abord manger, puis le chercher à l'aéroport.",0.6), HOLD(),
+   HOLD(),
   ...drill("À vous : dites « d'abord aller en cours, ensuite aller manger ».","先去上课，然后去吃饭","xiān qù shàngkè, ránhòu qù chī fàn","d'abord les cours, puis manger"),
 
   N("« Ici » se dit [[这儿|zhèr]]. Et [[要|yào]] signifie « falloir », « prendre du temps ». Demandez : combien de temps faut-il d'ici à l'aéroport ?"),
   TH(),
   C("从这儿到机场要多长时间？","Cóng zhèr dào jīchǎng yào duō cháng shíjiān?","Combien de temps d'ici à l'aéroport ?",0.55),
-  C("从这儿到机场要多长时间？","Cóng zhèr dào jīchǎng yào duō cháng shíjiān?","Combien de temps d'ici à l'aéroport ?",0.65), HOLD(),
+   HOLD(),
   N("« Partir » se dit [[走|zǒu]]. Répondez : un peu plus d'une heure. Partons avant une heure."),
   TH(),
   C("大概一个多小时吧。我们一点以前走。","Dàgài yí ge duō xiǎoshí ba. Wǒmen yì diǎn yǐqián zǒu.","Un peu plus d'une heure. Partons avant 13 h.",0.55),
-  C("大概一个多小时吧。我们一点以前走。","Dàgài yí ge duō xiǎoshí ba. Wǒmen yì diǎn yǐqián zǒu.","Un peu plus d'une heure. Partons avant 13 h.",0.65), HOLD(),
+   HOLD(),
 
   N("Maintenant, rejouons tout le dialogue. Vous êtes Li Wei. Zhang Li demande :"),
   C("现在几点？","Xiànzài jǐ diǎn?","Quelle heure est-il ?",0.65),
@@ -493,7 +493,7 @@ N("Bienvenue dans la leçon 6. Aujourd'hui : réserver une table au restaurant, 
   N("« Je voudrais », « je souhaite », se dit [[我想|wǒ xiǎng]]. Et « réserver » se dit [[预订|yùdìng]]. Dites : bonjour, je voudrais réserver."),
   TH(),
   C("你好，我想预订。","Nǐ hǎo, wǒ xiǎng yùdìng.","Bonjour, je voudrais réserver.",0.55),
-  C("你好，我想预订。","Nǐ hǎo, wǒ xiǎng yùdìng.","Bonjour, je voudrais réserver.",0.65), HOLD(),
+   HOLD(),
   N("Au fait, « le restaurant » se dit [[饭馆儿|fànguǎnr]] — vous y reconnaissez [[饭|fàn]], le repas."),
   ...teach("饭馆儿","fànguǎnr","le restaurant"),
 
@@ -742,7 +742,7 @@ N("Bienvenue dans la leçon 8. Aujourd'hui, une nouvelle façon très naturelle 
   N("Répondez : oui, la France est en avance d'une heure sur l'Angleterre."),
   TH(),
   C("法国比英国早一个小时。","Fǎguó bǐ Yīngguó zǎo yí ge xiǎoshí.","La France a une heure d'avance sur l'Angleterre.",0.55),
-  C("法国比英国早一个小时。","Fǎguó bǐ Yīngguó zǎo yí ge xiǎoshí.","La France a une heure d'avance sur l'Angleterre.",0.65), HOLD(),
+   HOLD(),
 
   // ---------- Révision finale ----------
   N("Révision finale. Dites : je suis en France."),

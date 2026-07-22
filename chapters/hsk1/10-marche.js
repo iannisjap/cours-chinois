@@ -39,12 +39,12 @@ registerChapter({
   N("Demandez poliment : « Excusez-moi, avez-vous des tasses ? »"),
   TH(),
   C("请问，有杯子吗？","Qǐngwèn, yǒu bēizi ma?","Excusez-moi, avez-vous des tasses ?",0.6),
-  C("请问，有杯子吗？","Qǐngwèn, yǒu bēizi ma?","Excusez-moi, avez-vous des tasses ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Par ici », « de ce côté », se dit [[这边|zhèbiān]] — comme [[那边|nàbian]] et [[外边|wàibian]] que vous connaissez. Répondez : « Oui, les tasses sont par ici. »"),
   TH(),
   C("有，杯子在这边。","Yǒu, bēizi zài zhèbiān.","Oui, les tasses sont par ici.",0.6),
-  C("有，杯子在这边。","Yǒu, bēizi zài zhèbiān.","Oui, les tasses sont par ici.",0.6), HOLD(),
+   HOLD(),
 
   N("« L'argent » se dit [[钱|qián]]. Vous connaissez déjà [[多少|duōshao]]. Demandez : « Combien coûte une pièce ? »"),
   TH(),
@@ -55,7 +55,7 @@ registerChapter({
   N("Répondez : « Celles-ci sont à cinq yuans pièce, celles-là à dix yuans pièce. »"),
   TH(),
   C("这些五块钱一个，那些十块钱一个。","Zhèxiē wǔ kuài qián yí ge, nàxiē shí kuài qián yí ge.","Celles-ci sont à cinq yuans pièce, celles-là à dix yuans pièce.",0.5),
-  C("这些五块钱一个，那些十块钱一个。","Zhèxiē wǔ kuài qián yí ge, nàxiē shí kuài qián yí ge.","Celles-ci sont à cinq yuans pièce, celles-là à dix yuans pièce.",0.55), HOLD(),
+   HOLD(),
 
   N("Dites : « Je vais prendre celle-ci. »"),
   TH(),
@@ -102,7 +102,7 @@ registerChapter({
   N("Remarquez : pas besoin de [[是|shì]] devant un adjectif comme [[少|shǎo]] — l'adjectif seul fait office de verbe. Dites : « Il y a vraiment beaucoup de fruits ici ! »"),
   TH(),
   C("这儿的水果真不少！","Zhèr de shuǐguǒ zhēn bù shǎo!","Il y a vraiment beaucoup de fruits ici !",0.6),
-  C("这儿的水果真不少！","Zhèr de shuǐguǒ zhēn bù shǎo!","Il y a vraiment beaucoup de fruits ici !",0.6), HOLD(),
+   HOLD(),
 
   N("Demandez poliment : « Que voulez-vous acheter ? »"),
   TH(),
@@ -117,14 +117,14 @@ registerChapter({
   N("Écoutez le prix : « Les pommes sont à 3,5 yuans le jin. Ça fait 7,2 yuans, disons 7 yuans. »"),
   TH(),
   C("苹果三块五一斤。这些七块二，七块钱吧。","Píngguǒ sān kuài wǔ yì jīn. Zhèxiē qī kuài èr, qī kuài qián ba.","Les pommes sont à 3,5 yuans le jin. Ça fait 7,2 yuans, disons 7 yuans.",0.5),
-  C("苹果三块五一斤。这些七块二，七块钱吧。","Píngguǒ sān kuài wǔ yì jīn. Zhèxiē qī kuài èr, qī kuài qián ba.","Les pommes sont à 3,5 yuans le jin. Ça fait 7,2 yuans, disons 7 yuans.",0.55), HOLD(),
+   HOLD(),
 
   N("« Pas cher », « abordable », se dit [[便宜|piányi]]. Écoutez et répétez."),
   ...teach2("便宜","piányi","pas cher"),
   N("Dites : « D'accord, les pommes ici sont vraiment pas chères ! »"),
   TH(),
   C("好的，这儿的苹果真便宜！","Hǎo de, zhèr de píngguǒ zhēn piányi!","D'accord, les pommes ici sont vraiment pas chères !",0.6),
-  C("好的，这儿的苹果真便宜！","Hǎo de, zhèr de píngguǒ zhēn piányi!","D'accord, les pommes ici sont vraiment pas chères !",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Dites : « Il y a vraiment beaucoup de fruits ici ! »"),
@@ -170,7 +170,7 @@ registerChapter({
   N("Dites : « Il y a vraiment beaucoup de vêtements dans ce magasin ! Celui-ci coûte 100 yuans, qu'en penses-tu ? »"),
   TH(),
   C("这家商店衣服真多！这件一百元，怎么样？","Zhè jiā shāngdiàn yīfu zhēn duō! Zhè jiàn yìbǎi yuán, zěnmeyàng?","Il y a vraiment beaucoup de vêtements dans ce magasin ! Celui-ci coûte 100 yuans, qu'en penses-tu ?",0.5),
-  C("这家商店衣服真多！这件一百元，怎么样？","Zhè jiā shāngdiàn yīfu zhēn duō! Zhè jiàn yìbǎi yuán, zěnmeyàng?","Il y a vraiment beaucoup de vêtements dans ce magasin ! Celui-ci coûte 100 yuans, qu'en penses-tu ?",0.55), HOLD(),
+   HOLD(),
 
   N("« Cher » se dit [[贵|guì]] — le contraire de [[便宜|piányi]]. Écoutez et répétez."),
   ...teach2("贵","guì","cher"),
@@ -193,7 +193,7 @@ registerChapter({
   N("Et « là-bas » se dit [[那儿|nàr]] — vous connaissez déjà [[那|nà]]. Répondez : « Non. Ce sont des vêtements de fille, les vêtements de garçon sont là-bas. »"),
   TH(),
   C("不能。这些是女孩子穿的衣服，男孩子的衣服在那儿。","Bù néng. Zhèxiē shì nǚ háizi chuān de yīfu, nán háizi de yīfu zài nàr.","Non. Ce sont des vêtements de fille, les vêtements de garçon sont là-bas.",0.5),
-  C("不能。这些是女孩子穿的衣服，男孩子的衣服在那儿。","Bù néng. Zhèxiē shì nǚ háizi chuān de yīfu, nán háizi de yīfu zài nàr.","Non. Ce sont des vêtements de fille, les vêtements de garçon sont là-bas.",0.55), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Dites : « Il y a vraiment beaucoup de vêtements dans ce magasin ! Celui-ci coûte 100 yuans, qu'en penses-tu ? »"),

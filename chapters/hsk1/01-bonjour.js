@@ -37,14 +37,14 @@ registerChapter({
   N("Donc [[你好|nǐ hǎo]], mot à mot, c'est « toi bien ». À vous : dites bonjour."),
   TH(),
   C("你好！","Nǐ hǎo!","Bonjour !",0.6),
-  C("你好！","Nǐ hǎo!","Bonjour !",0.6), HOLD(),
+   HOLD(),
 
   N("Pour dire « professeur », « enseignant », on dit [[老师|lǎoshī]]. Écoutez et répétez."),
   ...teach2("老师","lǎoshī","professeur"),
   N("En chinois, on nomme souvent la personne avant de la saluer. À vous : dites « Bonjour, professeur ! »"),
   TH(),
   C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.6),
-  C("老师，你好！","Lǎoshī, nǐ hǎo!","Bonjour, professeur !",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Quelqu'un vous salue :"),
@@ -84,7 +84,7 @@ registerChapter({
   N("À vous : saluez poliment votre professeur — dites « Professeur, bonjour ! » avec la forme de politesse."),
   TH(),
   C("老师，您好！","Lǎoshī, nín hǎo!","Bonjour, professeur ! (poli)",0.6),
-  C("老师，您好！","Lǎoshī, nín hǎo!","Bonjour, professeur ! (poli)",0.6), HOLD(),
+   HOLD(),
 
   N("Pour saluer tout le monde, un groupe, on dit [[大家|dàjiā]] — « tout le monde ». Écoutez et répétez."),
   ...teach2("大家","dàjiā","tout le monde"),
@@ -153,7 +153,7 @@ registerChapter({
   N("À vous : dites au revoir à votre professeur."),
   TH(),
   C("老师，再见！","Lǎoshī, zàijiàn!","Au revoir, professeur !",0.6),
-  C("老师，再见！","Lǎoshī, zàijiàn!","Au revoir, professeur !",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Les étudiants remercient :"),
@@ -164,7 +164,7 @@ registerChapter({
   N("Puis saluez la classe en partant. Dites : « Au revoir, chers camarades ! »"),
   TH(),
   C("同学们，再见！","Tóngxuémen, zàijiàn!","Au revoir, chers camarades !",0.6),
-  C("同学们，再见！","Tóngxuémen, zàijiàn!","Au revoir, chers camarades !",0.6), HOLD(),
+   HOLD(),
 
   // Révision finale de toute la leçon 1
   N("Révision finale de la leçon 1. Dites bonjour."),

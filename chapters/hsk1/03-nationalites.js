@@ -37,14 +37,14 @@ registerChapter({
   N("Souvenez-vous du verbe être, [[是|shì]]. Dites : « Je suis chinois. »"),
   TH(),
   C("我是中国人。","Wǒ shì Zhōngguó rén.","Je suis chinois.",0.6),
-  C("我是中国人。","Wǒ shì Zhōngguó rén.","Je suis chinois.",0.6), HOLD(),
+   HOLD(),
 
   N("« La France » se dit [[法国|Fǎguó]]. Écoutez et répétez."),
   ...teach2("法国","Fǎguó","la France"),
   N("À vous : dites « Je suis français. »"),
   TH(),
   C("我是法国人。","Wǒ shì Fǎguó rén.","Je suis français.",0.6),
-  C("我是法国人。","Wǒ shì Fǎguó rén.","Je suis français.",0.6), HOLD(),
+   HOLD(),
 
   N("Voici un petit mot très important : [[的|de]]. Il se place entre le possesseur et ce qu'il possède, comme notre « de ». Écoutez et répétez."),
   ...teach2("的","de","de (possession)"),
@@ -53,7 +53,7 @@ registerChapter({
   N("Dites : « Mon professeur de chinois est chinois aussi. » Souvenez-vous, « aussi » se dit [[也|yě]]."),
   TH(),
   C("我的中文老师也是中国人。","Wǒ de Zhōngwén lǎoshī yě shì Zhōngguó rén.","Mon professeur de chinois est chinois aussi.",0.55),
-  C("我的中文老师也是中国人。","Wǒ de Zhōngwén lǎoshī yě shì Zhōngguó rén.","Mon professeur de chinois est chinois aussi.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Li Wen dit : « Je suis chinois. » À vous."),
@@ -100,7 +100,7 @@ registerChapter({
   N("Répondez : « C'est ma petite amie. »"),
   TH(),
   C("这是我女朋友。","Zhè shì wǒ nǚpéngyou.","C'est ma petite amie.",0.6),
-  C("这是我女朋友。","Zhè shì wǒ nǚpéngyou.","C'est ma petite amie.",0.6), HOLD(),
+   HOLD(),
 
   N("« Elle » se dit [[她|tā]]. Écoutez et répétez."),
   ...teach2("她","tā","elle"),
@@ -109,11 +109,11 @@ registerChapter({
   N("Demandez : « Ta petite amie, de quel pays est-elle ? »"),
   TH(),
   C("你女朋友是哪国人？","Nǐ nǚpéngyou shì nǎ guó rén?","Ta petite amie est de quel pays ?",0.55),
-  C("你女朋友是哪国人？","Nǐ nǚpéngyou shì nǎ guó rén?","Ta petite amie est de quel pays ?",0.6), HOLD(),
+   HOLD(),
   N("« La Thaïlande » se dit [[泰国|Tàiguó]]. Répondez : « Elle est thaïlandaise aussi. »"),
   TH(),
   C("她也是泰国人。","Tā yě shì Tàiguó rén.","Elle est thaïlandaise aussi.",0.6),
-  C("她也是泰国人。","Tā yě shì Tàiguó rén.","Elle est thaïlandaise aussi.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. On vous montre une photo et on demande :"),
@@ -162,7 +162,7 @@ registerChapter({
   N("Répondez : « Oui, encore très occupé. »"),
   TH(),
   C("对，还很忙。","Duì, hái hěn máng.","Oui, encore très occupé.",0.6),
-  C("对，还很忙。","Duì, hái hěn máng.","Oui, encore très occupé.",0.6), HOLD(),
+   HOLD(),
 
   N("« Trop », « excessivement », se dit [[太|tài]]. Pour dire « pas trop occupé » : moi — ne pas — trop — occupé."),
   ...teach2("我不太忙。","Wǒ bú tài máng.","Je ne suis pas trop occupé."),

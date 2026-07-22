@@ -43,7 +43,7 @@ registerChapter({
   N("Demandez poliment : « Professeur Wang, puis-je encore vous poser une question ? »"),
   TH(),
   C("王老师，我可以再问您一个问题吗？","Wáng lǎoshī, wǒ kěyǐ zài wèn nín yí ge wèntí ma?","Professeur Wang, puis-je encore vous poser une question ?",0.5),
-  C("王老师，我可以再问您一个问题吗？","Wáng lǎoshī, wǒ kěyǐ zài wèn nín yí ge wèntí ma?","Professeur Wang, puis-je encore vous poser une question ?",0.55), HOLD(),
+   HOLD(),
 
   N("Répondez : « Bien sûr. Quelle est ta question ? »"),
   TH(),
@@ -54,14 +54,14 @@ registerChapter({
   N("Demandez : « Est-ce que ce petit magasin vend des téléphones ? »"),
   TH(),
   C("那个小店卖不卖手机？","Nàge xiǎo diàn mài bu mài shǒujī?","Est-ce que ce petit magasin vend des téléphones ?",0.55),
-  C("那个小店卖不卖手机？","Nàge xiǎo diàn mài bu mài shǒujī?","Est-ce que ce petit magasin vend des téléphones ?",0.6), HOLD(),
+   HOLD(),
 
   N("Pour dire « faire brièvement », « essayer de faire », on ajoute [[一下|yíxià]] après le verbe. « Appeler pour demander » se dit :"),
   ...teach2("打电话问一下","dǎ diànhuà wèn yíxià","appeler pour demander"),
   N("Répondez : « Je ne sais pas. Tu peux appeler pour demander. »"),
   TH(),
   C("我不知道。你可以打电话问一下。","Wǒ bù zhīdào. Nǐ kěyǐ dǎ diànhuà wèn yíxià.","Je ne sais pas. Tu peux appeler pour demander.",0.55),
-  C("我不知道。你可以打电话问一下。","Wǒ bù zhīdào. Nǐ kěyǐ dǎ diànhuà wèn yíxià.","Je ne sais pas. Tu peux appeler pour demander.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Demandez : « Professeur Wang, puis-je encore vous poser une question ? »"),
@@ -100,14 +100,14 @@ registerChapter({
   N("[[请|qǐng]] tout seul veut dire « je vous en prie », « s'il vous plaît » — vous le connaissiez dans [[请问|qǐngwèn]]. Et « s'asseoir » se dit [[坐|zuò]] — son sens premier, que vous connaissiez pour « prendre un transport ». Dites : « Madame, asseyez-vous je vous prie ! Que buvez-vous ? »"),
   TH(),
   C("女士，请坐！您喝什么？","Nǚshì, qǐng zuò! Nín hē shénme?","Madame, asseyez-vous je vous prie ! Que buvez-vous ?",0.55),
-  C("女士，请坐！您喝什么？","Nǚshì, qǐng zuò! Nín hē shénme?","Madame, asseyez-vous je vous prie ! Que buvez-vous ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Donner » se dit [[给|gěi]]. Écoutez et répétez."),
   ...teach2("给我","gěi wǒ","me donner"),
   N("Pour compter les boissons, on utilise [[杯|bēi]] — comme dans [[杯子|bēizi]] que vous connaissez. Répondez : « Laissez-moi voir. Donnez-moi un verre de lait, s'il vous plaît. »"),
   TH(),
   C("我看一下。请给我一杯牛奶。","Wǒ kàn yíxià. Qǐng gěi wǒ yì bēi niúnǎi.","Laissez-moi voir. Donnez-moi un verre de lait, s'il vous plaît.",0.55),
-  C("我看一下。请给我一杯牛奶。","Wǒ kàn yíxià. Qǐng gěi wǒ yì bēi niúnǎi.","Laissez-moi voir. Donnez-moi un verre de lait, s'il vous plaît.",0.6), HOLD(),
+   HOLD(),
 
   N("Nouveau sens pour [[要|yào]] : vous le connaissiez comme « vouloir faire » devant un verbe, ici c'est un verbe qui signifie « demander », « vouloir [un objet] ». Demandez : « Très bien. Vous désirez autre chose ? »"),
   TH(),
@@ -120,7 +120,7 @@ registerChapter({
   N("Répondez : « Je n'ai pas encore pris de petit-déjeuner, je prendrai aussi ce pain et cet œuf. »"),
   TH(),
   C("我还没吃早饭，再要这个面包和鸡蛋吧。","Wǒ hái méi chī zǎofàn, zài yào zhège miànbāo hé jīdàn ba.","Je n'ai pas encore pris de petit-déjeuner, je prendrai aussi ce pain et cet œuf.",0.5),
-  C("我还没吃早饭，再要这个面包和鸡蛋吧。","Wǒ hái méi chī zǎofàn, zài yào zhège miànbāo hé jīdàn ba.","Je n'ai pas encore pris de petit-déjeuner, je prendrai aussi ce pain et cet œuf.",0.55), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. On vous accueille : « Madame, asseyez-vous je vous prie ! Que buvez-vous ? »"),
@@ -159,7 +159,7 @@ registerChapter({
   N("« Monsieur » se dit [[先生|xiānsheng]] — comme [[女士|nǚshì]] que vous connaissez. Dites : « Monsieur, asseyez-vous je vous prie ! Que désirez-vous ? »"),
   TH(),
   C("先生，请坐！您要什么？","Xiānsheng, qǐng zuò! Nín yào shénme?","Monsieur, asseyez-vous je vous prie ! Que désirez-vous ?",0.55),
-  C("先生，请坐！您要什么？","Xiānsheng, qǐng zuò! Nín yào shénme?","Monsieur, asseyez-vous je vous prie ! Que désirez-vous ?",0.6), HOLD(),
+   HOLD(),
 
   N("Répondez : « Je voudrais un jin de jiaozi. » Vous connaissez déjà [[斤|jīn]] et [[饺子|jiǎozi]]."),
   TH(),
@@ -172,7 +172,7 @@ registerChapter({
   N("« La moitié » se dit [[一半|yíbàn]] — vous connaissez déjà [[半|bàn]] pour « et demi ». Dites : « Quarante c'est trop, je vais en prendre la moitié. »"),
   TH(),
   C("四十个太多了，我要一半吧。","Sìshí ge tài duō le, wǒ yào yíbàn ba.","Quarante c'est trop, je vais en prendre la moitié.",0.55),
-  C("四十个太多了，我要一半吧。","Sìshí ge tài duō le, wǒ yào yíbàn ba.","Quarante c'est trop, je vais en prendre la moitié.",0.6), HOLD(),
+   HOLD(),
 
   N("On vous répond : « Un demi-jin fait vingt pièces. Que voulez-vous boire ? »"),
   TH(),
@@ -183,7 +183,7 @@ registerChapter({
   N("Répondez : « Donnez-moi un thé, s'il vous plaît. »"),
   TH(),
   C("请给我一杯茶吧。","Qǐng gěi wǒ yì bēi chá ba.","Donnez-moi un thé, s'il vous plaît.",0.6),
-  C("请给我一杯茶吧。","Qǐng gěi wǒ yì bēi chá ba.","Donnez-moi un thé, s'il vous plaît.",0.6), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. On vous accueille : « Monsieur, asseyez-vous je vous prie ! Que désirez-vous ? »"),

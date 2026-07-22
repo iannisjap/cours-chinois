@@ -43,7 +43,7 @@ registerChapter({
   N("« Un restaurant », plus général que [[饭馆儿|fànguǎnr]] que vous connaissez, se dit [[饭店|fàndiàn]]. Demandez : « Allô, Li Wen, quand pourras-tu arriver au restaurant ? »"),
   TH(),
   C("喂，李文，你什么时候能到饭店？","Wèi, Lǐ Wén, nǐ shénme shíhou néng dào fàndiàn?","Allô, Li Wen, quand pourras-tu arriver au restaurant ?",0.5),
-  C("喂，李文，你什么时候能到饭店？","Wèi, Lǐ Wén, nǐ shénme shíhou néng dào fàndiàn?","Allô, Li Wen, quand pourras-tu arriver au restaurant ?",0.55), HOLD(),
+   HOLD(),
 
   N("« Savoir » se dit [[知道|zhīdào]]. Écoutez et répétez."),
   ...teach2("知道","zhīdào","savoir"),
@@ -52,12 +52,12 @@ registerChapter({
   N("Pour poser une question avec « oui ou non », on répète le verbe avec [[不|bù]] entre les deux : [[是不是|shì bu shì]] veut dire « est-ce que oui ou non ». Répondez : « Je ne sais pas encore, je suis en train de le chercher. C'est bien derrière le supermarché ? »"),
   TH(),
   C("还不知道，正在找呢。它是不是在超市后边？","Hái bù zhīdào, zhèngzài zhǎo ne. Tā shì bu shì zài chāoshì hòubian?","Je ne sais pas encore, je suis en train de le chercher. C'est bien derrière le supermarché ?",0.5),
-  C("还不知道，正在找呢。它是不是在超市后边？","Hái bù zhīdào, zhèngzài zhǎo ne. Tā shì bu shì zài chāoshì hòubian?","Je ne sais pas encore, je suis en train de le chercher. C'est bien derrière le supermarché ?",0.55), HOLD(),
+   HOLD(),
 
   N("« Conduire » se dit [[开车|kāichē]] — [[车|chē]] veut dire « véhicule ». Pour la question alternative d'un verbe, on utilise [[不|bù]] ou [[没|méi]] : « conduire pas conduire » demande si l'action a lieu. Demandez : « Oui. Est-ce que tu conduis ? »"),
   TH(),
   C("是的。你开车没开车？","Shì de. Nǐ kāichē méi kāichē?","Oui. Est-ce que tu conduis ?",0.6),
-  C("是的。你开车没开车？","Shì de. Nǐ kāichē méi kāichē?","Oui. Est-ce que tu conduis ?",0.6), HOLD(),
+   HOLD(),
 
   N("Répondez : « Je ne conduis pas, je suis en voiture. » — souvenez-vous, « prendre un transport » se dit [[坐|zuò]]."),
   TH(),
@@ -103,12 +103,12 @@ registerChapter({
   N("Demandez : « Tu es toujours en train d'étudier à l'université ? »"),
   TH(),
   C("你还在读大学吗？","Nǐ hái zài dú dàxué ma?","Tu es toujours en train d'étudier à l'université ?",0.6),
-  C("你还在读大学吗？","Nǐ hái zài dú dàxué ma?","Tu es toujours en train d'étudier à l'université ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Un étudiant d'université » se dit [[大学生|dàxuéshēng]]. Remarquez : au lieu de [[在|zài]], on peut aussi juste ajouter [[呢|ne]] après le verbe pour dire la même chose. Répondez : « Oui, j'étudie à l'université, je suis toujours étudiant. »"),
   TH(),
   C("对，我读大学呢，还是大学生。","Duì, wǒ dú dàxué ne, hái shì dàxuéshēng.","Oui, j'étudie à l'université, je suis toujours étudiant.",0.55),
-  C("对，我读大学呢，还是大学生。","Duì, wǒ dú dàxué ne, hái shì dàxuéshēng.","Oui, j'étudie à l'université, je suis toujours étudiant.",0.6), HOLD(),
+   HOLD(),
 
   N("Demandez avec une question alternative sur l'adjectif : « Vos études, c'est chargé ou pas ? »"),
   TH(),
@@ -117,7 +117,7 @@ registerChapter({
   N("« Étudier », « apprendre une matière », se dit [[学|xué]] — vous connaissez déjà [[学习|xuéxí]] et [[学校|xuéxiào]]. Et « la médecine » se dit [[医|yī]] — vous connaissez déjà [[医院|yīyuàn]] et [[医生|yīshēng]]. Répondez : « Très chargé, j'étudie la médecine, nous avons beaucoup de cours. »"),
   TH(),
   C("非常忙，我学医，我们的课很多。","Fēicháng máng, wǒ xué yī, wǒmen de kè hěn duō.","Très chargé, j'étudie la médecine, nous avons beaucoup de cours.",0.5),
-  C("非常忙，我学医，我们的课很多。","Fēicháng máng, wǒ xué yī, wǒmen de kè hěn duō.","Très chargé, j'étudie la médecine, nous avons beaucoup de cours.",0.55), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Demandez : « Tu es toujours en train d'étudier à l'université ? »"),
@@ -161,19 +161,19 @@ registerChapter({
   N("Demandez avec une question alternative : « Le petit frère est-il levé ? »"),
   TH(),
   C("弟弟起床没起床呢？","Dìdi qǐchuáng méi qǐchuáng ne?","Le petit frère est-il levé ?",0.6),
-  C("弟弟起床没起床呢？","Dìdi qǐchuáng méi qǐchuáng ne?","Le petit frère est-il levé ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Dormir » se dit [[睡觉|shuìjiào]], ou juste [[睡|shuì]] tout seul. Écoutez et répétez."),
   ...teach2("睡觉","shuìjiào","dormir"),
   N("Répondez : « Pas encore, il dort toujours. »"),
   TH(),
   C("没起床呢，还在睡觉。","Méi qǐchuáng ne, hái zài shuìjiào.","Pas encore, il dort toujours.",0.6),
-  C("没起床呢，还在睡觉。","Méi qǐchuáng ne, hái zài shuìjiào.","Pas encore, il dort toujours.",0.6), HOLD(),
+   HOLD(),
 
   N("« Là-bas » se dit aussi [[那里|nàli]] — une variante de [[那儿|nàr]] que vous connaissez. Demandez : « Il dort encore ? Il y va aujourd'hui ou pas ? »"),
   TH(),
   C("还睡呢？他今天去不去那里？","Hái shuì ne? Tā jīntiān qù bu qù nàli?","Il dort encore ? Il y va aujourd'hui ou pas ?",0.55),
-  C("还睡呢？他今天去不去那里？","Hái shuì ne? Tā jīntiān qù bu qù nàli?","Il dort encore ? Il y va aujourd'hui ou pas ?",0.6), HOLD(),
+   HOLD(),
 
   N("« Où » se dit aussi [[哪里|nǎlǐ]] — une variante de [[哪儿|nǎr]]. Demandez : « Aller où ? »"),
   TH(),
@@ -191,7 +191,7 @@ registerChapter({
   N("Et « des enfants », « des copains », se dit [[小朋友|xiǎopéngyou]] — vous connaissez déjà [[朋友|péngyou]]. Dites : « Je lui ai demandé hier, il m'a dit qu'il n'irait pas, qu'il voulait jouer avec des amis aujourd'hui. »"),
   TH(),
   C("我昨天问他，他对我说，他不去，他今天要和小朋友玩。","Wǒ zuótiān wèn tā, tā duì wǒ shuō, tā bú qù, tā jīntiān yào hé xiǎopéngyou wán.","Je lui ai demandé hier, il m'a dit qu'il n'irait pas, qu'il voulait jouer avec des amis aujourd'hui.",0.5),
-  C("我昨天问他，他对我说，他不去，他今天要和小朋友玩。","Wǒ zuótiān wèn tā, tā duì wǒ shuō, tā bú qù, tā jīntiān yào hé xiǎopéngyou wán.","Je lui ai demandé hier, il m'a dit qu'il n'irait pas, qu'il voulait jouer avec des amis aujourd'hui.",0.55), HOLD(),
+   HOLD(),
 
   // Rejeu du dialogue de référence entendu au tout début
   N("Rejouons le dialogue du début. Demandez : « Le petit frère est-il levé ? »"),

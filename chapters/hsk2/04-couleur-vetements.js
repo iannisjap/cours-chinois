@@ -49,7 +49,7 @@ registerChapter({
   N("Demandez, avec 过 : « maman, sommes-nous déjà venues dans ce centre commercial ? »"),
   TH(),
   C("妈妈，我们来过这家商场吗？","Māma, wǒmen láiguo zhè jiā shāngchǎng ma?","Maman, sommes-nous déjà venues dans ce centre commercial ?",0.5),
-  C("妈妈，我们来过这家商场吗？","Māma, wǒmen láiguo zhè jiā shāngchǎng ma?","Maman, sommes-nous déjà venues dans ce centre commercial ?",0.55), HOLD(),
+   HOLD(),
   N("Répondez : « non, jamais, il vient d'ouvrir. »"),
   TH(),
   C("没来过，这是新开的。","Méi láiguo, zhè shì xīn kāi de.","Non, jamais, il vient d'ouvrir.",0.55), HOLD(),
@@ -65,7 +65,7 @@ registerChapter({
   ...teach2("一条裤子","yì tiáo kùzi","un pantalon"),
   TH(),
   C("我想买条裤子。","Wǒ xiǎng mǎi tiáo kùzi.","Je voudrais acheter un pantalon.",0.6),
-  C("我想买条裤子。","Wǒ xiǎng mǎi tiáo kùzi.","Je voudrais acheter un pantalon.",0.6), HOLD(),
+   HOLD(),
   N("On vous répond : « pas de problème. »"),
   C("没问题。","Méi wèntí.","Pas de problème.",0.6), HOLD(),
 
@@ -97,7 +97,7 @@ registerChapter({
   N("Dites : « maman, je voudrais acheter ce pantalon blanc. »"),
   TH(),
   C("妈妈，我想买这条白色的裤子。","Māma, wǒ xiǎng mǎi zhè tiáo báisè de kùzi.","Maman, je voudrais acheter ce pantalon blanc.",0.5),
-  C("妈妈，我想买这条白色的裤子。","Māma, wǒ xiǎng mǎi zhè tiáo báisè de kùzi.","Maman, je voudrais acheter ce pantalon blanc.",0.55), HOLD(),
+   HOLD(),
   N("On vous demande : « tu as déjà beaucoup de vêtements blancs, pourquoi en acheter encore un blanc ? »"),
   C("你有很多白色的衣服，为什么还买白色的？","Nǐ yǒu hěn duō báisè de yīfu, wèi shénme hái mǎi báisè de?","Tu as déjà beaucoup de vêtements blancs, pourquoi en acheter encore un blanc ?",0.45),
 
@@ -149,7 +149,7 @@ registerChapter({
   N("Dites : « maman, je voudrais acheter un nouveau cartable. »"),
   TH(),
   C("妈妈，我想买个新书包。","Māma, wǒ xiǎng mǎi ge xīn shūbāo.","Maman, je voudrais acheter un nouveau cartable.",0.55),
-  C("妈妈，我想买个新书包。","Māma, wǒ xiǎng mǎi ge xīn shūbāo.","Maman, je voudrais acheter un nouveau cartable.",0.6), HOLD(),
+   HOLD(),
 
   N("« Passer, aller par là » se dit [[过去|guòqù]] — attention, différent de [[过|guo]] vu en partie 1. Écoutez et répétez."),
   ...teach2("过去","guòqù","passer, aller par là"),
