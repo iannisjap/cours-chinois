@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cours audio de chinois</title>
-<link rel="stylesheet" href="engine/style.css?v=49">
+<link rel="stylesheet" href="engine/style.css?v=50">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-yuan.png?v=2">
 <link rel="shortcut icon" type="image/png" href="assets/icon-yuan.png?v=2">
 <link rel="apple-touch-icon" href="assets/icon-yuan.png?v=2">
@@ -12,35 +12,55 @@
 <body>
 
 <!-- Menu des DOSSIERS (HSK 1 / HSK 2 / Bonus) — masqué par défaut : l'accueil, c'est le lecteur ci-dessous, sans leçon chargée -->
-<div class="overlay" id="folderOverlay" style="display:none">
-  <button class="overlay-close" id="folderCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
-  <div class="big-hanzi hanzi" style="font-size:52px">中文</div>
-  <h2>Cours audio de chinois mandarin</h2>
-  <p>Méthode audio dans l'esprit Pimsleur : narrateur français, phrases chinoises lues lentement, pauses pour répéter et rappels espacés. Choisis un dossier pour commencer.</p>
-  <div class="menu-list" id="folderList"></div>
-  <div class="tip">Écouteurs conseillés · MP3 intégrés · contrôles AirPods compatibles</div>
+<div class="overlay" id="folderOverlay" style="display:none" onclick="closeMenu(event)">
+  <section class="menu-panel" role="dialog" aria-modal="true" aria-labelledby="folderMenuTitle">
+    <button class="overlay-close" id="folderCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
+    <div class="big-hanzi hanzi" style="font-size:52px">中文</div>
+    <h2 id="folderMenuTitle">Cours audio de chinois mandarin</h2>
+    <p>Méthode audio dans l'esprit Pimsleur : narrateur français, phrases chinoises lues lentement, pauses pour répéter et rappels espacés. Choisis un dossier pour commencer.</p>
+    <div class="menu-list" id="folderList"></div>
+    <div class="tip">Écouteurs conseillés · MP3 intégrés · contrôles AirPods compatibles</div>
+    <div class="menu-footer">
+      <button class="menu-to-top" type="button" onclick="scrollMenuToTop(this)" aria-label="Remonter en haut du menu">↑ Haut</button>
+      <button class="menu-close-bottom" type="button" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
+    </div>
+  </section>
 </div>
 
 <!-- Menu des CHAPITRES du dossier choisi -->
-<div class="overlay" id="chapterOverlay" style="display:none">
-  <button class="overlay-close" id="chapterCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
-  <div class="big-hanzi hanzi" id="folderBigHanzi" style="font-size:52px">中文</div>
-  <h2 id="folderOverlayTitle">HSK 1</h2>
-  <p id="folderOverlayIntro"></p>
-  <div class="menu-list" id="chapterList"></div>
-  <button class="menu-inline ghost" onclick="showFolders()">← Dossiers</button>
-  <div class="tip">Écouteurs conseillés · MP3 intégrés · contrôles AirPods compatibles</div>
+<div class="overlay" id="chapterOverlay" style="display:none" onclick="closeMenu(event)">
+  <section class="menu-panel" role="dialog" aria-modal="true" aria-labelledby="folderOverlayTitle">
+    <button class="overlay-close" id="chapterCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
+    <div class="big-hanzi hanzi" id="folderBigHanzi" style="font-size:52px">中文</div>
+    <h2 id="folderOverlayTitle">HSK 1</h2>
+    <p id="folderOverlayIntro"></p>
+    <button class="menu-inline ghost menu-parent-top" onclick="showFolders()">← Dossiers</button>
+    <div class="menu-list" id="chapterList"></div>
+    <button class="menu-inline ghost" onclick="showFolders()">← Dossiers</button>
+    <div class="tip">Écouteurs conseillés · MP3 intégrés · contrôles AirPods compatibles</div>
+    <div class="menu-footer">
+      <button class="menu-to-top" type="button" onclick="scrollMenuToTop(this)" aria-label="Remonter en haut du menu">↑ Haut</button>
+      <button class="menu-close-bottom" type="button" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
+    </div>
+  </section>
 </div>
 
 <!-- Menu des LEÇONS du chapitre choisi -->
-<div class="overlay" id="overlay" style="display:none">
-  <button class="overlay-close" id="menuCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
-  <div class="big-hanzi hanzi" id="lessonBigHanzi" style="font-size:52px">谈时间</div>
-  <h2 id="lessonOverlayTitle">Le temps · Cours audio de chinois</h2>
-  <p id="lessonOverlayIntro">Fais les leçons dans l'ordre : chaque leçon révise les précédentes.</p>
-  <div class="menu-list" id="menuList"></div>
-  <button class="menu-inline ghost" onclick="showChapters()">← Chapitres</button>
-  <div class="tip">Écouteurs conseillés · MP3 intégrés · contrôles AirPods compatibles</div>
+<div class="overlay" id="overlay" style="display:none" onclick="closeMenu(event)">
+  <section class="menu-panel" role="dialog" aria-modal="true" aria-labelledby="lessonOverlayTitle">
+    <button class="overlay-close" id="menuCloseBtn" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
+    <div class="big-hanzi hanzi" id="lessonBigHanzi" style="font-size:52px">谈时间</div>
+    <h2 id="lessonOverlayTitle">Le temps · Cours audio de chinois</h2>
+    <p id="lessonOverlayIntro">Fais les leçons dans l'ordre : chaque leçon révise les précédentes.</p>
+    <button class="menu-inline ghost menu-parent-top" onclick="showChapters()">← Chapitres</button>
+    <div class="menu-list" id="menuList"></div>
+    <button class="menu-inline ghost" onclick="showChapters()">← Chapitres</button>
+    <div class="tip">Écouteurs conseillés · MP3 intégrés · contrôles AirPods compatibles</div>
+    <div class="menu-footer">
+      <button class="menu-to-top" type="button" onclick="scrollMenuToTop(this)" aria-label="Remonter en haut du menu">↑ Haut</button>
+      <button class="menu-close-bottom" type="button" onclick="closeMenu()" aria-label="Fermer le menu et revenir à la leçon">✕</button>
+    </div>
+  </section>
 </div>
 
 <header>
@@ -100,7 +120,7 @@
 
 <!-- Catalogue local, moteur, puis chapitres (ordre important), puis démarrage -->
 <script src="audio/catalog.js?v=17"></script>
-<script src="engine/player.js?v=66"></script>
+<script src="engine/player.js?v=67"></script>
 <script src="chapters/hsk3/pinyin.js?v=2"></script>
 <script src="chapters/hsk3/framework.js?v=3"></script>
 <script src="chapters/hsk1/01-bonjour.js?v=41"></script>

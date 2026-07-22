@@ -1234,12 +1234,19 @@ function showFolders(){ nav('#/menu'); }
    à quel niveau du menu on se trouve, et peu importe le chemin parcouru
    pour y arriver. S'il n'y a jamais eu de leçon chargée (tout premier
    lancement), il n'y a rien à révéler : on reste sur l'accueil. */
-function closeMenu(){
+function closeMenu(event){
+  // Le fond assombri ferme le menu ; un clic dans la fenêtre elle-même
+  // conserve l'écran ouvert pour pouvoir choisir une leçon tranquillement.
+  if(event && event.target !== event.currentTarget) return;
   if(playerChapterIdx >= 0 && playerChapterIdx < CHAPTERS.length){
     nav('#/dossier/'+CHAPTERS[playerChapterIdx].group+'/ch/'+(playerChapterIdx+1)+'/lecon/'+(cur+1));
   } else {
     nav('#/');
   }
+}
+function scrollMenuToTop(button){
+  const panel = button && button.closest ? button.closest('.menu-panel') : null;
+  if(panel) panel.scrollTo({top:0, behavior:'smooth'});
 }
 window.addEventListener('hashchange', route);
 function initApp(){
@@ -1253,6 +1260,7 @@ window.showMenu = showMenu;
 window.showChapters = showChapters;
 window.showFolders = showFolders;
 window.closeMenu = closeMenu;
+window.scrollMenuToTop = scrollMenuToTop;
 window.initApp = initApp;
 $('menuBtn').addEventListener('click', showMenu);
 
