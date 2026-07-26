@@ -63,7 +63,7 @@ registerChapter({
   N("Répondez : une paire de chaussures et une chemise."), TH(),
   C("我想买一双鞋和一件衬衣。","Wǒ xiǎng mǎi yì shuāng xié hé yí jiàn chènyī.","Je voudrais acheter une paire de chaussures et une chemise.",.66), HOLD(),
   N("Dites : je cherche une robe ou un qipao pour une fête."), TH(),
-  C("我想买一条连衣裙或者一件旗袍。","Wǒ xiǎng mǎi yì tiáo liányīqún huòzhě yí jiàn qípáo.","Je cherche une robe ou un qipao.",.64), HOLD(),
+  C("我想买一条连衣裙或者一件旗袍，参加聚会的时候穿。","Wǒ xiǎng mǎi yì tiáo liányīqún huòzhě yí jiàn qípáo, cānjiā jùhuì de shíhou chuān.","Je cherche une robe ou un qipao pour une fête.",.64), HOLD(),
     ]; } },
 
   { num:3, hanzi:"颜色大小", title:"Couleur, taille et style", desc:"颜色 · 红色 · 黑色 · 大 · 小 · 好看",
@@ -87,7 +87,7 @@ registerChapter({
   ...teach2("长","cháng","long"),
   ...teach2("短","duǎn","court"),
   N("Demandez : avez-vous une jupe rouge ?"), TH(),
-  C("你们有红色的裙子吗？","Nǐmen yǒu hóngsè de qúnzi ma?","Avez-vous des jupes rouges ?",.66), HOLD(),
+  C("你们有红色的裙子吗？","Nǐmen yǒu hóngsè de qúnzi ma?","Avez-vous une jupe rouge ?",.66), HOLD(),
   N("Le vendeur répond : oui, cette jupe rouge est très jolie."), TH(),
   C("有，这条红色的裙子很好看。","Yǒu, zhè tiáo hóngsè de qúnzi hěn hǎokàn.","Oui, cette jupe rouge est très jolie.",.66), HOLD(),
   N("Vous l'essayez. Dites : elle est jolie, mais un peu trop grande."), TH(),
