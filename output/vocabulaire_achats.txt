@@ -1,0 +1,66 @@
+买	acheter (dans un magasin ou au marché)
+想买	vouloir acheter
+商店	magasin, boutique
+逛商店	faire les magasins
+衣服	vêtement(s)
+衬衫	chemise
+西服	costume (veste et pantalon habillés)
+T恤衫	tee-shirt
+毛衣	pull
+大衣	manteau long
+羽绒服	doudoune
+裤子	pantalon
+裙子	jupe
+连衣裙	robe
+旗袍	robe chinoise traditionnelle (qipao)
+鞋	chaussures
+一件	classificateur pour une pièce de vêtement
+一条	classificateur pour un pantalon ou une jupe
+一双	classificateur pour une paire, par exemple des chaussures
+颜色	couleur
+红色	rouge
+黄色	jaune
+黑色	noir
+白色	blanc
+蓝色	bleu
+绿色	vert
+灰色	gris
+好看	joli, qui a belle allure
+大	grand
+小	petit
+薄	fin, peu épais (tissu ou vêtement)
+厚	épais (tissu ou vêtement)
+长	long
+短	court
+有点儿大	un peu trop grand
+有点儿小	un peu trop petit
+多少钱	combien ça coûte ?
+块	yuan (forme courante à l'oral)
+元	yuan (forme écrite ou plus formelle)
+一共	en tout, au total
+试穿	essayer un vêtement en l'enfilant
+试衣间	cabine d'essayage
+合适	convenir, être à la bonne taille
+号	taille, numéro
+贵	cher
+便宜	bon marché, moins cher
+一点儿	un peu
+太贵了	c'est trop cher
+能便宜一点儿吗？	pouvez-vous faire un peu moins cher ? (marché ou petite boutique)
+现金	espèces
+刷卡	payer par carte
+微信支付	payer avec WeChat Pay
+扫码	scanner un code
+斤	unité de poids chinoise : 500 grammes
+一斤	500 grammes
+苹果	pomme
+香蕉	banane
+面包	pain
+蛋糕	gâteau
+牛奶	lait
+矿泉水	eau minérale
+又红又大	à la fois rouge et gros
+比	comparé à, plus... que
+最便宜	le moins cher
+付款	payer, effectuer un paiement
+怎么付款？	comment souhaitez-vous payer ?
