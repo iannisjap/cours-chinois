@@ -60,20 +60,40 @@ l'aperçu de l'app Claude). État en mémoire uniquement.
   naturelle, sans silence artificiel ni seconde compression. Le bouton
   « + lent » du lecteur reste disponible au besoin.
 
-## 4. Structure pédagogique d'une leçon (~15 min)
+## 4. Structure pédagogique d'une leçon (~15–20 min)
 
-1. **Révision espacée** : 2-3 questions des leçons précédentes (N + TH + C)
-2. **Dialogue cible** : écoute complète à 0.4, avec pauses de 2 s
-3. **Enseignement** : mots nouveaux avec `teach`, construction à rebours
-   pour les mots longs (fin du mot d'abord : diǎn → jǐ diǎn → xiànzài jǐ diǎn)
-4. **Drills** : `drill` + rappels espacés des items vus plus tôt dans la leçon
-5. **Mini-conversation** : l'élève joue un rôle du dialogue cible
-6. **Révision finale** : série rapide N + TH + C + P(1.5)
-7. Clôture : encouragement + consigne de réécoute demain + 再见！
+Le cours suit une logique **Pimsleur** : on ne livre jamais une liste de
+vocabulaire à mémoriser. Une leçon conduit vers une situation orale précise,
+et l'élève doit pouvoir comprendre et jouer le dialogue annoncé au début.
 
-Règles : max ~8 mots nouveaux par leçon ; toujours donner la traduction
-française ; ordre des mots chinois expliqué quand il diffère du français ;
-jamais de pinyin seul dans le texte parlé du narrateur (toujours `[[汉字|pinyin]]`).
+1. **Révision espacée** : 2–3 réponses actives des leçons précédentes (N + TH + C).
+2. **Dialogue cible dès le début** : 2 à 5 répliques authentiques, que l'élève
+   écoutera puis rejouera à la fin. Annoncer clairement ce qu'il saura faire.
+3. **Phrases de contexte** : introduire chaque mot ou construction nouveau
+   dans une phrase complète, utile et traduite. Ne jamais enchaîner des mots
+   isolés du type « rouge, bleu, vert » ou « chemise, pull, manteau ».
+4. **Variation immédiate** : reprendre le même mot dans au moins une deuxième
+   phrase, avec un autre article, lieu, prix ou interlocuteur. Cela donne le
+   sens et évite l'apprentissage par simple liste.
+5. **Production guidée** : poser une consigne française non ambiguë, faire une
+   pause avec TH(), puis donner une correction chinoise complète avec C().
+6. **Retour au dialogue cible** : l'élève joue au moins une fois chaque rôle ;
+   le dialogue de début devient donc une compétence réellement produite.
+7. **Clôture et réactivation** : rappeler la situation acquise et inviter à
+   rejouer le dialogue le lendemain.
+
+Règles non négociables :
+
+- introduire au plus 4–6 mots ou blocs vraiment nouveaux par leçon ;
+- tout mot nouveau doit apparaître dans une phrase chinoise complète, puis
+  revenir dans une variation ou une réponse active ;
+- une phrase cible doit toujours avoir une traduction française fidèle ;
+- expliquer brièvement l'ordre des mots uniquement lorsqu'il est utile pour
+  produire la phrase, sans transformer la leçon en cours de grammaire abstrait ;
+- jamais de pinyin seul dans le texte parlé du narrateur (toujours
+  `[[汉字|pinyin]]`) ;
+- chaque réplique chinoise est dite une fois, suivie d'une pause. L'élève peut
+  utiliser le bouton « Répéter » plutôt que subir une répétition automatique.
 
 ### Parcours pédagogique du HSK3
 
