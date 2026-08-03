@@ -393,6 +393,11 @@ function clearTimers(){ if(pauseTimer){clearTimeout(pauseTimer);pauseTimer=null;
 
 function renderContentCaption(step, yourTurnLabel, holdStep){
   const c = $('caption'); c.innerHTML='';
+  c.classList.remove('replayable');
+  c.removeAttribute('role');
+  c.removeAttribute('tabindex');
+  c.removeAttribute('aria-label');
+  c.removeAttribute('title');
   if(!step) return;
   if(step.t==='zh'){
     if(showText){
@@ -450,13 +455,14 @@ function renderContentCaption(step, yourTurnLabel, holdStep){
       c.appendChild(controls);
     }
   }
-  // La répétition reste disponible à tout moment, y compris pendant la
-  // lecture : repeatLastContent() met alors la leçon en pause proprement.
+  // Le texte lui-même sert de commande de répétition : cela évite un bouton
+  // redondant tout en gardant la réécoute disponible pendant la lecture.
   if(step.t === 'fr' || step.t === 'zh'){
-    const repeat = document.createElement('button');
-    repeat.className = 'repeat-last'; repeat.textContent = '↻ Répéter';
-    repeat.addEventListener('click', repeatLastContent);
-    c.appendChild(repeat);
+    c.classList.add('replayable');
+    c.setAttribute('role', 'button');
+    c.setAttribute('tabindex', '0');
+    c.setAttribute('aria-label', 'Réécouter le texte affiché');
+    c.setAttribute('title', 'Cliquez sur le texte pour le réécouter');
   }
 }
 /* le contenu affiché pendant une pause/hold = le dernier vrai contenu */
@@ -930,11 +936,16 @@ $('timelineBar').addEventListener('click', event=>{
   const rect = event.currentTarget.getBoundingClientRect();
   seekTimeline((event.clientX - rect.left) / rect.width);
 });
-$('replayChip').addEventListener('click', ()=>{
-  stopEverything();
-  let j = Math.min(idx, steps.length-1);
-  while(j>=0 && steps[j].t!=='zh') j--;
-  if(j>=0){ idx=j; if(!playing){playing=true;syncPlayBtn();} runStep(); }
+$('caption').addEventListener('click', event=>{
+  if(!$('caption').classList.contains('replayable')) return;
+  if(event.target.closest('button, input, textarea, select, [contenteditable]')) return;
+  repeatLastContent();
+});
+$('caption').addEventListener('keydown', event=>{
+  if(!$('caption').classList.contains('replayable')) return;
+  if(event.key !== 'Enter') return;
+  event.preventDefault();
+  repeatLastContent();
 });
 function reRenderCaption(){
   renderCaptionFor(idx, steps[idx]&&steps[idx].t==='hold'?steps[idx].label:null);
