@@ -1,0 +1,47 @@
+季节	saison
+春天	printemps
+夏天	été
+秋天	automne
+冬天	hiver
+暖和	doux (température agréable)
+热	chaud
+凉快	agréablement frais
+冷	froid
+晴	beau, ensoleillé (temps)
+阴	couvert, gris (ciel)
+多云	nuageux
+下雨	pleuvoir
+下雪	neiger
+刮风	avoir du vent
+大雨	forte pluie
+伞	parapluie
+天气预报	prévisions météorologiques
+明天	demain
+后天	après-demain
+大后天	dans trois jours
+会	indiquer ce qui devrait arriver (futur / prévision)
+度	degré (température)
+气温	température de l'air
+最高气温	température maximale
+最低气温	température minimale
+温差	écart de température
+降温	baisse de la température
+好像	sembler, on dirait
+变天	changement de temps
+马上	bientôt, d'un moment à l'autre
+一会儿…一会儿…	tantôt… tantôt…
+突然	soudain
+变化	changement
+打算	prévoir, avoir l'intention de
+如果…就…	si… alors…
+改天	un autre jour (pour reporter)
+适合	convenir à, être adapté pour
+爬山	faire de la randonnée (en montagne)
+野餐	pique-niquer
+湿	humide
+干	sec
+准	exact, fiable (prévision)
+一点儿也不	pas du tout
+糟糕	quelle catastrophe, terrible
+别着急	ne t'inquiète pas
+一把伞	un parapluie (classificateur 把)
