@@ -1,35 +1,59 @@
+病	maladie, être malade
+看病	consulter pour se faire soigner
+医生	médecin
+医院	hôpital
+药	médicament
+开药	prescrire des médicaments
 不舒服	ne pas se sentir bien
 疼	avoir mal, faire mal
 头	tête
-头疼	avoir mal à la tête
+鼻子	nez
 嗓子	gorge
-肚子	ventre
+手	main
 胳膊	bras
+肚子	ventre
 腿	jambe
 脚	pied
+头疼	avoir mal à la tête
+肚子疼	avoir mal au ventre
+嗓子疼	avoir mal à la gorge
 感冒	attraper un rhume, rhume
 发烧	avoir de la fièvre
 咳嗽	tousser, toux
 流鼻涕	avoir le nez qui coule
 打喷嚏	éternuer
+症状	symptôme
+什么时候	quand, à quel moment
 什么时候开始的？	quand est-ce que cela a commencé ?
 开始	commencer
-医院	hôpital
+今天早上	ce matin
+昨天晚上	hier soir
+去医院	aller à l'hôpital
 看医生	consulter un médecin
 陪	accompagner quelqu'un
-开药	prescrire des médicaments
-药	médicament
+这是医生给我开的药。	ce sont les médicaments que le médecin m'a prescrits
 这药怎么吃？	comment faut-il prendre ce médicament ?
 一天三次	trois fois par jour
 一次两片	deux comprimés à chaque prise
+次	fois (fréquence)
+片	comprimé ; classificateur pour un comprimé
 按时	à l'heure, selon l'horaire prévu
+吃药	prendre un médicament
 多喝水	boire beaucoup d'eau
+温水	eau tiède
 好好休息	bien se reposer
+别熬夜	ne pas se coucher tard
 着凉	prendre froid
 淋雨	être mouillé par la pluie
+送伞	apporter un parapluie à quelqu'un
+外套	veste, manteau léger
 受伤	se blesser
 好点儿	aller un peu mieux
 好多了	aller beaucoup mieux
 已经	déjà
+一直	sans arrêt, continuellement
+很厉害	très fort, sévère (pour un symptôme)
 说明	notice, explication écrite
-别熬夜	ne pas se coucher tard
+看明白	bien comprendre en lisant ou en regardant
+安心	tranquillement, sans inquiétude
+太累	trop fatigué
