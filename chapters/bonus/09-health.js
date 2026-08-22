@@ -10,7 +10,7 @@ registerChapter({
   intro:"Douze leçons pour dire simplement ce qui ne va pas, expliquer depuis quand, comprendre les indications usuelles du médecin et rassurer un ami. Le cours apprend à communiquer ; en cas de problème médical réel, consultez un professionnel de santé.",
   lessons:[
 
-  {num:1,hanzi:"哪儿不舒服",title:"Dire ce qui ne va pas",desc:"哪儿不舒服 · 疼 · 头",
+  {num:1,hanzi:"哪儿不舒服",title:"Dire ce qui ne va pas",desc:"哪儿不舒服 · 疼 · 头 · 手",
     build(){return[
   N("Leçon 1. Écoutez le dialogue cible. Vous allez pouvoir demander à quelqu'un où il a mal et répondre simplement."),
   C("你哪儿不舒服？","Nǐ nǎr bù shūfu?","Qu'est-ce qui ne va pas ?",.62),
@@ -19,6 +19,7 @@ registerChapter({
   ...teach2("我今天不太舒服。","Wǒ jīntiān bú tài shūfu.","Je ne me sens pas très bien aujourd'hui."),
   ...teach2("她头很疼，想早点儿回家。","Tā tóu hěn téng, xiǎng zǎodiǎnr huí jiā.","Elle a très mal à la tête et voudrait rentrer tôt."),
   ...teach2("你哪儿疼？我肚子疼。","Nǐ nǎr téng? Wǒ dùzi téng.","Où as-tu mal ? J'ai mal au ventre."),
+  ...teach2("我的手疼，今天不想拿东西。","Wǒ de shǒu téng, jīntiān bù xiǎng ná dōngxi.","J'ai mal à la main ; je ne veux pas porter de choses aujourd'hui."),
   N("Demandez : qu'est-ce qui ne va pas ?"),TH(),
   C("你哪儿不舒服？","Nǐ nǎr bù shūfu?","Qu'est-ce qui ne va pas ?",.66),HOLD(),
   N("Répondez : j'ai mal à la tête."),TH(),
@@ -27,7 +28,7 @@ registerChapter({
   C("我今天不太舒服。","Wǒ jīntiān bú tài shūfu.","Je ne me sens pas très bien aujourd'hui.",.66),HOLD(),
     ];}},
 
-  {num:2,hanzi:"嗓子疼",title:"Préciser la partie du corps",desc:"嗓子 · 肚子 · 胳膊 · 腿 · 脚",
+  {num:2,hanzi:"嗓子疼",title:"Préciser la partie du corps",desc:"鼻子 · 嗓子 · 肚子 · 胳膊 · 腿 · 脚",
     build(){return[
   N("Leçon 2. Écoutez le dialogue cible. Vous allez dire clairement si vous avez mal à la gorge ou à une autre partie du corps."),
   C("你嗓子疼吗？","Nǐ sǎngzi téng ma?","As-tu mal à la gorge ?",.62),
@@ -36,6 +37,7 @@ registerChapter({
   ...teach2("我昨天跑步以后腿疼。","Wǒ zuótiān pǎobù yǐhòu tuǐ téng.","J'ai mal aux jambes après avoir couru hier."),
   ...teach2("他的胳膊疼，今天不能打球。","Tā de gēbo téng, jīntiān bù néng dǎ qiú.","Il a mal au bras ; il ne peut pas jouer au ballon aujourd'hui."),
   ...teach2("我走了很长时间，脚有点儿疼。","Wǒ zǒu le hěn cháng shíjiān, jiǎo yǒudiǎnr téng.","J'ai marché longtemps ; j'ai un peu mal aux pieds."),
+  ...teach2("我的鼻子不舒服，一直流鼻涕。","Wǒ de bízi bù shūfu, yìzhí liú bítì.","Mon nez me gêne ; il coule sans arrêt."),
   N("Demandez : as-tu mal à la gorge ?"),TH(),
   C("你嗓子疼吗？","Nǐ sǎngzi téng ma?","As-tu mal à la gorge ?",.66),HOLD(),
   N("Répondez : j'ai un peu mal et je tousse aussi un peu."),TH(),
@@ -53,6 +55,8 @@ registerChapter({
   ...teach2("我不发烧，但是一直流鼻涕。","Wǒ bù fāshāo, dànshì yìzhí liú bítì.","Je n'ai pas de fièvre, mais j'ai le nez qui coule sans arrêt."),
   ...teach2("她一直打喷嚏，可能感冒了。","Tā yìzhí dǎ pēntì, kěnéng gǎnmào le.","Elle éternue sans arrêt ; elle a peut-être attrapé un rhume."),
   ...teach2("我咳嗽得很厉害，今天不想出去。","Wǒ késou de hěn lìhai, jīntiān bù xiǎng chūqù.","Je tousse beaucoup ; je ne veux pas sortir aujourd'hui."),
+  ...teach2("感冒的症状有咳嗽、发烧和流鼻涕。","Gǎnmào de zhèngzhuàng yǒu késou, fāshāo hé liú bítì.","Les symptômes d'un rhume comprennent la toux, la fièvre et le nez qui coule."),
+  ...teach2("他生病了，今天在家休息。","Tā shēng bìng le, jīntiān zài jiā xiūxi.","Il est malade ; il se repose à la maison aujourd'hui."),
   N("Demandez : as-tu attrapé un rhume ?"),TH(),
   C("你感冒了吗？","Nǐ gǎnmào le ma?","As-tu attrapé un rhume ?",.66),HOLD(),
   N("Répondez : on dirait que oui, j'ai de la fièvre et je tousse."),TH(),
@@ -78,13 +82,14 @@ registerChapter({
   C("我是昨天晚上开始不舒服的。","Wǒ shì zuótiān wǎnshang kāishǐ bù shūfu de.","J'ai commencé à ne pas me sentir bien hier soir.",.66),HOLD(),
     ];}},
 
-  {num:5,hanzi:"去看医生",title:"Parler d’une consultation",desc:"医院 · 看医生 · 陪 · 去了",
+  {num:5,hanzi:"去看医生",title:"Parler d’une consultation",desc:"医院 · 看病 · 看医生 · 陪",
     build(){return[
   N("Leçon 5. Écoutez le dialogue cible. Vous allez demander à un ami s'il est allé à l'hôpital et proposer de l'accompagner."),
   C("你去医院了吗？","Nǐ qù yīyuàn le ma?","Es-tu allé à l'hôpital ?",.62),
   C("还没有，你陪我去吧。","Hái méiyǒu, nǐ péi wǒ qù ba.","Pas encore. Accompagne-moi, s'il te plaît.",.62),
   N("[[医院|yīyuàn]] est l'hôpital. [[看医生|kàn yīshēng]] signifie consulter un médecin. [[陪|péi]] est accompagner quelqu'un."),
   ...teach2("我下午去医院看医生。","Wǒ xiàwǔ qù yīyuàn kàn yīshēng.","Je vais consulter à l'hôpital cet après-midi."),
+  ...teach2("我今天去医院看病，医生让我多休息。","Wǒ jīntiān qù yīyuàn kàn bìng, yīshēng ràng wǒ duō xiūxi.","Je vais consulter à l'hôpital aujourd'hui ; le médecin me demande de me reposer davantage."),
   ...teach2("她已经去了，医生给她开了药。","Tā yǐjīng qù le, yīshēng gěi tā kāi le yào.","Elle y est déjà allée ; le médecin lui a prescrit des médicaments."),
   ...teach2("你不舒服，我陪你去医院吧。","Nǐ bù shūfu, wǒ péi nǐ qù yīyuàn ba.","Tu ne te sens pas bien ; je t'accompagne à l'hôpital."),
   N("Demandez : es-tu allé à l'hôpital ?"),TH(),
@@ -198,7 +203,7 @@ registerChapter({
   C("我已经吃药了，现在好多了。","Wǒ yǐjīng chī yào le, xiànzài hǎo duō le.","J'ai déjà pris le médicament ; maintenant, je vais beaucoup mieux.",.66),HOLD(),
     ];}},
 
-  {num:12,hanzi:"好好休息",title:"Dialogue final : aider un ami malade",desc:"Révision complète et réponse naturelle",
+  {num:12,hanzi:"好好休息",title:"Dialogue final : aider un ami malade",desc:"Révision complète · 中医 et 西医",
     build(){return[
   N("Mission finale. Écoutez le dialogue cible. Vous allez pouvoir demander des nouvelles, comprendre la situation et répondre avec des phrases utiles."),
   C("你今天怎么没来上课？","Nǐ jīntiān zěnme méi lái shàngkè?","Pourquoi n'es-tu pas venu en cours aujourd'hui ?",.62),
@@ -206,6 +211,9 @@ registerChapter({
   C("什么时候开始的？","Shénme shíhou kāishǐ de?","Quand est-ce que cela a commencé ?",.62),
   C("昨天晚上开始的。我已经去医院了。","Zuótiān wǎnshang kāishǐ de. Wǒ yǐjīng qù yīyuàn le.","Ça a commencé hier soir. Je suis déjà allé à l'hôpital.",.62),
   C("那你要多喝水，按时吃药，好好休息。","Nà nǐ yào duō hē shuǐ, ànshí chī yào, hǎohāo xiūxi.","Alors, bois beaucoup d'eau, prends tes médicaments à l'heure et repose-toi bien.",.62),
+  N("Le support mentionne aussi la médecine chinoise. Voici une phrase de culture générale, sans choisir de traitement."),
+  ...teach2("中医和西医的治疗方法不一样。","Zhōngyī hé xīyī de zhìliáo fāngfǎ bù yíyàng.","La médecine chinoise et la médecine occidentale n'ont pas les mêmes méthodes de traitement."),
+  ...teach2("有些人生病的时候会去看中医。","Yǒuxiē rén shēng bìng de shíhou huì qù kàn zhōngyī.","Certaines personnes consultent un médecin de médecine chinoise lorsqu'elles sont malades."),
   N("Vous appelez votre ami. Demandez : pourquoi n'es-tu pas venu en cours aujourd'hui ?"),TH(),
   C("你今天怎么没来上课？","Nǐ jīntiān zěnme méi lái shàngkè?","Pourquoi n'es-tu pas venu en cours aujourd'hui ?",.66),HOLD(),
   N("Répondez : j'ai attrapé un rhume, j'ai mal à la gorge et je tousse aussi."),TH(),

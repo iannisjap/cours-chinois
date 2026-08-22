@@ -57,3 +57,6 @@
 看明白	bien comprendre en lisant ou en regardant
 安心	tranquillement, sans inquiétude
 太累	trop fatigué
+中医	médecine chinoise ; médecin de médecine chinoise (selon le contexte)
+西医	médecine occidentale ; médecin occidental (selon le contexte)
+治疗方法	méthode de traitement
