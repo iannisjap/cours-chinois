@@ -40,7 +40,7 @@ if (!manual) {
   process.stdout.write('[]');
   process.exit(0);
 }
-const exercises = TileExercises.build(lessonSteps, manual, 10);
+const exercises = TileExercises.build(lessonSteps, manual);
 const texts = [...new Set(exercises.flatMap(exercise =>
   exercise.answer.concat(exercise.distractors).map(TileExercises.audioText)
 ).filter(Boolean))];

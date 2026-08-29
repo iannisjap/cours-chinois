@@ -699,7 +699,7 @@ async function loadAudioManifest(chapterId, lessonNum){
     // Le contenu d'un manifeste évolue quand de nouveaux blocs audio sont
     // ajoutés. Éviter qu'un ancien JSON mis en cache fasse croire que les MP3
     // fraîchement publiés sont absents.
-    const r = await fetch(base + '/manifest.json?v=27', {cache:'no-store'});
+    const r = await fetch(base + '/manifest.json?v=29', {cache:'no-store'});
     if(!r.ok) throw new Error('Manifeste audio introuvable (' + r.status + ')');
     m = await r.json();
   }
@@ -1334,7 +1334,7 @@ function renderPlayer(i){
     const lessonSteps = L.build();
     const manualExercises = TILE_EXERCISES[curChapter.id] && TILE_EXERCISES[curChapter.id][L.num];
     const finalExercises = manualExercises
-      ? TileExercises.build(lessonSteps, manualExercises, 10)
+      ? TileExercises.build(lessonSteps, manualExercises)
       : [];
     steps = lessonSteps.concat(finalExercises);
     if(curChapter.group === 'hsk1' && L.num !== 4) steps = addSpacedHskReview(steps);

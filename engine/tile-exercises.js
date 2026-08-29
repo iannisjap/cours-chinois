@@ -11,19 +11,33 @@
   const FALLBACK_DISTRACTORS = ['也','还','已经','没有','可能','很','吗','了','今天','明天'];
   const PUNCTUATION_RE = /^[，。！？；：、,.!?;:]$/u;
   const TRAILING_RE = /([。！？!?])$/u;
-  const SUFFIX_PARTICLES = new Set(['了','吗','吧','呢','的','得','地','儿']);
-  const PREFIX_WORDS = new Set(['一','不','没','别','很','太','也','还','再','就','才','会','要','想','能','可以','应该','可能','更','最','只','都','多']);
-  const LEXICON = new Set([
-    '一会儿','一点儿','有点儿','天气预报','最高气温','最低气温','什么季节','怎么样',
-    '下雨','下雪','刮风','下大雨','回家','拿伞','带伞','穿外套','出门','变天','改天',
-    '再去','就去','爬山','跑步','散步','冷得多','差不多','不舒服','头疼','肚子疼',
-    '嗓子疼','脚疼','胳膊疼','流鼻涕','打喷嚏','发烧','看医生','看病','去医院',
-    '开药','吃药','喝水','多喝水','按时吃药','好好休息','着凉','淋雨','上课','没来',
-    '好多了','好点儿','中医','西医'
+  const PARTICLES = new Set(['了','吗','吧','呢','的','得','地','过']);
+  const MODIFIERS = [
+    '一点儿','一会儿','有点儿','多云','没有','还是','可能','应该','可以','已经','差不多',
+    '我们','你们','他们','她们','有些','多少','怎么样'
+  ];
+  const ATOMIC_WORDS = new Set(MODIFIERS);
+  const PREFIXES = ['不','没','很','太','也','还','再','就','才','会','要','想','能','更','最','只','都','多'];
+  const FORCED_SPLITS = new Map([
+    ['变大',['变','大']], ['吃完',['吃','完']], ['出去',['出','去']],
+    ['打电话',['打','电话']], ['大雨',['大','雨']], ['得很',['得','很']],
+    ['的话',['的','话']], ['好多',['好','多']], ['花开',['花','开']],
+    ['喝水',['喝','水']], ['流鼻涕',['流','鼻涕']], ['请先',['请','先']],
+    ['下楼',['下','楼']], ['有风',['有','风']], ['在家',['在','家']],
+    ['早晚',['早','晚']], ['怎么说',['怎么','说']],
+    ['哪个',['哪','个']], ['这个',['这','个']], ['这次',['这','次']],
+    ['这种',['这','种']], ['这几天',['这','几','天']]
   ]);
 
   function create(prompt, answer, distractors, punctuation){
-    return {t:'tiles', prompt, answer:answer.slice(), distractors:(distractors||[]).slice(), punctuation:punctuation||'。'};
+    const answerBlocks = Array.isArray(answer) ? answer.slice() : wordTokens(answer);
+    const inferredPunctuation = Array.isArray(answer) ? '。' : punctuationFor(answer);
+    return {
+      t:'tiles', prompt,
+      answer:answerBlocks,
+      distractors:(distractors||[]).slice(),
+      punctuation:punctuation||inferredPunctuation
+    };
   }
 
   function audioText(value){
@@ -45,43 +59,63 @@
     } else {
       raw.push(...Array.from(clean).filter(character=>character.trim()));
     }
+
+    // Intl.Segmenter colle parfois plusieurs mots grammaticaux (不会, 就不,
+    // 我的…). On les sépare, tout en conservant les véritables unités
+    // lexicales enseignées comme 有点儿, 一会儿 et 多云.
     const lexical = [];
-    for(let index=0; index<raw.length;){
-      if(PUNCTUATION_RE.test(raw[index])){
-        lexical.push(raw[index++]);
-        continue;
+    for(let index=0; index<raw.length; index++){
+      const three = raw.slice(index, index + 3).join('');
+      const two = raw.slice(index, index + 2).join('');
+      if(raw[index] === '说明' && raw[index + 1] === '天'){
+        lexical.push('说','明天'); index += 1; continue;
       }
-      let match = '', end = index + 1;
-      let joined = '';
-      for(let cursor=index; cursor<Math.min(raw.length, index + 5); cursor++){
-        if(PUNCTUATION_RE.test(raw[cursor])) break;
-        joined += raw[cursor];
-        if(LEXICON.has(joined)){ match = joined; end = cursor + 1; }
+      if(three === '一会儿'){ lexical.push(three); index += 2; continue; }
+      if(two === '一点儿' || two === '有点儿' || two === '多云' || two === '怎么样'){
+        lexical.push(two); index += 1; continue;
       }
-      lexical.push(match || raw[index]);
-      index = match ? end : index + 1;
+      lexical.push(raw[index]);
     }
-    const attached = [];
-    lexical.forEach(token=>{
-      if(PUNCTUATION_RE.test(token)){
-        if(attached.length) attached[attached.length - 1] += token;
-      } else if(SUFFIX_PARTICLES.has(token) && attached.length) {
-        attached[attached.length - 1] += token;
-      } else {
-        attached.push(token);
+
+    function splitWord(token){
+      if(!token || PUNCTUATION_RE.test(token) || ATOMIC_WORDS.has(token)) return [token];
+      if(FORCED_SPLITS.has(token)) return FORCED_SPLITS.get(token).slice();
+      const measureMatch = token.match(/^([零一二两三四五六七八九十百千万几多少]+)(度|天|次|片|把|个|件|场)$/u);
+      if(measureMatch) return [measureMatch[1], measureMatch[2]];
+      if(token === '最低气温') return ['最','低','气温'];
+      if(token === '回家') return ['回','家'];
+      if(token === '回去') return ['回','去'];
+      if(token.startsWith('有些') && token !== '有些') return ['有些', ...splitWord(token.slice(2))];
+      const pronounMatch = token.match(/^(我们|你们|他们|她们|我|你|他|她)(.+)$/u);
+      if(pronounMatch){
+        return [pronounMatch[1], ...splitWord(pronounMatch[2])];
       }
-    });
+      for(const particle of PARTICLES){
+        if(token.length > particle.length && token.endsWith(particle)){
+          return [...splitWord(token.slice(0, -particle.length)), particle];
+        }
+      }
+      for(const prefix of PREFIXES){
+        if(token.length > prefix.length && token.startsWith(prefix)){
+          return [prefix, ...splitWord(token.slice(prefix.length))];
+        }
+      }
+      for(const prefix of ['已经','可能','今天','昨天','怎么','请','别','在','有','了']){
+        if(token.length > prefix.length && token.startsWith(prefix)){
+          return [prefix, ...splitWord(token.slice(prefix.length))];
+        }
+      }
+      return [token];
+    }
+
     const tokens = [];
-    let prefix = '';
-    attached.forEach(token=>{
-      if(PREFIX_WORDS.has(token)){
-        prefix += token;
-        return;
+    lexical.flatMap(splitWord).forEach(token=>{
+      if(PUNCTUATION_RE.test(token)){
+        if(tokens.length) tokens[tokens.length - 1] += token;
+      } else {
+        tokens.push(token);
       }
-      tokens.push(prefix + token);
-      prefix = '';
     });
-    if(prefix) tokens.push(prefix);
     return tokens;
   }
 
@@ -110,40 +144,48 @@
     return selected;
   }
 
-  function build(lessonSteps, manualExercises, minimum){
-    const target = Math.max(10, Number(minimum) || 10);
+  function sentenceKey(exercise){
+    return exercise.answer.map(audioText).join('').replace(/\s+/gu, '');
+  }
+
+  function build(lessonSteps, extraExercises){
     const phrases = uniqueChineseSteps(lessonSteps);
-    const pool = phrases.flatMap(step=>wordTokens(step.zh));
-    const result = (manualExercises || []).slice();
-    const signatures = new Set(result.map(item=>item.prompt + '|' + item.answer.join('|')));
-    const appendVariant = step=>{
+    const extras = (extraExercises || []).slice();
+    const pool = phrases.flatMap(step=>wordTokens(step.zh))
+      .concat(extras.flatMap(exercise=>exercise.answer));
+    const result = [];
+    const sentences = new Set();
+    const appendLessonPhrase = step=>{
       const words = wordTokens(step.zh);
-      const answer = words;
-      if(answer.length < 2) return;
-      const signature = step.fr + '|' + answer.join('|');
-      if(signatures.has(signature)) return;
-      signatures.add(signature);
-      result.push(create(
+      if(!words.length) return;
+      const exercise = create(
         step.fr,
-        answer,
-        chooseDistractors(answer, pool, signature),
+        words,
+        chooseDistractors(words, pool, step.zh),
         punctuationFor(step.zh)
-      ));
+      );
+      const key = sentenceKey(exercise);
+      if(sentences.has(key)) return;
+      sentences.add(key);
+      result.push(exercise);
     };
-    // Chaque phrase nouvelle est d'abord reconstruite avec de vrais mots et
-    // groupes grammaticaux. Les places restantes deviennent des rappels
-    // espacés : aucun bloc artificiel n'est créé en collant deux mots voisins.
-    for(const step of phrases){
-      if(result.length >= target) break;
-      appendVariant(step);
-    }
-    // Les rares leçons très courtes reçoivent une seconde distribution des
-    // blocs manuels : la phrase reste la même, mais le mélange change.
-    let cursor = 0;
-    while(result.length < target && result.length){
-      const source = result[cursor++ % result.length];
-      result.push(create(source.prompt, source.answer, source.distractors.slice().reverse(), source.punctuation));
-    }
+
+    // La fin de leçon reprend d'abord toutes les phrases chinoises réellement
+    // entendues, une seule fois chacune et dans leur ordre pédagogique.
+    phrases.forEach(appendLessonPhrase);
+
+    // Le fichier du cours fournit ensuite cinq productions de transfert :
+    // elles restent dans le même thème, mais n'ont jamais été dites auparavant.
+    extras.forEach(source=>{
+      if(!source.answer.length) return;
+      const key = sentenceKey(source);
+      if(sentences.has(key)) return;
+      sentences.add(key);
+      const distractors = source.distractors.length
+        ? source.distractors
+        : chooseDistractors(source.answer, pool, source.prompt + '|' + key);
+      result.push(create(source.prompt, source.answer, distractors, source.punctuation));
+    });
     return result;
   }
 
