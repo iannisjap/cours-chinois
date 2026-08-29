@@ -248,7 +248,7 @@ function renderTileExercise(step){
   document.querySelector('.ring-wrap')?.classList.add('exercise-active');
   let state = tileExerciseStates.get(idx);
   if(!state){
-    state = {pool:seededExerciseTiles(step), selected:[], message:'', complete:false};
+    state = {pool:seededExerciseTiles(step), selected:[], message:'', complete:false, showAnswer:false};
     tileExerciseStates.set(idx, state);
   }
   const chapterExercises = steps.filter(item=>item.t==='tiles');
@@ -329,6 +329,19 @@ function renderTileExercise(step){
   feedback.setAttribute('aria-live', 'polite');
   c.appendChild(feedback);
 
+  if(state.showAnswer && !state.complete){
+    const solution = document.createElement('div');
+    solution.className = 'exercise-solution';
+    solution.setAttribute('aria-live', 'polite');
+    const label = document.createElement('span');
+    label.textContent = 'Réponse : ';
+    solution.appendChild(label);
+    const chinese = document.createElement('strong');
+    chinese.textContent = step.answer.join(' ') + step.punctuation;
+    solution.appendChild(chinese);
+    c.appendChild(solution);
+  }
+
   const actions = document.createElement('div');
   actions.className = 'exercise-actions';
   if(state.complete){
@@ -353,6 +366,15 @@ function renderTileExercise(step){
       renderTileExercise(step);
     });
     actions.appendChild(clear);
+    const reveal = document.createElement('button');
+    reveal.className = 'exercise-answer-button' + (state.showAnswer ? ' active' : '');
+    reveal.textContent = state.showAnswer ? 'Masquer la réponse' : 'Réponse';
+    reveal.setAttribute('aria-pressed', state.showAnswer ? 'true' : 'false');
+    reveal.addEventListener('click', ()=>{
+      state.showAnswer = !state.showAnswer;
+      renderTileExercise(step);
+    });
+    actions.appendChild(reveal);
     const verify = document.createElement('button');
     verify.className = 'exercise-check' + (state.selected.length ? ' ready' : '');
     verify.textContent = 'Vérifier';
