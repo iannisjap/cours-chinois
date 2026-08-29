@@ -372,6 +372,7 @@ function renderTileExercise(step){
     reveal.setAttribute('aria-pressed', state.showAnswer ? 'true' : 'false');
     reveal.addEventListener('click', ()=>{
       state.showAnswer = !state.showAnswer;
+      if(state.showAnswer) playExercisePhrase(step);
       renderTileExercise(step);
     });
     actions.appendChild(reveal);
@@ -382,7 +383,10 @@ function renderTileExercise(step){
     verify.addEventListener('click', ()=>{
       const correct = state.selected.length === step.answer.length
         && state.selected.every((tile, position)=>tile.text === step.answer[position]);
-      if(correct) state.complete = true;
+      if(correct){
+        state.complete = true;
+        playExercisePhrase(step);
+      }
       else state.message = 'Pas encore. Vérifie l’ordre des blocs ou enlève l’intrus.';
       renderTileExercise(step);
     });
@@ -721,7 +725,7 @@ async function loadAudioManifest(chapterId, lessonNum){
     // Le contenu d'un manifeste évolue quand de nouveaux blocs audio sont
     // ajoutés. Éviter qu'un ancien JSON mis en cache fasse croire que les MP3
     // fraîchement publiés sont absents.
-    const r = await fetch(base + '/manifest.json?v=29', {cache:'no-store'});
+    const r = await fetch(base + '/manifest.json?v=30', {cache:'no-store'});
     if(!r.ok) throw new Error('Manifeste audio introuvable (' + r.status + ')');
     m = await r.json();
   }
@@ -755,6 +759,13 @@ function stopExerciseTileAudio(){
 }
 function playExerciseTile(tile){
   const text = TileExercises.audioText(tile);
+  playExerciseChinese(text, 'bloc');
+}
+function playExercisePhrase(step){
+  const text = step.answer.join('') + step.punctuation;
+  playExerciseChinese(text, 'phrase');
+}
+function playExerciseChinese(text, kind){
   const url = text && audioFileFor('zh', text);
   if(!url){ alert('Audio chinois introuvable pour « ' + text + ' ».'); return; }
   stopExerciseTileAudio();
@@ -764,7 +775,7 @@ function playExerciseTile(tile){
   audio.onended = clear;
   audio.onerror = ()=>{
     clear();
-    alert('Impossible de lire le bloc « ' + text + ' ».');
+    alert('Impossible de lire ' + (kind === 'phrase' ? 'la phrase' : 'le bloc') + ' « ' + text + ' ».');
   };
   audio.play().catch(()=>audio.onerror());
 }

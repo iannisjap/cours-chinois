@@ -41,7 +41,8 @@ if (!manual) {
   process.exit(0);
 }
 const exercises = TileExercises.build(lessonSteps, manual);
-const texts = [...new Set(exercises.flatMap(exercise =>
-  exercise.answer.concat(exercise.distractors).map(TileExercises.audioText)
-).filter(Boolean))];
+const texts = [...new Set(exercises.flatMap(exercise => [
+  ...exercise.answer.concat(exercise.distractors).map(TileExercises.audioText),
+  exercise.answer.join('') + exercise.punctuation,
+]).filter(Boolean))];
 process.stdout.write(JSON.stringify(texts));
