@@ -213,6 +213,13 @@ function seekTimeline(ratio){
   while(target < steps.length - 1 && steps[target].t !== 'fr' && steps[target].t !== 'zh') target++;
   seekToIndex(target);
 }
+function syncExerciseShortcut(){
+  $('exercisesChip').hidden = !steps.some(step=>step.t === 'tiles');
+}
+function goToExercises(){
+  const firstExercise = steps.findIndex(step=>step.t === 'tiles');
+  if(firstExercise >= 0) seekToIndex(firstExercise);
+}
 
 /* ---------- préférences d'affichage ---------- */
 const store = {
@@ -794,10 +801,13 @@ function requiredAudioItems(){
     if(step.t === 'zh') items.push(['zh', step.zh]);
     else if(step.t === 'fr') playableNarrationSegments(step.text)
       .forEach(seg=>items.push([seg.lang, segmentText(seg)]));
-    else if(step.t === 'tiles') step.answer.concat(step.distractors).forEach(tile=>{
-      const text = TileExercises.audioText(tile);
-      if(text) items.push(['zh', text]);
-    });
+    else if(step.t === 'tiles'){
+      step.answer.concat(step.distractors).forEach(tile=>{
+        const text = TileExercises.audioText(tile);
+        if(text) items.push(['zh', text]);
+      });
+      items.push(['zh', step.answer.join('') + step.punctuation]);
+    }
   });
   return items;
 }
@@ -1104,6 +1114,7 @@ document.addEventListener('keydown', event=>{
 });
 $('fwdBtn').addEventListener('click', ()=> moveSequence(+1));
 $('backBtn').addEventListener('click', ()=> moveSequence(-1));
+$('exercisesChip').addEventListener('click', goToExercises);
 let previousTrackTimer = null;
 function restartCurrentLesson(){
   if(playerChapterIdx < 0 || !steps.length) return;
@@ -1325,6 +1336,7 @@ function renderHome(){
   $('lessonTag').textContent = '—';
   $('stepLbl').textContent = '—';
   $('timeLbl').textContent = '';
+  $('exercisesChip').hidden = true;
   $('caption').innerHTML = '<div class="fr">Sélectionne une leçon dans le menu ☰ pour commencer.</div>';
 }
 function renderFolders(){
@@ -1377,6 +1389,7 @@ function renderPlayer(i){
     idx = 0; playing = false;
     buildTimeline();
   }
+  syncExerciseShortcut();
   syncPlayBtn(); updateProgress();
   $('lessonTag').textContent = (L.star ? 'Révision' : 'Leçon ' + L.num);
   // fil d'Ariane : « Chapitre › Leçon » — le nom du chapitre ramène à la liste des leçons
