@@ -227,3 +227,55 @@ registerChapter({
     ];}},
   ]
 });
+
+/* Exercices visuels de fin de leçon : syntaxe, vocabulaire et ordre des constituants. */
+registerTileExercises("09-health", {
+  1:[
+    TILES("Qu’est-ce qui ne va pas ?",["你","哪儿","不舒服"],["什么","头疼"],"？"),
+    TILES("Je ne me sens pas très bien aujourd’hui.",["我","今天","不太","舒服"],["很","昨天"]),
+  ],
+  2:[
+    TILES("As-tu mal à la gorge ?",["你","嗓子","疼","吗"],["鼻子","有点儿"],"？"),
+    TILES("J’ai marché longtemps ; j’ai un peu mal aux pieds.",["我","走了","很长时间，","脚","有点儿疼"],["胳膊","咳嗽"]),
+  ],
+  3:[
+    TILES("As-tu attrapé un rhume ?",["你","感冒","了","吗"],["发烧","还"],"？"),
+    TILES("Je n’ai pas de fièvre, mais j’ai constamment le nez qui coule.",["我","不发烧，","但是","一直","流鼻涕"],["咳嗽","好像"]),
+  ],
+  4:[
+    TILES("Quand est-ce que cela a commencé ?",["什么时候","开始","的"],["怎么","昨天"],"？"),
+    TILES("J’ai commencé à ne pas me sentir bien hier soir.",["我","是","昨天晚上","开始","不舒服","的"],["今天早上","已经"]),
+  ],
+  5:[
+    TILES("Es-tu allé à l’hôpital ?",["你","去医院","了","吗"],["看医生","没有"],"？"),
+    TILES("Tu ne te sens pas bien ; je t’accompagne à l’hôpital.",["你","不舒服，","我","陪你","去医院","吧"],["医生","回家"]),
+  ],
+  6:[
+    TILES("Ce sont les médicaments que le médecin m’a prescrits.",["这","是","医生","给我","开的","药"],["怎么吃","说明"]),
+    TILES("Trois fois par jour, deux comprimés à chaque prise.",["一天","三次，","一次","两片"],["一个","两次"]),
+  ],
+  7:[
+    TILES("J’ai attrapé un rhume. Que devrais-je faire ?",["我","感冒了","应该","怎么办"],["为什么","休息"],"？"),
+    TILES("Tu dois boire beaucoup d’eau, prendre tes médicaments à l’heure et bien te reposer.",["你","要","多喝水，","按时吃药，","好好休息"],["别熬夜","运动"]),
+  ],
+  8:[
+    TILES("Comment as-tu attrapé ce rhume ?",["你","怎么","感冒了"],["哪儿","发烧"],"？"),
+    TILES("C’est peut-être parce que j’ai été mouillé par la pluie hier et que j’ai pris froid.",["可能","是","昨天","淋雨","着凉","的"],["今天","咳嗽"]),
+  ],
+  9:[
+    TILES("Pourquoi n’es-tu pas venu en cours aujourd’hui ?",["你","今天","怎么","没来","上课"],["昨天","回家"],"？"),
+    TILES("Est-ce que tu vas un peu mieux maintenant ?",["你","现在","好点儿","了","吗"],["已经","咳嗽"],"？"),
+  ],
+  10:[
+    TILES("J’ai de la fièvre et j’ai aussi mal à la gorge.",["我","发烧，","嗓子","也疼"],["头","咳嗽"]),
+    TILES("Je vais te prescrire un peu de médicament ; tu dois le prendre à l’heure.",["我","给你","开点药，","你","要","按时吃"],["多喝水","已经"]),
+  ],
+  11:[
+    TILES("Le médecin a dit que je devais davantage me reposer et boire beaucoup d’eau.",["医生","说","我","要","多休息，","多喝水"],["不能","吃药"]),
+    TILES("J’ai déjà pris le médicament ; maintenant, je vais beaucoup mieux.",["我","已经","吃药了，","现在","好多了"],["明天","有点儿"]),
+  ],
+  12:[
+    TILES("J’ai attrapé un rhume ; j’ai mal à la gorge et je tousse aussi.",["我","感冒了，","嗓子疼，","还咳嗽"],["发烧","流鼻涕"]),
+    TILES("Alors, bois beaucoup d’eau, prends tes médicaments à l’heure et repose-toi bien.",["那","你","要","多喝水，","按时吃药，","好好休息"],["去医院","别着急"]),
+  ],
+});

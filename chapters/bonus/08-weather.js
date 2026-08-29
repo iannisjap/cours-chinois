@@ -217,3 +217,55 @@ registerChapter({
     ];}},
   ]
 });
+
+/* Exercices visuels de fin de leçon : reconstruire la phrase sans traduction mot à mot. */
+registerTileExercises("08-weather", {
+  1:[
+    TILES("Quelle saison est-ce en ce moment ?",["现在","是","什么","季节"],["哪儿","天气"],"？"),
+    TILES("Au printemps, il fait souvent doux.",["春天","常常","很","暖和"],["冬天","冷"]),
+  ],
+  2:[
+    TILES("Quel temps fait-il en été ?",["夏天","天气","怎么样"],["什么","季节"],"？"),
+    TILES("En automne, il fait agréablement frais : il ne fait ni froid ni chaud.",["秋天","很凉快","不冷","也不热"],["冬天","常常"]),
+  ],
+  3:[
+    TILES("Il fait beau aujourd’hui, mais le ciel est un peu nuageux.",["今天","是晴天，","不过","有点儿","多云"],["阴天","下雨"]),
+    TILES("Le matin sera ensoleillé ; l’après-midi sera peut-être nuageux.",["上午","是晴天，","下午","可能","多云"],["晚上","很冷"]),
+  ],
+  4:[
+    TILES("Est-ce qu’il pleut dehors ?",["外面","下雨","了","吗"],["里面","下雪"],"？"),
+    TILES("À Pékin, il neige parfois en hiver.",["北京","冬天","有时候","下雪"],["夏天","刮风"]),
+  ],
+  5:[
+    TILES("Est-ce qu’il va pleuvoir demain ?",["明天","会","下雨","吗"],["昨天","可能"],"？"),
+    TILES("La météo annonce du vent cet après-midi.",["天气预报","说","下午","有风"],["明天","下雨"]),
+  ],
+  6:[
+    TILES("Quelle sera la température maximale demain ?",["明天","最高气温","多少度"],["最低气温","今天"],"？"),
+    TILES("Ce soir, la température minimale ne sera que de cinq degrés.",["晚上","最低气温","只有","五度"],["最高","二十度"]),
+  ],
+  7:[
+    TILES("Le ciel s’est couvert ; on dirait qu’il va pleuvoir.",["天","阴了，","好像","要下雨"],["晴天","可能"]),
+    TILES("Alors, je vais d’abord rentrer chercher un parapluie.",["那","我","先回家","拿伞"],["以后","外套"]),
+  ],
+  8:[
+    TILES("Un moment il fait beau, un moment il pleut.",["一会儿","晴","一会儿","下雨"],["突然","常常"]),
+    TILES("Le temps change trop vite ; il vaut mieux prendre un parapluie en sortant.",["天气","变化","太快了，","出门","最好","带伞"],["回家","外套"]),
+  ],
+  9:[
+    TILES("S’il ne pleut pas, j’irai.",["如果","不下雨","我","就去"],["因为","再去"]),
+    TILES("S’il pleut fort, remettons cela à un autre jour.",["如果","下大雨，","我们","改天","再去","吧"],["今天","就去"]),
+  ],
+  10:[
+    TILES("Pékin est-il plus froid que Shanghai ?",["北京","比","上海","冷","吗"],["更","很"],"？"),
+    TILES("Harbin est bien plus froid que Pékin.",["哈尔滨","比","北京","冷得多"],["上海","一点儿"]),
+  ],
+  11:[
+    TILES("La météo d’aujourd’hui n’est pas du tout exacte.",["今天的","天气预报","一点儿也不","准"],["有点儿","晴天"]),
+    TILES("Ne t’inquiète pas : j’ai deux parapluies, allons-y ensemble.",["别着急，","我有","两把伞，","我们","一起走"],["没带伞","真糟糕"]),
+  ],
+  12:[
+    TILES("Demain matin, il fera beau et la maximale sera de vingt-huit degrés.",["明天上午","晴天，","最高气温","二十八度"],["下午","最低气温"]),
+    TILES("S’il ne pleut pas l’après-midi, nous irons courir.",["如果","下午","不下雨，","我们","就去跑步"],["上午","改天"]),
+  ],
+});

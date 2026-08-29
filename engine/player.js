@@ -13,6 +13,11 @@ const C = (zh, py, fr, rate, origin) => ({t:'zh', zh, py, fr, rate, origin:origi
 const P = (sec, label) => ({t:'pause', sec, label: label||'…'});
 const HOLD = (label, sec) => ({t:'hold', label: label||'Répète à voix haute, puis ▶', sec: sec||5, recordable:true});
 const TH = () => ({t:'hold', label:'À toi de répondre à voix haute — ▶ pour entendre la réponse'});
+const TILES = TileExercises.create;
+const TILE_EXERCISES = Object.create(null);
+function registerTileExercises(chapterId, exercisesByLesson){
+  TILE_EXERCISES[chapterId] = exercisesByLesson;
+}
 // Pause légère ajoutée après une réplique chinoise qui n'avait pas de temps
 // d'entraînement explicite. Elle n'affiche pas le micro : la réécoute se fait
 // avec le bouton « Répéter » déjà visible sous le texte.
@@ -154,6 +159,7 @@ function stepDur(s){
   if(s.t==='zh') return audioDurationFor('zh', s.zh);
   if(s.t==='pause') return s.sec;
   if(s.t==='hold') return continuous ? (s.sec || 5) : 0;
+  if(s.t!=='fr') return 0;
   const segs = playableNarrationSegments(s.text);
   return segs.reduce((total, seg, i)=>
     total + narrationSegmentDuration(seg, segs[i+1]), 0);
@@ -178,13 +184,14 @@ function seekToIndex(i){
   idx = Math.max(0, Math.min(i, steps.length-1));
   updateProgress();
   if(wasPlaying){ playing=true; syncPlayBtn(); runStep(); }
+  else if(steps[idx] && steps[idx].t === 'tiles') renderTileExercise(steps[idx]);
   else { renderCaptionFor(idx); setPhase('','⏸','En pause'); }
 }
 function moveSequence(direction){
   if(!steps.length) return;
   let target = idx + direction;
   while(target >= 0 && target < steps.length &&
-        steps[target].t !== 'fr' && steps[target].t !== 'zh'){
+        steps[target].t !== 'fr' && steps[target].t !== 'zh' && steps[target].t !== 'tiles'){
     target += direction;
   }
   if(target < 0) target = 0;
@@ -218,6 +225,149 @@ let practiceUrl = null, practiceStep = -1, practiceGeneration = 0;
 let practiceStarting = false;
 let practiceStopTimer = null, practicePlayback = null, referencePlayback = null;
 let repeatPlayback = null, repeatToken = 0;
+let tileExerciseStates = new Map();
+
+function seededExerciseTiles(step){
+  const tiles = step.answer.concat(step.distractors).map((text, id)=>({id, text}));
+  let seed = Array.from(step.prompt + step.answer.join('')).reduce((sum, char)=>
+    (sum * 31 + char.codePointAt(0)) >>> 0, 2166136261);
+  for(let i=tiles.length-1; i>0; i--){
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    const j = seed % (i + 1);
+    [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+  }
+  return tiles;
+}
+
+function renderTileExercise(step){
+  playing = false;
+  syncPlayBtn();
+  stopRepeatPlayback();
+  keepMediaControlsReady();
+  setPhase('pause-p','✍️','Complète la traduction');
+  document.querySelector('.ring-wrap')?.classList.add('exercise-active');
+  let state = tileExerciseStates.get(idx);
+  if(!state){
+    state = {pool:seededExerciseTiles(step), selected:[], message:'', complete:false};
+    tileExerciseStates.set(idx, state);
+  }
+  const chapterExercises = steps.filter(item=>item.t==='tiles');
+  const exerciseNumber = chapterExercises.indexOf(step) + 1;
+  const c = $('caption');
+  c.className = 'caption exercise-caption';
+  c.innerHTML = '';
+  c.removeAttribute('role');
+  c.removeAttribute('tabindex');
+  c.removeAttribute('aria-label');
+  c.removeAttribute('title');
+
+  const progress = document.createElement('div');
+  progress.className = 'exercise-progress';
+  progress.textContent = `Exercice ${exerciseNumber} / ${chapterExercises.length}`;
+  c.appendChild(progress);
+  const title = document.createElement('div');
+  title.className = 'exercise-title';
+  title.textContent = 'Complète la traduction';
+  c.appendChild(title);
+  const prompt = document.createElement('div');
+  prompt.className = 'exercise-prompt';
+  prompt.textContent = step.prompt;
+  c.appendChild(prompt);
+
+  const answer = document.createElement('div');
+  answer.className = 'exercise-answer' + (state.complete ? ' correct' : '');
+  answer.setAttribute('aria-label', 'Phrase chinoise construite');
+  if(!state.selected.length){
+    const placeholder = document.createElement('span');
+    placeholder.className = 'exercise-placeholder';
+    placeholder.textContent = 'Choisis les blocs dans l’ordre…';
+    answer.appendChild(placeholder);
+  } else {
+    state.selected.forEach(tile=>{
+      const button = document.createElement('button');
+      button.className = 'answer-tile';
+      button.textContent = tile.text;
+      button.disabled = state.complete;
+      button.addEventListener('click', ()=>{
+        if(state.complete) return;
+        playExerciseTile(tile.text);
+        state.selected = state.selected.filter(item=>item.id !== tile.id);
+        state.message = '';
+        renderTileExercise(step);
+      });
+      answer.appendChild(button);
+    });
+    const punctuation = document.createElement('span');
+    punctuation.className = 'exercise-punctuation';
+    punctuation.textContent = step.punctuation;
+    answer.appendChild(punctuation);
+  }
+  c.appendChild(answer);
+
+  const bank = document.createElement('div');
+  bank.className = 'exercise-bank';
+  state.pool.forEach(tile=>{
+    const used = state.selected.some(item=>item.id === tile.id);
+    const button = document.createElement('button');
+    button.className = 'choice-tile';
+    button.textContent = tile.text;
+    button.disabled = used || state.complete;
+    button.setAttribute('aria-pressed', used ? 'true' : 'false');
+    button.addEventListener('click', ()=>{
+      playExerciseTile(tile.text);
+      state.selected.push(tile);
+      state.message = '';
+      renderTileExercise(step);
+    });
+    bank.appendChild(button);
+  });
+  c.appendChild(bank);
+
+  const feedback = document.createElement('div');
+  feedback.className = 'exercise-feedback' + (state.complete ? ' correct' : '');
+  feedback.textContent = state.complete ? '✓ Bonne réponse !' : state.message;
+  feedback.setAttribute('aria-live', 'polite');
+  c.appendChild(feedback);
+
+  const actions = document.createElement('div');
+  actions.className = 'exercise-actions';
+  if(state.complete){
+    const proceed = document.createElement('button');
+    proceed.className = 'exercise-check ready';
+    proceed.textContent = exerciseNumber < chapterExercises.length ? 'Exercice suivant' : 'Terminer la leçon';
+    proceed.addEventListener('click', ()=>{
+      idx++;
+      playing = true;
+      syncPlayBtn();
+      runStep();
+    });
+    actions.appendChild(proceed);
+  } else {
+    const clear = document.createElement('button');
+    clear.className = 'exercise-clear';
+    clear.textContent = 'Effacer';
+    clear.disabled = !state.selected.length;
+    clear.addEventListener('click', ()=>{
+      state.selected = [];
+      state.message = '';
+      renderTileExercise(step);
+    });
+    actions.appendChild(clear);
+    const verify = document.createElement('button');
+    verify.className = 'exercise-check' + (state.selected.length ? ' ready' : '');
+    verify.textContent = 'Vérifier';
+    verify.disabled = !state.selected.length;
+    verify.addEventListener('click', ()=>{
+      const correct = state.selected.length === step.answer.length
+        && state.selected.every((tile, position)=>tile.text === step.answer[position]);
+      if(correct) state.complete = true;
+      else state.message = 'Pas encore. Vérifie l’ordre des blocs ou enlève l’intrus.';
+      renderTileExercise(step);
+    });
+    actions.appendChild(verify);
+  }
+  c.appendChild(actions);
+}
 function stopPracticePlayback(){
   [practicePlayback, referencePlayback].forEach(audio=>{
     if(!audio) return;
@@ -392,7 +542,9 @@ function setArc(f){ $('arc').style.strokeDashoffset = ARC_LEN * (1 - f); }
 function clearTimers(){ if(pauseTimer){clearTimeout(pauseTimer);pauseTimer=null;} if(pauseRAF){cancelAnimationFrame(pauseRAF);pauseRAF=null;} }
 
 function renderContentCaption(step, yourTurnLabel, holdStep){
+  document.querySelector('.ring-wrap')?.classList.remove('exercise-active');
   const c = $('caption'); c.innerHTML='';
+  c.classList.remove('exercise-caption');
   c.classList.remove('replayable');
   c.removeAttribute('role');
   c.removeAttribute('tabindex');
@@ -544,7 +696,10 @@ async function loadAudioManifest(chapterId, lessonNum){
     if(!lookup) throw new Error('Manifeste absent du catalogue audio local : ' + base);
     m = {lookup};
   } else {
-    const r = await fetch(base + '/manifest.json');
+    // Le contenu d'un manifeste évolue quand de nouveaux blocs audio sont
+    // ajoutés. Éviter qu'un ancien JSON mis en cache fasse croire que les MP3
+    // fraîchement publiés sont absents.
+    const r = await fetch(base + '/manifest.json?v=27', {cache:'no-store'});
     if(!r.ok) throw new Error('Manifeste audio introuvable (' + r.status + ')');
     m = await r.json();
   }
@@ -568,6 +723,29 @@ function audioFileFor(lang, text){
   const k = AUDIO.lookup[lang.slice(0,2) + '|' + text];
   return k ? AUDIO.base + '/' + k + '.mp3' : null;
 }
+let exerciseTilePlayback = null;
+function stopExerciseTileAudio(){
+  if(!exerciseTilePlayback) return;
+  exerciseTilePlayback.onended = null;
+  exerciseTilePlayback.onerror = null;
+  try{ exerciseTilePlayback.pause(); exerciseTilePlayback.currentTime = 0; }catch(e){}
+  exerciseTilePlayback = null;
+}
+function playExerciseTile(tile){
+  const text = TileExercises.audioText(tile);
+  const url = text && audioFileFor('zh', text);
+  if(!url){ alert('Audio chinois introuvable pour « ' + text + ' ».'); return; }
+  stopExerciseTileAudio();
+  const audio = exerciseTilePlayback = new Audio(url);
+  audio.playbackRate = voicePlaybackRate('zh');
+  const clear = ()=>{ if(exerciseTilePlayback === audio) exerciseTilePlayback = null; };
+  audio.onended = clear;
+  audio.onerror = ()=>{
+    clear();
+    alert('Impossible de lire le bloc « ' + text + ' ».');
+  };
+  audio.play().catch(()=>audio.onerror());
+}
 function audioDurationFor(lang, text){
   const url = audioFileFor(lang, text);
   const original = url && AUDIO ? (AUDIO.durations.get(url) || 0) : 0;
@@ -583,6 +761,10 @@ function requiredAudioItems(){
     if(step.t === 'zh') items.push(['zh', step.zh]);
     else if(step.t === 'fr') playableNarrationSegments(step.text)
       .forEach(seg=>items.push([seg.lang, segmentText(seg)]));
+    else if(step.t === 'tiles') step.answer.concat(step.distractors).forEach(tile=>{
+      const text = TileExercises.audioText(tile);
+      if(text) items.push(['zh', text]);
+    });
   });
   return items;
 }
@@ -620,6 +802,8 @@ async function prepareLessonAudio(){
   buildTimeline();
 }
 function showAudioError(error){
+  document.querySelector('.ring-wrap')?.classList.remove('exercise-active');
+  $('caption').classList.remove('exercise-caption');
   playing = false;
   audioPaused = false;
   resetAudioFile();
@@ -660,6 +844,7 @@ function armAudioBoundary(){
   }, Math.max(0, remaining / voicePlaybackRate(activeAudioLang) * 1000));
 }
 function playAudioSegment(text, lang, token, onend, startAt, stepOffset, earlyFinish){
+  stopExerciseTileAudio();
   const done = ()=>{
     if(audioBoundaryTimer){ clearTimeout(audioBoundaryTimer); audioBoundaryTimer = null; }
     activeAudioDone = null;
@@ -710,6 +895,7 @@ function playNarrationSegments(segs, i, token, onend, elapsed){
 
 function stopEverything(){
   clearPracticeRecording();
+  stopExerciseTileAudio();
   runToken++;
   resetAudioFile();
   clearTimers();
@@ -803,6 +989,8 @@ function runStep(){
       keepMediaControlsReady();
       setPhase('pause-p','✋', 'À toi — ▶ pour continuer');
     }
+  } else if(s.t==='tiles'){
+    renderTileExercise(s);
   } else { // pause chronométrée : le texte reste affiché
     renderCaptionFor(idx);
     setPhase('pause-p','⏳', s.label);
@@ -824,6 +1012,11 @@ function play(){
   if(playing) return;
   // Accueil, aucune leçon chargée : rien à jouer, on ouvre le menu.
   if(playerChapterIdx < 0){ showFolders(); return; }
+  if(steps[idx] && steps[idx].t === 'tiles'){
+    const state = tileExerciseStates.get(idx);
+    if(!state || !state.complete){ renderTileExercise(steps[idx]); return; }
+    idx++;
+  }
   playing = true; syncPlayBtn();
   stopRepeatPlayback();
   // 1) un MP3 était suspendu au milieu d'une phrase : reprendre exactement
@@ -1138,10 +1331,16 @@ function renderPlayer(i){
     playerLessons = LESSONS;
     stopEverything();
     AUDIO = null;
-    steps = L.build();
+    const lessonSteps = L.build();
+    const manualExercises = TILE_EXERCISES[curChapter.id] && TILE_EXERCISES[curChapter.id][L.num];
+    const finalExercises = manualExercises
+      ? TileExercises.build(lessonSteps, manualExercises, 10)
+      : [];
+    steps = lessonSteps.concat(finalExercises);
     if(curChapter.group === 'hsk1' && L.num !== 4) steps = addSpacedHskReview(steps);
     if(curChapter.group === 'hsk3' && !L.exercise) steps = enhanceHsk3Lesson(steps);
     steps = normalizeChinesePractice(steps);
+    tileExerciseStates = new Map();
     idx = 0; playing = false;
     buildTimeline();
   }

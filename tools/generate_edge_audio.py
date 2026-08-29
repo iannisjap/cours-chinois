@@ -10,6 +10,8 @@ import hashlib
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -19,10 +21,13 @@ FR_VOICE = "fr-CH-ArianeNeural"
 ZH_VOICE = "zh-CN-XiaoxiaoNeural"
 MAX_ATTEMPTS = 6
 MAX_CONCURRENT = max(1, int(os.environ.get("TTS_CONCURRENCY", "4")))
+CHINESE_ONLY = os.environ.get("TTS_CHINESE_ONLY", "0") == "1"
 # Pipeline direct validé : Edge TTS produit le MP3 final, sans demander les
 # frontières de mots, sans ajout de silence et sans réencodage par ffmpeg.
 ZH_RATE = os.environ.get("ZH_RATE", "-20%")
 ZH_PROFILE = "direct-v1"
+ROOT = Path(__file__).resolve().parents[1]
+AUDIO_ROOT = ROOT / "audio"
 
 
 def js_string(value: str) -> str:
@@ -171,6 +176,20 @@ def collect_segments(source: str, part: int, course_group: str = ""):
     return list(dict.fromkeys(items))
 
 
+def collect_tile_segments(source_file: Path, part: int):
+    """Charge le générateur partagé pour obtenir les blocs réellement affichés."""
+    if "registerTileExercises" not in source_file.read_text(encoding="utf-8"):
+        return []
+    helper = ROOT / "tools" / "export_tile_audio.cjs"
+    result = subprocess.run(
+        ["node", str(helper), str(source_file), str(part)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return [("zh", text) for text in json.loads(result.stdout)]
+
+
 async def main(source_file: Path, part: int, output: Path):
     output.mkdir(parents=True, exist_ok=True)
     source_path = source_file.as_posix()
@@ -180,8 +199,14 @@ async def main(source_file: Path, part: int, output: Path):
         "hsk3" if "chapters/hsk3/" in source_path else ""
     )
     items = collect_segments(source_file.read_text(encoding="utf-8"), part, course_group)
+    items.extend(collect_tile_segments(source_file, part))
     items = list(dict.fromkeys(items))
     semaphore = asyncio.Semaphore(MAX_CONCURRENT)
+    reusable_audio = {}
+    if AUDIO_ROOT.exists():
+        for existing in AUDIO_ROOT.rglob("*.mp3"):
+            if existing.stat().st_size >= 1000:
+                reusable_audio.setdefault(existing.name, existing)
 
     async def render_item(index, item):
         lang, text = item
@@ -197,6 +222,15 @@ async def main(source_file: Path, part: int, output: Path):
         if target.exists() and target.stat().st_size >= 1000:
             print(f"[{index}/{len(items)}] {lang}: déjà présent")
             return f"{lang}|{text}", stem
+        reusable = reusable_audio.get(target.name)
+        if reusable and reusable.resolve() != target.resolve():
+            shutil.copy2(reusable, target)
+            print(f"[{index}/{len(items)}] {lang}: réutilisé depuis {reusable.relative_to(ROOT)}")
+            return f"{lang}|{text}", stem
+        if CHINESE_ONLY and lang != "zh":
+            raise RuntimeError(
+                f"MP3 français absent en mode chinois uniquement : {text}"
+            )
 
         async with semaphore:
             print(f"[{index}/{len(items)}] {lang}: {text[:72]}")
