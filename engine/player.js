@@ -291,23 +291,35 @@ function renderTileExercise(step){
     answer.appendChild(placeholder);
   } else {
     state.selected.forEach(tile=>{
-      const button = document.createElement('button');
-      button.className = 'answer-tile';
-      button.textContent = tile.text;
-      button.disabled = state.complete;
-      button.addEventListener('click', ()=>{
-        if(state.complete) return;
-        playExerciseTile(tile.text);
-        state.selected = state.selected.filter(item=>item.id !== tile.id);
-        state.message = '';
-        renderTileExercise(step);
-      });
-      answer.appendChild(button);
+      const tileElement = document.createElement(state.complete ? 'span' : 'button');
+      tileElement.className = 'answer-tile';
+      tileElement.textContent = tile.text;
+      if(!state.complete){
+        tileElement.addEventListener('click', ()=>{
+          playExerciseTile(tile.text);
+          state.selected = state.selected.filter(item=>item.id !== tile.id);
+          state.message = '';
+          renderTileExercise(step);
+        });
+      }
+      answer.appendChild(tileElement);
     });
     const punctuation = document.createElement('span');
     punctuation.className = 'exercise-punctuation';
     punctuation.textContent = step.punctuation;
     answer.appendChild(punctuation);
+  }
+  if(state.complete){
+    answer.setAttribute('role', 'button');
+    answer.setAttribute('tabindex', '0');
+    answer.setAttribute('aria-label', 'Réécouter la phrase chinoise validée');
+    answer.setAttribute('title', 'Clique pour réécouter la phrase complète');
+    answer.addEventListener('click', ()=>playExercisePhrase(step));
+    answer.addEventListener('keydown', event=>{
+      if(event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      playExercisePhrase(step);
+    });
   }
   c.appendChild(answer);
 
@@ -332,7 +344,9 @@ function renderTileExercise(step){
 
   const feedback = document.createElement('div');
   feedback.className = 'exercise-feedback' + (state.complete ? ' correct' : '');
-  feedback.textContent = state.complete ? '✓ Bonne réponse !' : state.message;
+  feedback.textContent = state.complete
+    ? '✓ Bonne réponse ! Clique sur la phrase pour la réécouter.'
+    : state.message;
   feedback.setAttribute('aria-live', 'polite');
   c.appendChild(feedback);
 

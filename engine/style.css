@@ -79,7 +79,10 @@ svg.ring{width:170px;height:170px;transform:rotate(-90deg)}
 .exercise-title{width:100%;font-size:20px;font-weight:700;text-align:left;color:var(--paper)}
 .exercise-prompt{width:100%;font-size:15px;line-height:1.5;text-align:left;color:var(--paper);padding:4px 0 2px}
 .exercise-answer{width:100%;min-height:66px;padding:12px;border-bottom:2px solid rgba(232,184,75,.7);display:flex;align-items:center;justify-content:flex-start;gap:7px;flex-wrap:wrap;text-align:left;background:rgba(255,255,255,.035);border-radius:10px 10px 0 0}
-.exercise-answer.correct{border-bottom-color:#71d9a0;background:rgba(72,190,126,.08)}
+.exercise-answer.correct{border-bottom-color:#71d9a0;background:rgba(72,190,126,.08);cursor:pointer;transition:background .15s ease,transform .15s ease}
+.exercise-answer.correct:hover{background:rgba(72,190,126,.14)}
+.exercise-answer.correct:active{transform:scale(.995)}
+.exercise-answer.correct:focus-visible{outline:2px solid #71d9a0;outline-offset:3px}
 .exercise-placeholder{font-size:13px;color:var(--muted);font-style:italic}
 .answer-tile,.choice-tile{font-family:"Noto Serif SC","Songti SC","STSong",serif;font-size:21px;line-height:1;padding:9px 11px;border-radius:8px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);color:var(--paper)}
 .answer-tile{background:rgba(232,184,75,.16);border-color:rgba(232,184,75,.5)}
