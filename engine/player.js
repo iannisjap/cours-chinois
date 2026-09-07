@@ -1393,7 +1393,7 @@ function renderPlayer(i){
     const lessonSteps = L.build();
     const manualExercises = TILE_EXERCISES[curChapter.id] && TILE_EXERCISES[curChapter.id][L.num];
     const finalExercises = manualExercises
-      ? TileExercises.build(lessonSteps, manualExercises)
+      ? TileExercises.build(lessonSteps, manualExercises, curChapter.exerciseTokenizer)
       : [];
     steps = lessonSteps.concat(finalExercises);
     if(curChapter.group === 'hsk1' && L.num !== 4) steps = addSpacedHskReview(steps);

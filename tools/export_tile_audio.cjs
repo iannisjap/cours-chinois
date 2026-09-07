@@ -23,6 +23,7 @@ const teach = (zh, py, fr) => [C(zh, py, fr), HOLD()];
 const teach2 = teach;
 const drill = (prompt, zh, py, fr) => [N(prompt), TH(), C(zh, py, fr), HOLD()];
 const sandbox = {
+  TileExercises,
   C, N, HOLD, TH, P, teach, teach2, drill,
   TILES: TileExercises.create,
   registerChapter(value){ chapter = value; },
@@ -40,7 +41,7 @@ if (!manual) {
   process.stdout.write('[]');
   process.exit(0);
 }
-const exercises = TileExercises.build(lessonSteps, manual);
+const exercises = TileExercises.build(lessonSteps, manual, chapter.exerciseTokenizer);
 const texts = [...new Set(exercises.flatMap(exercise => [
   ...exercise.answer.concat(exercise.distractors).map(TileExercises.audioText),
   exercise.answer.join('') + exercise.punctuation,

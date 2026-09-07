@@ -148,15 +148,15 @@
     return exercise.answer.map(audioText).join('').replace(/\s+/gu, '');
   }
 
-  function build(lessonSteps, extraExercises){
+  function build(lessonSteps, extraExercises, tokenize = wordTokens){
     const phrases = uniqueChineseSteps(lessonSteps);
     const extras = (extraExercises || []).slice();
-    const pool = phrases.flatMap(step=>wordTokens(step.zh))
+    const pool = phrases.flatMap(step=>tokenize(step.zh))
       .concat(extras.flatMap(exercise=>exercise.answer));
     const result = [];
     const sentences = new Set();
     const appendLessonPhrase = step=>{
-      const words = wordTokens(step.zh);
+      const words = tokenize(step.zh);
       if(!words.length) return;
       const exercise = create(
         step.fr,
